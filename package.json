@@ -44,7 +44,7 @@
     "lint:fix": "eslint . --ext .js,.jsx --fix"
   },
   "engines": {
-    "node": ">=18.18.0"
+    "node": "20.x"
   },
   "browserslist": {
     "production": [
