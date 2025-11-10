@@ -31,7 +31,7 @@ import Blog from './pages/Blog';
 import BlogPost from './components/blog/BlogPost';
 import FTE from './pages/FTE';
 import ContactUsPage from './pages/contact_us_page';
-import UAEPage from './pages/uae';
+import UAEPage from './pages/UAE';
 import BreastNoduleVAEPage from './pages/Breast_Nodule_VAE';
 import BreastNoduleCryoablationPage from './pages/Breast_nodule_cryoablation';
 import Planter from './pages/Planter';
