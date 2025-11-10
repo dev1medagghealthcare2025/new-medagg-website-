@@ -77,14 +77,7 @@ const MobileHeroSection = () => {
 
       <div className="relative z-10 flex flex-col h-full px-6 pt-8 text-white">
         {/* Header with Logo */}
-        <div className="flex items-center space-x-4 mb-8">
-          <img src="/isvir_logo-2-removebg-preview.png" alt="ISVIR Logo" className="h-16 w-16" />
-          <div>
-            <p className="text-xl font-bold text-white">ISVIR</p>
-            <p className="text-xs text-white">Indian Society of Vascular and</p>
-            <p className="text-xs text-white">Interventional Radiology</p>
-          </div>
-        </div>
+      
 
         {/* Main Content */}
         <div className="mt--1">
