@@ -1,7 +1,7 @@
 import React from 'react';
 import SharedSearchBar from './SharedSearchBar';
 
-const Hero_crossel = ({ query, setQuery, handleSearch, results, isLoading, popularSearches }) => {
+const Hero_crossel = ({ query, setQuery, handleSearch, results, isLoading }) => {
   const socialIcons = [
     { icon: 'facebook', color: '#1877F2' },
     { icon: 'instagram', color: '#E4405F' },
@@ -54,7 +54,6 @@ const Hero_crossel = ({ query, setQuery, handleSearch, results, isLoading, popul
             handleSearch={handleSearch}
             results={results}
             isLoading={isLoading}
-            popularSearches={popularSearches}
           />
 
 
@@ -88,7 +87,7 @@ const Hero_crossel = ({ query, setQuery, handleSearch, results, isLoading, popul
                       <span className="text-white text-xs">Dr</span>
                     </div>
                     <div className="bg-white rounded-lg p-2 shadow-sm flex-1">
-                      <p className="text-xs text-gray-700">Hello! I'm Dr. Medagg</p>
+                      <p className="text-xs text-gray-700">Hello! I'm Dr. IRA</p>
                     </div>
                   </div>
                   

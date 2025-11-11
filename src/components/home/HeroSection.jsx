@@ -7,9 +7,7 @@ import SharedSearchBar from './SharedSearchBar';
 import MobileHeroSection from './MobileHeroSection';
 import FloatingBadgeCTA from './FloatingBadgeCTA';
 
-const popularSearches = ['Knee Pain', 'Breast Nodule', 'Thyroid', 'Prostate'];
-
-const OriginalHeroSlide = ({ query, setQuery, handleSearch, results, isLoading, popularSearches }) => (
+const OriginalHeroSlide = ({ query, setQuery, handleSearch, results, isLoading }) => (
   <section
     className='relative w-full min-h-screen bg-cover bg-center rounded-none overflow-hidden flex items-center'
     style={{
@@ -22,7 +20,7 @@ const OriginalHeroSlide = ({ query, setQuery, handleSearch, results, isLoading, 
     {/* Doctor Image - Hidden on mobile, visible from md screens up */}
     <div className='block md:absolute md:right-0 lg:right-0 md:translate-x-1 lg:translate-x-2 2xl:translate-x-3 bottom-0 z-10 w-full md:w-[520px] lg:w-[640px] xl:w-[760px] 2xl:w-[860px] md:max-h-[85vh] mt-8 md:mt-0'>
       <img
-        src='/main_home_new .png'
+        src='/main_home_new.png'
         alt='Doctor'
         className='w-3/4 sm:w-1/2 md:w-full h-auto md:h-full object-contain mx-auto'
       />
@@ -53,7 +51,6 @@ const OriginalHeroSlide = ({ query, setQuery, handleSearch, results, isLoading, 
               handleSearch={handleSearch}
               results={results}
               isLoading={isLoading}
-              popularSearches={popularSearches}
             />
           </div>
         </div>
@@ -569,7 +566,6 @@ const HeroSection = () => {
               handleSearch={handleSearch}
               results={results}
               isLoading={isLoading}
-              popularSearches={popularSearches}
             />
           </div>
           
@@ -581,7 +577,6 @@ const HeroSection = () => {
               handleSearch={handleSearch}
               results={results}
               isLoading={isLoading}
-              popularSearches={popularSearches}
             />
           </div>
 
@@ -593,7 +588,6 @@ const HeroSection = () => {
               handleSearch={handleSearch}
               results={results}
               isLoading={isLoading}
-              popularSearches={popularSearches}
             />
           </div>
         </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import SharedSearchBar from './SharedSearchBar';
 
-const HeroCrosselMap = ({ query, setQuery, handleSearch, results, isLoading, popularSearches }) => {
+const HeroCrosselMap = ({ query, setQuery, handleSearch, results, isLoading }) => {
   return (
     <div
             className="relative w-full h-screen flex items-right justify-end p-0 md:p-0 bg-cover bg-right"
@@ -26,7 +26,6 @@ const HeroCrosselMap = ({ query, setQuery, handleSearch, results, isLoading, pop
             handleSearch={handleSearch}
             results={results}
             isLoading={isLoading}
-            popularSearches={popularSearches}
           />
         </div>
 

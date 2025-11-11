@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const SharedSearchBar = ({ query, setQuery, handleSearch, results = [], isLoading, popularSearches }) => {
+const SharedSearchBar = ({ query, setQuery, handleSearch, results = [], isLoading }) => {
   return (
     <div className="w-full max-w-xl">
       {/* Search Bar */}
@@ -48,18 +48,6 @@ const SharedSearchBar = ({ query, setQuery, handleSearch, results = [], isLoadin
           </ul>
         </div>
       )}
-
-      {/* Popular Search Tags */}
-      <div className='text-xs sm:text-sm font-semibold text-white/90 mb-2'>
-        Popular Search :
-      </div>
-      <div className='flex flex-wrap gap-2'>
-        {popularSearches.map((item) => (
-          <span key={item} className='bg-white/20 backdrop-blur-sm text-white px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium border border-white/30 hover:bg-white/30 transition-all cursor-pointer'>
-            {item}
-          </span>
-        ))}
-      </div>
     </div>
   );
 };
