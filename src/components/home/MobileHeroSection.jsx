@@ -51,7 +51,7 @@ const MobileHeroSection = () => {
 
   return (
     <div
-      className="relative w-full min-h-[70vh] sm:min-h-[70vh] bg-cover bg-center md:hidden overflow-x-hidden"
+      className="relative w-full min-h-[75vh] sm:min-h-[75vh] bg-cover bg-center md:hidden overflow-x-hidden"
       style={{
         backgroundImage: `url('/Herosection background.jpg')`,
       }}

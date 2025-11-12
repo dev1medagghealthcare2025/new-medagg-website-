@@ -17,7 +17,7 @@ const Drmedagg = () => {
         {/* Right: Text and Actions */}
         <div className='flex-1 flex flex-col justify-center items-start w-full max-w-none md:max-w-lg min-w-0 gap-3 mx-auto md:pl-0 overflow-visible'>
           <div className='w-full pr-1'>
-            <h2 className='text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold leading-tight tracking-tight text-left flex items-center gap-1.5 sm:gap-2 mb-1 w-full origin-left'>
+            <h2 className='text-lg sm:text-2xl md:text-3xl lg:text-4xl font-extrabold leading-tight tracking-tight text-left flex items-center gap-1.5 sm:gap-2 mb-1 w-full origin-left'>
               <span className='text-[#ff3576] whitespace-nowrap'>Meet IRA :</span>
               <span className='text-[#1a1446] font-bold whitespace-nowrap'>Your Medagg Health Companion</span>
             </h2>

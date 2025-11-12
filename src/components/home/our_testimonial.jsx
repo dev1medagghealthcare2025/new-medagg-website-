@@ -117,8 +117,10 @@ const OurTestimonial = () => {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
             What Our Patients Says
           </h2>
-          <p className="text-lg md:text-xl text-gray-200 max-w-3xl">
-            Real stories from real patients — see how Medagg's care made a real difference.
+          <p className="text-sm sm:text-base md:text-xl leading-snug text-gray-200 max-w-full md:max-w-3xl break-words whitespace-normal">
+            Real stories from real patients —
+            <br className="block md:hidden" />
+            see how Medagg's care made a real difference.
           </p>
         </div>
 

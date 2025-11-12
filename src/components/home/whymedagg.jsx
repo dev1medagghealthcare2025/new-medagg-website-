@@ -2,8 +2,8 @@ import React from 'react';
 
 const features = [
   {
-    title: 'SURGERIES SIMPLIFIED',
-    desc: 'Medagg healthcare helps you choose different options for surgery. We help you choose the best hospital. We also provide alternative treatment for surgeries',
+    title: 'Precision Treatments, Simplified',
+    desc: 'Skip surgery, not care. Medagg connects you with specialists who offer safe, minimally invasive solutions tailored to your condition.',
     img: '/Surgeries Simplified_new.svg',
     svg: (
       <svg width='32' height='32' fill='none' viewBox='0 0 32 32' className='text-[#ff3576] group-hover:text-white'>
@@ -15,7 +15,7 @@ const features = [
   },
   {
     title: 'CARE CUSTODIAN',
-    desc: 'Medagg Healthcare\'s Care Custodian will be your one point contact, who will guide and help you choose the right treatment, with the right hospital!',
+    desc: 'From first consultation to follow-up, your Medagg Care Custodian ensures a smooth, transparent, and personalized treatment journey.',
     img: '/costumer-support-call-svgrepo-com 1.svg',
     svg: (
       <svg width='32' height='32' fill='none' viewBox='0 0 32 32' className='text-[#ff3576] group-hover:text-white'>
@@ -26,8 +26,8 @@ const features = [
     highlight: false,
   },
   {
-    title: 'ALL INSURANCE ACCEPTED',
-    desc: 'Medagg healthcare helps you in getting the right hospital for your insurance policy. All insurances are accepted',
+    title: 'Insurance, Made Easy',
+    desc: 'We help you find the right hospital and handle insurance coordination — all major providers are accepted.',
     img: '/all insurance.png',
     svg: (
       <svg width='32' height='32' fill='none' viewBox='0 0 32 32' className='text-[#ff3576] group-hover:text-white'>
@@ -39,7 +39,7 @@ const features = [
   },
   {
     title: 'SECOND OPINION',
-    desc: 'Medagg healthcare helps you choose different options for surgery. We help you choose the best hospital. We also provide alternative treatment for surgeries',
+    desc: 'Get clarity before you decide. Medagg connects you with experienced specialists who assess your case and recommend the best treatment path — whether it’s Interventional Radiology, surgery, or another alternative approach.',
     img: '/Second Opinion_new.svg',
     svg: (
       <svg width='32' height='32' fill='none' viewBox='0 0 32 32' className='text-[#ff3576] group-hover:text-white'>
@@ -50,8 +50,8 @@ const features = [
     highlight: false,
   },
   {
-    title: 'Post Procedure Care',
-    desc: 'Medagg healthcare helps you choose different options for surgery. We help you choose the best hospital. We also provide alternative treatment for surgeries',
+    title: 'Complete Post-Procedure Support',
+    desc: 'Recovery doesn’t stop after treatment. Medagg ensures you get the right post-procedure support, from follow-up consultations to rehabilitation guidance — helping you recover faster and safer.',
     img: '/Post Surgery Care_new.svg',
     svg: (
       <svg width='32' height='32' fill='none' viewBox='0 0 32 32' className='text-[#ff3576] group-hover:text-white'>
@@ -62,8 +62,8 @@ const features = [
     highlight: false,
   },
   {
-    title: 'NO-COST EMI',
-    desc: 'Medagg healthcare helps you choose different options for surgery. We help you choose the best hospital. We also provide alternative treatment for surgeries',
+    title: 'Flexible, No-Cost EMI',
+    desc: 'Quality care should never be out of reach. Medagg offers zero-cost EMI options that make advanced medical and interventional treatments more accessible and affordable for every patient',
     img: '/No cost EMI_new.svg',
     svg: (
       <svg width='32' height='32' fill='none' viewBox='0 0 32 32' className='text-[#ff3576] group-hover:text-white'>
