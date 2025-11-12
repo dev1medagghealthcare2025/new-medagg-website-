@@ -15,7 +15,7 @@ const Joinwithus_future = () => {
 
           {/* Main Content */}
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl whitespace-nowrap">
+            <h2 className="text-2xl sm:text-5xl lg:text-6xl font-bold tracking-tight sm:whitespace-nowrap">
               <span className="text-pink-500">Join the Future</span> of Healthcare with Medagg!
             </h2>
             <p className="mt-5 text-2xl font-semibold text-gray-800 sm:text-3xl">

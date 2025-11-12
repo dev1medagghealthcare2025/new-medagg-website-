@@ -95,7 +95,6 @@ const CompareTreatmentVAE = () => {
         </div>
 
         <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-16">
-          <img src="/member of ISVIR.jpg" alt="ISVIR Member" className="h-24" />
           
         </div>
       </div>

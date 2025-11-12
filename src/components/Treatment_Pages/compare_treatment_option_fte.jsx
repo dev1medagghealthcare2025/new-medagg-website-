@@ -64,10 +64,8 @@ const CompareTreatmentOptionFTE = () => {
           </div>
         </div>
 
-        {/* ISVIR Membership */}
-        <div className="mt-16 flex items-center justify-center">
-          <img src="/member of ISVIR.jpg" alt="ISVIR Logo" className="h-28" />
-        </div>
+        {/* Footer spacer (ISVIR logo removed) */}
+        <div className="mt-12" />
       </div>
     </section>
   );

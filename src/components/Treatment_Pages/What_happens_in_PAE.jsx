@@ -6,12 +6,16 @@ const checklist = [
   'Hear from our medical experts',
 ];
 
-// Helpers for video embedding (YouTube, Shorts, Vimeo, MP4)
+// Helpers for video embedding (YouTube, Shorts, YouTube no-cookie, Vimeo, MP4)
 const getEmbedUrl = (url) => {
   if (!url) return null;
   try {
     const u = new URL(url);
-    if (u.hostname.includes('youtube.com')) {
+    // If the URL is already an embed link (supports youtube-nocookie and youtube domains), use as-is
+    if (u.pathname.includes('/embed/')) {
+      return url;
+    }
+    if (u.hostname.includes('youtube.com') || u.hostname.includes('youtube-nocookie.com')) {
       const v = u.searchParams.get('v');
       if (v) return `https://www.youtube.com/embed/${v}`;
       const parts = u.pathname.split('/').filter(Boolean);

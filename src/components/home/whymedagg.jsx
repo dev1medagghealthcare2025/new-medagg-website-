@@ -76,7 +76,7 @@ const features = [
 ];
 
 const WhyMedagg = () => (
-  <section className='py-8 sm:py-12 lg:py-16 bg-white'>
+  <section className='py-6 sm:py-10 lg:py-14 bg-gray-60'>
     <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8'>
       <div className='text-center sm:text-left'>
         <h2 className='text-2xl sm:text-3xl lg:text-4xl font-extrabold mb-3 sm:mb-4'>
@@ -113,20 +113,9 @@ const WhyMedagg = () => (
           </div>
         ))}
       </div>
-      <div className='flex flex-col md:flex-row items-center justify-center gap-4 mt-12'>
-        <img
-          src='/isvir_logo-1-600x202 1.jpg'
-          alt='ISVIR'
-          className='h-20 w-20 md:h-24 md:w-24'
-        />
-        <span className='hidden md:block text-gray-500 text-2xl font-light'>|</span>
+      <div className='flex items-center justify-center mt-12'>
         <div className='text-center md:text-left'>
-          <div className='text-[#ff3576] font-bold text-xl sm:text-2xl md:text-3xl mb-1'>
-            Corporate Member of ISVIR
-          </div>
-          <div className='text-gray-700 text-base sm:text-lg md:text-xl'>
-            Medagg healthcare is the official corporate member ISVIR.
-          </div>
+    
         </div>
       </div>
     </div>

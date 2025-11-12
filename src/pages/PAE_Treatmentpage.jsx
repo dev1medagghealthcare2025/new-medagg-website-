@@ -22,7 +22,7 @@ const PAE_Treatmentpage = () => (
     <PAE_Treatment_FAQs />
     <PAE_Treatment_Testimonials />
     <PAE_Treatment_Book_Appointment />
-    <PAE_Treatment_About videoUrl="https://youtube.com/shorts/c5DucffDYec?si=eNQU7pjcxHhDvlAG" />
+    <PAE_Treatment_About videoUrl="https://www.youtube-nocookie.com/embed/c5DucffDYec?rel=0&modestbranding=1&autohide=1" />
     <OurDoctor />
     <OurTestimonial />
     <Consultourdoctor />

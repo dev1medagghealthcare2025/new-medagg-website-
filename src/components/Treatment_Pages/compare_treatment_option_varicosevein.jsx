@@ -108,12 +108,6 @@ const CompareTreatmentOptions = () => {
           </div>
         </div>
 
-        {/* ISVIR Member Section */}
-        <div className="mt-16 flex flex-col md:flex-row items-center justify-center gap-8 text-center md:text-left">
-          <img src="/member of ISVIR.jpg" alt="ISVIR Logo" className="h-24" />
-        
-        </div>
-
       </div>
     </div>
   );

@@ -88,13 +88,6 @@ const CompareTreatmentBnRFA = () => {
             ))}
           </div>
         </div>
-        
-        {/* ISVIR Member Section */}
-        <div className="max-w-5xl mx-auto mt-16 flex flex-col md:flex-row items-center justify-center gap-8">
-            <img src="/member of ISVIR.jpg" alt="ISVIR Logo" className="h-24" />
-        
-        </div>
-
       </div>
     </div>
   );

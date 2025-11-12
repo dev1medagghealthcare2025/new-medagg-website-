@@ -131,14 +131,7 @@ const CompareTreatmentOptionThyroid = () => (
         </table>
       </div>
 
-      {/* ISVIR Membership */}
-      <div className='flex justify-center py-8'>
-        <img
-          src='/member of ISVIR.jpg'
-          alt='Corporate Member of ISVIR'
-          className='w-auto h-auto max-w-full md:max-w-4xl object-contain'
-        />
-      </div>
+     
     </div>
   </section>
 );

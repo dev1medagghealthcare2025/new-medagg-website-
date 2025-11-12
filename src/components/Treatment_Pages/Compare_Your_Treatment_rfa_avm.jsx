@@ -58,12 +58,6 @@ const CompareYourTreatmentRFAAVM = () => {
             </tbody>
           </table>
         </div>
-
-        {/* ISVIR Membership */}
-        <div className="mt-12 flex flex-col md:flex-row items-center justify-center gap-8 text-center md:text-left">
-          <img src="/member of ISVIR.jpg" alt="ISVIR Logo" className="h-24" />
-          
-        </div>
       </div>
     </section>
   );

@@ -87,11 +87,7 @@ const CompareTreatmentOptionVaricocele = () => {
           </table>
         </div>
 
-        {/* ISVIR Membership */}
-        <div className="mt-16 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
-            <img src="/member of ISVIR.jpg" alt="ISVIR Logo" className="h-28 object-contain" />
-            <div className="w-px bg-gray-300 h-16 hidden md:block"></div>
-        </div>
+        
 
       </div>
     </section>

@@ -113,18 +113,7 @@ const CompareTreatmentPlanter = () => {
           </div>
         </div>
 
-        {/* ISVIR Membership Section */}
-        <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8 mt-16">
-          <div className="flex-shrink-0">
-            <img 
-              src="/member of ISVIR.jpg" 
-              alt="ISVIR Member" 
-              className="h-24 object-contain"
-            />
-          </div>
-          <div className="hidden md:block w-px bg-gray-300 h-20"></div>
-          
-        </div>
+        
       </div>
     </div>
   );

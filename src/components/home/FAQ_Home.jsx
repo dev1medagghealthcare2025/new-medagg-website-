@@ -71,15 +71,15 @@ const FAQ_Home = () => {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-gray-50">
+    <section className="py-10 md:py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main grid layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           
           {/* Left side - FAQ Header and Question Form */}
           <div className="flex flex-col justify-center">
             {/* Header section using flexbox */}
-            <div className="flex flex-col mb-8">
+            <div className="flex flex-col mb-6">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#2d2552] mb-2">
                 Frequently Asked
               </h2>
@@ -160,6 +160,11 @@ const FAQ_Home = () => {
               ))}
             </div>
           </div>
+        </div>
+
+        {/* ISVIR Logo */}
+        <div className="mt-16 flex justify-center">
+          <img src="/member of ISVIR.jpg" alt="Member of ISVIR" className="h-24 drop-shadow-lg" />
         </div>
       </div>
     </section>

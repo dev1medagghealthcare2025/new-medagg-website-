@@ -114,10 +114,6 @@ const TreatmentCompareEC = () => {
           </div>
         </div>
 
-        <div className="mt-12 flex items-center justify-center gap-6 p-6">
-          <img src="/member of ISVIR.jpg" alt="ISVIR Logo" className="h-28 w-auto" />
-          
-        </div>
       </div>
     </div>
   );

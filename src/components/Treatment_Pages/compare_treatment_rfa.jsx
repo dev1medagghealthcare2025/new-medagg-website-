@@ -57,12 +57,6 @@ const Compare_treatment_rfa = () => {
           </table>
         </div>
 
-        {/* ISVIR Member */}
-        <div className="mt-16 flex flex-col md:flex-row items-center justify-center text-center md:text-left gap-8">
-          <img src="/member of ISVIR.jpg" alt="ISVIR Logo" className="h-24" />
-        
-        </div>
-
       </div>
     </section>
   );
