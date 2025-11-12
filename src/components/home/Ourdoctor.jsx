@@ -291,6 +291,7 @@ const OurDoctor = ({ randomize = false, initialShowCount = 4 }) => {
   const [filters, setFilters] = useState({ name: '', city: 'All' });
   const [showAll, setShowAll] = useState(false);
   const [imageErrors, setImageErrors] = useState({});
+  const [isFilterActive, setIsFilterActive] = useState(false);
 
   const doctorList = useMemo(() => {
     if (randomize) {
@@ -306,7 +307,9 @@ const OurDoctor = ({ randomize = false, initialShowCount = 4 }) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFilters(prev => ({ ...prev, [name]: value }));
+    const newFilters = { ...filters, [name]: value };
+    setFilters(newFilters);
+    setIsFilterActive(newFilters.name !== '' || newFilters.city !== 'All');
     setShowAll(false);
   };
 
@@ -382,7 +385,7 @@ const OurDoctor = ({ randomize = false, initialShowCount = 4 }) => {
         </div>
 
         {/* Doctor cards */}
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6'>
+        <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 ${isFilterActive ? 'block' : 'hidden'} md:grid`}>
           {doctorsToDisplay.length > 0 ? (
             doctorsToDisplay.map((doc) => (
               <div
@@ -429,7 +432,7 @@ const OurDoctor = ({ randomize = false, initialShowCount = 4 }) => {
 
         {/* Show More / Show Less Button */}
         {hasMoreDoctors && (
-          <div className='flex justify-center mt-8'>
+          <div className='hidden md:flex justify-center mt-8'>
             <button
               onClick={() => setShowAll(prev => !prev)}
               className='px-8 py-3 bg-[#ff3576] text-white font-semibold rounded-lg hover:bg-[#e1006a] transition-colors duration-300 shadow-md hover:shadow-lg'

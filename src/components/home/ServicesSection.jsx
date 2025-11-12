@@ -7,49 +7,56 @@ const allServices = {
       title: 'Geniculate Artery Embolization',
       desc: 'A non-surgical solution to relieve chronic knee pain safely.',
       img: '/Geniculate%20Artery%20Emblization.jpg',
-      highlight: true,
+      icon: '/Geniculate Artery Emblization.jpg',
       path: '/gae',
     },
     {
       title: 'Prostate Artery Embolization',
       desc: 'Minimally invasive relief for Prostate without surgery.',
       img: '/Prostate%20Artery%20Embolization.jpg',
+      icon: '/Prostate Artery Embolization.jpg',
       path: '/pae',
     },
     {
       title: 'Fallopian Tube Recanalization',
       desc: 'Non-surgical treatment to unblock fallopian tubes.',
       img: '/Fallopian%20Tube%20Recanalization.jpg',
+      icon: '/Fallopian Tube Recanalization.jpg',
       path: '/fte',
     },
     {
       title: 'Varicocele Embolization',
       desc: 'Minimally invasive relief for varicocele without surgery.',
       img: '/Varicocele%20Embolization.jpg',
+      icon: '/Varicocele Embolization.jpg',
       path: '/varicocele-embolization',
     },
     {
       title: 'Thyroid Nodule Ablation',
       desc: 'Minimally invasive treatment for thyroid nodules.',
       img: '/Thyroid%20Nodul%20Ablation.jpg',
+      icon: '/Thyroid Nodul Ablation.jpg',
       path: '/thyroid',
     },
     {
       title: 'Uterine Fibroid Embolization',
       desc: 'A non-surgical procedure to shrink fibroids and relieve symptoms.',
       img: '/Uterine%20Fibroid%20Embolization.jpg',
+      icon: '/Uterine Fibroid Embolization.jpg',
       path: '/uae',
     },
     {
       title: 'Varicose Veins',
       desc: 'Non-surgical treatment for varicose veins.',
       img: '/Varicose%20Veins.jpg',
+      icon: '/Varicose Veins.jpg',
       path: '/varicose-vein',
     },
     {
       title: 'Transcatheter Aortic Valve Replacement',
       desc: 'Non-surgical aortic valve replacement for better heart function.',
       img: '/Transcatheter%20Aortic%20Valve%20Replacement.jpg',
+      icon: '/Transcatheter Aortic Valve Replacement.jpg',
       path: '/transcatheter-aortic-valve-replacement',
     },
   ],
@@ -58,36 +65,42 @@ const allServices = {
       title: 'Chronic Total Occlusion',
       desc: 'Minimally invasive reopening of permanently blocked coronary arteries to restore blood flow and improve heart function.',
       img: '/chronic.svg',
+      icon: '/chronic.svg',
       path: '/cto',
     },
     {
       title: 'Radiofrequency Ablation for Arrhythmia',
       desc: 'A minimally invasive procedure using heat energy to correct irregular heart rhythms—fast, safe relief without open-heart surgery.',
       img: '/rfa for Ar.svg',
+      icon: '/rfa for Ar.svg',
       path: '/rfa',
     },
     {
       title: 'Endovascular coiling',
       desc: 'Minimally invasive, image-guided treatment to secure brain aneurysms without open surgery.',
       img: '/Endovascular coiling.svg',
+      icon: '/Endovascular coiling.svg',
       path: '/endovascular-coiling',
     },
     {
       title: 'Radiofrequency ablation for AVM',
       desc: 'Minimally invasive treatment to close off or shrink abnormal blood vessel tangles, reducing the risk of haemorrhage and neurological effects.',
       img: 'avm.svg',
+      icon: 'avm.svg',
       path: '/radiofrequency-ablation-for-avm',
     },
     {
       title: 'Plantar Fascial Embolization',
       desc: 'Plantar fasciitis occurs when the thick tissue along the bottom of the foot becomes inflamed. Treatment involves injecting tiny particles to reduce blood flow, easing inflammation and relieving pain.',
       img: '/planter_icon.jpg',
+      icon: '/planter_icon.jpg',
       path: '/pfe',
     },
     {
       title: 'Breast Nodule (VAE)',
       desc: 'A non-surgical technique for the removal of benign breast nodules, leaving minimal to no scarring.',
       img: '/Breast_nodule_icon.svg',
+      icon: '/Breast_nodule_icon.svg',
       path: '/breast-nodule-vae',
     },
   ],
@@ -153,7 +166,20 @@ const OurServiceSection = () => {
           </button>
         )}
 
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full'>
+        {/* Mobile Icon Grid */}
+        <div className='grid grid-cols-4 gap-4 w-full md:hidden'>
+          {[...allServices.set1, ...allServices.set2].map((service) => (
+            <div key={service.path} role='button' onClick={() => handleCardClick(service.path)} className='flex flex-col items-center text-center cursor-pointer group'>
+              <div className='w-16 h-16 p-3 rounded-lg bg-gray-100 flex items-center justify-center group-hover:bg-pink-100 transition-colors'>
+                <img src={service.icon} alt={`${service.title} icon`} className='w-full h-full object-contain' />
+              </div>
+              <p className='text-xs font-semibold mt-2 text-gray-700 group-hover:text-pink-600 transition-colors leading-tight'>{service.title}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop Service Cards */}
+        <div className='hidden md:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full'>
           {services.map((t, idx) => (
             <div
               key={t.title}

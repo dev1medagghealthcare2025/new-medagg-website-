@@ -51,7 +51,7 @@ const MobileHeroSection = () => {
 
   return (
     <div
-      className="relative w-full min-h-screen bg-cover bg-center md:hidden overflow-x-hidden"
+      className="relative w-full min-h-[70vh] sm:min-h-[70vh] bg-cover bg-center md:hidden overflow-x-hidden"
       style={{
         backgroundImage: `url('/Herosection background.jpg')`,
       }}
@@ -59,7 +59,7 @@ const MobileHeroSection = () => {
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#2d2552] via-[#2d2552] to-[#e1006a] opacity-80" />
 
-      <div className="relative z-10 flex flex-col h-full px-4 sm:px-6 pt-4 pb-24 sm:pb-32 text-white">
+      <div className="relative z-10 flex flex-col h-full px-4 sm:px-6 pt-3 pb-10 sm:pb-16 text-white">
 
         {/* Top Banner */}
         <div className="flex items-center justify-start space-x-2 sm:space-x-3 mb-3 sm:mb-5">
@@ -95,7 +95,7 @@ const MobileHeroSection = () => {
 
       </div>
       {/* Doctor image anchored to hero bottom-right, behind content */}
-      <div className="absolute bottom-0 right-0 w-[220px] sm:w-[300px] max-[380px]:w-[200px] z-0 pointer-events-none select-none">
+      <div className="absolute bottom-0 right-0 w-[280px] sm:w-[360px] max-[380px]:w-[230px] z-0 pointer-events-none select-none">
         <img
           src='/main_home_new.png'
           alt="Doctor"

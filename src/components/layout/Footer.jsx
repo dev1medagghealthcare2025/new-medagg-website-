@@ -51,10 +51,10 @@ export default function Footer() {
         </div>
 
           {/* Right section - Quick Links (as in reference) */}
-          <div className='lg:col-span-5 flex justify-end self-center lg:pl-0 mr-16 lg:mr-32'>
-            <div className='flex flex-col items-start text-left'>
+          <div className='lg:col-span-5 w-full flex justify-start lg:justify-end self-start lg:pl-0 mr-0 lg:mr-32 mt-6 lg:mt-0'>
+            <div className='flex flex-col items-start text-left w-full'>
               <h3 className='text-pink-400 font-bold text-base mb-1'>Quick Links</h3>
-              <ul className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 lg:grid-rows-2 gap-x-8 gap-y-2'>
+              <ul className='grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 lg:grid-rows-2 gap-x-8 gap-y-2'>
                 {quickLinks.map((link, index) => (
                   <li
                     key={index}

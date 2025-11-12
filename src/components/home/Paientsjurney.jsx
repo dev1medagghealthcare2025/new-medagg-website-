@@ -32,31 +32,13 @@ const PatientJourney = () => {
           />
         </div>
 
-        {/* Mobile View - Vertical Timeline */}
-        <div className='lg:hidden w-full mt-12'>
-          <div className='relative pl-8'>
-            {/* Vertical Line */}
-            <div className='absolute left-6 top-0 h-full w-0.5 bg-gray-200'></div>
-
-            <div className='space-y-8'>
-              {journeySteps.map((step, index) => (
-                <div key={index} className='relative flex items-center'>
-                  {/* Dot and Number */}
-                  <div className='absolute -left-6 z-10 flex items-center justify-center w-12 h-12 bg-white border-2 border-gray-200 rounded-full'>
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${step.color === 'dark' ? 'bg-[#2d2346]' : 'bg-[#ff3576]'}`}>
-                      <span className='text-white font-bold'>{index + 1}</span>
-                    </div>
-                  </div>
-                  {/* Content */}
-                  <div className='ml-10 w-full'>
-                    <div className={`p-4 rounded-lg shadow-md font-semibold text-left ${step.color === 'dark' ? 'bg-[#2d2346] text-white' : 'bg-[#ff3576] text-white'}`}>
-                      {step.title}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+        {/* Mobile View - Image */}
+        <div className='lg:hidden w-full mt-12 flex justify-center'>
+          <img 
+            src='/mobile_paients-removebg.png' 
+            alt='Patient Journey Flowchart for Mobile' 
+            className='w-full max-w-md h-auto'
+          />
         </div>
       </div>
     </section>

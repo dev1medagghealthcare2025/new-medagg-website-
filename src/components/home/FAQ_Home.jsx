@@ -5,47 +5,47 @@ const faqData = [
   {
     id: 1,
     question: "Will the Medagg Healthcare assist for ambulance service?",
-    answer: "We can. But we are not an emergency service provider but essentially an elective treatment platform",
+    answer: "Yes, we can help coordinate ambulance services if needed. However, Medagg is not an emergency care provider — we are an elective treatment platform focused on planned, non-emergency medical and interventional procedures.",
     isOpen: true
   },
   {
     id: 2,
     question: "Do you offer weekend and evening Appointments?",
-    answer: "It depends upon the doctor's availability."
+    answer: "Appointment slots are based on each specialist’s availability. Our Care Custodians will help you schedule a time that best suits your convenience and the doctor’s schedule."
   },
   {
     id: 3,
     question: "How Medagg helps hospitals?",
-    answer: "Reducing the burden of functions/ processes (Front office, insurance, financial and clinical counselling),Medagg helps in bringing new patients to the hospitals.Medagg onboards the hospital with a new digital platform.Hospital promotions with blogs,videos and images periodically No retainer fees, we operate on service/patient cost."
+    answer: "At Medagg, we make hospital operations smoother and smarter — managing patient onboarding, insurance, and counselling while bringing in new patients through our digital network. We also help hospitals build visibility with targeted campaigns and educational content, operating transparently with no retainer fees."
   },
   {
     id: 4,
     question: "Will Medagg arrange for post treatment care?",
-    answer: "yes, Medagg Healthcare will arrange for post Treatment care",
+    answer: "Yes. Medagg coordinates complete post-treatment care, including follow-ups, recovery guidance, and support services — ensuring your recovery is smooth and continuous.",
     isOpen: true
   },
   {
     id: 5,
     question: "Do you have a teleconsultation services?",
-    answer: "Yes, We organise tele-consultation with the hospitals you choose through our Care Custodian.",
+    answer: "Yes. We organize teleconsultations through our Care Custodians, connecting you with the hospitals and specialists of your choice — so you can access expert care from anywhere.",
     isOpen: true
   },
   {
     id: 6,
     question: "How do I find the Best Hospital?",
-    answer: "Talk to our Care Custodians and they will explore all available options for you along with the respective costs.",
+    answer: "Our Care Custodians will assess your treatment needs and present suitable hospital options along with estimated costs — helping you make an informed and confident decision.",
     isOpen: true
   },
   {
     id: 7,
     question: "What is the required information to register on Medagg Healthcare?",
-    answer: "The following information is required for the registration: Name, Date of Birth, Individual's Mobile Number, Email ID.",
+    answer: "To register, please provide the following details: your full name, date of birth, mobile number, and email ID. You can begin by clicking on the “Book Appointment” tab at the top of our website. Our team will then guide you through the rest of the onboarding process.",
     isOpen: true
   },
   {
     id: 8,
     question: "Why do I need Care Custodians?",
-    answer: "We live in a world where unbiased advisory is something that we seek for a number of things. Don’t you think it is needed for something as important as your or your family’s health? Also, there are advisors available for a number of services starting from searching for a house, deciding on the best schools for your ward’s higher education, investment decisions to even matrimony! Don’t you need some good unbiased advice on your health? This is why you need our Care Custodians who are expert healthcare operators with many years of experience in our hospital industry.",
+    answer: "Just like we rely on expert advisors for finance, education, or major life decisions — you deserve trusted guidance for your health too. Medagg’s Care Custodians are experienced healthcare professionals who act as your personal care navigators. They provide unbiased advice, connect you to the right specialists, and ensure you get the best treatment for your needs.",
     isOpen: true
   },
 ];
