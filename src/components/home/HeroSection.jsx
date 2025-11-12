@@ -549,7 +549,8 @@ const HeroSection = () => {
           size={120}
           mobileSize={120}
           topOffset={24}
-          offsetX={116}
+          align="left"
+          leftOffset={24}
           zIndex={40}
           showOnMobile={false}
         />
