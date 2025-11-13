@@ -38,14 +38,22 @@ const AreYouExperiencingVaricocele = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {symptoms.map((symptom) => (
-            <div key={symptom.number} className="border border-[#ff3576] rounded-2xl p-6 text-center flex flex-col items-center shadow-sm hover:shadow-md transition-shadow duration-300">
-              <div className="w-12 h-12 flex items-center justify-center bg-pink-100/50 rounded-full mb-4">
+            <div
+              key={symptom.number}
+              className="border border-gray-200 rounded-xl p-4 md:p-6 text-center flex flex-col items-center shadow-sm hover:shadow-md transition-shadow duration-300"
+            >
+              {/* Number circle: desktop only */}
+              <div className="hidden md:flex w-12 h-12 items-center justify-center bg-pink-100/50 rounded-full mb-4">
                 <span className="text-xl font-bold text-[#ff3576]">{symptom.number}</span>
               </div>
-              <h3 className="text-sm font-bold text-[#2d2552] mb-2 flex-grow">{symptom.title}</h3>
-              <p className="text-gray-600 text-sm">{symptom.description}</p>
+              {/* Title: bolder on desktop, larger on mobile */}
+              <h3 className="text-base font-semibold text-[#2d2552] md:text-sm md:font-bold md:uppercase mb-0 md:mb-2 flex-grow">
+                {symptom.title}
+              </h3>
+              {/* Description: desktop only */}
+              <p className="hidden md:block text-gray-600 text-sm">{symptom.description}</p>
             </div>
           ))}
         </div>

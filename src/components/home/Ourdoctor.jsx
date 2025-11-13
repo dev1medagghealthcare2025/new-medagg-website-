@@ -102,7 +102,7 @@ const doctors = [
     degrees: 'MBBS, MD, DNB (Radiodiagnosis)',
     specialty: 'Interventional Radiology',
     city: 'Bangalore',
-    image: 'https://via.placeholder.com/150',
+    image: 'Dr. Junaid.png',
   },
 
   // Madurai Doctors

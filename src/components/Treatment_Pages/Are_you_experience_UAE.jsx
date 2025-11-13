@@ -38,14 +38,20 @@ const AreYouExperiencingUAE = () => {
         </div>
 
         {/* Symptoms Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {symptoms.map((symptom) => (
-            <div key={symptom.number} className="bg-white p-6 rounded-lg border-2 border-pink-200 text-center flex flex-col items-center">
-              <div className="w-12 h-12 flex items-center justify-center rounded-full bg-pink-100 text-[#ff3576] text-xl font-bold mb-4">
+            <div
+              key={symptom.number}
+              className="bg-white p-4 md:p-6 rounded-lg border border-gray-200 md:border-2 md:border-pink-200 text-center flex flex-col items-center"
+            >
+              {/* Number circle: show on md+, hide on mobile */}
+              <div className="hidden md:flex w-12 h-12 items-center justify-center rounded-full bg-pink-100 text-[#ff3576] text-xl font-bold mb-4">
                 {symptom.number}
               </div>
-              <h3 className="text-base font-bold text-[#2d2552] uppercase tracking-wide">{symptom.title}</h3>
-              <p className="mt-2 text-sm text-gray-600">{symptom.description}</p>
+              {/* Title: slightly larger on mobile, original uppercase on md+ */}
+              <h3 className="text-base font-semibold text-[#2d2552] md:text-base md:font-bold md:uppercase md:tracking-wide">{symptom.title}</h3>
+              {/* Description: desktop only */}
+              <p className="hidden md:block mt-2 text-sm text-gray-600">{symptom.description}</p>
             </div>
           ))}
         </div>

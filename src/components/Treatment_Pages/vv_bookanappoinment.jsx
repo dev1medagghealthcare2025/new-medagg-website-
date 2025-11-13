@@ -54,7 +54,7 @@ const VV_BookAnAppointment = () => {
   };
 
   return (
-    <section className="py-8 px-4 sm:px-6 lg:px-8 bg-white">
+    <section className="py-8 px-4 sm:px-6 lg:px-8 bg-gray-100">
       <div className="flex justify-center">
         <div 
           className="bg-[#2d2552] rounded-3xl p-6 sm:p-8 lg:p-12 flex items-center bg-cover bg-center relative w-full max-w-[1201px] min-h-[300px] sm:min-h-[350px] lg:min-h-[412px]"

@@ -4,32 +4,32 @@ const timelineData = [
   {
     year: '2018',
     title: 'Parent Vision Established',
-    description: 'Founded by Ramesh Krishnan and Sumitha Karthik, Medagg Ventures LLP began with a bold mission — to reshape how healthcare in India is accessed, operated, and aggregated.',
+    description: 'Founded by Ramesh Krishnan and Sumitha Karthik, Medagg Ventures LLP began with a bold mission — to reshape how healthcare in India is accessed, operated, and aggregated',
   },
   {
     year: '2021',
     title: 'Medagg Healthcare Launched',
-    description: 'On 17 November 2021, Medagg Healthcare was incorporated in Chennai, Tamil Nadu, to help patients compare treatment costs, choose hospitals, and receive guided support through the Care Custodian model — a concierge-style service supporting every step from inquiry to discharge, starting with Chennai and its surrounding regions.',
+    description: 'On 17 November 2021, Medagg Healthcare was incorporated in Chennai, introducing the Care Custodian model to support patients from inquiry to recovery while enabling transparent treatment comparisons and direct access to trusted hospitals through an ethical, guided experience.',
   },
   {
-    year: '2021',
-    title: 'Initial Platform Rollout',
-    description: 'Launched as a digital discovery platform connecting patients with hospitals, Medagg enabled transparent cost comparisons and access to both surgical and non-surgical treatment options. The platform quickly expanded across Tamil Nadu, establishing a presence in over four cities.',
+    year: '2023',
+    title: 'Interventional Radiology Becomes Our Niche',
+    description: 'Medagg established Interventional Radiology (IR) as its core niche, championing minimally invasive, non-surgical treatments to expand patient awareness, strengthen specialist partnerships, and position the organisation as a leader in modern, scar-free healthcare solutions.',
   },
   {
-    year: '2022 – 2023',
-    title: 'Expansion of Services',
-    description: 'Strengthened operations through the Care Custodian model and expanded advocacy for Interventional Radiology-led non-surgical treatments. Added insurance and financing support while growing a hospital partner network across South India, including Kerala, Andhra Pradesh, Karnataka, and Telangana.',
+    year: '2024',
+    title: 'From Tamil Nadu to the Wider South',
+    description: 'After completing strong operations across Tamil Nadu, Medagg began expanding into major South Indian cities — including Kerala, Karnataka, Andhra Pradesh, and Telangana — laying the groundwork for seamless regional coverage and coordinated patient care.',
   },
   {
-    year: '2024 – 2025',
-    title: 'Maturing Platform & Growth',
-    description: 'Achieved wider reach and deeper engagement, aiming to onboard thousands of hospitals and solidify our footprint across India — extending operations to the East and West, reaching 20+ cities nationwide.',
+    year: '2025',
+    title: 'Connecting India Through Care Pathways',
+    description: 'In 2025, Medagg completed its presence across all key South Indian cities and expanded into East and West India, reaching 20+ cities with integrated digital systems and unified, patient-first treatment pathways.',
   },
   {
     //year: '2024 – 2025',
     title: 'The Future — Scaling Further',
-    description: 'Entering the next phase of growth with a focus on national expansion, advanced service integration, and end-to-end patient journeys — making quality, minimally invasive care accessible to all.',
+    description: 'With a focus on national integration, digital precision, and end-to-end patient journeys, Medagg Healthcare is scaling to make quality, minimally invasive care accessible to every individual, everywhere.',
   },
 ];
 

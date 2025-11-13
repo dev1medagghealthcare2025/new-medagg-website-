@@ -40,20 +40,20 @@ const GAE_Are_you_experience = () => (
           {symptoms.map((symptom, idx) => (
             <div
               key={idx}
-              className='border border-[#FF4376] rounded-[10px] flex flex-col items-center text-center transition-shadow hover:shadow-lg bg-white w-full h-[203px] min-w-0 p-[20px] px-[10px] box-border'
-              style={{ opacity: 1 }}
+              className='border border-gray-200 rounded-lg flex flex-col items-center justify-center text-center transition-shadow hover:shadow-lg bg-white w-full p-4 md:h-[203px] md:p-5'
             >
-              <div className='flex flex-col items-center w-full'>
-                <div className='w-12 h-12 flex items-center justify-center rounded-full bg-[#FF4376]/10 text-[#FF4376] text-2xl font-bold mb-4'>
-                  {symptom.number}
-                </div>
-                <h3 className='font-extrabold text-[#2D2357] text-sm mb-2 uppercase tracking-tight'>
-                  {symptom.title}
-                </h3>
-                <p className='text-gray-500 text-sm font-medium'>
-                  {symptom.desc}
-                </p>
+              {/* Desktop view: Numbered circle */}
+              <div className='hidden md:flex w-12 h-12 items-center justify-center rounded-full bg-[#FF4376]/10 text-[#FF4376] text-2xl font-bold mb-4'>
+                {symptom.number}
               </div>
+              {/* Title: Different styles for mobile and desktop */}
+              <h3 className='font-semibold text-[#2D2357] text-base md:font-extrabold md:text-sm md:mb-2 md:uppercase md:tracking-tight'>
+                {symptom.title}
+              </h3>
+              {/* Desktop view: Description */}
+              <p className='hidden md:block text-gray-500 text-sm font-medium'>
+                {symptom.desc}
+              </p>
             </div>
           ))}
         </div>

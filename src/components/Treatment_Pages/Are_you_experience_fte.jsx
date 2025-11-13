@@ -42,13 +42,16 @@ const AreYouExperienceFTE = () => {
           {symptoms.map((symptom) => (
             <div
               key={symptom.number}
-              className="border border-pink-300 rounded-xl p-6 text-center shadow-sm hover:shadow-md transition-shadow duration-300"
+              className="border border-gray-200 md:border-pink-300 rounded-xl p-4 md:p-6 text-center shadow-sm hover:shadow-md transition-shadow duration-300"
             >
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-pink-100 flex items-center justify-center">
+              {/* Number circle: show on md+, hide on mobile */}
+              <div className="hidden md:flex w-16 h-16 mx-auto mb-4 rounded-full bg-pink-100 items-center justify-center">
                 <span className="text-2xl font-bold text-[#ff3576]">{symptom.number}</span>
               </div>
-                            <h3 className="font-bold text-[#2D2552] text-sm mb-2">{symptom.title}</h3>
-              <p className="text-gray-600 text-sm">{symptom.desc}</p>
+              {/* Title styles: slightly larger on mobile, original on desktop */}
+              <h3 className="text-base font-semibold text-[#2D2552] md:text-sm md:font-bold md:uppercase md:mb-2">{symptom.title}</h3>
+              {/* Description: desktop only */}
+              <p className="hidden md:block text-gray-600 text-sm">{symptom.desc}</p>
             </div>
           ))}
         </div>

@@ -154,25 +154,6 @@ const GAE_Compare_treatment_option = () => {
           </table>
         </div>
 
-        {/* ISVIR Membership */}
-        <div className='flex justify-center py-8'>
-          <div className='bg-white p-4 rounded-lg'>
-            {shouldShowImage('/member of ISVIR.jpg') ? (
-              <img
-                src='/member of ISVIR.jpg'
-                alt='ISVIR Logo'
-                className='w-96 h-54 lg:w-[1000px] lg:h-32 object-contain'
-                onError={() => handleImageError('/member of ISVIR.jpg')}
-                loading="lazy"
-                key={`member-isvir-${imageLoadAttempts['/member of ISVIR.jpg'] || 0}`}
-              />
-            ) : (
-              <div className='w-96 h-54 lg:w-[1000px] lg:h-32 bg-gray-200 flex items-center justify-center rounded-lg'>
-                <span className='text-gray-500 font-semibold'>ISVIR Member</span>
-              </div>
-            )}
-          </div>
-        </div>
       </div>
     </section>
   );

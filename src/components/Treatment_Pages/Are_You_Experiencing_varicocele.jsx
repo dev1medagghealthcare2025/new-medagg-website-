@@ -38,14 +38,22 @@ const AreYouExperiencingVaricocele = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {symptoms.map((symptom) => (
-            <div key={symptom.number} className="border border-[#ff3576] rounded-lg p-6 text-center flex flex-col items-center">
-              <div className="w-16 h-16 flex items-center justify-center bg-[#ff3576] bg-opacity-10 rounded-full text-[#ff3576] font-bold text-2xl mb-4">
+            <div
+              key={symptom.number}
+              className="border border-gray-200 md:border-[#ff3576] rounded-lg p-4 md:p-6 text-center flex flex-col items-center"
+            >
+              {/* Number circle: show on md+, hide on mobile */}
+              <div className="hidden md:flex w-16 h-16 items-center justify-center bg-[#ff3576]/10 rounded-full text-[#ff3576] font-bold text-2xl mb-4">
                 {symptom.number}
               </div>
-              <h3 className="font-bold text-sm text-[#2d2552] mb-2" style={{ minHeight: '3rem' }}>{symptom.title}</h3>
-              <p className="text-gray-600 text-sm">{symptom.description}</p>
+              {/* Title: slightly larger on mobile for readability; desktop keeps original size/weight */}
+              <h3 className="text-base font-semibold md:text-sm md:font-bold text-[#2d2552] md:uppercase md:mb-2" style={{ minHeight: 'unset' }}>
+                {symptom.title}
+              </h3>
+              {/* Description: desktop only */}
+              <p className="hidden md:block text-gray-600 text-sm">{symptom.description}</p>
             </div>
           ))}
         </div>

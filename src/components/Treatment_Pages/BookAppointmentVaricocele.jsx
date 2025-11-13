@@ -58,7 +58,7 @@ const BookAppointmentVaricocele = () => {
   };
 
   return (
-    <section className="py-16 sm:py-24 flex items-center justify-center bg-white">
+    <section className="py-16 sm:py-24 flex items-center justify-center bg-gray-100">
       <div
         className='relative w-full max-w-[1201px] h-auto md:h-[421px] rounded-[20px] overflow-hidden mx-4'
         style={{

@@ -56,30 +56,30 @@ const Thyroid_bookappoinment = () => {
   return (
     <section className="py-10 md:py-16 bg-white">
       <div
-        className="relative max-w-[1201px] h-[421px] mx-auto rounded-[20px] overflow-hidden bg-cover bg-center p-8 md:p-12"
+        className="relative w-full max-w-[1201px] mx-auto rounded-[20px] overflow-hidden bg-cover bg-center p-6 sm:p-8 md:p-12 min-h-[420px] md:h-[421px]"
         style={{ backgroundImage: "url('/book and appoinment background.jpg')" }}
       >
                 <div className="absolute inset-0 bg-[#2d2552] opacity-20"></div>
         
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center h-full">
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-center h-full">
           {/* Left Content */}
-          <div className="text-white space-y-6">
+          <div className="text-white space-y-5 text-center md:text-left max-w-xl mx-auto md:mx-0">
             <h2 className="text-3xl md:text-4xl font-bold leading-tight">
               <span className="text-white">Think You Might Have A</span> <br />
               <span className="text-[#ff3576]">Thyroid Nodule?</span>
             </h2>
-            <p className="text-base md:text-lg text-gray-200 max-w-md">
+            <p className="text-base md:text-lg text-gray-200 max-w-md mx-auto md:mx-0">
               Book your scan review and get expert advice from our IR specialists.
             </p>
             <Link to="/contact-us">
-              <button className="bg-[#ff3576] text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-pink-700 transition-colors shadow-lg">
+              <button className="w-full sm:w-auto bg-[#ff3576] text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-pink-700 transition-colors shadow-lg">
                 Book Appointment
               </button>
             </Link>
           </div>
 
           {/* Right Form */}
-          <div className="bg-white rounded-2xl p-6 shadow-2xl">
+          <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-2xl w-full max-w-xl mx-auto lg:mx-0">
             <h3 className="text-lg font-bold text-gray-800 mb-4">Get Expert Consultation</h3>
             <form onSubmit={handleSubmit} className="space-y-4">
               <textarea

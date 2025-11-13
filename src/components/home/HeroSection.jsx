@@ -18,12 +18,13 @@ const OriginalHeroSlide = ({ query, setQuery, handleSearch, results, isLoading }
     <div className='absolute inset-0 bg-gradient-to-br from-[#1a1446] via-[#2d2552] to-[#e1006a] opacity-90 z-0' />
 
     {/* Doctor Image - Hidden on mobile, visible from md screens up */}
-    <div className='block md:absolute md:right-0 lg:right-0 md:translate-x-1 lg:translate-x-2 2xl:translate-x-3 bottom-0 z-10 w-full md:w-[520px] lg:w-[640px] xl:w-[760px] 2xl:w-[860px] md:max-h-[85vh] mt-8 md:mt-0'>
+    <div className='block md:absolute md:right-0 lg:right-0 md:translate-x-1 lg:translate-x-2 2xl:translate-x-3 bottom-0 z-10 w-full md:w-[480px] lg:w-[600px] xl:w-[700px] 2xl:w-[800px] md:max-h-[85vh] mt-8 md:mt-0'>
       <img
         src='/main_home_new.png'
         alt='Doctor'
         className='w-3/4 sm:w-1/2 md:w-full h-auto md:h-full object-contain mx-auto'
       />
+    
     </div>
 
     {/* Content Container */}
