@@ -86,9 +86,7 @@ const UAE_Compare = () => {
         </div>
 
         <div className="mt-16 flex flex-col md:flex-row items-center justify-center gap-8 border-t pt-8">
-            <img src="/member of ISVIR.jpg" alt="ISVIR Member Logo" className="h-28" />
-           
-            
+    
         </div>
       </div>
     </div>

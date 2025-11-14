@@ -75,8 +75,23 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Mobile menu button (visible below lg) */}
-          <div className='lg:hidden'>
+          {/* Mobile ISVIR logo + menu (visible below lg) */}
+          <div className='flex items-center gap-2 lg:hidden'>
+            {/* ISVIR Logo (mobile only) */}
+            <img
+              src='/isvir_logo-2-removebg-preview.png'
+              alt='ISVIR logo'
+              className='h-10 w-auto opacity-90'
+            />
+            {/* ISVIR caption (mobile only) */}
+            <div className='leading-tight'>
+              <div className='text-white/80 text-[10px] font-medium'>
+                Corporate Member of ISVIR
+              </div>
+              <div className='text-white/80 text-[10px]'>
+                Interventional Radiology
+              </div>
+            </div>
             <button
               onClick={toggleMenu}
               className='text-white hover:text-pink-400 transition-colors p-2'

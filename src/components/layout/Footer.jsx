@@ -76,8 +76,22 @@ export default function Footer() {
         {/* Bottom section */}
         <div className='grid grid-cols-1 sm:grid-cols-3 items-center pt-4 border-t border-white/10 gap-3'>
           {/* Privacy and Terms - left */}
-          <div className='text-center sm:text-left'>
-            <span className='text-gray-300 text-[11px] sm:text-xs'>Privacy Policy | Terms and Condition</span>
+          <div className='text-center sm:text-left flex items-center justify-center sm:justify-start gap-2'>
+            <Link
+              to="/policy"
+              className='inline-block px-3 py-1 rounded-md border border-white/20 bg-white/10 hover:bg-white/20 text-white text-[11px] sm:text-xs transition-colors'
+              aria-label='Go to Privacy Policy'
+            >
+              Privacy Policy
+            </Link>
+            <span className='text-gray-400'>|</span>
+            <Link
+              to="/terms"
+              className='inline-block px-3 py-1 rounded-md border border-white/20 bg-white/10 hover:bg-white/20 text-white text-[11px] sm:text-xs transition-colors'
+              aria-label='Go to Terms and Conditions'
+            >
+              Terms and Condition
+            </Link>
           </div>
 
           {/* Social icons - centered */}
