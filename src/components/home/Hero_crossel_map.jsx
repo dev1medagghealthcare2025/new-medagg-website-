@@ -34,7 +34,7 @@ const HeroCrosselMap = ({ query, setQuery, handleSearch, results, isLoading }) =
                     <img
             src="/Home_map_new_one.png"
             alt="Medagg locations across India"
-            className="w-full max-w-none h-auto object-contain origin-center md:max-h-[80vh] scale-[1.45]"
+            className="w-full max-w-none h-auto object-contain origin-center md:max-h-[80vh] scale-[1.31]"
           />
                                         <div className="absolute bottom-[20%] md:bottom-[25%] left-1/2 -translate-x-1/2 w-auto whitespace-nowrap">
     

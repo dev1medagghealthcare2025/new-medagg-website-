@@ -54,6 +54,7 @@ const FAQ_Home = () => {
   const [faqs, setFaqs] = useState(faqData);
   const [question, setQuestion] = useState('');
   const [showFullLongAnswer, setShowFullLongAnswer] = useState(false); // only for id: 8
+  const [showMoreMobile, setShowMoreMobile] = useState(false); // mobile: show more/less
 
   const toggleFAQ = (id) => {
     setFaqs(faqs.map(faq => 
@@ -96,8 +97,83 @@ const FAQ_Home = () => {
             </div>
           </div>
 
-          {/* Right side - FAQ Accordion */}
-          <div className="flex flex-col">
+          {/* Right side - FAQ Accordion (Mobile) */}
+          <div className="flex flex-col md:hidden">
+            <div className="space-y-4">
+              {(showMoreMobile ? faqs : faqs.slice(0, 3)).map((faq) => (
+                <div
+                  key={faq.id}
+                  className="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm"
+                >
+                  {/* Question header using flexbox */}
+                  <button
+                    onClick={() => toggleFAQ(faq.id)}
+                    className="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 transition-colors duration-200"
+                  >
+                    <span className="text-gray-700 font-medium pr-4">
+                      {faq.question}
+                    </span>
+                    <div className="flex-shrink-0">
+                      {faq.isOpen ? (
+                        <Minus className="w-6 h-6 text-[#ff3576]" />
+                      ) : (
+                        <Plus className="w-6 h-6 text-[#ff3576]" />
+                      )}
+                    </div>
+                  </button>
+
+                  {/* Answer section with smooth transition */}
+                  {faq.isOpen && (
+                    <div className="px-4 pb-4">
+                      <div className="bg-[#2d2552] p-4 rounded-lg">
+                        {faq.id === 8 ? (
+                          <>
+                            <p
+                              className="leading-relaxed text-white"
+                              style={
+                                showFullLongAnswer
+                                  ? {}
+                                  : {
+                                      display: '-webkit-box',
+                                      WebkitLineClamp: 3,
+                                      WebkitBoxOrient: 'vertical',
+                                      overflow: 'hidden',
+                                    }
+                              }
+                            >
+                              {faq.answer}
+                            </p>
+                            <button
+                              type="button"
+                              onClick={() => setShowFullLongAnswer((v) => !v)}
+                              className="mt-3 text-sm font-medium text-[#ff3576] hover:underline"
+                            >
+                              {showFullLongAnswer ? 'Less' : 'More'}
+                            </button>
+                          </>
+                        ) : (
+                          <p className="leading-relaxed text-white">{faq.answer}</p>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+            {/* Show more/less button */}
+            <div className="flex justify-center mt-4">
+              <button
+                type="button"
+                onClick={() => setShowMoreMobile((v) => !v)}
+                className="px-4 py-2 text-sm font-semibold text-[#2d2552] border border-gray-300 rounded-full bg-white hover:bg-gray-50"
+              >
+                {showMoreMobile ? 'Show less' : 'Show more'}
+              </button>
+            </div>
+          </div>
+
+          {/* Right side - FAQ Accordion (Desktop unchanged) */}
+          <div className="hidden md:flex md:flex-col">
             <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200">
               {faqs.map((faq) => (
                 <div

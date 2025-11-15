@@ -101,11 +101,11 @@ const WhyMedagg = () => (
               className={`w-16 h-16 flex items-center justify-center rounded-full mb-4 border-2 ${
                 f.highlight
                   ? 'border-white bg-white/10'
-                  : 'border-[#ff3576] bg-[#ff3576]/10 group-hover:border-white group-hover:bg-white/10'
+                  : 'border-[#ff3576] bg-[#ff3576]/20 ring-1 ring-[#ff3576]/30 group-hover:border-white group-hover:bg-white/10 group-hover:ring-white/20'
               }`}
             >
               {f.img ? (
-                <img src={f.img} alt={f.title} className='w-10 h-10 object-contain' />
+                <img src={f.img} alt={f.title} className='w-12 h-12 object-contain drop-shadow-md opacity-95' />
               ) : f.svg}
             </div>
             <h3 className='font-bold text-lg mb-2 group-hover:text-white'>{f.title}</h3>
