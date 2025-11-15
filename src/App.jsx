@@ -21,6 +21,7 @@ import Footer from './components/layout/Footer';
 import Home from './pages/Home';
 import Chatbot from './components/internal_components/chatbot';
 import BackToTop from './components/BackToTop';
+import CallFab from './components/common/CallFab';
 import PAE_Treatmentpage from './pages/PAE_Treatmentpage';
 import GAE_Treatmentpage from './pages/GAE_Treatmentpage';
 import Thyroid_Nodule_Ablation_Treatmentpage from './pages/Thyroid_Nodule_Ablation_Treatmentpage';
@@ -89,6 +90,7 @@ function App() {
       <Footer />
       <Chatbot />
       <BackToTop />
+      <CallFab position="right" phone="+919363656010" />
     </div>
   );
 }

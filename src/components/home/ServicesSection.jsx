@@ -123,6 +123,17 @@ const OurServiceSection = () => {
   const intervalRef = useRef(null);
 
   const services = allServices[activeSet];
+  const allMobileServices = React.useMemo(() => ([...allServices.set1, ...allServices.set2]), []);
+  const [mobilePage, setMobilePage] = useState(0);
+  const mobilePages = React.useMemo(() => {
+    const chunkSize = 8; // 8 per page like the reference (2 rows x 4 or 4 rows x 2)
+    const chunks = [];
+    for (let i = 0; i < allMobileServices.length; i += chunkSize) {
+      chunks.push(allMobileServices.slice(i, i + chunkSize));
+    }
+    return chunks;
+  }, [allMobileServices]);
+  const displayedMobile = mobilePages[mobilePage] || [];
 
   const handleCardClick = (path) => {
     if (path) {
@@ -166,16 +177,48 @@ const OurServiceSection = () => {
           </button>
         )}
 
-        {/* Mobile Icon Grid */}
-        <div className='grid grid-cols-4 gap-4 w-full md:hidden'>
-          {[...allServices.set1, ...allServices.set2].map((service) => (
-            <div key={service.path} role='button' onClick={() => handleCardClick(service.path)} className='flex flex-col items-center text-center cursor-pointer group'>
-              <div className='w-16 h-16 p-3 rounded-lg bg-gray-100 flex items-center justify-center group-hover:bg-pink-100 transition-colors'>
-                <img src={service.icon} alt={`${service.title} icon`} className='w-full h-full object-contain' />
+        {/* Mobile Icon Grid (paginated) */}
+        <div className='md:hidden w-full'>
+          <div className='grid grid-cols-2 gap-5'>
+            {displayedMobile.map((service) => (
+              <div
+                key={service.path}
+                role='button'
+                onClick={() => handleCardClick(service.path)}
+                className='flex flex-col items-center text-center cursor-pointer group'
+              >
+                <div className='w-20 h-20 p-3 rounded-2xl bg-white shadow-md flex items-center justify-center ring-1 ring-gray-100 group-hover:shadow-lg group-hover:ring-pink-200 transition-all'>
+                  <img src={service.icon} alt={`${service.title} icon`} className='w-full h-full object-contain' />
+                </div>
+                <p className='text-[13px] font-semibold mt-2 text-[#1a1446] group-hover:text-pink-600 transition-colors leading-snug'>
+                  {service.title}
+                </p>
               </div>
-              <p className='text-xs font-semibold mt-2 text-gray-700 group-hover:text-pink-600 transition-colors leading-tight'>{service.title}</p>
+            ))}
+          </div>
+          {/* Mobile Pager Controls */}
+          {mobilePages.length > 1 && (
+            <div className='flex items-center justify-center gap-4 mt-5'>
+              <button
+                onClick={() => setMobilePage((p) => (p - 1 + mobilePages.length) % mobilePages.length)}
+                className='w-10 h-10 flex items-center justify-center rounded-full bg-white text-[#1a1446] border border-gray-200 shadow-md hover:bg-[#ff3576] hover:text-white hover:border-[#ff3576] transition-colors'
+                aria-label='Previous services'
+              >
+                <svg width='20' height='20' fill='none' stroke='currentColor' strokeWidth='2' viewBox='0 0 24 24'>
+                  <path d='M14 8l-4 4 4 4' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
+                </svg>
+              </button>
+              <button
+                onClick={() => setMobilePage((p) => (p + 1) % mobilePages.length)}
+                className='w-10 h-10 flex items-center justify-center rounded-full bg-white text-[#1a1446] border border-gray-200 shadow-md hover:bg-[#ff3576] hover:text-white hover:border-[#ff3576] transition-colors'
+                aria-label='Next services'
+              >
+                <svg width='20' height='20' fill='none' stroke='currentColor' strokeWidth='2' viewBox='0 0 24 24'>
+                  <path d='M10 8l4 4-4 4' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
+                </svg>
+              </button>
             </div>
-          ))}
+          )}
         </div>
 
         {/* Desktop Service Cards */}
