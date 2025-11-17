@@ -6,6 +6,7 @@ const ThinkYouMightNeedUAE = () => {
     city: '',
     fullName: '',
     phone: '',
+    preferredLanguage: '',
   });
 
   const handleChange = (e) => {
@@ -69,6 +70,26 @@ const ThinkYouMightNeedUAE = () => {
                   placeholder="City"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff3576] transition duration-300"
                 />
+                <select
+                  name="preferredLanguage"
+                  value={formData.preferredLanguage}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff3576] transition duration-300 bg-white text-black"
+                  aria-label="Preferred Language"
+                >
+                  <option value="" disabled>Preferred Language</option>
+                  <option value="English">English</option>
+                  <option value="Hindi">Hindi</option>
+                  <option value="Tamil">Tamil</option>
+                  <option value="Telugu">Telugu</option>
+                  <option value="Kannada">Kannada</option>
+                  <option value="Malayalam">Malayalam</option>
+                  <option value="Bengali">Bengali</option>
+                  <option value="Marathi">Marathi</option>
+                  <option value="Gujarati">Gujarati</option>
+                  <option value="Punjabi">Punjabi</option>
+                  <option value="Urdu">Urdu</option>
+                </select>
                 <div className="grid sm:grid-cols-2 gap-3">
                   <input
                     type="text"

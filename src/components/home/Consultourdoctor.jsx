@@ -25,6 +25,7 @@ export default function Consultourdoctor() {
     name: '',
     phone: '',
     locations: '',
+    preferredLanguage: '',
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -52,6 +53,7 @@ export default function Consultourdoctor() {
             name: formData.name,
             phone: formData.phone,
             locations: formData.locations,
+            preferredLanguage: formData.preferredLanguage,
             message: formData.message,
             source: 'Website - Consult Our Experts Form',
           },
@@ -60,7 +62,7 @@ export default function Consultourdoctor() {
 
       if (response.ok) {
         setFormStatus('success');
-        setFormData({ name: '', phone: '', locations: '', message: '' });
+        setFormData({ name: '', phone: '', locations: '', preferredLanguage: '', message: '' });
       } else {
         const errorData = await response.json(); // Get error details from the server
         console.error('API Error:', errorData); // Log the specific error
@@ -141,6 +143,28 @@ export default function Consultourdoctor() {
               className='w-full px-4 py-3 rounded-lg bg-gray-100 text-base border border-transparent focus:border-[#F7266B] focus:ring-0 outline-none transition'
               aria-label='Locations'
             />
+            <select
+              name='preferredLanguage'
+              value={formData.preferredLanguage}
+              onChange={handleInputChange}
+              className='w-full px-4 py-3 rounded-lg bg-gray-100 text-base border border-transparent focus:border-[#F7266B] focus:ring-0 outline-none transition'
+              aria-label='Preferred Language'
+            >
+              <option value='' disabled>
+                Preferred Language
+              </option>
+              <option value='English'>English</option>
+              <option value='Hindi'>Hindi</option>
+              <option value='Tamil'>Tamil</option>
+              <option value='Telugu'>Telugu</option>
+              <option value='Kannada'>Kannada</option>
+              <option value='Malayalam'>Malayalam</option>
+              <option value='Bengali'>Bengali</option>
+              <option value='Marathi'>Marathi</option>
+              <option value='Gujarati'>Gujarati</option>
+              <option value='Punjabi'>Punjabi</option>
+              <option value='Urdu'>Urdu</option>
+            </select>
             <textarea
               name='message'
               placeholder='Message'

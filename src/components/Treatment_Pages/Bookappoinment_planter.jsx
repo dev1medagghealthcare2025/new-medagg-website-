@@ -7,6 +7,7 @@ const BookappoinmentPlanter = () => {
     city: '',
     fullName: '',
     phone: '',
+    preferredLanguage: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formStatus, setFormStatus] = useState('');
@@ -33,13 +34,14 @@ const BookappoinmentPlanter = () => {
             phone: formData.phone,
             city: formData.city,
             health_concern: formData.healthConcern,
+            preferredLanguage: formData.preferredLanguage,
             source: 'Website - Planter Book Appointment Form',
           },
         }),
       });
       if (response.ok) {
         setFormStatus('success');
-        setFormData({ healthConcern: '', city: '', fullName: '', phone: '' });
+        setFormData({ healthConcern: '', city: '', fullName: '', phone: '', preferredLanguage: '' });
       } else {
         setFormStatus('error');
       }
@@ -86,6 +88,26 @@ const BookappoinmentPlanter = () => {
                     placeholder="Describe Your Health Concern"
                     className="w-full p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff3576]"
                   />
+                  <select
+                    name="preferredLanguage"
+                    value={formData.preferredLanguage}
+                    onChange={handleInputChange}
+                    className="w-full p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff3576] text-black"
+                    aria-label="Preferred Language"
+                  >
+                    <option value="" disabled>Preferred Language</option>
+                    <option value="English">English</option>
+                    <option value="Hindi">Hindi</option>
+                    <option value="Tamil">Tamil</option>
+                    <option value="Telugu">Telugu</option>
+                    <option value="Kannada">Kannada</option>
+                    <option value="Malayalam">Malayalam</option>
+                    <option value="Bengali">Bengali</option>
+                    <option value="Marathi">Marathi</option>
+                    <option value="Gujarati">Gujarati</option>
+                    <option value="Punjabi">Punjabi</option>
+                    <option value="Urdu">Urdu</option>
+                  </select>
                   <input
                     type="text"
                     name="city"

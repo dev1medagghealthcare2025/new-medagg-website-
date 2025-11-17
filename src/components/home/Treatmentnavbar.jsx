@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -48,7 +48,7 @@ const treatments = [
  
 ];
 
-const DropdownMenu = ({ items }) => {
+const DropdownMenu = ({ items, stackSubBelow = false, depth = 0 }) => {
   return (
     <ul className='absolute left-0 top-full mt-0 bg-white border border-gray-200 shadow-lg rounded-b-md z-50' style={{ minWidth: '280px', width: 'max-content' }}>
       {items.map((item, index) => (
@@ -58,9 +58,23 @@ const DropdownMenu = ({ items }) => {
             {item.subTreatments && <span className='text-xs ml-2 flex-shrink-0'>►</span>}
           </Link>
           {item.subTreatments && (
-            <div className='absolute left-full top-0 mt-0 hidden group-hover/submenu:block'>
-              <DropdownMenu items={item.subTreatments} />
-            </div>
+            stackSubBelow && depth === 0 ? (
+              <div className='hidden group-hover/submenu:block'>
+                <ul className='pl-4 pr-2 py-2'>
+                  {item.subTreatments.map((sub, subIdx) => (
+                    <li key={subIdx} className='relative'>
+                      <Link to={sub.path || '#'} className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded'>
+                        {sub.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : (
+              <div className='absolute left-full top-0 mt-0 hidden group-hover/submenu:block'>
+                <DropdownMenu items={item.subTreatments} stackSubBelow={stackSubBelow} depth={depth + 1} />
+              </div>
+            )
           )}
         </li>
       ))}
@@ -69,7 +83,7 @@ const DropdownMenu = ({ items }) => {
 };
 
 // Fixed-position root dropdown so it is always visible over hero without scrolling
-const FixedDropdown = ({ isOpen, position, items, onMouseEnter, onMouseLeave }) => {
+const FixedDropdown = ({ isOpen, position, items, onMouseEnter, onMouseLeave, stackSubBelow = false }) => {
   if (!isOpen || !items?.length) return null;
   const { left, top } = position || { left: 0, top: 0 };
   return (
@@ -87,9 +101,23 @@ const FixedDropdown = ({ isOpen, position, items, onMouseEnter, onMouseLeave }) 
               {item.subTreatments && <span className='text-xs ml-2 flex-shrink-0'>►</span>}
             </Link>
             {item.subTreatments && (
-              <div className='absolute left-full top-0 mt-0 hidden group-hover/submenu:block'>
-                <DropdownMenu items={item.subTreatments} />
-              </div>
+              stackSubBelow ? (
+                <div className='hidden group-hover/submenu:block'>
+                  <ul className='pl-4 pr-2 py-2'>
+                    {item.subTreatments.map((sub, subIdx) => (
+                      <li key={subIdx} className='relative'>
+                        <Link to={sub.path || '#'} className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded'>
+                          {sub.title}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : (
+                <div className='absolute left-full top-0 mt-0 hidden group-hover/submenu:block'>
+                  <DropdownMenu items={item.subTreatments} />
+                </div>
+              )
             )}
           </li>
         ))}
@@ -106,10 +134,26 @@ export default function Treatmentnavbar() {
   const [fixedOpen, setFixedOpen] = useState(false);
   const [fixedItems, setFixedItems] = useState([]);
   const [fixedPos, setFixedPos] = useState({ left: 0, top: 0 });
+  const [fixedStackBelow, setFixedStackBelow] = useState(false);
   const fixedHoverRef = useRef(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [mobileOpenIndex, setMobileOpenIndex] = useState(null); // top-level tab index
+  const [mobileOpenSubIndex, setMobileOpenSubIndex] = useState(null); // sub item index within dropdown
+
+  // Ensure 'Interventional' appears last without mutating original data
+  const orderedTreatments = useMemo(() => {
+    const arr = [...treatments];
+    const idx = arr.findIndex(t => t.title === 'Interventional');
+    if (idx !== -1) {
+      const [it] = arr.splice(idx, 1);
+      arr.push(it);
+    }
+    return arr;
+  }, []);
 
   // Ensure hovered item + its submenu are fully visible without manual scrolling
   const handleMouseEnter = (idx, targetEl) => {
+    if (isMobile) return; // no hover logic on mobile
     setOpenIndex(idx);
     const container = scrollContainerRef.current;
     if (!targetEl || !container) return;
@@ -154,7 +198,7 @@ export default function Treatmentnavbar() {
     try { checkArrows(); } catch (e) { /* no-op */ }
 
     // If this item has a submenu, open fixed dropdown positioned under the tab
-    const hasSubmenu = !!treatments[idx]?.subTreatments;
+    const hasSubmenu = !!orderedTreatments[idx]?.subTreatments;
     if (hasSubmenu) {
       const rect = targetEl.getBoundingClientRect();
       const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
@@ -170,12 +214,25 @@ export default function Treatmentnavbar() {
 
       const top = rect.bottom; // directly below the tab
 
-      setFixedItems(treatments[idx].subTreatments);
+      setFixedItems(orderedTreatments[idx].subTreatments);
+      // Enable stack-below layout only for Interventional root
+      const isInterventional = orderedTreatments[idx]?.title === 'Interventional';
+      setFixedStackBelow(!!isInterventional);
       setFixedPos({ left, top });
       setFixedOpen(true);
     } else {
       setFixedOpen(false);
     }
+  };
+
+  // Mobile handlers
+  const handleMobileTabClick = (idx) => {
+    setMobileOpenSubIndex(null);
+    setMobileOpenIndex(prev => (prev === idx ? null : idx));
+  };
+
+  const handleMobileSubToggle = (subIdx) => {
+    setMobileOpenSubIndex(prev => (prev === subIdx ? null : subIdx));
   };
 
   const checkArrows = () => {
@@ -206,6 +263,19 @@ export default function Treatmentnavbar() {
     }
   }, []);
 
+  // Detect mobile viewport once and on resize
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 640px)');
+    const apply = () => setIsMobile(mq.matches);
+    apply();
+    mq.addEventListener?.('change', apply);
+    window.addEventListener('orientationchange', apply);
+    return () => {
+      mq.removeEventListener?.('change', apply);
+      window.removeEventListener('orientationchange', apply);
+    };
+  }, []);
+
   const scroll = (direction) => {
     if (scrollContainerRef.current) {
       const scrollAmount = direction === 'left' ? -300 : 300;
@@ -231,7 +301,7 @@ export default function Treatmentnavbar() {
             <ul className='flex items-center justify-start whitespace-nowrap py-2'>
               {/* Small left spacer to keep first item clear of edge */}
               <li className='w-6 sm:w-8 flex-shrink-0 pointer-events-none' aria-hidden='true' />
-              {treatments.map((treatment, idx) => (
+              {orderedTreatments.map((treatment, idx) => (
                 <li
                   key={idx}
                   className='relative group/main flex items-center first:ml-0 last:mr-2'
@@ -239,21 +309,34 @@ export default function Treatmentnavbar() {
                   onMouseMove={(e) => openIndex === idx && handleMouseEnter(idx, e.currentTarget)}
                   onFocus={(e) => handleMouseEnter(idx, e.currentTarget)}
                   onMouseLeave={() => {
+                    if (isMobile) return;
                     setOpenIndex(null);
                     if (!fixedHoverRef.current) setFixedOpen(false);
                   }}
                 >
-                  <Link to={treatment.path || '#'} className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors duration-200 ${openIndex === idx ? 'bg-[#ff3576] text-white' : 'text-gray-700 hover:text-[#ff3576]'}`}>
-                    <span>{treatment.title}</span>
-                    {treatment.subTreatments && <span className='text-xs'>▼</span>}
-                  </Link>
+                  {isMobile ? (
+                    <button
+                      type='button'
+                      aria-expanded={mobileOpenIndex === idx}
+                      onClick={() => handleMobileTabClick(idx)}
+                      className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors duration-200 ${mobileOpenIndex === idx ? 'bg-[#ff3576] text-white' : 'text-gray-700'} `}
+                    >
+                      <span>{treatment.title}</span>
+                      {treatment.subTreatments && <span className='text-xs'>{mobileOpenIndex === idx ? '▲' : '▼'}</span>}
+                    </button>
+                  ) : (
+                    <Link to={treatment.path || '#'} className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors duration-200 ${openIndex === idx ? 'bg-[#ff3576] text-white' : 'text-gray-700 hover:text-[#ff3576]'}`}>
+                      <span>{treatment.title}</span>
+                      {treatment.subTreatments && <span className='text-xs'>▼</span>}
+                    </Link>
+                  )}
 
-                  {openIndex === idx && treatment.subTreatments && (
+                  {!isMobile && openIndex === idx && treatment.subTreatments && (
                     <div className='hidden group-hover/main:block'>
                       <DropdownMenu items={treatment.subTreatments} />
                     </div>
                   )}
-                  {idx < treatments.length - 1 && (
+                  {idx < orderedTreatments.length - 1 && (
                     <span className='text-gray-300'>|</span>
                   )}
                 </li>
@@ -271,14 +354,57 @@ export default function Treatmentnavbar() {
           </button>
         )}
       </div>
-      {/* Fixed-position root dropdown */}
-      <FixedDropdown
-        isOpen={fixedOpen}
-        position={fixedPos}
-        items={fixedItems}
-        onMouseEnter={() => { fixedHoverRef.current = true; }}
-        onMouseLeave={() => { fixedHoverRef.current = false; setFixedOpen(false); }}
-      />
+      {/* Fixed-position root dropdown (desktop only) */}
+      {!isMobile && (
+        <FixedDropdown
+          isOpen={fixedOpen}
+          position={fixedPos}
+          items={fixedItems}
+          stackSubBelow={fixedStackBelow}
+          onMouseEnter={() => { fixedHoverRef.current = true; }}
+          onMouseLeave={() => { fixedHoverRef.current = false; setFixedOpen(false); }}
+        />
+      )}
+
+      {/* Mobile dropdown panel */}
+      {isMobile && mobileOpenIndex !== null && (
+        <div className='bg-white border-t border-gray-200 shadow-inner'>
+          <div className='max-w-7xl mx-auto px-4 py-2'>
+            {(orderedTreatments[mobileOpenIndex]?.subTreatments || []).map((item, i) => (
+              <div key={i} className='border-b last:border-b-0 border-gray-100'>
+                {item.subTreatments ? (
+                  <>
+                    <button
+                      type='button'
+                      className='w-full flex items-center justify-between text-left px-2 py-3 text-sm text-gray-800'
+                      aria-expanded={mobileOpenSubIndex === i}
+                      onClick={() => handleMobileSubToggle(i)}
+                    >
+                      <span>{item.title}</span>
+                      <span className='text-xs ml-2'>{mobileOpenSubIndex === i ? '▲' : '▼'}</span>
+                    </button>
+                    {mobileOpenSubIndex === i && (
+                      <ul className='pl-4 pb-2'>
+                        {item.subTreatments.map((sub, si) => (
+                          <li key={si}>
+                            <Link to={sub.path || '#'} className='block px-2 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded'>
+                              {sub.title}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </>
+                ) : (
+                  <Link to={item.path || '#'} className='w-full flex items-center justify-between text-left px-2 py-3 text-sm text-gray-800 hover:bg-gray-50 rounded'>
+                    {item.title}
+                  </Link>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
       <style>{`
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }

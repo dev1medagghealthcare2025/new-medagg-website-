@@ -6,8 +6,11 @@ const InfoMedagg = () => {
     name: '',
     phone: '',
     email: '',
+    locations: '',
+    preferredLanguage: '',
     message: ''
   });
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formStatus, setFormStatus] = useState(''); // success, error, or ''
 
@@ -35,6 +38,8 @@ const InfoMedagg = () => {
             name: formData.name,
             phone: formData.phone,
             email: formData.email,
+            locations: formData.locations,
+            preferredLanguage: formData.preferredLanguage,
             message: formData.message,
             source: 'Website - Become an Investor Form',
           },
@@ -43,7 +48,7 @@ const InfoMedagg = () => {
 
       if (response.ok) {
         setFormStatus('success');
-        setFormData({ name: '', phone: '', email: '', message: '' });
+        setFormData({ name: '', phone: '', email: '', locations: '', preferredLanguage: '', message: '' });
       } else {
         setFormStatus('error');
       }
@@ -145,6 +150,48 @@ const InfoMedagg = () => {
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff3576] focus:border-transparent outline-none transition-all"
                     required
                   />
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="locations" className="block text-sm font-medium text-gray-700 mb-2">
+                      Location
+                    </label>
+                    <input
+                      type="text"
+                      id="locations"
+                      name="locations"
+                      value={formData.locations}
+                      onChange={handleChange}
+                      placeholder="Your City/Location"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff3576] focus:border-transparent outline-none transition-all"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="preferredLanguage" className="block text-sm font-medium text-gray-700 mb-2">
+                      Preferred Language
+                    </label>
+                    <select
+                      id="preferredLanguage"
+                      name="preferredLanguage"
+                      value={formData.preferredLanguage}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff3576] focus:border-transparent outline-none transition-all"
+                    >
+                      <option value="" disabled>Choose Language</option>
+                      <option value="English">English</option>
+                      <option value="Hindi">Hindi</option>
+                      <option value="Tamil">Tamil</option>
+                      <option value="Telugu">Telugu</option>
+                      <option value="Kannada">Kannada</option>
+                      <option value="Malayalam">Malayalam</option>
+                      <option value="Bengali">Bengali</option>
+                      <option value="Marathi">Marathi</option>
+                      <option value="Gujarati">Gujarati</option>
+                      <option value="Punjabi">Punjabi</option>
+                      <option value="Urdu">Urdu</option>
+                    </select>
+                  </div>
                 </div>
 
                 <div>

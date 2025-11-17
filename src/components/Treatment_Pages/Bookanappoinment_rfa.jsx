@@ -7,6 +7,7 @@ const Bookanappoinment_rfa = () => {
     city: '',
     name: '',
     phone: '',
+    preferredLanguage: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formStatus, setFormStatus] = useState(''); // success, error, or ''
@@ -34,6 +35,7 @@ const Bookanappoinment_rfa = () => {
             phone: formData.phone,
             health_concern: formData.concern,
             city: formData.city,
+            preferredLanguage: formData.preferredLanguage,
             source: 'Website - RFA Book Appointment Form',
           },
         }),
@@ -41,7 +43,7 @@ const Bookanappoinment_rfa = () => {
 
       if (response.ok) {
         setFormStatus('success');
-        setFormData({ concern: '', city: '', name: '', phone: '' });
+        setFormData({ concern: '', city: '', name: '', phone: '', preferredLanguage: '' });
       } else {
         setFormStatus('error');
       }
@@ -112,6 +114,26 @@ const Bookanappoinment_rfa = () => {
                       className="w-full px-3 py-2 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff3576] text-xs"
                       required
                     />
+                    <select
+                      name="preferredLanguage"
+                      value={formData.preferredLanguage}
+                      onChange={handleInputChange}
+                      className="w-full px-3 py-2 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff3576] text-xs text-black"
+                      aria-label="Preferred Language"
+                    >
+                      <option value="" disabled>Preferred Language</option>
+                      <option value="English">English</option>
+                      <option value="Hindi">Hindi</option>
+                      <option value="Tamil">Tamil</option>
+                      <option value="Telugu">Telugu</option>
+                      <option value="Kannada">Kannada</option>
+                      <option value="Malayalam">Malayalam</option>
+                      <option value="Bengali">Bengali</option>
+                      <option value="Marathi">Marathi</option>
+                      <option value="Gujarati">Gujarati</option>
+                      <option value="Punjabi">Punjabi</option>
+                      <option value="Urdu">Urdu</option>
+                    </select>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <input 
                         type="text" 

@@ -7,6 +7,7 @@ const JoinWithLanding = () => {
     email: '',
     experience: '',
     city: '',
+    preferredLanguage: '',
     message: '', // Replaces hospitalName and specialization
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -36,6 +37,7 @@ const JoinWithLanding = () => {
             email: formData.email,
             experience: formData.experience,
             city: formData.city,
+            preferredLanguage: formData.preferredLanguage,
             specialization: formData.message, // Map message to specialization
             source: 'Website - Join With Us Form',
           },
@@ -44,7 +46,7 @@ const JoinWithLanding = () => {
 
       if (response.ok) {
         setFormStatus('success');
-        setFormData({ name: '', phone: '', email: '', experience: '', city: '', message: '' });
+        setFormData({ name: '', phone: '', email: '', experience: '', city: '', preferredLanguage: '', message: '' });
       } else {
         setFormStatus('error');
       }
@@ -77,6 +79,20 @@ const JoinWithLanding = () => {
                 <input type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder="Email ID*" className="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-pink-500 focus:border-pink-500" required />
                 <input type="text" name="city" value={formData.city} onChange={handleInputChange} placeholder="Select City*" className="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-pink-500 focus:border-pink-500" required />
                 <input type="text" name="experience" value={formData.experience} onChange={handleInputChange} placeholder="Experience (Years)*" className="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-pink-500 focus:border-pink-500" required />
+                <select name="preferredLanguage" value={formData.preferredLanguage} onChange={handleInputChange} className="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-pink-500 focus:border-pink-500">
+                  <option value="" disabled>Preferred Language</option>
+                  <option value="English">English</option>
+                  <option value="Hindi">Hindi</option>
+                  <option value="Tamil">Tamil</option>
+                  <option value="Telugu">Telugu</option>
+                  <option value="Kannada">Kannada</option>
+                  <option value="Malayalam">Malayalam</option>
+                  <option value="Bengali">Bengali</option>
+                  <option value="Marathi">Marathi</option>
+                  <option value="Gujarati">Gujarati</option>
+                  <option value="Punjabi">Punjabi</option>
+                  <option value="Urdu">Urdu</option>
+                </select>
               </div>
               <textarea name="message" value={formData.message} onChange={handleInputChange} placeholder="Your Message" rows="4" className="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-pink-500 focus:border-pink-500"></textarea>
               <div>

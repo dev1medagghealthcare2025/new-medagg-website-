@@ -7,6 +7,7 @@ const BookAppointmentVaricocele = () => {
     city: '',
     fullName: '',
     phone: '',
+    preferredLanguage: '',
   });
 
   const handleChange = (e) => {
@@ -38,6 +39,7 @@ const BookAppointmentVaricocele = () => {
             phone: formData.phone,
             city: formData.city,
             health_concern: formData.concern,
+            preferredLanguage: formData.preferredLanguage,
             source: 'Website - Varicocele Book Appointment',
           },
         }),
@@ -45,7 +47,7 @@ const BookAppointmentVaricocele = () => {
 
       if (response.ok) {
         setFormStatus('success');
-        setFormData({ concern: '', city: '', fullName: '', phone: '' });
+        setFormData({ concern: '', city: '', fullName: '', phone: '', preferredLanguage: '' });
       } else {
         setFormStatus('error');
       }
@@ -96,7 +98,7 @@ const BookAppointmentVaricocele = () => {
                   onChange={handleChange}
                   placeholder='Describe Your Health Concern'
                   rows='2'
-                  className='w-full p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff3576] transition resize-none'
+                  className='w-full p-2.5 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff3576] transition resize-none'
                   required
                 ></textarea>
                 <input
@@ -105,9 +107,29 @@ const BookAppointmentVaricocele = () => {
                   value={formData.city}
                   onChange={handleChange}
                   placeholder='City'
-                  className='w-full p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff3576] transition'
+                  className='w-full p-2.5 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff3576] transition'
                   required
                 />
+                <select
+                  name='preferredLanguage'
+                  value={formData.preferredLanguage}
+                  onChange={handleChange}
+                  className='w-full p-2.5 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff3576] transition text-black'
+                  aria-label='Preferred Language'
+                >
+                  <option value='' disabled>Preferred Language</option>
+                  <option value='English'>English</option>
+                  <option value='Hindi'>Hindi</option>
+                  <option value='Tamil'>Tamil</option>
+                  <option value='Telugu'>Telugu</option>
+                  <option value='Kannada'>Kannada</option>
+                  <option value='Malayalam'>Malayalam</option>
+                  <option value='Bengali'>Bengali</option>
+                  <option value='Marathi'>Marathi</option>
+                  <option value='Gujarati'>Gujarati</option>
+                  <option value='Punjabi'>Punjabi</option>
+                  <option value='Urdu'>Urdu</option>
+                </select>
                 <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
                   <input
                     type='text'
@@ -115,7 +137,7 @@ const BookAppointmentVaricocele = () => {
                     value={formData.fullName}
                     onChange={handleChange}
                     placeholder='Full Name'
-                    className='w-full p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff3576] transition'
+                    className='w-full p-2.5 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff3576] transition'
                     required
                   />
                   <input
@@ -124,7 +146,7 @@ const BookAppointmentVaricocele = () => {
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder='Phone Number'
-                    className='w-full p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff3576] transition'
+                    className='w-full p-2.5 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff3576] transition'
                     required
                   />
                 </div>

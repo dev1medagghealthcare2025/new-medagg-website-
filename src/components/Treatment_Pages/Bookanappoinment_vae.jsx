@@ -7,6 +7,7 @@ const BookAnAppointmentVAE = () => {
     city: '',
     fullName: '',
     phone: '',
+    preferredLanguage: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formStatus, setFormStatus] = useState('');
@@ -34,6 +35,7 @@ const BookAnAppointmentVAE = () => {
             phone: formData.phone,
             city: formData.city,
             health_concern: formData.healthConcern,
+            preferredLanguage: formData.preferredLanguage,
             source: 'Website - VAE Book Appointment',
           },
         }),
@@ -41,7 +43,7 @@ const BookAnAppointmentVAE = () => {
 
       if (response.ok) {
         setFormStatus('success');
-        setFormData({ healthConcern: '', city: '', fullName: '', phone: '' });
+        setFormData({ healthConcern: '', city: '', fullName: '', phone: '', preferredLanguage: '' });
       } else {
         setFormStatus('error');
       }
@@ -101,6 +103,26 @@ const BookAnAppointmentVAE = () => {
                   placeholder="City"
                   required
                 />
+                <select
+                  name="preferredLanguage"
+                  value={formData.preferredLanguage}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff3576] text-sm text-black"
+                  aria-label="Preferred Language"
+                >
+                  <option value="" disabled>Preferred Language</option>
+                  <option value="English">English</option>
+                  <option value="Hindi">Hindi</option>
+                  <option value="Tamil">Tamil</option>
+                  <option value="Telugu">Telugu</option>
+                  <option value="Kannada">Kannada</option>
+                  <option value="Malayalam">Malayalam</option>
+                  <option value="Bengali">Bengali</option>
+                  <option value="Marathi">Marathi</option>
+                  <option value="Gujarati">Gujarati</option>
+                  <option value="Punjabi">Punjabi</option>
+                  <option value="Urdu">Urdu</option>
+                </select>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <input
                     type="text"

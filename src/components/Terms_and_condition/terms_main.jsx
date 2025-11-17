@@ -490,10 +490,6 @@ function TermsMain() {
                 </p>
               </div>
             </section>
-
-            
-            
-            
           </div>
         </div>
       </div>

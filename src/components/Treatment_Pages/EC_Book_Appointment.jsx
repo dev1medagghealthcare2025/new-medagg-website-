@@ -3,8 +3,10 @@ import React, { useState } from 'react';
 const EC_Book_Appointment = () => {
   const [formData, setFormData] = useState({
     concern: '',
+    city: '',
     name: '',
     phone: '',
+    preferredLanguage: '',
   });
 
   const handleInputChange = (e) => {
@@ -32,6 +34,8 @@ const EC_Book_Appointment = () => {
             name: formData.name,
             phone: formData.phone,
             health_concern: formData.concern,
+            city: formData.city,
+            preferredLanguage: formData.preferredLanguage,
             source: 'Website - Endovascular Coiling Book Appointment',
           },
         }),
@@ -39,7 +43,7 @@ const EC_Book_Appointment = () => {
 
       if (response.ok) {
         setFormStatus('success');
-        setFormData({ concern: '', name: '', phone: '' });
+        setFormData({ concern: '', city: '', name: '', phone: '', preferredLanguage: '' });
       } else {
         setFormStatus('error');
       }
@@ -77,16 +81,25 @@ const EC_Book_Appointment = () => {
 
         {/* Right Side: Form */}
         <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-lg mx-auto">
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <textarea
               name="concern"
               value={formData.concern}
               onChange={handleInputChange}
               placeholder="Describe Your Health Concern"
-              className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff3576]"
-              rows="4"
+              className="w-full px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#ff3576] text-xs"
+              rows="3"
               required
             ></textarea>
+            <input
+              type="text"
+              name="city"
+              value={formData.city}
+              onChange={handleInputChange}
+              placeholder="City"
+              className="w-full px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#ff3576] text-xs"
+              required
+            />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <input
                 type="text"
@@ -94,7 +107,7 @@ const EC_Book_Appointment = () => {
                 value={formData.name}
                 onChange={handleInputChange}
                 placeholder="Full Name"
-                className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff3576]"
+                className="w-full px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#ff3576] text-xs"
                 required
               />
               <input
@@ -103,14 +116,34 @@ const EC_Book_Appointment = () => {
                 value={formData.phone}
                 onChange={handleInputChange}
                 placeholder="Phone Number"
-                className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff3576]"
+                className="w-full px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#ff3576] text-xs"
                 required
               />
             </div>
+            <select
+              name="preferredLanguage"
+              value={formData.preferredLanguage}
+              onChange={handleInputChange}
+              className="w-full px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#ff3576] bg-white text-black text-xs"
+              aria-label="Preferred Language"
+            >
+              <option value="" disabled>Preferred Language</option>
+              <option value="English">English</option>
+              <option value="Hindi">Hindi</option>
+              <option value="Tamil">Tamil</option>
+              <option value="Telugu">Telugu</option>
+              <option value="Kannada">Kannada</option>
+              <option value="Malayalam">Malayalam</option>
+              <option value="Bengali">Bengali</option>
+              <option value="Marathi">Marathi</option>
+              <option value="Gujarati">Gujarati</option>
+              <option value="Punjabi">Punjabi</option>
+              <option value="Urdu">Urdu</option>
+            </select>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-[#ff3576] text-white font-bold py-4 px-6 rounded-lg hover:bg-pink-700 transition-colors duration-300 text-lg disabled:bg-gray-400"
+              className="w-full bg-[#ff3576] text-white font-bold py-2 px-4 rounded-md hover:bg-pink-700 transition-colors duration-300 text-sm disabled:bg-gray-400"
             >
               {isSubmitting ? 'Submitting...' : 'Speak To Experts'}
             </button>

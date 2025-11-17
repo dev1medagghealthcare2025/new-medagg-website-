@@ -601,7 +601,7 @@ const quickResponses = [
   'What treatments do you offer?',
   'I have knee pain, can you help?',
   'Tell me about non-surgical options',
-  'Insurance & billing questions'
+ // 'Insurance & billing questions'
 ];
 
 const Chatbot = () => {
@@ -1367,7 +1367,7 @@ const Chatbot = () => {
                 </svg>
               </div>
               <div>
-                <h3 className='font-bold text-base sm:text-lg'>Ira</h3>
+                <h3 className='font-bold text-base sm:text-lg'>IRA</h3>
                 <p className='text-xs text-pink-100 font-medium'>Virtual Health Assistant</p>
               </div>
             </div>

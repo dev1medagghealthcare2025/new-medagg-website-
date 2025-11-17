@@ -291,6 +291,7 @@ const OurDoctor = ({ randomize = false, initialShowCount = 4 }) => {
   const [filters, setFilters] = useState({ name: '', city: 'All' });
   const [showAll, setShowAll] = useState(false);
   const [imageErrors, setImageErrors] = useState({});
+  const [showAllMobile, setShowAllMobile] = useState(false);
   const [isFilterActive, setIsFilterActive] = useState(false);
 
   const doctorList = useMemo(() => {
@@ -327,6 +328,10 @@ const OurDoctor = ({ randomize = false, initialShowCount = 4 }) => {
 
   const doctorsToDisplay = showAll ? filteredDoctors : filteredDoctors.slice(0, initialShowCount);
   const hasMoreDoctors = filteredDoctors.length > initialShowCount;
+  // Mobile-specific slicing (show 3 by default)
+  const mobileInitialCount = 3;
+  const doctorsToDisplayMobile = showAllMobile ? filteredDoctors : filteredDoctors.slice(0, mobileInitialCount);
+  const hasMoreMobile = filteredDoctors.length > mobileInitialCount;
 
   return (
     <section className='w-full bg-white'>
@@ -384,8 +389,66 @@ const OurDoctor = ({ randomize = false, initialShowCount = 4 }) => {
           </div>
         </div>
 
-        {/* Doctor cards */}
-        <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 ${isFilterActive ? 'block' : 'hidden'} md:grid`}>
+        {/* Doctor cards - Mobile (shows first 3 with Show More) */}
+        <div className={`md:hidden grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 ${isFilterActive ? 'block' : 'hidden'}`}>
+          {doctorsToDisplayMobile.length > 0 ? (
+            doctorsToDisplayMobile.map((doc) => (
+              <div
+                key={`${doc.name}-${doc.city}`}
+                className='bg-gray-200 rounded-lg shadow-sm border border-gray-100 flex flex-col items-center p-4 lg:p-6 hover:shadow-md transition-shadow'
+              >
+                {!imageErrors[doc.image] ? (
+                  <img
+                    src={doc.image}
+                    alt={doc.name}
+                    className='w-32 h-32 lg:w-40 lg:h-40 object-cover rounded-lg mb-3 lg:mb-4'
+                    onError={() => handleImageError(doc.image)}
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className='w-32 h-32 lg:w-40 lg:h-40 bg-gradient-to-br from-[#ff3576] to-[#2d2552] rounded-lg mb-3 lg:mb-4 flex items-center justify-center'>
+                    <div className='text-white font-bold text-xl lg:text-2xl'>
+                      {doc.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                    </div>
+                  </div>
+                )}
+                <Link 
+                  to="/contact-us"
+                  className='w-full mb-3 lg:mb-4 py-2 border border-[#ff3576] rounded-md text-[#ff3576] text-sm font-medium flex items-center justify-center gap-2 hover:bg-[#ff3576] hover:text-white transition no-underline hover:no-underline focus:no-underline active:no-underline'
+                >
+                  <span className='text-lg'>→</span>
+                  Book Appointment
+                </Link>
+                <div className='text-center'>
+                  <div className='font-bold text-base lg:text-lg'>{doc.name}</div>
+                  <div className='text-gray-700 text-xs lg:text-sm'>{doc.degrees}</div>
+                  <div className='text-gray-500 text-xs'>{doc.specialty}</div>
+                  <div className='text-gray-400 text-xs mt-1'>{doc.city}</div>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className='col-span-full text-center py-8 text-gray-500'>
+              <div className='text-lg mb-2'>No doctors found</div>
+              <div className='text-sm'>Try adjusting your search criteria</div>
+            </div>
+          )}
+        </div>
+
+        {/* Mobile Show More / Show Less Button */}
+        {isFilterActive && hasMoreMobile && (
+          <div className='flex md:hidden justify-center mt-6'>
+            <button
+              onClick={() => setShowAllMobile(prev => !prev)}
+              className='px-6 py-2 bg-[#ff3576] text-white text-sm font-semibold rounded-lg hover:bg-[#e1006a] transition-colors duration-300 shadow-md hover:shadow-lg'
+            >
+              {showAllMobile ? 'Show Less' : `Show More (${filteredDoctors.length - mobileInitialCount} more)`}
+            </button>
+          </div>
+        )}
+
+        {/* Doctor cards - Desktop (unchanged) */}
+        <div className={`hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 ${isFilterActive ? 'block' : 'hidden'} md:grid`}>
           {doctorsToDisplay.length > 0 ? (
             doctorsToDisplay.map((doc) => (
               <div

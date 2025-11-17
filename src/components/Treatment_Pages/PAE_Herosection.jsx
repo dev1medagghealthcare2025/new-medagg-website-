@@ -9,6 +9,7 @@ export default function PAE_Herosection() {
     city: '',
     fullName: '',
     phoneNumber: '',
+    preferredLanguage: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formStatus, setFormStatus] = useState(''); // success, error, or ''
@@ -36,6 +37,7 @@ export default function PAE_Herosection() {
             phone: formData.phoneNumber,
             city: formData.city,
             health_concern: formData.healthConcern,
+            preferredLanguage: formData.preferredLanguage,
             source: 'Website - PAE Hero Section Form',
           },
         }),
@@ -43,7 +45,7 @@ export default function PAE_Herosection() {
 
       if (response.ok) {
         setFormStatus('success');
-        setFormData({ healthConcern: '', city: '', fullName: '', phoneNumber: '' });
+        setFormData({ healthConcern: '', city: '', fullName: '', phoneNumber: '', preferredLanguage: '' });
       } else {
         setFormStatus('error');
       }
@@ -98,6 +100,26 @@ export default function PAE_Herosection() {
                   className='w-full border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm mb-3 focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all bg-white text-gray-800 placeholder-gray-500'
                   required
                 />
+                <select
+                  name='preferredLanguage'
+                  value={formData.preferredLanguage}
+                  onChange={handleInputChange}
+                  className='w-full border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm mb-3 focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all bg-white text-black'
+                  aria-label='Preferred Language'
+                >
+                  <option value='' disabled>Preferred Language</option>
+                  <option value='English'>English</option>
+                  <option value='Hindi'>Hindi</option>
+                  <option value='Tamil'>Tamil</option>
+                  <option value='Telugu'>Telugu</option>
+                  <option value='Kannada'>Kannada</option>
+                  <option value='Malayalam'>Malayalam</option>
+                  <option value='Bengali'>Bengali</option>
+                  <option value='Marathi'>Marathi</option>
+                  <option value='Gujarati'>Gujarati</option>
+                  <option value='Punjabi'>Punjabi</option>
+                  <option value='Urdu'>Urdu</option>
+                </select>
                 <div className='flex flex-col sm:flex-row gap-2.5 mb-3'>
                   <input
                     type='text'

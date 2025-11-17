@@ -7,6 +7,7 @@ const Thyroid_bookappoinment = () => {
     city: '',
     fullName: '',
     phoneNumber: '',
+    preferredLanguage: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formStatus, setFormStatus] = useState(''); // success, error, or ''
@@ -34,6 +35,7 @@ const Thyroid_bookappoinment = () => {
             phone: formData.phoneNumber,
             city: formData.city,
             health_concern: formData.healthConcern,
+            preferredLanguage: formData.preferredLanguage,
             source: 'Website - Thyroid Book Appointment',
           },
         }),
@@ -41,7 +43,7 @@ const Thyroid_bookappoinment = () => {
 
       if (response.ok) {
         setFormStatus('success');
-        setFormData({ healthConcern: '', city: '', fullName: '', phoneNumber: '' });
+        setFormData({ healthConcern: '', city: '', fullName: '', phoneNumber: '', preferredLanguage: '' });
       } else {
         setFormStatus('error');
       }
@@ -88,7 +90,7 @@ const Thyroid_bookappoinment = () => {
                 onChange={handleInputChange}
                 placeholder="Describe Your Health Concern"
                 rows={2}
-                className="w-full px-4 py-2 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                className="w-full px-2 py-1.5 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
               />
               <input
                 type="text"
@@ -96,8 +98,28 @@ const Thyroid_bookappoinment = () => {
                 value={formData.city}
                 onChange={handleInputChange}
                 placeholder="City"
-                className="w-full px-4 py-2 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                className="w-full px-2 py-1.5 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
               />
+              <select
+                name="preferredLanguage"
+                value={formData.preferredLanguage}
+                onChange={handleInputChange}
+                className="w-full px-2 py-1.5 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-black"
+                aria-label="Preferred Language"
+              >
+                <option value="" disabled>Preferred Language</option>
+                <option value="English">English</option>
+                <option value="Hindi">Hindi</option>
+                <option value="Tamil">Tamil</option>
+                <option value="Telugu">Telugu</option>
+                <option value="Kannada">Kannada</option>
+                <option value="Malayalam">Malayalam</option>
+                <option value="Bengali">Bengali</option>
+                <option value="Marathi">Marathi</option>
+                <option value="Gujarati">Gujarati</option>
+                <option value="Punjabi">Punjabi</option>
+                <option value="Urdu">Urdu</option>
+              </select>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <input
                   type="text"
@@ -105,7 +127,7 @@ const Thyroid_bookappoinment = () => {
                   value={formData.fullName}
                   onChange={handleInputChange}
                   placeholder="Full Name"
-                  className="w-full px-4 py-2 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  className="w-full px-2 py-1.5 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
                   required
                 />
                 <input
@@ -114,7 +136,7 @@ const Thyroid_bookappoinment = () => {
                   value={formData.phoneNumber}
                   onChange={handleInputChange}
                   placeholder="Phone Number"
-                  className="w-full px-4 py-2 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  className="w-full px-2 py-1.5 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
                   required
                 />
               </div>

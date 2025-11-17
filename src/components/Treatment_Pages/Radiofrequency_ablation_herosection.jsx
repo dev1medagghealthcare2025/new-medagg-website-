@@ -7,6 +7,7 @@ const Radiofrequency_ablation_herosection = () => {
     city: '',
     name: '',
     phone: '',
+    preferredLanguage: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formStatus, setFormStatus] = useState(''); // success, error, or ''
@@ -34,6 +35,7 @@ const Radiofrequency_ablation_herosection = () => {
             phone: formData.phone,
             health_concern: formData.concern,
             city: formData.city,
+            preferredLanguage: formData.preferredLanguage,
             source: 'Website - RFA Hero Section Form',
           },
         }),
@@ -41,7 +43,7 @@ const Radiofrequency_ablation_herosection = () => {
 
       if (response.ok) {
         setFormStatus('success');
-        setFormData({ concern: '', city: '', name: '', phone: '' });
+        setFormData({ concern: '', city: '', name: '', phone: '', preferredLanguage: '' });
       } else {
         setFormStatus('error');
       }
@@ -94,6 +96,26 @@ const Radiofrequency_ablation_herosection = () => {
                   className="w-full border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm mb-3 focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all"
                   required
                 />
+                <select
+                  name="preferredLanguage"
+                  value={formData.preferredLanguage}
+                  onChange={handleInputChange}
+                  className="w-full border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm mb-3 focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all bg-white text-black"
+                  aria-label="Preferred Language"
+                >
+                  <option value="" disabled>Preferred Language</option>
+                  <option value="English">English</option>
+                  <option value="Hindi">Hindi</option>
+                  <option value="Tamil">Tamil</option>
+                  <option value="Telugu">Telugu</option>
+                  <option value="Kannada">Kannada</option>
+                  <option value="Malayalam">Malayalam</option>
+                  <option value="Bengali">Bengali</option>
+                  <option value="Marathi">Marathi</option>
+                  <option value="Gujarati">Gujarati</option>
+                  <option value="Punjabi">Punjabi</option>
+                  <option value="Urdu">Urdu</option>
+                </select>
                 <div className="flex flex-col sm:flex-row gap-2.5 mb-3">
                   <input
                     type="text"
