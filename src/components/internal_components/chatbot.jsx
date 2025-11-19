@@ -644,10 +644,26 @@ const Chatbot = () => {
   // --- Persistence: Load state on mount ---
   useEffect(() => {
     try {
+      // Helpers to normalize persisted data safely across environments
+      const normalizeTimestamp = (ts) => {
+        if (!ts) return new Date().toISOString();
+        if (ts instanceof Date) return ts.toISOString();
+        const d = new Date(ts);
+        return Number.isNaN(d.getTime()) ? new Date().toISOString() : d.toISOString();
+      };
+      const reviveMessages = (arr) => {
+        if (!Array.isArray(arr) || arr.length === 0) return arr;
+        return arr.map((m) => ({
+          ...m,
+          // store as ISO; rendering uses formatTime() that accepts both Date or string
+          timestamp: normalizeTimestamp(m.timestamp),
+        }));
+      };
+
       const raw = localStorage.getItem('medagg_chatbot_state');
       if (raw) {
         const saved = JSON.parse(raw);
-        if (Array.isArray(saved.messages) && saved.messages.length) setMessages(saved.messages);
+        if (Array.isArray(saved.messages) && saved.messages.length) setMessages(reviveMessages(saved.messages));
         if (typeof saved.isOpen === 'boolean') setIsOpen(saved.isOpen);
         if (typeof saved.inputValue === 'string') setInputValue(saved.inputValue);
         if (saved.medicalContext) setMedicalContext(saved.medicalContext);
@@ -668,9 +684,19 @@ const Chatbot = () => {
   // --- Persistence: Save key state whenever it changes ---
   useEffect(() => {
     try {
+      const messagesForSave = Array.isArray(messages)
+        ? messages.map((m) => ({
+            ...m,
+            timestamp:
+              m && typeof m.timestamp === 'string'
+                ? m.timestamp
+                : new Date(m.timestamp || Date.now()).toISOString(),
+          }))
+        : messages;
+
       const stateToSave = {
         isOpen,
-        messages,
+        messages: messagesForSave,
         inputValue,
         medicalContext,
         conversationHistory,
@@ -719,6 +745,17 @@ const Chatbot = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  // Safely format timestamps that may be Date objects or ISO strings from localStorage
+  const formatTime = useCallback((ts) => {
+    try {
+      const d = ts instanceof Date ? ts : new Date(ts);
+      if (Number.isNaN(d.getTime())) return '';
+      return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    } catch (_) {
+      return '';
+    }
+  }, []);
 
   // Emergency detection function
   const detectEmergency = useCallback((userInput) => {
@@ -1583,7 +1620,7 @@ const Chatbot = () => {
                         )}
                       </div>
                       <div className='text-xs text-gray-400 mt-1 ml-2'>
-                        {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                        {formatTime(message.timestamp)}
                       </div>
                     </div>
                   </div>
@@ -1598,7 +1635,7 @@ const Chatbot = () => {
                         </div>
                       </div>
                       <div className='text-xs text-gray-400 mt-1 mr-2 text-right'>
-                        {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                        {formatTime(message.timestamp)}
                       </div>
                     </div>
                     <div className='w-11 h-11 bg-white rounded-full ml-4 flex-shrink-0 flex items-center justify-center shadow-inner border border-pink-100'>
