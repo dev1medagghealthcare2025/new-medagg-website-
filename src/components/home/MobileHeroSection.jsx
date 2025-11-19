@@ -1,57 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import SharedSearchBar from './SharedSearchBar';
 
 
-const MobileHeroSection = () => {
-  const [query, setQuery] = useState('');
-  const [searchResult, setSearchResult] = useState(null);
-  const treatmentSuggestions = [
-    {
-      name: 'Prostate Artery Embolization (PAE)',
-      path: '/pae',
-      keywords: [
-        'prostate', 'pae', 'bph', 'turp', 'embolization', 'enlarged prostate', 'benign prostatic hyperplasia',
-      ],
-    },
-    {
-      name: 'Geniculate Artery Embolization (GAE)',
-      path: '/gae',
-      keywords: [
-        'geniculate artery embolization',
-        'knee pain',
-        'osteoarthritis',
-      ],
-    },
-    // Add other treatments as needed
-  ];
-
-  const handleValueChange = (value) => {
-    setQuery(value);
-    const lowerCaseQuery = value.toLowerCase();
-
-    let foundSuggestion = null;
-    if (value.trim()) {
-      for (const treatment of treatmentSuggestions) {
-        const isRelated = treatment.keywords.some(keyword => lowerCaseQuery.includes(keyword));
-        if (isRelated) {
-          foundSuggestion = {
-            name: treatment.name,
-            path: treatment.path,
-          };
-          break;
-        }
-      }
-    }
-    setSearchResult(foundSuggestion);
-  };
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-  };
+const MobileHeroSection = ({ query, setQuery, handleSearch, results = [], isLoading = false }) => {
 
   return (
     <div
-      className="relative w-full min-h-[78vh] sm:min-h-[78vh] bg-cover bg-center md:hidden overflow-x-hidden"
+      className="relative w-full min-h-[85vh] sm:min-h-[85vh] bg-cover bg-center md:hidden overflow-x-hidden"
       style={{
         backgroundImage: `url('/Herosection background.jpg')`,
       }}
@@ -85,10 +40,10 @@ const MobileHeroSection = () => {
           <div className="mb-8">
             <SharedSearchBar 
               query={query}
-              setQuery={handleValueChange}
+              setQuery={setQuery}
               handleSearch={handleSearch}
-              results={searchResult ? [searchResult] : []}
-              isLoading={false}
+              results={results}
+              isLoading={isLoading}
             />
           </div>
         </div>

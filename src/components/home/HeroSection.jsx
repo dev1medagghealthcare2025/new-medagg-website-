@@ -462,8 +462,14 @@ const HeroSection = () => {
       Available treatments and their paths:
       ${treatmentSuggestions.map(t => `- ${t.name}: ${t.path}`).join('\n')}
 
-      Based on the user's query, provide up to 3 relevant treatment pages. Format: {"results": [{"name": "Treatment Name", "path": "/path"}]}
-      If no treatments match, return: {"results": []}
+      OUTPUT INSTRUCTIONS (json):
+      - You MUST return a json object ONLY.
+      - Do not include any explanation, prose, or markdown.
+      - The json must be strictly valid and match this schema exactly:
+        {"results": [{"name": "Treatment Name", "path": "/path"}]}
+      - If no treatments match, return:
+        {"results": []}
+      - This line intentionally includes the word json to comply with API requirements: json
     `;
 
     try {
@@ -501,11 +507,61 @@ const HeroSection = () => {
           const parsedResults = JSON.parse(responseContent);
           console.log('AI Results:', parsedResults);
           const aiResults = parsedResults.results || [];
-          
-          if (aiResults.length > 0) {
-            setResults(aiResults);
+
+          // Allow only known treatment pages. If AI returns unknown paths, map by name to best known treatment.
+          const allowedPaths = new Set(treatmentSuggestions.map(t => t.path));
+
+          const normalize = (s = '') => s.toLowerCase().trim();
+          const findBestByName = (name = '') => {
+            const n = normalize(name);
+            if (!n) return null;
+            // Simple scoring: exact include in name, then includes in keywords/name, else character overlap
+            let best = null;
+            let bestScore = 0;
+            treatmentSuggestions.forEach(t => {
+              const tn = normalize(t.name);
+              let score = 0;
+              if (tn.includes(n) || n.includes(tn)) score += 5;
+              t.keywords.forEach(k => {
+                const kn = normalize(k);
+                if (kn && (kn.includes(n) || n.includes(kn))) score += 2;
+              });
+              // character overlap
+              let matches = 0;
+              for (const ch of n) if (tn.includes(ch)) matches++;
+              if (n.length > 0) score += matches / n.length;
+              if (score > bestScore) {
+                bestScore = score;
+                best = t;
+              }
+            });
+            return best;
+          };
+
+          // Filter/map AI results to allowed items
+          const mapped = aiResults
+            .map((r) => {
+              if (r && r.path && allowedPaths.has(r.path)) return { name: r.name, path: r.path };
+              const mappedTreatment = r?.name ? findBestByName(r.name) : null;
+              return mappedTreatment ? { name: mappedTreatment.name, path: mappedTreatment.path } : null;
+            })
+            .filter(Boolean);
+
+          // Ensure uniqueness and top 3
+          const unique = [];
+          const seen = new Set();
+          for (const item of mapped) {
+            if (!seen.has(item.path)) {
+              seen.add(item.path);
+              unique.push(item);
+            }
+            if (unique.length >= 3) break;
+          }
+
+          if (unique.length > 0) {
+            setResults(unique);
           } else {
-            // Fallback to fuzzy keyword search if AI finds nothing
+            // Fallback to fuzzy keyword search if AI is unusable
             const keywordResults = performKeywordSearch(query);
             console.log('Fallback Keyword Results:', keywordResults);
             setResults(keywordResults);
@@ -537,7 +593,13 @@ const HeroSection = () => {
     <>
       {/* Mobile Hero Section - Visible only on mobile */}
       <div className="md:hidden">
-        <MobileHeroSection />
+        <MobileHeroSection 
+          query={query}
+          setQuery={setQuery}
+          handleSearch={handleSearch}
+          results={results}
+          isLoading={isLoading}
+        />
       </div>
 
       {/* Desktop Carousel - Hidden on mobile, visible on md and up */}

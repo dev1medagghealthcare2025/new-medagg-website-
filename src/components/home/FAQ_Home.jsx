@@ -240,7 +240,11 @@ const FAQ_Home = () => {
 
         {/* ISVIR Logo */}
         <div className="mt-16 flex justify-center">
-          <img src="/member of ISVIR.jpg" alt="Member of ISVIR" className="h-24 drop-shadow-lg" />
+          <img
+            src="/member of ISVIR.jpg"
+            alt="Member of ISVIR"
+            className="h-16 sm:h-24 w-auto object-contain drop-shadow-lg"
+          />
         </div>
       </div>
     </section>

@@ -394,7 +394,7 @@ const OurDoctor = ({ randomize = false, initialShowCount = 4 }) => {
               </select>
             </div>
           </div>
-          <div className='text-sm text-gray-500 mb-4'>
+          <div className='hidden md:block text-sm text-gray-500 mb-4'>
             Showing {doctorsToDisplay.length} of {filteredDoctors.length} {filteredDoctors.length === 1 ? 'doctor' : 'doctors'}
           </div>
         </div>

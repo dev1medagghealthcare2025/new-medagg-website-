@@ -155,7 +155,6 @@ const EndovascularCoilingHeroSection = () => {
             </form>
           </div>
           <div className="flex flex-wrap justify-center lg:justify-start gap-2.5 mt-4 px-2">
-           
           </div>
         </div>
       </div>

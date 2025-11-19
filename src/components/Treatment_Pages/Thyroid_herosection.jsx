@@ -154,7 +154,6 @@ export default function Thyroid_Herosection() {
             )}
           </form>
           {/* Pills below the form */}
-          
         </div>
       </div>
     </section>

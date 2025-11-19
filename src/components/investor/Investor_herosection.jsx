@@ -15,7 +15,7 @@ const InvestorHerosection = ({ scrollToInfoRef }) => {
       <div className="max-w-7xl mx-auto w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center h-full">
           {/* Left Content */}
-          <div className="flex flex-col justify-center space-y-6 lg:pr-8">
+          <div className="flex flex-col justify-center space-y-6 lg:pr-8 pt-8 sm:pt-10 lg:pt-0">
             <h1 className="text-4xl lg:text-5xl font-bold leading-tight">
               <span className="text-[#ff3576]">Invest in the Future</span>{' '}
               <span className="text-white">of Non-Surgical Healthcare</span>
@@ -34,7 +34,7 @@ const InvestorHerosection = ({ scrollToInfoRef }) => {
             </p>
             
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-              <button onClick={handleScroll} className="bg-[#ff3576] text-white font-bold py-4 px-8 rounded-2xl text-lg hover:bg-pink-700 transition duration-300 ease-in-out transform hover:scale-105">
+              <button onClick={handleScroll} className="bg-[#ff3576] text-white font-bold py-4 px-8 rounded-2xl text-lg hover:bg-pink-700 transition duration-300 ease-in-out transform hover:scale-105 mb-6 sm:mb-0">
                 Start Investing
               </button>
               {/* Removed investor avatars and count as requested */}

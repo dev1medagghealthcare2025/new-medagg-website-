@@ -91,7 +91,8 @@ export default function GAE_Herosection() {
               name='healthConcern'
               value={formData.healthConcern}
               onChange={handleInputChange}
-              className='w-full border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm resize-none mb-3 focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all'
+              className='w-full border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm resize-none mb-3 focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all bg-white !text-black !placeholder-gray-700 caret-black selection:!text-black selection:bg-blue-200'
+              style={{ color: '#000' }}
               placeholder='Describe Your Health Concern'
               rows={2}
             />
@@ -99,7 +100,8 @@ export default function GAE_Herosection() {
               name='city'
               value={formData.city}
               onChange={handleInputChange}
-              className='w-full border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm mb-3 focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all'
+              className='w-full border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm mb-3 focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all bg-white !text-black !placeholder-gray-700 caret-black selection:!text-black selection:bg-blue-200'
+              style={{ color: '#000' }}
               placeholder='City'
               type='text'
             />
@@ -107,7 +109,8 @@ export default function GAE_Herosection() {
               name='preferredLanguage'
               value={formData.preferredLanguage}
               onChange={handleInputChange}
-              className='w-full border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm mb-3 focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all bg-white text-black'
+              className='w-full border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm mb-3 focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all bg-white !text-black'
+              style={{ color: '#000' }}
               aria-label='Preferred Language'
             >
               <option value='' disabled>Preferred Language</option>
@@ -128,7 +131,8 @@ export default function GAE_Herosection() {
                 name='fullName'
                 value={formData.fullName}
                 onChange={handleInputChange}
-                className='w-full sm:w-1/2 border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all'
+                className='w-full sm:w-1/2 border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all bg-white !text-black !placeholder-gray-700 caret-black selection:!text-black selection:bg-blue-200'
+                style={{ color: '#000' }}
                 placeholder='Full Name'
                 type='text'
                 required
@@ -137,7 +141,8 @@ export default function GAE_Herosection() {
                 name='phoneNumber'
                 value={formData.phoneNumber}
                 onChange={handleInputChange}
-                className='w-full sm:w-1/2 border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all'
+                className='w-full sm:w-1/2 border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all bg-white !text-black !placeholder-gray-700 caret-black selection:!text-black selection:bg-blue-200'
+                style={{ color: '#000' }}
                 placeholder='Phone Number'
                 type='tel'
                 required
