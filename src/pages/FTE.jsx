@@ -24,7 +24,7 @@ const FTE = () => {
       <AreYouExperienceFTE />
       <BookAppointmentFTE />
       <CompareTreatmentOptionFTE />
-      <WhatHappensInFTE videoUrl="https://youtube.com/shorts/itpjmiyaLk0?si=R15ijYNu2yi1aRW8" />
+      <WhatHappensInFTE videoUrl="https://www.youtube.com/shorts/UdfJkfTMdz8" />
       <OurDoctor />
       <OurTestimonial />
       <Consultourdoctor />

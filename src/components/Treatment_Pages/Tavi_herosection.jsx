@@ -158,12 +158,7 @@ const TaviHeroSection = () => {
             </form>
           </div>
           <div className='mt-4 flex flex-wrap justify-center lg:justify-start gap-2.5 px-2'>
-            <span className='text-xs text-white bg-black/20 rounded-full px-3 py-1.5 font-medium'>
-              I was worried about side effects
-            </span>
-            <span className='text-xs text-white bg-black/20 rounded-full px-3 py-1.5 font-medium'>
-              I didn't want surgery
-            </span>
+           
           </div>
         </div>
       </div>

@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import curatedBlogs from '../../data/curatedBlogs';
+import { Link } from 'react-router-dom';
+import blogPosts from '../../data/blogPosts.json';
 
 const BlogList = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [error, setError] = useState(null);
-  const [isCuratedMode, setIsCuratedMode] = useState(true);
+  const [isCuratedMode, setIsCuratedMode] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(3);
   const [pagination, setPagination] = useState({
     currentPage: 1,
     totalPages: 1,
@@ -17,27 +19,18 @@ const BlogList = () => {
   // Simple filter state
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Static curated mode: no fetching, map data directly
-  const initStaticCurated = () => {
+  // Initialize from local JSON dataset
+  const initLocalPosts = () => {
     setLoading(true);
     try {
-      const mapped = curatedBlogs.map((b, idx) => ({
-        id: idx + 1,
-        title: b.title || '',
-        slug: '',
-        date: '',
-        excerpt: '',
-        content: '',
-        featuredImage: b.thumbnail || '/Medagg_logo.jpg',
-        author: '',
-        categories: [],
-        externalLink: b.url,
-      }));
-      setPosts(mapped);
-      setPagination({ currentPage: 1, totalPages: 1, total: mapped.length, perPage: mapped.length || 9 });
+      // Sort by date desc if available
+      const sorted = [...blogPosts].sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
+      setPosts(sorted);
+      setPagination({ currentPage: 1, totalPages: 1, total: sorted.length, perPage: sorted.length || 9 });
+      setVisibleCount(Math.min(3, sorted.length || 0));
     } catch (e) {
-      console.error('Error initializing curated posts:', e);
-      setError('Failed to load curated blog posts.');
+      console.error('Error initializing local posts:', e);
+      setError('Failed to load blog posts.');
     } finally {
       setLoading(false);
       setLoadingMore(false);
@@ -45,7 +38,7 @@ const BlogList = () => {
   };
 
   useEffect(() => {
-    initStaticCurated();
+    initLocalPosts();
   }, []);
 
   if (error) {
@@ -60,7 +53,7 @@ const BlogList = () => {
             <button
               onClick={() => {
                 setError(null);
-                initStaticCurated();
+                initLocalPosts();
               }}
               className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
             >
@@ -85,12 +78,9 @@ const BlogList = () => {
           </p>
         </div>
 
-        {/* Search removed in static curated mode */}
+        {/* Search removed for now; can be re-enabled for local dataset */}
 
-        {/* Results Info */}
-        {!loading && (
-          <div className="mb-6 text-gray-600">Showing {posts.length} curated posts</div>
-        )}
+        {/* Results Info removed as per request */}
 
         {/* Loading State */}
         {loading ? (
@@ -108,44 +98,66 @@ const BlogList = () => {
             ))}
           </div>
         ) : (
-          <div className="space-y-12 mb-12">
-            {posts.map((post) => (
-              <article key={post.id} className="flex flex-col md:flex-row items-start gap-8 border-b border-gray-200 pb-8">
-                {/* Featured Image */}
-                {post.featuredImage && (
-                  <div className="w-full md:w-1/3 flex-shrink-0">
-                    <a href={post.externalLink} target="_blank" rel="noopener noreferrer">
-                      <img
-                        src={post.featuredImage}
-                        alt={post.featuredImage}
-                        className="w-full h-48 object-cover rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
-                      />
-                    </a>
+          <>
+            <div className="space-y-12 mb-12">
+              {posts.slice(0, visibleCount).map((post) => (
+                <article key={post.id} className="flex flex-col md:flex-row items-start gap-8 border-b border-gray-200 pb-8">
+                  {/* Featured Image */}
+                  {post.featuredImage && (
+                    <div className="w-full md:w-1/3 flex-shrink-0">
+                      <Link to={`/blog/${post.slug}`}>
+                        <img
+                          src={post.featuredImage}
+                          alt={post.title}
+                          className="w-full h-48 object-cover rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
+                        />
+                      </Link>
+                    </div>
+                  )}
+
+                  {/* Content */}
+                  <div className={`w-full ${post.featuredImage ? 'md:w-2/3' : ''}`}>
+                    {/* Title */}
+                    <h2 className="text-2xl font-bold text-gray-900 mb-3 hover:text-pink-600 transition-colors min-h-[28px]">
+                      <Link to={`/blog/${post.slug}`}>
+                        {post.title || ' '}
+                      </Link>
+                    </h2>
+                    {/* Optional excerpt */}
+                    {post.excerpt && (
+                      <p className="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
+                    )}
+                    {/* Read More Button */}
+                    <Link
+                      to={`/blog/${post.slug}`}
+                      className="inline-block bg-gray-800 text-white px-5 py-2 rounded-md text-sm font-medium hover:bg-gray-900 transition-colors"
+                    >
+                      Read More
+                    </Link>
                   </div>
-                )}
-
-                {/* Content */}
-                <div className={`w-full ${post.featuredImage ? 'md:w-2/3' : ''}`}>
-                  {/* Title only (no meta/excerpt in static mode) */}
-                  <h2 className="text-2xl font-bold text-gray-900 mb-3 hover:text-pink-600 transition-colors min-h-[28px]">
-                    <a href={post.externalLink} target="_blank" rel="noopener noreferrer">
-                      {post.title || ' '}
-                    </a>
-                  </h2>
-
-                  {/* Read More Button */}
-                  <a
-                    href={post.externalLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block bg-gray-800 text-white px-5 py-2 rounded-md text-sm font-medium hover:bg-gray-900 transition-colors"
-                  >
-                    Read More
-                  </a>
-                </div>
-              </article>
-            ))}
-          </div>
+                </article>
+              ))}
+            </div>
+            {/* Show More */}
+            {visibleCount < posts.length && (
+              <div className="text-center">
+                <button
+                  onClick={() => {
+                    setLoadingMore(true);
+                    // Small timeout for UX; remove if not needed
+                    setTimeout(() => {
+                      setVisibleCount((v) => Math.min(v + 3, posts.length));
+                      setLoadingMore(false);
+                    }, 150);
+                  }}
+                  className="inline-flex items-center justify-center px-6 py-3 rounded-md bg-gray-900 text-white hover:bg-gray-800 transition-colors disabled:opacity-50"
+                  disabled={loadingMore}
+                >
+                  {loadingMore ? 'Loading…' : 'Show More'}
+                </button>
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>

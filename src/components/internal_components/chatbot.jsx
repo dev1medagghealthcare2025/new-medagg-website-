@@ -708,9 +708,9 @@ const Chatbot = () => {
       };
     } catch (error) {
       console.error('API Error:', error);
-      // Fallback to basic response
+      // Fallback to helpful guidance (no apologies)
       return {
-        text: "I apologize, but I'm experiencing technical difficulties. Please try again in a moment, or feel free to call us directly at +91 9363656010 for immediate assistance.",
+        text: 'I understand your query. To make sure you get the most accurate and relevant guidance, our care team is available to assist you directly. Connect with our care team at +91 93636 56010 or +91 89259 28840 for clear, step-by-step guidance on how to proceed.',
         error: true
       };
     } finally {
@@ -816,6 +816,13 @@ const Chatbot = () => {
 
   // Function to handle questionnaire responses
   const handleQuestionnaireResponse = useCallback((response) => {
+    // Guard: if questionnaire context is missing or out-of-bounds, ignore safely
+    if (!currentQuestionnaire || !currentQuestionnaire.questions || questionnaireStep == null) {
+      return;
+    }
+    if (questionnaireStep < 0 || questionnaireStep >= currentQuestionnaire.questions.length) {
+      return;
+    }
     const currentQuestion = currentQuestionnaire.questions[questionnaireStep];
     const selectedOption = Array.isArray(response) ? response.join(', ') : response;
     const updatedResponses = { ...questionnaireResponses, [currentQuestion.field]: selectedOption };
@@ -925,13 +932,7 @@ const Chatbot = () => {
   // Function to submit questionnaire responses to TeleCRM
   const submitQuestionnaireToTeleCRM = useCallback(async (responses, questionnaire) => {
     setIsSubmittingQuestionnaire(true);
-    
-    const submittingMessage = {
-      text: `Thank you for completing the ${questionnaire.procedure} assessment. Let me save your responses...`,
-      sender: 'bot',
-      timestamp: new Date(),
-    };
-    setMessages(prev => [...prev, submittingMessage]);
+    // Removed intermediate "saving responses" message per request
 
     try {
       const allowedFields = [
@@ -1003,18 +1004,16 @@ const Chatbot = () => {
       });
 
       if (response.ok) {
-        // TeleCRM submission successful - no need to show confirmation to user
-        
-        setTimeout(() => {
-          const thankYouMessage = {
-            text: `🎉 Thank you for completing the ${questionnaire.procedure} assessment! \n\nBased on your responses, our medical team will review your case and contact you for a personalized consultation. Our experts will reach out to you according to your preferred timing. \n\nFor more information about ${questionnaire.procedure} treatment, you can visit our detailed treatment page.`,
-            sender: 'bot',
-            timestamp: new Date(),
-            aiGenerated: true,
-            recommendedTreatment: questionnaire.treatmentPage
-          };
-          setMessages(prev => [...prev, thankYouMessage]);
-        }, 1000);
+        // TeleCRM submission successful - show concise thank-you + treatment link
+        const thankYouMessage = {
+          text: `Thank you. Our medical team will review your answers and contact you soon.`,
+          sender: 'bot',
+          timestamp: new Date(),
+          aiGenerated: true,
+          // Provide the treatment page so renderer can show a CTA
+          recommendedTreatment: questionnaire.treatmentPage
+        };
+        setMessages(prev => [...prev, thankYouMessage]);
       } else {
         const errorText = await response.text();
         console.error('TeleCRM API Error:', response.status, errorText);
@@ -1023,7 +1022,7 @@ const Chatbot = () => {
     } catch (error) {
       console.error('Questionnaire submission error:', error);
       const errorMessage = {
-        text: 'I apologize, but there was an issue submitting your assessment. Please try again or contact us directly at +91 9363656010.',
+        text: 'I understand your query. To make sure you get the most accurate and relevant guidance, our care team is available to assist you directly. Connect with our care team at +91 93636 56010 or +91 89259 28840 for clear, step-by-step guidance on how to proceed.',
         sender: 'bot',
         timestamp: new Date(),
       };
@@ -1039,13 +1038,7 @@ const Chatbot = () => {
   // Function to submit booking data to TeleCRM
   const submitBookingToTeleCRM = useCallback(async (data) => {
     setIsSubmittingBooking(true);
-    
-    const submittingMessage = {
-      text: 'Thank you for providing all the information. Let me book your appointment...',
-      sender: 'bot',
-      timestamp: new Date(),
-    };
-    setMessages(prev => [...prev, submittingMessage]);
+    // Removed interim submitting message per request
 
     try {
       const response = await fetch('https://api.telecrm.in/enterprise/658abddbf911ed2d692b0cf5/autoupdatelead', {
@@ -1068,7 +1061,7 @@ const Chatbot = () => {
 
       if (response.ok) {
         const successMessage = {
-          text: 'Perfect! Your appointment request has been submitted successfully. Thank you for choosing MedAgg. Our expert team will be reaching you shortly to confirm your appointment details.',
+          text: 'Thank you for providing all the information. Your request has been submitted successfully. Thank you for choosing MedAgg Healthcare. Our care team will be reaching you shortly to confirm your appointment details',
           sender: 'bot',
           timestamp: new Date(),
         };
@@ -1079,7 +1072,7 @@ const Chatbot = () => {
     } catch (error) {
       console.error('Booking submission error:', error);
       const errorMessage = {
-        text: 'I apologize, but there was an issue submitting your appointment request. Please try again or contact us directly at +91 9363656010.',
+        text: 'I understand your query. To make sure you get the most accurate and relevant guidance, our care team is available to assist you directly. Connect with our care team at +91 93636 56010 or +91 89259 28840 for clear, step-by-step guidance on how to proceed.',
         sender: 'bot',
         timestamp: new Date(),
       };
@@ -1237,7 +1230,7 @@ const Chatbot = () => {
     } catch (error) {
       console.error('Error generating AI response:', error);
       const errorMessage = {
-        text: "I apologize for the technical difficulty. Please try again or contact us directly at +91 9363656010 for immediate assistance.",
+        text: 'I understand your query. To make sure you get the most accurate and relevant guidance, our care team is available to assist you directly. Connect with our care team at +91 93636 56010 or +91 89259 28840 for clear, step-by-step guidance on how to proceed.',
         sender: 'bot',
         timestamp: new Date(),
         error: true
@@ -1262,6 +1255,25 @@ const Chatbot = () => {
     // Check if it's a booking request
     if (response.toLowerCase().includes('book') && response.toLowerCase().includes('consultation')) {
       startBookingFlow();
+    } else if (response === 'What treatments do you offer?') {
+      const botMessage = {
+        text: 'We offer a range of effective non-surgical options designed to help you achieve the best possible results with minimal\u00A0downtime. Connect with our care team at \u202A+91 93636 56010\u202C or \u202A+91 89259 28840\u202C for clear, step-by-step guidance on\u00A0how\u00A0to\u00A0proceed. Feel free to explore the treatment\u00A0options\u00A0below.',
+        sender: 'bot',
+        timestamp: new Date(),
+        aiGenerated: true,
+        // Show CTA button pointing to treatments overview
+        recommendedTreatment: '/#services'
+      };
+      setMessages(prev => [...prev, botMessage]);
+    } else if (response === 'Tell me about non-surgical options') {
+      const botMessage = {
+        text: 'We offer a range of effective non-surgical options designed to help you achieve the best possible results with minimal\u00A0downtime. Feel free to explore the treatment options below.',
+        sender: 'bot',
+        timestamp: new Date(),
+        aiGenerated: true,
+        recommendedTreatment: '/#services'
+      };
+      setMessages(prev => [...prev, botMessage]);
     } else {
       // Use AI-powered response for all quick responses
       generateResponse(response);

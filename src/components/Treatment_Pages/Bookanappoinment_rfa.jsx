@@ -56,21 +56,17 @@ const Bookanappoinment_rfa = () => {
   };
 
   return (
-    <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gray-50">
+    <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
       <div className="max-w-7xl mx-auto">
         <div 
-          className="relative bg-cover bg-center rounded-3xl shadow-2xl overflow-hidden"
+          className="relative bg-cover bg-center rounded-3xl shadow-2xl overflow-hidden min-h-[420px] md:min-h-[412px]"
           style={{ 
-            backgroundImage: "url('/book and appoinment background.jpg')",
-            width: '1201.54px',
-            height: '412px',
-            maxWidth: '100%',
-            margin: '0 auto'
+            backgroundImage: "url('/book and appoinment background.jpg')"
           }}
         >
           <div className="absolute inset-0 bg-[#2d2552] bg-opacity-10"></div>
-          <div className="relative h-full flex items-center px-8 sm:px-12 lg:px-16">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full items-center">
+          <div className="relative h-full flex items-center px-4 sm:px-8 lg:px-16 py-8 md:py-0">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 w-full items-center">
               {/* Left Content */}
               <div className="text-white text-center lg:text-left lg:pr-8">
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight">
@@ -84,7 +80,7 @@ const Bookanappoinment_rfa = () => {
                 </p>
                 <div className="mt-4">
                   <Link to="/contact-us">
-                    <button className="bg-[#ff3576] text-white font-bold py-2 px-6 rounded-lg text-base hover:bg-pink-700 transition-all duration-300 shadow-lg">
+                    <button className="w-full sm:w-auto bg-[#ff3576] text-white font-bold py-2 px-6 rounded-lg text-base hover:bg-pink-700 transition-all duration-300 shadow-lg">
                       Book Appointment
                     </button>
                   </Link>

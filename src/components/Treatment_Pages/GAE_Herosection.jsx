@@ -162,10 +162,7 @@ export default function GAE_Herosection() {
             )}
           </form>
           {/* Pills below the form */}
-          <div className='flex flex-wrap gap-2.5 justify-center w-full mt-4 px-2'>
-            <span className='bg-black/20 text-white text-xs px-3 py-1.5 rounded-full font-medium'>I was worried about side effects.</span>
-            <span className='bg-black/20 text-white text-xs px-3 py-1.5 rounded-full font-medium'>I didn't want surgery</span>
-          </div>
+        
         </div>
       </div>
     </section>

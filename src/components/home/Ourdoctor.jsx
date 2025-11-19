@@ -52,6 +52,13 @@ const doctors = [
     city: 'Chennai',
     image: '/Dr Ravindran_chennai.png',
   },
+  {
+    name: 'Dr. Karthikeyan',
+    degrees: 'MBBS, DMRD, DNB',
+    specialty: 'Interventional Radiology',
+    city: 'Chennai',
+    image: '/Karthikeyan.png',
+  },
   // Coimbatore Doctors
   {
     name: 'Dr. Muthurajan',
@@ -88,14 +95,14 @@ const doctors = [
     degrees: 'MBBS, MD, DNB (Radiodiagnosis)',
     specialty: 'Interventional Radiology',
     city: 'Bangalore',
-    image: 'https://via.placeholder.com/150',
+    image: 'Dr Bhaskar.png',
   },
   {
     name: 'Dr. Bhavya',
     degrees: 'MBBS, MD, DNB (Radiodiagnosis)',
     specialty: 'Interventional Radiology',
     city: 'Bangalore',
-    image: 'https://via.placeholder.com/150',
+    image: 'Dr Bhavya.png',
   },
   {
     name: 'Dr. Junaid',
@@ -115,13 +122,13 @@ const doctors = [
   },
 
   // Salem Doctors
-  {
-    name: 'Dr. Karthikeyan',
-    degrees: 'MBBS, DMRD, DNB',
-    specialty: 'Interventional Radiology',
-    city: 'Salem',
-    image: '/Karthikeyan.png',
-  },
+  //{
+    //name: 'Dr. Karthikeyan',
+    //degrees: 'MBBS, DMRD, DNB',
+    //specialty: 'Interventional Radiology',
+    //city: 'Salem',
+    //image: '/Karthikeyan.png',
+ // },
 
   // Hyderabad Doctors
   {
@@ -319,10 +326,13 @@ const OurDoctor = ({ randomize = false, initialShowCount = 4 }) => {
   }, []);
 
   const filteredDoctors = useMemo(() => {
+    const hasName = filters.name.trim() !== '';
+    const q = filters.name.toLowerCase().trim();
     return doctorList.filter(doc => {
-      const nameMatch = doc.name.toLowerCase().includes(filters.name.toLowerCase());
+      const nameMatch = doc.name.toLowerCase().includes(q);
       const cityMatch = filters.city === 'All' || doc.city === filters.city;
-      return nameMatch && cityMatch;
+      // If a name is typed, match by name across all cities; otherwise filter by city
+      return hasName ? nameMatch : cityMatch;
     });
   }, [doctorList, filters]);
 

@@ -57,30 +57,29 @@ const EC_Book_Appointment = () => {
 
   return (
     <div
-      className="relative bg-cover bg-center flex items-center"
+      className="relative bg-cover bg-center flex items-center min-h-[420px] md:min-h-[393px] py-8 sm:py-10 md:py-12"
       style={{
         backgroundImage: "url('/book and appoinment background.jpg')",
-        height: '393px',
       }}
     >
       <div className="absolute inset-0 bg-[#2d2552] opacity-20"></div>
-      <div className="relative container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 items-center w-full">
         {/* Left Side: Content */}
         <div className="text-white text-center lg:text-left">
-          <h2 className="text-4xl md:text-5xl font-bold text-white">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
             Think You Might Have An <br />
             <span className="text-[#ff3576]">Aneurysm?</span>
           </h2>
-          <p className="text-lg md:text-xl mt-4 mb-8 text-white">
+          <p className="text-base md:text-lg mt-3 md:mt-4 mb-6 md:mb-8 text-white">
             Don't wait—headaches, vision changes, or neurological symptoms need expert evaluation.
           </p>
-          <button className="bg-[#ff3576] text-white font-bold py-3 px-8 rounded-lg hover:bg-pink-700 transition-colors duration-300 text-lg">
+          <button className="w-full sm:w-auto bg-[#ff3576] text-white font-bold py-3 px-8 rounded-lg hover:bg-pink-700 transition-colors duration-300 text-base md:text-lg">
             Book Appointment
           </button>
         </div>
 
         {/* Right Side: Form */}
-        <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-lg mx-auto">
+        <div className="bg-white p-4 sm:p-6 lg:p-8 rounded-2xl shadow-2xl w-full max-w-lg mx-auto">
           <form onSubmit={handleSubmit} className="space-y-4">
             <textarea
               name="concern"
@@ -100,7 +99,7 @@ const EC_Book_Appointment = () => {
               className="w-full px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#ff3576] text-xs"
               required
             />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
               <input
                 type="text"
                 name="name"

@@ -157,12 +157,7 @@ const FTE_HeroSection = () => {
               </form>
           </div>
           <div className="flex flex-wrap justify-center gap-2.5 mt-4 px-2">
-            <span className="bg-black/20 text-white text-xs font-medium px-3 py-1.5 rounded-full">
-              I was worried about side effects.
-            </span>
-            <span className="bg-black/20 text-white text-xs font-medium px-3 py-1.5 rounded-full">
-              I didn't want surgery
-            </span>
+            
           </div>
         </div>
       </div>

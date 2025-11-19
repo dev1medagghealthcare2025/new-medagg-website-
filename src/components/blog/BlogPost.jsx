@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Calendar, User, ArrowLeft, Tag, Folder, Share2, Clock } from 'lucide-react';
 import DOMPurify from 'dompurify';
-import blogService from '../../utils/blogService';
+import blogPosts from '../../data/blogPosts.json';
 
 const BlogPost = () => {
   const { slug } = useParams();
@@ -12,60 +12,54 @@ const BlogPost = () => {
   const [error, setError] = useState(null);
   const [relatedPosts, setRelatedPosts] = useState([]);
 
-  // Fetch single post using WordPress REST API service
-  const fetchPost = async () => {
+  // Load single post from local dataset
+  const loadPost = () => {
     try {
       setLoading(true);
-      console.log('Fetching post with slug:', slug);
-      
-      const wpPost = await blogService.fetchPostBySlug(slug);
-      
-      if (!wpPost) {
+      const found = blogPosts.find(p => p.slug === slug);
+      if (!found) {
         setError('Blog post not found');
+        setPost(null);
         return;
       }
-
-      console.log('WordPress post data:', wpPost);
-      console.log('Content length:', wpPost.content?.length || 0);
-      
-      setPost(wpPost);
-
-      if (wpPost.categories.length > 0) {
-        fetchRelatedPosts(wpPost.categories[0], wpPost.id);
-      }
+      setPost(found);
+      loadRelatedPosts(found);
     } catch (err) {
-      console.error('Error fetching post:', err);
+      console.error('Error loading local post:', err);
       setError('Failed to load blog post. Please try again later.');
     } finally {
       setLoading(false);
     }
   };
 
-  // Fetch related posts using WordPress REST API service
-  const fetchRelatedPosts = async (categoryName, currentPostId) => {
+  // Compute related posts locally (by shared category if available, else latest)
+  const loadRelatedPosts = (current) => {
     try {
-      const allPosts = await blogService.searchPosts('', { category: categoryName });
-      
-      const relatedPosts = allPosts
-        .filter(p => p.id !== currentPostId)
-        .map(post => ({
-          id: post.id,
-          title: post.title,
-          slug: post.slug,
-          date: post.date,
-          featuredImage: post.featuredImage,
-        }))
-        .slice(0, 3);
-        
-      setRelatedPosts(relatedPosts);
+      const currentCats = (current.categories || []).map(c => (c || '').toLowerCase());
+      let candidates = blogPosts.filter(p => p.slug !== current.slug);
+      if (currentCats.length > 0) {
+        candidates = candidates.filter(p => (p.categories || []).some(c => currentCats.includes((c || '').toLowerCase())));
+      }
+      // Fallback to latest if none
+      if (candidates.length === 0) {
+        candidates = blogPosts.filter(p => p.slug !== current.slug);
+      }
+      const sorted = [...candidates].sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
+      setRelatedPosts(sorted.slice(0, 3).map(post => ({
+        id: post.id,
+        title: post.title,
+        slug: post.slug,
+        date: post.date,
+        featuredImage: post.featuredImage,
+      })));
     } catch (err) {
-      console.error('Error fetching related posts:', err);
+      console.error('Error loading related posts locally:', err);
     }
   };
 
   useEffect(() => {
     if (slug) {
-      fetchPost();
+      loadPost();
     }
   }, [slug]);
 
