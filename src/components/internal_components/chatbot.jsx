@@ -1,63 +1,3 @@
-  // --- Persistence: Load state on mount ---
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem('medagg_chatbot_state');
-      if (raw) {
-        const saved = JSON.parse(raw);
-        if (Array.isArray(saved.messages) && saved.messages.length) setMessages(saved.messages);
-        if (typeof saved.isOpen === 'boolean') setIsOpen(saved.isOpen);
-        if (typeof saved.inputValue === 'string') setInputValue(saved.inputValue);
-        if (saved.medicalContext) setMedicalContext(saved.medicalContext);
-        if (Array.isArray(saved.conversationHistory)) setConversationHistory(saved.conversationHistory);
-        if (typeof saved.isQuestionnaireActive === 'boolean') setIsQuestionnaireActive(saved.isQuestionnaireActive);
-        if (typeof saved.questionnaireStep === 'number') setQuestionnaireStep(saved.questionnaireStep);
-        if (saved.questionnaireResponses) setQuestionnaireResponses(saved.questionnaireResponses);
-        if (saved.currentQuestionnaire) setCurrentQuestionnaire(saved.currentQuestionnaire);
-        if (typeof saved.isBookingFlow === 'boolean') setIsBookingFlow(saved.isBookingFlow);
-        if (typeof saved.bookingStep === 'number') setBookingStep(saved.bookingStep);
-        if (saved.bookingData) setBookingData(saved.bookingData);
-      }
-    } catch (e) {
-      console.warn('Failed to load chatbot state', e);
-    }
-  }, []);
-
-  // --- Persistence: Save key state whenever it changes ---
-  useEffect(() => {
-    try {
-      const stateToSave = {
-        isOpen,
-        messages,
-        inputValue,
-        medicalContext,
-        conversationHistory,
-        isQuestionnaireActive,
-        questionnaireStep,
-        questionnaireResponses,
-        currentQuestionnaire,
-        isBookingFlow,
-        bookingStep,
-        bookingData,
-      };
-      localStorage.setItem('medagg_chatbot_state', JSON.stringify(stateToSave));
-    } catch (e) {
-      console.warn('Failed to save chatbot state', e);
-    }
-  }, [
-    isOpen,
-    messages,
-    inputValue,
-    medicalContext,
-    conversationHistory,
-    isQuestionnaireActive,
-    questionnaireStep,
-    questionnaireResponses,
-    currentQuestionnaire,
-    isBookingFlow,
-    bookingStep,
-    bookingData,
-  ]);
-
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { treatments } from '../../data/treatments';
 import { Link, useNavigate } from 'react-router-dom';
@@ -700,6 +640,66 @@ const Chatbot = () => {
   
   const messagesEndRef = useRef(null);
   const chatContainerRef = useRef(null);
+
+  // --- Persistence: Load state on mount ---
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem('medagg_chatbot_state');
+      if (raw) {
+        const saved = JSON.parse(raw);
+        if (Array.isArray(saved.messages) && saved.messages.length) setMessages(saved.messages);
+        if (typeof saved.isOpen === 'boolean') setIsOpen(saved.isOpen);
+        if (typeof saved.inputValue === 'string') setInputValue(saved.inputValue);
+        if (saved.medicalContext) setMedicalContext(saved.medicalContext);
+        if (Array.isArray(saved.conversationHistory)) setConversationHistory(saved.conversationHistory);
+        if (typeof saved.isQuestionnaireActive === 'boolean') setIsQuestionnaireActive(saved.isQuestionnaireActive);
+        if (typeof saved.questionnaireStep === 'number') setQuestionnaireStep(saved.questionnaireStep);
+        if (saved.questionnaireResponses) setQuestionnaireResponses(saved.questionnaireResponses);
+        if (saved.currentQuestionnaire) setCurrentQuestionnaire(saved.currentQuestionnaire);
+        if (typeof saved.isBookingFlow === 'boolean') setIsBookingFlow(saved.isBookingFlow);
+        if (typeof saved.bookingStep === 'number') setBookingStep(saved.bookingStep);
+        if (saved.bookingData) setBookingData(saved.bookingData);
+      }
+    } catch (e) {
+      console.warn('Failed to load chatbot state', e);
+    }
+  }, []);
+
+  // --- Persistence: Save key state whenever it changes ---
+  useEffect(() => {
+    try {
+      const stateToSave = {
+        isOpen,
+        messages,
+        inputValue,
+        medicalContext,
+        conversationHistory,
+        isQuestionnaireActive,
+        questionnaireStep,
+        questionnaireResponses,
+        currentQuestionnaire,
+        isBookingFlow,
+        bookingStep,
+        bookingData,
+      };
+      localStorage.setItem('medagg_chatbot_state', JSON.stringify(stateToSave));
+    } catch (e) {
+      console.warn('Failed to save chatbot state', e);
+    }
+  }, [
+    isOpen,
+    messages,
+    inputValue,
+    medicalContext,
+    conversationHistory,
+    isQuestionnaireActive,
+    questionnaireStep,
+    questionnaireResponses,
+    currentQuestionnaire,
+    isBookingFlow,
+    bookingStep,
+    bookingData,
+  ]);
 
   // When user chooses to view treatment, minimize chatbot on mobile and navigate
   const handleViewTreatment = useCallback((path) => {
