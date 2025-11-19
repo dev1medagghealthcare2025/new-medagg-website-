@@ -67,6 +67,14 @@ const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const totalSlides = 3;
 
+  // Clear results when query is emptied
+  useEffect(() => {
+    if (!query.trim()) {
+      setResults([]);
+      setIsLoading(false);
+    }
+  }, [query]);
+
   // Data structure for treatment suggestions
   const treatmentSuggestions = [
     {

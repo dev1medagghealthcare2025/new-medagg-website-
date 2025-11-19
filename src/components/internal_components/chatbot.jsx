@@ -1,6 +1,66 @@
+  // --- Persistence: Load state on mount ---
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem('medagg_chatbot_state');
+      if (raw) {
+        const saved = JSON.parse(raw);
+        if (Array.isArray(saved.messages) && saved.messages.length) setMessages(saved.messages);
+        if (typeof saved.isOpen === 'boolean') setIsOpen(saved.isOpen);
+        if (typeof saved.inputValue === 'string') setInputValue(saved.inputValue);
+        if (saved.medicalContext) setMedicalContext(saved.medicalContext);
+        if (Array.isArray(saved.conversationHistory)) setConversationHistory(saved.conversationHistory);
+        if (typeof saved.isQuestionnaireActive === 'boolean') setIsQuestionnaireActive(saved.isQuestionnaireActive);
+        if (typeof saved.questionnaireStep === 'number') setQuestionnaireStep(saved.questionnaireStep);
+        if (saved.questionnaireResponses) setQuestionnaireResponses(saved.questionnaireResponses);
+        if (saved.currentQuestionnaire) setCurrentQuestionnaire(saved.currentQuestionnaire);
+        if (typeof saved.isBookingFlow === 'boolean') setIsBookingFlow(saved.isBookingFlow);
+        if (typeof saved.bookingStep === 'number') setBookingStep(saved.bookingStep);
+        if (saved.bookingData) setBookingData(saved.bookingData);
+      }
+    } catch (e) {
+      console.warn('Failed to load chatbot state', e);
+    }
+  }, []);
+
+  // --- Persistence: Save key state whenever it changes ---
+  useEffect(() => {
+    try {
+      const stateToSave = {
+        isOpen,
+        messages,
+        inputValue,
+        medicalContext,
+        conversationHistory,
+        isQuestionnaireActive,
+        questionnaireStep,
+        questionnaireResponses,
+        currentQuestionnaire,
+        isBookingFlow,
+        bookingStep,
+        bookingData,
+      };
+      localStorage.setItem('medagg_chatbot_state', JSON.stringify(stateToSave));
+    } catch (e) {
+      console.warn('Failed to save chatbot state', e);
+    }
+  }, [
+    isOpen,
+    messages,
+    inputValue,
+    medicalContext,
+    conversationHistory,
+    isQuestionnaireActive,
+    questionnaireStep,
+    questionnaireResponses,
+    currentQuestionnaire,
+    isBookingFlow,
+    bookingStep,
+    bookingData,
+  ]);
+
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { treatments } from '../../data/treatments';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 // Medical AI System Configuration
 const MEDICAL_SYSTEM_PROMPT = `You are Ira, a virtual medical assistant for Medagg Healthcare, specializing in Interventional Radiology and non-surgical treatments.
@@ -605,6 +665,7 @@ const quickResponses = [
 ];
 
 const Chatbot = () => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState(initialMessages);
   const [inputValue, setInputValue] = useState('');
@@ -639,6 +700,17 @@ const Chatbot = () => {
   
   const messagesEndRef = useRef(null);
   const chatContainerRef = useRef(null);
+
+  // When user chooses to view treatment, minimize chatbot on mobile and navigate
+  const handleViewTreatment = useCallback((path) => {
+    const target = path || '/treatments';
+    try {
+      if (typeof window !== 'undefined' && window.innerWidth < 768) {
+        setIsOpen(false); // minimize on mobile to avoid overlaying destination page
+      }
+    } catch (_) {}
+    navigate(target);
+  }, [navigate]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -1484,15 +1556,16 @@ const Chatbot = () => {
                         )}
                         {message.aiGenerated && (
                           <div className='mt-3 space-y-2'>
-                            <Link
-                              to={message.recommendedTreatment || '/treatments'}
+                            <button
+                              type='button'
+                              onClick={() => handleViewTreatment(message.recommendedTreatment)}
                               className='inline-flex items-center text-sm px-4 py-2 bg-gradient-to-r from-pink-500 to-pink-400 text-white rounded-lg hover:from-pink-600 hover:to-pink-500 transition-all shadow-sm hover:shadow-md'
                             >
                               View Treatment Options
                               <svg className='ml-1.5 w-4 h-4' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
                                 <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M14 5l7 7m0 0l-7 7m7-7H3' />
                               </svg>
-                            </Link>
+                            </button>
                             {message.youtubeVideo && (
                               <a
                                 href={message.youtubeVideo}
