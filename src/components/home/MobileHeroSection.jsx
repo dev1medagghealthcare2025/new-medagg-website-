@@ -6,7 +6,7 @@ const MobileHeroSection = ({ query, setQuery, handleSearch, results = [], isLoad
 
   return (
     <div
-      className="relative w-full min-h-[85vh] sm:min-h-[85vh] bg-cover bg-center md:hidden overflow-x-hidden"
+      className="relative w-full min-h-[88vh] sm:min-h-[88vh] bg-cover bg-center md:hidden overflow-x-hidden"
       style={{
         backgroundImage: `url('/Herosection background.jpg')`,
       }}
