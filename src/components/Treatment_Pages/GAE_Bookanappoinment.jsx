@@ -6,6 +6,7 @@ const GAE_Bookanappoinment = () => {
     city: '',
     fullName: '',
     phoneNumber: '',
+    preferredLanguage: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formStatus, setFormStatus] = useState(''); // success, error, or ''
@@ -33,6 +34,7 @@ const GAE_Bookanappoinment = () => {
             phone: formData.phoneNumber,
             city: formData.city,
             health_concern: formData.healthConcern,
+            preferred_language: formData.preferredLanguage,
             source: 'Website - GAE Book Appointment',
           },
         }),
@@ -40,7 +42,7 @@ const GAE_Bookanappoinment = () => {
 
       if (response.ok) {
         setFormStatus('success');
-        setFormData({ healthConcern: '', city: '', fullName: '', phoneNumber: '' });
+        setFormData({ healthConcern: '', city: '', fullName: '', phoneNumber: '', preferredLanguage: '' });
       } else {
         setFormStatus('error');
       }
@@ -53,7 +55,7 @@ const GAE_Bookanappoinment = () => {
   };
 
   return (
-    <section className="py-10 md:py-16 bg-white">
+    <section className="pt-10 md:pt-16 pb-16 md:pb-24 bg-white">
       <div
         className="relative w-full max-w-[1201px] mx-auto rounded-[20px] overflow-hidden bg-cover bg-center p-6 sm:p-8 md:p-12 min-h-[420px] md:h-[421px]"
         style={{ backgroundImage: "url('/book and appoinment background.jpg')" }}
@@ -78,14 +80,14 @@ const GAE_Bookanappoinment = () => {
           {/* Right Form */}
           <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-2xl w-full max-w-xl mx-auto lg:mx-0">
             <h3 className="text-lg font-bold text-gray-800 mb-4">Get Expert Consultation</h3>
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-3">
               <textarea
                 name="healthConcern"
                 value={formData.healthConcern}
                 onChange={handleInputChange}
                 placeholder="Describe Your Health Concern"
                 rows={2}
-                className="w-full px-4 py-2 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                className="w-full px-3 py-2 bg-gray-100 border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-pink-500"
               />
               <input
                 type="text"
@@ -93,8 +95,22 @@ const GAE_Bookanappoinment = () => {
                 value={formData.city}
                 onChange={handleInputChange}
                 placeholder="City"
-                className="w-full px-4 py-2 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                className="w-full px-3 py-2 bg-gray-100 border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-pink-500"
               />
+              <select
+                name="preferredLanguage"
+                value={formData.preferredLanguage}
+                onChange={handleInputChange}
+                className="w-full px-3 py-2 bg-gray-100 border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-pink-500"
+              >
+                <option value="">Preferred Language</option>
+                <option value="English">English</option>
+                <option value="Hindi">Hindi</option>
+                <option value="Tamil">Tamil</option>
+                <option value="Telugu">Telugu</option>
+                <option value="Kannada">Kannada</option>
+                <option value="Malayalam">Malayalam</option>
+              </select>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <input
                   type="text"
@@ -102,7 +118,7 @@ const GAE_Bookanappoinment = () => {
                   value={formData.fullName}
                   onChange={handleInputChange}
                   placeholder="Full Name"
-                  className="w-full px-4 py-2 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  className="w-full px-3 py-2 bg-gray-100 border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-pink-500"
                   required
                 />
                 <input
@@ -111,7 +127,7 @@ const GAE_Bookanappoinment = () => {
                   value={formData.phoneNumber}
                   onChange={handleInputChange}
                   placeholder="Phone Number"
-                  className="w-full px-4 py-2 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  className="w-full px-3 py-2 bg-gray-100 border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-pink-500"
                   required
                 />
               </div>

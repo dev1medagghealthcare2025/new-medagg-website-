@@ -30,28 +30,40 @@ const Have_Postate = () => {
 
             {/* Right Side - Form */}
             <div className='bg-white p-6 rounded-xl shadow-lg w-full max-w-sm mx-auto'>
-              <h3 className="text-xl font-bold text-[#2d2552] mb-4">Get Expert Consultation</h3>
-              <form className="space-y-4">
+              <h3 className="text-xl font-bold text-[#2d2552] mb-3">Get Expert Consultation</h3>
+              <form className="space-y-3">
                 <textarea
                   placeholder='Describe Your Health Concern'
                   rows='2'
-                  className='w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff3576] transition resize-none'
+                  className='w-full px-3 py-2 text-sm border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-[#ff3576] transition resize-none'
                 ></textarea>
                 <input
                   type='text'
                   placeholder='City'
-                  className='w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff3576] transition'
+                  className='w-full px-3 py-2 text-sm border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-[#ff3576] transition'
                 />
+                <select
+                  defaultValue=''
+                  className='w-full px-3 py-2 text-sm border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-[#ff3576] transition'
+                >
+                  <option value='' disabled>Preferred Language</option>
+                  <option value='English'>English</option>
+                  <option value='Hindi'>Hindi</option>
+                  <option value='Tamil'>Tamil</option>
+                  <option value='Telugu'>Telugu</option>
+                  <option value='Kannada'>Kannada</option>
+                  <option value='Malayalam'>Malayalam</option>
+                </select>
                 <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
                   <input
                     type='text'
                     placeholder='Full Name'
-                    className='w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff3576] transition'
+                    className='w-full px-3 py-2 text-sm border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-[#ff3576] transition'
                   />
                   <input
                     type='tel'
                     placeholder='Phone Number'
-                    className='w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff3576] transition'
+                    className='w-full px-3 py-2 text-sm border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-[#ff3576] transition'
                   />
                 </div>
                 <button

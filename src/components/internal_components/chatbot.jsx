@@ -1351,6 +1351,18 @@ const Chatbot = () => {
   }, [detectEmergency, getEmergencyResponse, isQuestionnaireActive, isBookingFlow, handleBookingResponse, startBookingFlow, startQuestionnaire, callOpenAI, conversationHistory, updateMedicalContext, detectRecommendedTreatment]);
 
   const handleQuickResponse = (response) => {
+    // Prevent selecting other quick links while booking is in progress
+    if (isBookingFlow && bookingStep < bookingQuestions.length) {
+      setIsQuickResponsesOpen(false);
+      // Provide a gentle reminder message only once per click
+      const reminder = {
+        text: 'Please complete your appointment booking first. You can use quick links after submitting your details.',
+        sender: 'bot',
+        timestamp: new Date(),
+      };
+      setMessages(prev => [...prev, reminder]);
+      return;
+    }
     const userMessage = {
       text: response,
       sender: 'user',
@@ -1674,8 +1686,16 @@ const Chatbot = () => {
           {/* Quick responses */}
           <div className='px-4 py-3 bg-gradient-to-b from-white to-gray-50 border-t border-gray-100'>
             <button 
-              onClick={() => setIsQuickResponsesOpen(!isQuickResponsesOpen)}
-              className='flex justify-between items-center w-full text-left text-sm font-semibold text-gray-600 hover:text-gray-800 transition-colors mb-2'>
+              onClick={() => {
+                if (isBookingFlow && bookingStep < bookingQuestions.length) return;
+                setIsQuickResponsesOpen(!isQuickResponsesOpen);
+              }}
+              disabled={isBookingFlow && bookingStep < bookingQuestions.length}
+              className={`flex justify-between items-center w-full text-left text-sm font-semibold transition-colors mb-2 ${
+                isBookingFlow && bookingStep < bookingQuestions.length
+                  ? 'text-gray-300 cursor-not-allowed'
+                  : 'text-gray-600 hover:text-gray-800'
+              }`}>
               <span>Quick Responses</span>
               <svg xmlns='http://www.w3.org/2000/svg' className={`h-5 w-5 transform transition-transform ${isQuickResponsesOpen ? 'rotate-180' : ''}`} fill='none' viewBox='0 0 24 24' stroke='currentColor'>
                 <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M19 9l-7 7-7-7' />
@@ -1687,11 +1707,14 @@ const Chatbot = () => {
                   <button
                     key={index}
                     onClick={() => handleQuickResponse(response)}
+                    disabled={(isBookingFlow && bookingStep < bookingQuestions.length) || isSubmittingBooking || isSubmittingQuestionnaire || isAIProcessing}
                     className={`text-xs font-medium px-3.5 py-2 rounded-full transition-all whitespace-nowrap
                       ${
-                        response === 'Schedule Your Appointment'
-                          ? 'bg-gradient-to-r from-pink-500 to-pink-400 text-white font-semibold shadow-md hover:shadow-lg transform hover:scale-[1.03] border border-white/30 hover:border-white/50'
-                          : 'bg-white hover:bg-pink-50 text-pink-600 border border-pink-200 hover:border-pink-300 shadow-sm hover:shadow'
+                        (isBookingFlow && bookingStep < bookingQuestions.length) || isSubmittingBooking || isSubmittingQuestionnaire || isAIProcessing
+                          ? 'bg-gray-100 text-gray-300 border border-gray-200 cursor-not-allowed'
+                          : response === 'Schedule Your Appointment'
+                              ? 'bg-gradient-to-r from-pink-500 to-pink-400 text-white font-semibold shadow-md hover:shadow-lg transform hover:scale-[1.03] border border-white/30 hover:border-white/50'
+                              : 'bg-white hover:bg-pink-50 text-pink-600 border border-pink-200 hover:border-pink-300 shadow-sm hover:shadow'
                       }`}
                   >
                     {response === 'Schedule Your Appointment' ? (
