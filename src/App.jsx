@@ -19,6 +19,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import React from 'react';
 import Footer from './components/layout/Footer';
 import Home from './pages/Home';
+import Gallery from './pages/Gallery';
 import Chatbot from './components/internal_components/chatbot';
 import BackToTop from './components/BackToTop';
 import CallFab from './components/common/CallFab';
@@ -65,6 +66,7 @@ function App() {
           <Route path='/blog' element={<Blog />} />
           <Route path='/fte' element={<FTE />} />
           <Route path='/blog/:slug' element={<BlogPost />} />
+          <Route path='/gallery' element={<Gallery />} />
           <Route path="/contact-us" element={<ContactUsPage />} />
           <Route path="/uae" element={<UAEPage />} />
           <Route path="/breast-nodule-vae" element={<BreastNoduleVAEPage />} />

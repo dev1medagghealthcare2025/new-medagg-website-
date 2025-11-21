@@ -6,6 +6,7 @@ const quickLinks = [
   { name: 'Testimonials', path: '/testimonials' },
   { name: 'About Us', path: '/about' },
   { name: 'Services', path: '/#services' }, // Scroll to services section on home page
+  { name: 'Gallery', path: '/gallery' },
   { name: 'Contact', path: '/contact-us' },
 ];
 
@@ -44,11 +45,14 @@ export default function Footer() {
             Medagg Healthcare, established in 2021, is a pioneering force in promoting advanced non-surgical treatments across India. With a mission to bridge the gap in healthcare knowledge, we began as a discovery platform focused on connecting patients to hospitals. Today, we specialize in Interventional Radiology and advocate for non-surgical procedures as the future of healthcare.
           </p>
 
-            {/* Know More button */}
-            <Link to="/about" className='inline-block text-center bg-pink-500 hover:bg-pink-600 text-white font-medium text-sm px-6 sm:px-8 py-3 rounded-md transition-colors duration-200 max-w-[150px] w-full sm:w-auto shadow-md'>
-              Know More
-            </Link>
-        </div>
+            {/* Know More and Gallery buttons */}
+            <div className='flex flex-col sm:flex-row gap-3'>
+              <Link to="/about" className='inline-block text-center bg-pink-500 hover:bg-pink-600 text-white font-medium text-sm px-6 sm:px-8 py-3 rounded-md transition-colors duration-200 max-w-[150px] w-full sm:w-auto shadow-md'>
+                Know More
+              </Link>
+              
+            </div>
+          </div>
 
           {/* Right section - Quick Links (as in reference) */}
           <div className='lg:col-span-5 w-full flex justify-start lg:justify-end self-start lg:pl-0 mr-0 lg:mr-32 mt-6 lg:mt-0'>
