@@ -3,7 +3,7 @@ import { treatments } from '../../data/treatments';
 import { Link, useNavigate } from 'react-router-dom';
 
 // Medical AI System Configuration
-const MEDICAL_SYSTEM_PROMPT = `You are Ira, a virtual medical assistant for Medagg Healthcare, specializing in Interventional Radiology and non-surgical treatments.
+const MEDICAL_SYSTEM_PROMPT = `You are IRA, an Interventional Radiology Assistant for Medagg Healthcare, specializing in Interventional Radiology and non-surgical treatments.
 
 CORE RESPONSIBILITIES:
 - Provide accurate medical information about non-surgical treatments
@@ -148,7 +148,7 @@ const createMedicalContext = () => ({
 
 const initialMessages = [
   {
-    text: "Greetings, I'm Ira, your virtual clinical consultant. How may I assist with your healthcare needs today?",
+    text: "Greetings, I'm IRA, your Interventional Radiology Assistant. How may I assist with your healthcare needs today?",
     sender: 'bot',
     timestamp: new Date(),
   },
@@ -1480,7 +1480,7 @@ const Chatbot = () => {
             aria-label='Open chat'
           >
             <img
-              src='/new_animated.gif'
+              src='/Ira_for_website.gif'
               alt='Chat with Dr. Medagg'
               className='w-full h-full object-contain'
             />
@@ -1501,7 +1501,7 @@ const Chatbot = () => {
               </div>
               <div>
                 <h3 className='font-bold text-base sm:text-lg'>IRA</h3>
-                <p className='text-xs text-pink-100 font-medium'>Virtual Health Assistant</p>
+                <p className='text-xs text-pink-100 font-medium'>Interventional Radiology Assistant</p>
               </div>
             </div>
             <div className='flex items-center space-x-1 sm:space-x-2'>

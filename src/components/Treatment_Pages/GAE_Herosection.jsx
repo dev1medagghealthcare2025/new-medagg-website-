@@ -59,15 +59,15 @@ export default function GAE_Herosection() {
 
   return (
     <section
-      className='relative bg-cover bg-center text-white py-8 sm:py-10 lg:py-14 px-4 sm:px-6 lg:px-8'
+      className='relative bg-cover bg-center text-white py-6 sm:py-8 lg:py-12 px-4 sm:px-6 lg:px-8'
       style={{
         backgroundImage: `url('${bgImage}')`,
-        minHeight: '460px',
+        minHeight: '400px',
       }}
     >
       <div className='absolute inset-0 bg-[#2d2552] bg-opacity-60 z-0' />
       <div
-        className='relative z-10 w-full max-w-7xl min-h-[460px] mx-auto flex flex-col lg:flex-row items-center justify-between'
+        className='relative z-10 w-full max-w-7xl min-h-[400px] mx-auto flex flex-col lg:flex-row items-center justify-between'
         style={{ borderRadius: '24px', overflow: 'hidden' }}
       >
         {/* Left: Text */}

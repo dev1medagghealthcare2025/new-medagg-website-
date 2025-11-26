@@ -58,14 +58,14 @@ export default function Thyroid_Herosection() {
   };
   return (
     <section
-      className='relative bg-cover bg-center text-white py-8 sm:py-10 lg:py-14 px-4 sm:px-6 lg:px-8'
+      className='relative bg-cover bg-center text-white py-6 sm:py-8 lg:py-12 px-4 sm:px-6 lg:px-8'
       style={{
         backgroundImage: `url('${bgImage}')`,
-        minHeight: '460px',
+        minHeight: '400px',
       }}
     >
       <div className='absolute inset-0 bg-[#2d2552] bg-opacity-60'></div>
-      <div className='relative max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between min-h-[460px]'>
+      <div className='relative max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between min-h-[400px]'>
         {/* Left: Text */}
         <div className='flex-1 lg:pr-8 xl:pr-12 mb-8 lg:mb-0 text-center lg:text-left'>
           <h1 className='text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-4 sm:mb-6'>

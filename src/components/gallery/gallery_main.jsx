@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 
-const TABS = ['All', 'Celebrations', 'Awards', 'Reviews', 'Our Camps','Media'];
+const TABS = ['All', 'Celebrations', 'Awards', 'Reviews', 'Our Camps','Media','Conference'];
 
 // Sample items. Replace the src paths with your real images if needed.
 // These 3 images exist in your public/ folder already.
@@ -62,6 +62,63 @@ const ALL_ITEMS = [
     id: 19,
     src: '/pic11.jpeg',
     categories: ['Awards'],
+  },
+  // Newly added Reviews images
+  {
+    id: 20,
+    src: '/review_1.jpg',
+    categories: ['Reviews'],
+  },
+  {
+    id: 21,
+    src: '/review_2.jpg',
+    categories: ['Reviews'],
+  },
+  {
+    id: 22,
+    src: '/review_3.jpg',
+    categories: ['Reviews'],
+  },
+  {
+    id: 23,
+    src: '/review_4.jpg',
+    categories: ['Reviews'],
+  },
+  {
+    id: 24,
+    src: '/review_5.jpg',
+    categories: ['Reviews'],
+  },
+  // Newly added Our Camps images
+  {
+    id: 25,
+    src: '/camp1.jpeg',
+    categories: ['Our Camps'],
+  },
+  {
+    id: 26,
+    src: '/camp2.jpeg',
+    categories: ['Our Camps'],
+  },
+  {
+    id: 27,
+    src: '/camp3.jpeg',
+    categories: ['Our Camps'],
+  },
+  {
+    id: 28,
+    src: '/camp4.jpeg',
+    categories: ['Our Camps'],
+  },
+  {
+    id: 29,
+    src: '/camp5.jpeg',
+    categories: ['Our Camps'],
+  },
+  {
+    id: 30,
+    src: '/camp6.jpeg',
+    categories: ['Our Camps'],
   },
 ];
 

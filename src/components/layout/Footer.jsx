@@ -7,6 +7,7 @@ const quickLinks = [
   { name: 'About Us', path: '/about' },
   { name: 'Services', path: '/#services' }, // Scroll to services section on home page
   { name: 'Gallery', path: '/gallery' },
+  { name: 'Career', path: '/career' },
   { name: 'Contact', path: '/contact-us' },
 ];
 
@@ -50,6 +51,7 @@ export default function Footer() {
               <Link to="/about" className='inline-block text-center bg-pink-500 hover:bg-pink-600 text-white font-medium text-sm px-6 sm:px-8 py-3 rounded-md transition-colors duration-200 max-w-[150px] w-full sm:w-auto shadow-md'>
                 Know More
               </Link>
+              
               
             </div>
           </div>

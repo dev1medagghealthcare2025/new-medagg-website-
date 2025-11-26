@@ -18,7 +18,7 @@ const OriginalHeroSlide = ({ query, setQuery, handleSearch, results, isLoading }
     <div className='absolute inset-0 bg-gradient-to-br from-[#1a1446] via-[#2d2552] to-[#e1006a] opacity-90 z-0' />
 
     {/* Doctor Image - Hidden on mobile, visible from md screens up */}
-    <div className='block md:absolute md:right-0 lg:right-0 md:translate-x-1 lg:translate-x-2 2xl:translate-x-3 bottom-0 z-10 w-full md:w-[450px] lg:w-[550px] xl:w-[650px] 2xl:w-[800px] md:max-h-[85vh] mt-8 md:mt-0'>
+    <div className='block md:absolute md:right-0 lg:right-0 md:translate-x-1 lg:translate-x-2 2xl:translate-x-3 bottom-0 z-10 w-full md:w-[380px] lg:w-[480px] xl:w-[560px] 2xl:w-[680px] md:max-h-[85vh] mt-8 md:mt-0'>
       <img
         src='/main_home_new.png'
         alt='Doctor'

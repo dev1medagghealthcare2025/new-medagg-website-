@@ -35,6 +35,7 @@ import BlogPost from './components/blog/BlogPost';
 import FTE from './pages/FTE';
 import ContactUsPage from './pages/contact_us_page';
 import UAEPage from './pages/UAE';
+import CareerPage from './pages/career';
 import BreastNoduleVAEPage from './pages/Breast_Nodule_VAE';
 import BreastNoduleCryoablationPage from './pages/Breast_nodule_cryoablation';
 import Planter from './pages/Planter';
@@ -67,6 +68,7 @@ function App() {
           <Route path='/fte' element={<FTE />} />
           <Route path='/blog/:slug' element={<BlogPost />} />
           <Route path='/gallery' element={<Gallery />} />
+          <Route path='/career' element={<CareerPage />} />
           <Route path="/contact-us" element={<ContactUsPage />} />
           <Route path="/uae" element={<UAEPage />} />
           <Route path="/breast-nodule-vae" element={<BreastNoduleVAEPage />} />
