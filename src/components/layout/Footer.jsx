@@ -48,11 +48,10 @@ export default function Footer() {
 
             {/* Know More and Gallery buttons */}
             <div className='flex flex-col sm:flex-row gap-3'>
-              <Link to="/about" className='inline-block text-center bg-pink-500 hover:bg-pink-600 text-white font-medium text-sm px-6 sm:px-8 py-3 rounded-md transition-colors duration-200 max-w-[150px] w-full sm:w-auto shadow-md'>
+              <Link to='/about' className='inline-block text-center bg-pink-500 hover:bg-pink-600 text-white font-medium text-sm px-6 sm:px-8 py-3 rounded-md transition-colors duration-200 max-w-[150px] w-full sm:w-auto shadow-md'>
                 Know More
               </Link>
-              
-              
+
             </div>
           </div>
 
@@ -84,7 +83,7 @@ export default function Footer() {
           {/* Privacy and Terms - left */}
           <div className='text-center sm:text-left flex items-center justify-center sm:justify-start gap-2'>
             <Link
-              to="/policy"
+              to='/policy'
               className='inline-block px-3 py-1 rounded-md border border-white/20 bg-white/10 hover:bg-white/20 text-white text-[11px] sm:text-xs transition-colors'
               aria-label='Go to Privacy Policy'
             >
@@ -92,7 +91,7 @@ export default function Footer() {
             </Link>
             <span className='text-gray-400'>|</span>
             <Link
-              to="/terms"
+              to='/terms'
               className='inline-block px-3 py-1 rounded-md border border-white/20 bg-white/10 hover:bg-white/20 text-white text-[11px] sm:text-xs transition-colors'
               aria-label='Go to Terms and Conditions'
             >

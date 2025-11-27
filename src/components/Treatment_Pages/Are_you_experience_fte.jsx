@@ -25,33 +25,33 @@ const symptoms = [
 
 const AreYouExperienceFTE = () => {
   return (
-    <section className="py-12 sm:py-16 lg:py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-left mb-12">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#2D2552]">
+    <section className='py-12 sm:py-16 lg:py-20 bg-white'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+        <div className='text-left mb-12'>
+          <h2 className='text-3xl sm:text-4xl lg:text-5xl font-bold text-[#2D2552]'>
             Are You Experiencing
             <br />
-            <span className="text-[#ff3576]">These Symptoms?</span>
+            <span className='text-[#ff3576]'>These Symptoms?</span>
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-gray-600">
+          <p className='mt-4 text-base sm:text-lg text-gray-600'>
             If you are experiencing any of these symptoms, talk to our expert team:
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8'>
           {symptoms.map((symptom) => (
             <div
               key={symptom.number}
-              className="border border-gray-200 md:border-pink-300 rounded-xl p-4 md:p-6 text-center shadow-sm hover:shadow-md transition-shadow duration-300"
+              className='border border-gray-200 md:border-pink-300 rounded-xl p-4 md:p-6 text-center shadow-sm hover:shadow-md transition-shadow duration-300'
             >
               {/* Number circle: show on md+, hide on mobile */}
-              <div className="hidden md:flex w-16 h-16 mx-auto mb-4 rounded-full bg-pink-100 items-center justify-center">
-                <span className="text-2xl font-bold text-[#ff3576]">{symptom.number}</span>
+              <div className='hidden md:flex w-16 h-16 mx-auto mb-4 rounded-full bg-pink-100 items-center justify-center'>
+                <span className='text-2xl font-bold text-[#ff3576]'>{symptom.number}</span>
               </div>
               {/* Title styles: slightly larger on mobile, original on desktop */}
-              <h3 className="text-base font-semibold text-[#2D2552] md:text-sm md:font-bold md:uppercase md:mb-2">{symptom.title}</h3>
+              <h3 className='text-base font-semibold text-[#2D2552] md:text-sm md:font-bold md:uppercase md:mb-2'>{symptom.title}</h3>
               {/* Description: desktop only */}
-              <p className="hidden md:block text-gray-600 text-sm">{symptom.desc}</p>
+              <p className='hidden md:block text-gray-600 text-sm'>{symptom.desc}</p>
             </div>
           ))}
         </div>

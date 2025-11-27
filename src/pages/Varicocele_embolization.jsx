@@ -13,7 +13,6 @@ import Consultourdoctor from '../components/home/Consultourdoctor';
 import OurTestimonial from '../components/home/our_testimonial';
 import FAQ_Home from '../components/home/FAQ_Home';
 
-
 const Varicocele_embolization = () => {
   return (
     <>
@@ -25,7 +24,7 @@ const Varicocele_embolization = () => {
       <AreYouExperiencingVaricocele />
       <BookAppointmentVaricocele />
       <CompareTreatmentOptionVaricocele />
-      <WhatHappensInVaricoceleEmbolization videoUrl="https://youtube.com/shorts/3U_LMSCCdWI?si=PRGrCs4TpUB9gdXw" />
+      <WhatHappensInVaricoceleEmbolization videoUrl='https://youtube.com/shorts/3U_LMSCCdWI?si=PRGrCs4TpUB9gdXw' />
       <OurDoctor />
       <OurTestimonial />
       <Consultourdoctor />

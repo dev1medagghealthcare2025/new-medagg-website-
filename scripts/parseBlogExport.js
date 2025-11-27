@@ -207,7 +207,7 @@ function main() {
       categories: [],
       tags: [],
       author: 'Medagg Healthcare',
-      link
+      link,
     };
 
     if (post.slug && post.title && post.content) {
@@ -231,7 +231,7 @@ function main() {
     rowsWrongStatus,
     rowsIncluded,
     uniqueSlugs: postsBySlug.size,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   };
   const LOG_PATH = path.resolve(__dirname, 'parseBlogExport.log');
   try {

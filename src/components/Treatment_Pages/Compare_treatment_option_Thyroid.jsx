@@ -131,7 +131,6 @@ const CompareTreatmentOptionThyroid = () => (
         </table>
       </div>
 
-     
     </div>
   </section>
 );

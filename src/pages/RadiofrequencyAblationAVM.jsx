@@ -15,7 +15,7 @@ import FAQ_Home from '../components/home/FAQ_Home';
 
 const RadiofrequencyAblationAVM = () => {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className='min-h-screen bg-gray-50'>
       <Navbar />
       <Treatmentnavbar />
       <RfaForAvmHeroSection />

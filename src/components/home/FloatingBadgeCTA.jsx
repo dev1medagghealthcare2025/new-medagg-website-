@@ -30,17 +30,17 @@ const FloatingBadgeCTA = ({
       }}
     >
       {/* Float + subtle tilt wrapper */}
-      <div className="badge-float">
+      <div className='badge-float'>
       {href ? (
         <a
           href={href}
           target={newTab ? '_blank' : '_self'}
           rel={newTab ? 'noopener noreferrer' : undefined}
           aria-label={alt}
-          className="group floating-badge block focus:outline-none"
+          className='group floating-badge block focus:outline-none'
         >
           <div
-            className="relative flex items-center justify-center rounded-full"
+            className='relative flex items-center justify-center rounded-full'
             style={{
               width: size,
               height: size,
@@ -48,14 +48,14 @@ const FloatingBadgeCTA = ({
           >
             {/* Rotating dashed ring */}
             <div
-              className="absolute inset-0 rounded-full border-2 border-dashed border-white/80 animate-spin"
+              className='absolute inset-0 rounded-full border-2 border-dashed border-white/80 animate-spin'
               style={{ animationDuration: '10s' }}
               aria-hidden
             />
 
             {/* Soft glow pulse */}
             <div
-              className="absolute inset-0 rounded-full bg-pink-500/10 blur-md animate-pulse"
+              className='absolute inset-0 rounded-full bg-pink-500/10 blur-md animate-pulse'
               aria-hidden
             />
 
@@ -78,10 +78,10 @@ const FloatingBadgeCTA = ({
         <Link
           to={to}
           aria-label={alt}
-          className="group floating-badge block focus:outline-none"
+          className='group floating-badge block focus:outline-none'
         >
         <div
-          className="relative flex items-center justify-center rounded-full"
+          className='relative flex items-center justify-center rounded-full'
           style={{
             width: size,
             height: size,
@@ -89,14 +89,14 @@ const FloatingBadgeCTA = ({
         >
           {/* Rotating dashed ring */}
           <div
-            className="absolute inset-0 rounded-full border-2 border-dashed border-white/80 animate-spin"
+            className='absolute inset-0 rounded-full border-2 border-dashed border-white/80 animate-spin'
             style={{ animationDuration: '10s' }}
             aria-hidden
           />
 
           {/* Soft glow pulse */}
           <div
-            className="absolute inset-0 rounded-full bg-pink-500/10 blur-md animate-pulse"
+            className='absolute inset-0 rounded-full bg-pink-500/10 blur-md animate-pulse'
             aria-hidden
           />
 

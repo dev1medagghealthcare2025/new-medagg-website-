@@ -98,10 +98,10 @@ const GAE_Compare_treatment_option = () => {
           {treatments.map((treatment, idx) => (
             <div
               key={idx}
-              className={`rounded-2xl p-6 text-center transition-all duration-300 hover:shadow-xl bg-white text-gray-800 border-2 border-gray-200 hover:border-[#ff3576] hover:bg-[#ff3576] hover:text-white group`}
+              className={'rounded-2xl p-6 text-center transition-all duration-300 hover:shadow-xl bg-white text-gray-800 border-2 border-gray-200 hover:border-[#ff3576] hover:bg-[#ff3576] hover:text-white group'}
             >
               <div
-                className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 bg-gray-100 group-hover:bg-white/20`}
+                className={'w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 bg-gray-100 group-hover:bg-white/20'}
               >
                 {shouldShowImage(treatment.img) ? (
                   <img
@@ -109,7 +109,7 @@ const GAE_Compare_treatment_option = () => {
                     alt={treatment.title}
                     className='w-10 h-10 object-contain'
                     onError={() => handleImageError(treatment.img)}
-                    loading="lazy"
+                    loading='lazy'
                     key={`${treatment.img}-${imageLoadAttempts[treatment.img] || 0}`}
                   />
                 ) : (
@@ -120,10 +120,10 @@ const GAE_Compare_treatment_option = () => {
                   </div>
                 )}
               </div>
-              <h3 className={`text-xl font-bold mb-3 text-[#ff3576] group-hover:text-white`}>
+              <h3 className={'text-xl font-bold mb-3 text-[#ff3576] group-hover:text-white'}>
                 {treatment.title}
               </h3>
-              <p className={`text-sm leading-relaxed text-gray-600 group-hover:text-white/90`}>
+              <p className={'text-sm leading-relaxed text-gray-600 group-hover:text-white/90'}>
                 {treatment.desc}
               </p>
             </div>

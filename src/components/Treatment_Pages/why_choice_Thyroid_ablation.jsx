@@ -30,7 +30,6 @@ const WhyChooseThyroidAblation = () => {
   return (
     <div className='py-8 sm:py-12 lg:py-16 bg-white'>
       <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
-        
 
         {/* Main Content */}
         <div className='text-center max-w-4xl mx-auto'>

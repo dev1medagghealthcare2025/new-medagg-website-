@@ -34,7 +34,7 @@ const useAnimatedCounter = (targetValue, duration = 2000) => {
       ([entry]) => {
         setIsVisible(entry.isIntersecting);
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     if (elementRef.current) {
@@ -64,13 +64,13 @@ const useAnimatedCounter = (targetValue, duration = 2000) => {
     const animate = (timestamp) => {
       if (!startTime) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / duration, 1);
-      
+
       // Easing function for smooth animation
       const easeOutQuart = 1 - Math.pow(1 - progress, 4);
       const currentValue = Math.floor(targetValue * easeOutQuart);
-      
+
       setCount(currentValue);
-      
+
       if (progress < 1) {
         animationFrame = requestAnimationFrame(animate);
       }
@@ -79,7 +79,7 @@ const useAnimatedCounter = (targetValue, duration = 2000) => {
     // Reset count to 0 and start animation
     setCount(0);
     animationFrame = requestAnimationFrame(animate);
-    
+
     return () => {
       if (animationFrame) {
         cancelAnimationFrame(animationFrame);
@@ -93,7 +93,7 @@ const useAnimatedCounter = (targetValue, duration = 2000) => {
 // Counter component
 const AnimatedCounter = ({ value, prefix = '', suffix = '' }) => {
   const { count, elementRef } = useAnimatedCounter(value);
-  
+
   return (
     <span ref={elementRef}>
       {prefix}{count.toLocaleString()}{suffix}
@@ -135,10 +135,10 @@ export default function Trusted_by_Patients_Across_India() {
                   <IconComponent className='w-8 h-8 text-gray-500' />
                 </div>
                 <h3 className='text-3xl font-bold text-[#2D2552] mb-2'>
-                  <AnimatedCounter 
-                    value={stat.value} 
-                    prefix={stat.prefix || ''} 
-                    suffix={stat.suffix || ''} 
+                  <AnimatedCounter
+                    value={stat.value}
+                    prefix={stat.prefix || ''}
+                    suffix={stat.suffix || ''}
                   />
                 </h3>
                 <p className='text-gray-500'>{stat.label}</p>
@@ -146,8 +146,6 @@ export default function Trusted_by_Patients_Across_India() {
             );
           })}
         </div>
-
-       
 
         {/* CTA Section */}
         <div
@@ -164,7 +162,7 @@ export default function Trusted_by_Patients_Across_India() {
               Discover safer, faster, and effective treatments — no scars, no stitches, and same-day recovery.
             </p>
             <div className='flex flex-col sm:flex-row gap-4'>
-              <button 
+              <button
                 onClick={openChatbot}
                 className='bg-pink-500 text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center gap-2 hover:bg-pink-600 transition-colors shadow-lg'
               >
@@ -179,7 +177,7 @@ export default function Trusted_by_Patients_Across_India() {
           </div>
         </div>
       </div>
-      
+
     </section>
   );
 }

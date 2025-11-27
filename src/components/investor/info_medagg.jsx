@@ -8,7 +8,7 @@ const InfoMedagg = () => {
     email: '',
     locations: '',
     preferredLanguage: '',
-    message: ''
+    message: '',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -17,7 +17,7 @@ const InfoMedagg = () => {
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -61,159 +61,158 @@ const InfoMedagg = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-[#4a5568] to-[#2d3748] py-16 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <div className='bg-gradient-to-br from-[#4a5568] to-[#2d3748] py-16 px-4 sm:px-6 lg:px-8'>
+      <div className='max-w-7xl mx-auto'>
         {/* Header */}
-        <div className="text-left mb-12">
-          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
-            Ready to <span className="text-[#ff3576]">Shape the Future</span>
+        <div className='text-left mb-12'>
+          <h2 className='text-3xl lg:text-4xl font-bold text-white mb-4'>
+            Ready to <span className='text-[#ff3576]'>Shape the Future</span>
           </h2>
-          <p className="text-gray-300 text-lg max-w-2xl">
+          <p className='text-gray-300 text-lg max-w-2xl'>
             Join our community of forward-thinking investors making a difference in healthcare innovation
           </p>
         </div>
 
         {/* Contact Section */}
-        <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
-          <div className="grid grid-cols-1 lg:grid-cols-2">
-            
+        <div className='bg-white rounded-2xl shadow-2xl overflow-hidden'>
+          <div className='grid grid-cols-1 lg:grid-cols-2'>
+
             {/* Contact Information Card */}
-            <div className="bg-gradient-to-br from-[#667eea] to-[#764ba2] p-8 lg:p-12 text-white">
-              <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
-              <p className="text-blue-100 mb-8 leading-relaxed">
+            <div className='bg-gradient-to-br from-[#667eea] to-[#764ba2] p-8 lg:p-12 text-white'>
+              <h3 className='text-2xl font-bold mb-6'>Contact Information</h3>
+              <p className='text-blue-100 mb-8 leading-relaxed'>
                 We usually respond within 1 working day. For urgent queries, call us directly.
               </p>
-              
-              <div className="space-y-6">
-                
-                
-                <div className="flex items-center">
-                  <Mail className="w-6 h-6 mr-4 text-blue-200" />
-                  <span className="text-lg">sumitha.k@medagg.com</span>
+
+              <div className='space-y-6'>
+
+                <div className='flex items-center'>
+                  <Mail className='w-6 h-6 mr-4 text-blue-200' />
+                  <span className='text-lg'>sumitha.k@medagg.com</span>
                 </div>
-                
-                <div className="flex items-center">
-                  <MapPin className="w-6 h-6 mr-4 text-blue-200" />
-                  <span className="text-lg">Perungudi, Chennai</span>
+
+                <div className='flex items-center'>
+                  <MapPin className='w-6 h-6 mr-4 text-blue-200' />
+                  <span className='text-lg'>Perungudi, Chennai</span>
                 </div>
               </div>
             </div>
 
             {/* Contact Form */}
-            <div className="p-8 lg:p-12">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className='p-8 lg:p-12'>
+              <form onSubmit={handleSubmit} className='space-y-6'>
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor='name' className='block text-sm font-medium text-gray-700 mb-2'>
                       Name
                     </label>
                     <input
-                      type="text"
-                      id="name"
-                      name="name"
+                      type='text'
+                      id='name'
+                      name='name'
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder="Your name"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff3576] focus:border-transparent outline-none transition-all"
+                      placeholder='Your name'
+                      className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff3576] focus:border-transparent outline-none transition-all'
                       required
                     />
                   </div>
-                  
+
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor='phone' className='block text-sm font-medium text-gray-700 mb-2'>
                       Phone Number
                     </label>
                     <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
+                      type='tel'
+                      id='phone'
+                      name='phone'
                       value={formData.phone}
                       onChange={handleChange}
-                      placeholder="Your Phone Number"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff3576] focus:border-transparent outline-none transition-all"
+                      placeholder='Your Phone Number'
+                      className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff3576] focus:border-transparent outline-none transition-all'
                       required
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor='email' className='block text-sm font-medium text-gray-700 mb-2'>
                     Email Address
                   </label>
                   <input
-                    type="email"
-                    id="email"
-                    name="email"
+                    type='email'
+                    id='email'
+                    name='email'
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder="Enter your Email Address"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff3576] focus:border-transparent outline-none transition-all"
+                    placeholder='Enter your Email Address'
+                    className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff3576] focus:border-transparent outline-none transition-all'
                     required
                   />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                   <div>
-                    <label htmlFor="locations" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor='locations' className='block text-sm font-medium text-gray-700 mb-2'>
                       Location
                     </label>
                     <input
-                      type="text"
-                      id="locations"
-                      name="locations"
+                      type='text'
+                      id='locations'
+                      name='locations'
                       value={formData.locations}
                       onChange={handleChange}
-                      placeholder="Your City/Location"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff3576] focus:border-transparent outline-none transition-all"
+                      placeholder='Your City/Location'
+                      className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff3576] focus:border-transparent outline-none transition-all'
                     />
                   </div>
                   <div>
-                    <label htmlFor="preferredLanguage" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor='preferredLanguage' className='block text-sm font-medium text-gray-700 mb-2'>
                       Preferred Language
                     </label>
                     <select
-                      id="preferredLanguage"
-                      name="preferredLanguage"
+                      id='preferredLanguage'
+                      name='preferredLanguage'
                       value={formData.preferredLanguage}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff3576] focus:border-transparent outline-none transition-all"
+                      className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff3576] focus:border-transparent outline-none transition-all'
                     >
-                      <option value="" disabled>Choose Language</option>
-                      <option value="English">English</option>
-                      <option value="Hindi">Hindi</option>
-                      <option value="Tamil">Tamil</option>
-                      <option value="Telugu">Telugu</option>
-                      <option value="Kannada">Kannada</option>
-                      <option value="Malayalam">Malayalam</option>
-                      <option value="Bengali">Bengali</option>
-                      <option value="Marathi">Marathi</option>
-                      <option value="Gujarati">Gujarati</option>
-                      <option value="Punjabi">Punjabi</option>
-                      <option value="Urdu">Urdu</option>
+                      <option value='' disabled>Choose Language</option>
+                      <option value='English'>English</option>
+                      <option value='Hindi'>Hindi</option>
+                      <option value='Tamil'>Tamil</option>
+                      <option value='Telugu'>Telugu</option>
+                      <option value='Kannada'>Kannada</option>
+                      <option value='Malayalam'>Malayalam</option>
+                      <option value='Bengali'>Bengali</option>
+                      <option value='Marathi'>Marathi</option>
+                      <option value='Gujarati'>Gujarati</option>
+                      <option value='Punjabi'>Punjabi</option>
+                      <option value='Urdu'>Urdu</option>
                     </select>
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor='message' className='block text-sm font-medium text-gray-700 mb-2'>
                     Message
                   </label>
                   <textarea
-                    id="message"
-                    name="message"
+                    id='message'
+                    name='message'
                     value={formData.message}
                     onChange={handleChange}
-                    placeholder="Type Message..."
-                    rows="4"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff3576] focus:border-transparent outline-none transition-all resize-none"
+                    placeholder='Type Message...'
+                    rows='4'
+                    className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff3576] focus:border-transparent outline-none transition-all resize-none'
                     required
                   />
                 </div>
 
                 <button
-                  type="submit"
+                  type='submit'
                   disabled={isSubmitting}
-                  className="bg-[#ff3576] text-white font-bold py-3 px-8 rounded-lg hover:bg-pink-700 transition duration-300 ease-in-out transform hover:scale-105 disabled:bg-gray-400"
+                  className='bg-[#ff3576] text-white font-bold py-3 px-8 rounded-lg hover:bg-pink-700 transition duration-300 ease-in-out transform hover:scale-105 disabled:bg-gray-400'
                 >
                   {isSubmitting ? 'Submitting...' : 'Become an Investor'}
                 </button>

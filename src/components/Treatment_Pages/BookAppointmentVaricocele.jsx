@@ -60,16 +60,16 @@ const BookAppointmentVaricocele = () => {
   };
 
   return (
-    <section className="py-16 sm:py-24 flex items-center justify-center bg-gray-100">
+    <section className='py-16 sm:py-24 flex items-center justify-center bg-gray-100'>
       <div
         className='relative w-full max-w-[1201px] h-auto md:h-[421px] rounded-[20px] overflow-hidden mx-4'
         style={{
-          backgroundImage: "url('/book and appoinment background.jpg')",
+          backgroundImage: 'url(\'/book and appoinment background.jpg\')',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       >
-        <div className="absolute inset-0 bg-[#2d2552] opacity-5"></div>
+        <div className='absolute inset-0 bg-[#2d2552] opacity-5'></div>
         <div className='relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 h-full'>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-8 items-center h-full'>
             {/* Left Side */}
@@ -81,7 +81,7 @@ const BookAppointmentVaricocele = () => {
               <p className='text-white text-base md:text-lg font-medium mb-8 max-w-md mx-auto md:mx-0'>
                 Book a scan review and connect with leading IR specialists.
               </p>
-              <Link to="/contact-us">
+              <Link to='/contact-us'>
                 <button className='bg-[#ff3576] text-white font-bold py-3 px-8 rounded-lg hover:bg-opacity-50 transition-transform duration-300 hover:scale-105'>
                   Book Appointment
                 </button>
@@ -90,10 +90,10 @@ const BookAppointmentVaricocele = () => {
 
             {/* Right Side - Form */}
             <div className='bg-white p-6 rounded-xl shadow-lg w-full max-w-sm mx-auto'>
-              <h3 className="text-xl font-bold text-[#2d2552] mb-4">Get Expert Consultation</h3>
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <h3 className='text-xl font-bold text-[#2d2552] mb-4'>Get Expert Consultation</h3>
+              <form onSubmit={handleSubmit} className='space-y-4'>
                 <textarea
-                  name="concern"
+                  name='concern'
                   value={formData.concern}
                   onChange={handleChange}
                   placeholder='Describe Your Health Concern'

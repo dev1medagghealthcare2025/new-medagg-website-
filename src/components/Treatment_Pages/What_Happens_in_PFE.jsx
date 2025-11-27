@@ -18,25 +18,25 @@ const WhatHappensInPFE = () => {
   ];
 
   return (
-    <div className="py-12 md:py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#2d2552] mb-4">
+    <div className='py-12 md:py-20 bg-gray-50'>
+      <div className='container mx-auto px-4'>
+        <div className='max-w-4xl mx-auto text-center'>
+          <h2 className='text-3xl md:text-4xl font-bold text-[#2d2552] mb-4'>
             What Happens During Plantar Fascial Embolization?
           </h2>
-          <p className="text-gray-600 text-lg md:text-xl mb-12">
+          <p className='text-gray-600 text-lg md:text-xl mb-12'>
             A simple, safe, and straightforward outpatient procedure.
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
+        <div className='max-w-4xl mx-auto'>
           {procedureDetails.map((item, index) => (
-            <div key={index} className="mb-8 p-6 bg-white rounded-lg shadow-md">
-              <div className="flex items-start">
-                <CheckCircle className="text-[#ff3576] w-6 h-6 mr-4 mt-1 flex-shrink-0" />
+            <div key={index} className='mb-8 p-6 bg-white rounded-lg shadow-md'>
+              <div className='flex items-start'>
+                <CheckCircle className='text-[#ff3576] w-6 h-6 mr-4 mt-1 flex-shrink-0' />
                 <div>
-                  <h3 className="text-xl font-bold text-[#2d2552] mb-2">{item.stage}</h3>
-                  <p className="text-gray-700 leading-relaxed">{item.description}</p>
+                  <h3 className='text-xl font-bold text-[#2d2552] mb-2'>{item.stage}</h3>
+                  <p className='text-gray-700 leading-relaxed'>{item.description}</p>
                 </div>
               </div>
             </div>

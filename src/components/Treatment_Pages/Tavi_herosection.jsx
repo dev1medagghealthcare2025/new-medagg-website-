@@ -59,7 +59,7 @@ const TaviHeroSection = () => {
     <section
       className='relative w-full bg-cover bg-center py-8 sm:py-10 lg:py-14 px-4 sm:px-6 lg:px-8'
       style={{
-        backgroundImage: "url('/TAVI_bg_image.jpg')",
+        backgroundImage: 'url(\'/TAVI_bg_image.jpg\')',
         minHeight: '460px',
       }}
     >
@@ -158,7 +158,7 @@ const TaviHeroSection = () => {
             </form>
           </div>
           <div className='mt-4 flex flex-wrap justify-center lg:justify-start gap-2.5 px-2'>
-           
+
           </div>
         </div>
       </div>

@@ -59,44 +59,44 @@ const JoinWithLanding = () => {
   };
 
   return (
-    <section id="join-with-us-section" className="bg-gray-50 py-12 sm:py-16">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <section id='join-with-us-section' className='bg-gray-50 py-12 sm:py-16'>
+      <div className='mx-auto max-w-6xl px-4 sm:px-6 lg:px-8'>
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-16 items-center'>
           {/* Left Content */}
-          <div className="text-center lg:text-left">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-              Join our growing network of <span className="text-pink-500">Expert IR doctors</span> and be a part of <span className="text-pink-500">Medagg Healthcare's</span> trusted team.
+          <div className='text-center lg:text-left'>
+            <h1 className='text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight'>
+              Join our growing network of <span className='text-pink-500'>Expert IR doctors</span> and be a part of <span className='text-pink-500'>Medagg Healthcare's</span> trusted team.
             </h1>
           </div>
 
           {/* Right Form */}
           <div>
-            <p className="text-lg font-medium text-gray-800 mb-6">Share your details and we will reach out to you with the next Steps</p>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <input type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder="Your Name*" className="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-pink-500 focus:border-pink-500" required />
-                <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} placeholder="Your Mobile No*" className="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-pink-500 focus:border-pink-500" required />
-                <input type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder="Email ID*" className="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-pink-500 focus:border-pink-500" required />
-                <input type="text" name="city" value={formData.city} onChange={handleInputChange} placeholder="Select City*" className="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-pink-500 focus:border-pink-500" required />
-                <input type="text" name="experience" value={formData.experience} onChange={handleInputChange} placeholder="Experience (Years)*" className="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-pink-500 focus:border-pink-500" required />
-                <select name="preferredLanguage" value={formData.preferredLanguage} onChange={handleInputChange} className="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-pink-500 focus:border-pink-500">
-                  <option value="" disabled>Preferred Language</option>
-                  <option value="English">English</option>
-                  <option value="Hindi">Hindi</option>
-                  <option value="Tamil">Tamil</option>
-                  <option value="Telugu">Telugu</option>
-                  <option value="Kannada">Kannada</option>
-                  <option value="Malayalam">Malayalam</option>
-                  <option value="Bengali">Bengali</option>
-                  <option value="Marathi">Marathi</option>
-                  <option value="Gujarati">Gujarati</option>
-                  <option value="Punjabi">Punjabi</option>
-                  <option value="Urdu">Urdu</option>
+            <p className='text-lg font-medium text-gray-800 mb-6'>Share your details and we will reach out to you with the next Steps</p>
+            <form onSubmit={handleSubmit} className='space-y-4'>
+              <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+                <input type='text' name='name' value={formData.name} onChange={handleInputChange} placeholder='Your Name*' className='w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-pink-500 focus:border-pink-500' required />
+                <input type='tel' name='phone' value={formData.phone} onChange={handleInputChange} placeholder='Your Mobile No*' className='w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-pink-500 focus:border-pink-500' required />
+                <input type='email' name='email' value={formData.email} onChange={handleInputChange} placeholder='Email ID*' className='w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-pink-500 focus:border-pink-500' required />
+                <input type='text' name='city' value={formData.city} onChange={handleInputChange} placeholder='Select City*' className='w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-pink-500 focus:border-pink-500' required />
+                <input type='text' name='experience' value={formData.experience} onChange={handleInputChange} placeholder='Experience (Years)*' className='w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-pink-500 focus:border-pink-500' required />
+                <select name='preferredLanguage' value={formData.preferredLanguage} onChange={handleInputChange} className='w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-pink-500 focus:border-pink-500'>
+                  <option value='' disabled>Preferred Language</option>
+                  <option value='English'>English</option>
+                  <option value='Hindi'>Hindi</option>
+                  <option value='Tamil'>Tamil</option>
+                  <option value='Telugu'>Telugu</option>
+                  <option value='Kannada'>Kannada</option>
+                  <option value='Malayalam'>Malayalam</option>
+                  <option value='Bengali'>Bengali</option>
+                  <option value='Marathi'>Marathi</option>
+                  <option value='Gujarati'>Gujarati</option>
+                  <option value='Punjabi'>Punjabi</option>
+                  <option value='Urdu'>Urdu</option>
                 </select>
               </div>
-              <textarea name="message" value={formData.message} onChange={handleInputChange} placeholder="Your Message" rows="4" className="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-pink-500 focus:border-pink-500"></textarea>
+              <textarea name='message' value={formData.message} onChange={handleInputChange} placeholder='Your Message' rows='4' className='w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-pink-500 focus:border-pink-500'></textarea>
               <div>
-                <button type="submit" disabled={isSubmitting} className="w-full sm:w-auto rounded-md bg-pink-600 px-10 py-3 text-base font-semibold text-white shadow-sm hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 disabled:bg-gray-400 transition-colors">
+                <button type='submit' disabled={isSubmitting} className='w-full sm:w-auto rounded-md bg-pink-600 px-10 py-3 text-base font-semibold text-white shadow-sm hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 disabled:bg-gray-400 transition-colors'>
                   {isSubmitting ? 'Submitting...' : 'Submit'}
                 </button>
               </div>

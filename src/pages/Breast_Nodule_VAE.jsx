@@ -15,7 +15,7 @@ import FAQ_Home from '../components/home/FAQ_Home';
 
 const BreastNoduleVAEPage = () => {
   return (
-    <div className="bg-white">
+    <div className='bg-white'>
       <Navbar />
       <Treatmentnavbar />
       <BreastNoduleVAEHeroSection />
@@ -24,7 +24,7 @@ const BreastNoduleVAEPage = () => {
       <AreYouExperiencingVAE />
       <BookAnAppointmentVAE />
       <CompareTreatmentVAE />
-      <WhatHappensInVAE videoUrl="https://youtube.com/shorts/xniZMciljic?si=d4HK5sNyGO2ndjfU" />
+      <WhatHappensInVAE videoUrl='https://youtube.com/shorts/xniZMciljic?si=d4HK5sNyGO2ndjfU' />
       <Ourdoctor />
       <OurTestimonial/>
       <Consultourdoctor />

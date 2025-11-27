@@ -24,16 +24,16 @@ const OriginalHeroSlide = ({ query, setQuery, handleSearch, results, isLoading }
         alt='Doctor'
         className='w-1/2 sm:w-2/5 md:w-full h-auto md:h-full object-contain mx-auto'
       />
-    
+
     </div>
 
     {/* Content Container */}
     <div className='relative z-10 flex flex-col justify-center items-center md:items-start w-full text-center md:text-left pt-6 pb-5 md:pt-6 md:pb-12'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full'>
         {/* Content - Left side with responsive width (ISVIR logo/text removed) */}
-        <div className='flex flex-col justify-center items-center md:items-start h-full gap-2 sm:gap-3 pt-2 sm:pt-4 md:pt-0 w-full md:max-w-2xl lg:max-w-xl xl:max-w-2xl'> 
+        <div className='flex flex-col justify-center items-center md:items-start h-full gap-2 sm:gap-3 pt-2 sm:pt-4 md:pt-0 w-full md:max-w-2xl lg:max-w-xl xl:max-w-2xl'>
 
-          <h1 
+          <h1
             className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mt-2'
             style={{ lineHeight: 1.2 }}
           >
@@ -46,7 +46,7 @@ const OriginalHeroSlide = ({ query, setQuery, handleSearch, results, isLoading }
             <p className='text-xs sm:text-sm md:text-base lg:text-lg text-white/90 font-medium mb-4'>
               Experience care without fear, without surgery, and with quick recovery.
             </p>
-            <SharedSearchBar 
+            <SharedSearchBar
               query={query}
               setQuery={setQuery}
               handleSearch={handleSearch}
@@ -385,31 +385,31 @@ const HeroSection = () => {
     const fuzzyMatch = (text, keyword) => {
       const textLower = text.toLowerCase();
       const keywordLower = keyword.toLowerCase();
-      
+
       // Exact match
       if (textLower.includes(keywordLower)) return 3;
-      
+
       // Partial match (at least 3 characters)
       if (keywordLower.length >= 3 && textLower.includes(keywordLower.substring(0, 3))) return 2;
-      
+
       // Character similarity for typos
       let matches = 0;
       for (let char of keywordLower) {
         if (textLower.includes(char)) matches++;
       }
-      
+
       // If more than 50% characters match, consider it a fuzzy match
       if (matches / keywordLower.length > 0.5 && keywordLower.length > 2) return 1;
-      
+
       // Special case: check if query contains keyword or vice versa
       if (textLower.includes(keywordLower) || keywordLower.includes(textLower)) return 2;
-      
+
       return 0;
     };
 
     treatmentSuggestions.forEach(treatment => {
       let score = 0;
-      
+
       treatment.keywords.forEach(keyword => {
         score += fuzzyMatch(query, keyword);
       });
@@ -420,7 +420,7 @@ const HeroSection = () => {
       if (score > 0) {
         matchedTreatments.push({
           ...treatment,
-          score
+          score,
         });
       }
     });
@@ -431,7 +431,7 @@ const HeroSection = () => {
       .slice(0, 3)
       .map(treatment => ({
         name: treatment.name,
-        path: treatment.path
+        path: treatment.path,
       }));
   };
 
@@ -600,8 +600,8 @@ const HeroSection = () => {
   return (
     <>
       {/* Mobile Hero Section - Visible only on mobile */}
-      <div className="md:hidden">
-        <MobileHeroSection 
+      <div className='md:hidden'>
+        <MobileHeroSection
           query={query}
           setQuery={setQuery}
           handleSearch={handleSearch}
@@ -611,28 +611,28 @@ const HeroSection = () => {
       </div>
 
       {/* Desktop Carousel - Hidden on mobile, visible on md and up */}
-      <div className="hidden md:block relative w-full overflow-hidden">
+      <div className='hidden md:block relative w-full overflow-hidden'>
         {/* Top-center floating CTA (visible across all slides) */}
-        <FloatingBadgeCTA 
-          imgSrc="/irpreneur.png" 
-          alt="IR preneur 2025"
-          href="https://medagghealthcare.com/IRPreneur-conference/"
+        <FloatingBadgeCTA
+          imgSrc='/irpreneur.png'
+          alt='IR preneur 2025'
+          href='https://medagghealthcare.com/IRPreneur-conference/'
           size={120}
           mobileSize={120}
           topOffset={24}
-          align="left"
+          align='left'
           leftOffset={24}
           zIndex={40}
           showOnMobile={false}
         />
         {/* Carousel Container */}
-        <div 
-          className="flex transition-transform duration-1000 ease-in-out"
+        <div
+          className='flex transition-transform duration-1000 ease-in-out'
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}
         >
           {/* Slide 1: Original Hero */}
-          <div className="w-full flex-shrink-0">
-            <OriginalHeroSlide 
+          <div className='w-full flex-shrink-0'>
+            <OriginalHeroSlide
               query={query}
               setQuery={setQuery}
               handleSearch={handleSearch}
@@ -640,10 +640,10 @@ const HeroSection = () => {
               isLoading={isLoading}
             />
           </div>
-          
+
           {/* Slide 2: New Hero Crossel */}
-          <div className="w-full flex-shrink-0">
-            <Hero_crossel 
+          <div className='w-full flex-shrink-0'>
+            <Hero_crossel
               query={query}
               setQuery={setQuery}
               handleSearch={handleSearch}
@@ -653,8 +653,8 @@ const HeroSection = () => {
           </div>
 
           {/* Slide 3: Map Hero Crossel */}
-          <div className="w-full flex-shrink-0">
-            <HeroCrosselMap 
+          <div className='w-full flex-shrink-0'>
+            <HeroCrosselMap
               query={query}
               setQuery={setQuery}
               handleSearch={handleSearch}
@@ -665,14 +665,14 @@ const HeroSection = () => {
         </div>
 
         {/* Carousel Navigation Dots */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-3 z-20">
+        <div className='absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-3 z-20'>
           {Array.from({ length: totalSlides }).map((_, index) => (
             <button
               key={index}
               onClick={() => goToSlide(index)}
               className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                currentSlide === index 
-                  ? 'bg-white scale-125' 
+                currentSlide === index
+                  ? 'bg-white scale-125'
                   : 'bg-white/50 hover:bg-white/75'
               }`}
               aria-label={`Go to slide ${index + 1}`}
@@ -683,21 +683,21 @@ const HeroSection = () => {
         {/* Carousel Navigation Arrows */}
         <button
           onClick={() => goToSlide((currentSlide - 1 + totalSlides) % totalSlides)}
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white p-3 rounded-full transition-all duration-300 z-20"
-          aria-label="Previous slide"
+          className='absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white p-3 rounded-full transition-all duration-300 z-20'
+          aria-label='Previous slide'
         >
-          <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-            <path d="M15 18l-6-6 6-6"/>
+          <svg width='20' height='20' fill='none' stroke='currentColor' strokeWidth='2' viewBox='0 0 24 24'>
+            <path d='M15 18l-6-6 6-6'/>
           </svg>
         </button>
-        
+
         <button
           onClick={() => goToSlide((currentSlide + 1) % totalSlides)}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white p-3 rounded-full transition-all duration-300 z-20"
-          aria-label="Next slide"
+          className='absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white p-3 rounded-full transition-all duration-300 z-20'
+          aria-label='Next slide'
         >
-          <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-            <path d="M9 18l6-6-6-6"/>
+          <svg width='20' height='20' fill='none' stroke='currentColor' strokeWidth='2' viewBox='0 0 24 24'>
+            <path d='M9 18l6-6-6-6'/>
           </svg>
         </button>
       </div>

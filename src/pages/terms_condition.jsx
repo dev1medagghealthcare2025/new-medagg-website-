@@ -6,7 +6,7 @@ import TermsMain from '../components/Terms_and_condition/terms_main';
 
 const TermsConditionPage = () => {
   return (
-    <main className="bg-white">
+    <main className='bg-white'>
       <Navbar />
       <Treatmentnavbar />
       <TermsHeroSection />

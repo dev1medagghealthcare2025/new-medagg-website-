@@ -35,17 +35,17 @@ const steps = [
 
 const HowRFAForAVMWorks = () => {
   return (
-    <section className="py-10 md:py-16 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="max-w-3xl mb-8 md:mb-12 text-left">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800">
-            How <span className="text-pink-500">RFA for AVM</span> Works
+    <section className='py-10 md:py-16 bg-gray-50'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6'>
+        <div className='max-w-3xl mb-8 md:mb-12 text-left'>
+          <h2 className='text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800'>
+            How <span className='text-pink-500'>RFA for AVM</span> Works
           </h2>
         </div>
 
-        <div className="relative">
+        <div className='relative'>
           {/* Timeline Line (hidden on mobile) */}
-          <div className="hidden md:block absolute left-1/2 h-full w-1 bg-pink-300 transform -translate-x-1/2"></div>
+          <div className='hidden md:block absolute left-1/2 h-full w-1 bg-pink-300 transform -translate-x-1/2'></div>
 
           {/* Timeline Items */}
           {steps.map((item, index) => {
@@ -53,7 +53,7 @@ const HowRFAForAVMWorks = () => {
             return (
               <div
                 key={index}
-                className="mb-8 md:mb-12 flex flex-col md:flex-row md:items-center md:justify-between w-full"
+                className='mb-8 md:mb-12 flex flex-col md:flex-row md:items-center md:justify-between w-full'
               >
                 {/* Left/Right Columns with responsive order */}
                 <div
@@ -64,13 +64,13 @@ const HowRFAForAVMWorks = () => {
                   <img
                     src={item.image}
                     alt={`Step ${item.step}`}
-                    className="w-full rounded-lg shadow-lg"
+                    className='w-full rounded-lg shadow-lg'
                   />
                 </div>
 
                 {/* Step node (center) on desktop only */}
-                <div className="hidden md:flex z-10 md:order-1 md:order-none mx-0 md:mx-4">
-                  <div className="bg-pink-500 rounded-full h-10 w-10 flex items-center justify-center text-white font-bold">
+                <div className='hidden md:flex z-10 md:order-1 md:order-none mx-0 md:mx-4'>
+                  <div className='bg-pink-500 rounded-full h-10 w-10 flex items-center justify-center text-white font-bold'>
                     {item.step}
                   </div>
                 </div>
@@ -81,13 +81,13 @@ const HowRFAForAVMWorks = () => {
                   }
                 >
                   {/* Mobile Step pill */}
-                  <div className="md:hidden inline-flex items-center justify-center text-xs font-semibold text-white bg-pink-500 rounded-full h-6 px-3 mb-2">
+                  <div className='md:hidden inline-flex items-center justify-center text-xs font-semibold text-white bg-pink-500 rounded-full h-6 px-3 mb-2'>
                     Step {item.step}
                   </div>
-                  <h3 className="text-base sm:text-lg font-bold text-pink-500 mb-2 text-left">
+                  <h3 className='text-base sm:text-lg font-bold text-pink-500 mb-2 text-left'>
                     {item.title}
                   </h3>
-                  <p className="text-gray-600 text-sm sm:text-base text-left">{item.description}</p>
+                  <p className='text-gray-600 text-sm sm:text-base text-left'>{item.description}</p>
                 </div>
               </div>
             );

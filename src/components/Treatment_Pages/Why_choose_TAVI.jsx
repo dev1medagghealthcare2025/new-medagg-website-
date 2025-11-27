@@ -44,22 +44,21 @@ const FeatureCard = ({ feature }) => {
 
 const WhyChooseTAVI = () => {
   return (
-    <section className="py-12 md:py-20 bg-white font-sans">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className='py-12 md:py-20 bg-white font-sans'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         {/* Partner Logos Section */}
-        
 
         {/* Why Choose TAVI Section */}
-        <div className="text-center md:text-left">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#2d2552] mb-4">
-            Why Choose <span className="text-[#ff3576]">TAVI?</span>
+        <div className='text-center md:text-left'>
+          <h2 className='text-3xl md:text-4xl font-bold text-[#2d2552] mb-4'>
+            Why Choose <span className='text-[#ff3576]'>TAVI?</span>
           </h2>
-          <p className="max-w-3xl text-gray-600 text-lg mb-12">
+          <p className='max-w-3xl text-gray-600 text-lg mb-12'>
             TAVI restores proper blood flow without the need for a sternotomy or bypass surgery, using a percutaneous approach.
           </p>
 
           {/* Features Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8'>
             {features.map((feature, index) => (
               <FeatureCard key={index} feature={feature} />
             ))}

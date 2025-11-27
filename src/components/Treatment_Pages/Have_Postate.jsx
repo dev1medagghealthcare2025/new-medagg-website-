@@ -2,7 +2,7 @@ import React from 'react';
 
 const Have_Postate = () => {
   return (
-    <section className="py-16 sm:py-24 flex items-center justify-center bg-white">
+    <section className='py-16 sm:py-24 flex items-center justify-center bg-white'>
       <div
         className='relative w-full max-w-[1201px] h-auto md:h-[421px] rounded-[20px] overflow-hidden mx-4'
         style={{
@@ -11,7 +11,7 @@ const Have_Postate = () => {
           backgroundPosition: 'center',
         }}
       >
-        <div className="absolute inset-0 bg-blue-200/5"></div>
+        <div className='absolute inset-0 bg-blue-200/5'></div>
         <div className='relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 h-full'>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-8 items-center h-full'>
             {/* Left Side */}
@@ -30,8 +30,8 @@ const Have_Postate = () => {
 
             {/* Right Side - Form */}
             <div className='bg-white p-6 rounded-xl shadow-lg w-full max-w-sm mx-auto'>
-              <h3 className="text-xl font-bold text-[#2d2552] mb-3">Get Expert Consultation</h3>
-              <form className="space-y-3">
+              <h3 className='text-xl font-bold text-[#2d2552] mb-3'>Get Expert Consultation</h3>
+              <form className='space-y-3'>
                 <textarea
                   placeholder='Describe Your Health Concern'
                   rows='2'

@@ -4,16 +4,14 @@ import PrivacyPolicyHeroSection from '../components/Privacy Policy/privacy_polic
 import Treatmentnavbar from '../components/home/Treatmentnavbar';
 import PrivacyMain from '../components/Privacy Policy/Privacy_main';
 
-
 const PolicyPage = () => {
   return (
-    <main className="bg-white">
+    <main className='bg-white'>
       <Navbar />
       <Treatmentnavbar />
       <PrivacyPolicyHeroSection />
       <PrivacyMain />
 
-      
     </main>
   );
 };

@@ -29,23 +29,20 @@ const treatments = [
       },
     ],
   },
-  { 
+  {
     title: 'Breast Nodules',
     subTreatments: [
         { title: 'Breast Nodule VAE', path: '/breast-nodule-vae' },
         { title: 'Breast Nodule Cryoablation', path: '/breast-nodule-cryoablation' },
         { title: 'Breast Nodule Radiofrequency Ablation', path: '/breast-nodule-rfa' },
 
-    ]
+    ],
   },
  // { title: 'Plantar Fascial Embolization', path: '/pfe' },
  // { title: 'Varicose Veins', path: '/varicose-vein' },
   { title: 'Plantar Fascitis', path: '/pfe', subTreatments: [{ title: 'Plantar Fascitis Embolization', path: '/pfe' }] },
   { title: 'Varicose Veins', path: '/varicose-vein', subTreatments: [{ title: 'Endovenous Ablation', path: '/varicose-vein' }] },
-  
-  
- 
- 
+
 ];
 
 const DropdownMenu = ({ items, stackSubBelow = false, depth = 0 }) => {
@@ -287,7 +284,7 @@ export default function Treatmentnavbar() {
     <nav className='sticky top-[84px] lg:top-[92px] z-40 w-full bg-white border-b border-gray-200 shadow-xl shadow-black/15 ring-1 ring-black/5'>
       <div className='relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         {showLeftArrow && (
-          <button 
+          <button
             onClick={() => scroll('left')}
             className='absolute left-0 -translate-x-full top-1/2 -translate-y-1/2 bg-white hover:bg-gray-50 rounded-full shadow-md p-2 z-30 border border-gray-200'
           >
@@ -346,7 +343,7 @@ export default function Treatmentnavbar() {
             </ul>
         </div>
         {showRightArrow && (
-          <button 
+          <button
             onClick={() => scroll('right')}
             className='absolute right-4 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-50 rounded-full shadow-md p-2 z-30 border border-gray-200'
           >

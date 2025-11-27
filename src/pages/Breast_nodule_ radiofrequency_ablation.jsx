@@ -13,10 +13,9 @@ import Our_testimonial from '../components/home/our_testimonial';
 import Consultourdoctor from '../components/home/Consultourdoctor';
 import FAQ_Home from '../components/home/FAQ_Home';
 
-
 const BreastNoduleRadiofrequencyAblation = () => {
   return (
-    <div className="bg-gray-50">
+    <div className='bg-gray-50'>
       <Navbar />
       <Treatmentnavbar />
       <BreastNoduleHerosection />
@@ -31,7 +30,7 @@ const BreastNoduleRadiofrequencyAblation = () => {
       <Consultourdoctor />
       <FAQ_Home />
         {/* Other components for this page can be added here */}
-      
+
     </div>
   );
 };

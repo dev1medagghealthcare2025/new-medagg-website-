@@ -2,7 +2,7 @@ import React from 'react';
 import PlanterHeroSection from '../components/Treatment_Pages/Planter_herosection.jsx';
 import Navbar from '../components/home/Navbar';
 import Treatmentnavbar from '../components/home/Treatmentnavbar';
-import WhyChoosePlantar from '../components/Treatment_Pages/Why_choose_plantar.jsx'
+import WhyChoosePlantar from '../components/Treatment_Pages/Why_choose_plantar.jsx';
 import HowPlantarWork from '../components/Treatment_Pages/How_Plantar_work.jsx';
 import AreYouExperiencingPlanter from '../components/Treatment_Pages/Are_You_Experiencing_Planter.jsx';
 import CompareTreatmentPlanter from '../components/Treatment_Pages/Compare_treatment_Planter.jsx';
@@ -28,7 +28,7 @@ const Planter = () => {
       <OurTestimonial/>
       <Consultourdoctor />
       <FAQ_Home/>
-      
+
       {/* You can add other components for the Planter page here */}
     </>
   );

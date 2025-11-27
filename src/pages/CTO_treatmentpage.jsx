@@ -13,7 +13,6 @@ import Consultourdoctor from '../components/home/Consultourdoctor';
 import OurTestimonial from '../components/home/our_testimonial';
 import FAQ_Home from '../components/home/FAQ_Home';
 
-
 const CTO_treatmentpage = () => {
   return (
     <div>

@@ -159,7 +159,7 @@ const doctors = [
     city: 'Hyderabad',
     image: '/Arjun Somi Reddy.png',
   },
-  
+
   // Vijayawada Doctors
   {
     name: 'Dr. Bhavani Shankar',
@@ -183,7 +183,6 @@ const doctors = [
     city: 'Vizag',
     image: '/Siba shankar dalai.png',
   },
- 
 
   // Delhi Doctors
   {
@@ -277,7 +276,6 @@ const doctors = [
       image: '/Dr. Thoufiq Ali.png',
     },
 
-    
 ];
 
 // Extract unique cities from doctors data
@@ -413,7 +411,7 @@ const OurDoctor = ({ randomize = false, initialShowCount = 4 }) => {
                     alt={doc.name}
                     className='w-32 h-32 lg:w-40 lg:h-40 object-cover rounded-lg mb-3 lg:mb-4'
                     onError={() => handleImageError(doc.image)}
-                    loading="lazy"
+                    loading='lazy'
                   />
                 ) : (
                   <div className='w-32 h-32 lg:w-40 lg:h-40 bg-gradient-to-br from-[#ff3576] to-[#2d2552] rounded-lg mb-3 lg:mb-4 flex items-center justify-center'>
@@ -422,8 +420,8 @@ const OurDoctor = ({ randomize = false, initialShowCount = 4 }) => {
                     </div>
                   </div>
                 )}
-                <Link 
-                  to="/contact-us"
+                <Link
+                  to='/contact-us'
                   className='w-full mb-3 lg:mb-4 py-2 border border-[#ff3576] rounded-md text-[#ff3576] text-sm font-medium flex items-center justify-center gap-2 hover:bg-[#ff3576] hover:text-white transition no-underline hover:no-underline focus:no-underline active:no-underline'
                 >
                   <span className='text-lg'>→</span>
@@ -471,7 +469,7 @@ const OurDoctor = ({ randomize = false, initialShowCount = 4 }) => {
                     alt={doc.name}
                     className='w-32 h-32 lg:w-40 lg:h-40 object-cover rounded-lg mb-3 lg:mb-4'
                     onError={() => handleImageError(doc.image)}
-                    loading="lazy"
+                    loading='lazy'
                   />
                 ) : (
                   <div className='w-32 h-32 lg:w-40 lg:h-40 bg-gradient-to-br from-[#ff3576] to-[#2d2552] rounded-lg mb-3 lg:mb-4 flex items-center justify-center'>
@@ -480,8 +478,8 @@ const OurDoctor = ({ randomize = false, initialShowCount = 4 }) => {
                     </div>
                   </div>
                 )}
-                <Link 
-                  to="/contact-us"
+                <Link
+                  to='/contact-us'
                   className='w-full mb-3 lg:mb-4 py-2 border border-[#ff3576] rounded-md text-[#ff3576] text-sm font-medium flex items-center justify-center gap-2 hover:bg-[#ff3576] hover:text-white transition no-underline hover:no-underline focus:no-underline active:no-underline'
                 >
                   <span className='text-lg'>→</span>

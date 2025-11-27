@@ -15,7 +15,7 @@ import FAQ_Home from '../components/home/FAQ_Home';
 
 const RFA_treatmentpage = () => {
   return (
-    <div className="bg-gray-50">
+    <div className='bg-gray-50'>
       <Navbar />
       <Treatmentnavbar />
       <Radiofrequency_ablation_herosection />
@@ -24,7 +24,7 @@ const RFA_treatmentpage = () => {
       <Are_You_Experiencing_rfa />
       <Bookanappoinment_rfa />
       <Compare_treatment_rfa />
-      <What_Happens_in_RFA videoUrl="https://youtube.com/shorts/xniZMciljic?si=d4HK5sNyGO2ndjfU" />
+      <What_Happens_in_RFA videoUrl='https://youtube.com/shorts/xniZMciljic?si=d4HK5sNyGO2ndjfU' />
       <Ourdoctor />
       <OurTestimonial/>
       <Consultourdoctor />

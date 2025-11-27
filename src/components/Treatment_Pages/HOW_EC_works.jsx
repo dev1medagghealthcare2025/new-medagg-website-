@@ -40,35 +40,35 @@ const steps = [
 
 const HowECWorks = () => {
   return (
-    <div className="py-16 md:py-24 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <div className="text-left mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800">How Endovascular Coiling Works</h2>
-          <p className="mt-2 text-lg text-gray-600">Step-by-step breakdown of the procedure</p>
+    <div className='py-16 md:py-24 bg-gray-50'>
+      <div className='container mx-auto px-4'>
+        <div className='text-left mb-12'>
+          <h2 className='text-3xl md:text-4xl font-bold text-gray-800'>How Endovascular Coiling Works</h2>
+          <p className='mt-2 text-lg text-gray-600'>Step-by-step breakdown of the procedure</p>
         </div>
 
-        <div className="relative">
+        <div className='relative'>
           {/* Vertical Line */}
-          <div className="hidden md:block absolute left-1/2 top-8 bottom-8 w-0.5 bg-pink-300 transform -translate-x-1/2"></div>
+          <div className='hidden md:block absolute left-1/2 top-8 bottom-8 w-0.5 bg-pink-300 transform -translate-x-1/2'></div>
 
           {steps.map((item, index) => (
             <div key={item.step} className={`mb-8 flex flex-col md:flex-row items-center w-full ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
               {/* Image */}
-              <div className="w-full md:w-5/12 px-4">
-                <img src={item.imageUrl} alt={item.alt} className="rounded-lg shadow-lg w-full" />
+              <div className='w-full md:w-5/12 px-4'>
+                <img src={item.imageUrl} alt={item.alt} className='rounded-lg shadow-lg w-full' />
               </div>
 
               {/* Step Number Circle */}
-              <div className="hidden md:flex w-2/12 justify-center">
-                <div className="bg-pink-500 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-xl z-10">
+              <div className='hidden md:flex w-2/12 justify-center'>
+                <div className='bg-pink-500 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-xl z-10'>
                   {item.step}
                 </div>
               </div>
 
               {/* Content */}
-              <div className="w-full md:w-5/12 px-4 mt-6 md:mt-0">
-                <h3 className="text-xl font-bold text-pink-500 mb-2">Step {item.step}: {item.title}</h3>
-                <p className="text-gray-600">{item.description}</p>
+              <div className='w-full md:w-5/12 px-4 mt-6 md:mt-0'>
+                <h3 className='text-xl font-bold text-pink-500 mb-2'>Step {item.step}: {item.title}</h3>
+                <p className='text-gray-600'>{item.description}</p>
               </div>
             </div>
           ))}

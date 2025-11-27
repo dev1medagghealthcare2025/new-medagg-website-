@@ -3,12 +3,12 @@ import React from 'react';
 const services = [
   {
     title: 'CARE CUSTODIAN',
-    desc: "Care Custodians offer expert guidance on alternative treatments to surgery.",
+    desc: 'Care Custodians offer expert guidance on alternative treatments to surgery.',
     img: '/Non%20sugrical.svg',
   },
   {
     title: 'CARE COMPANION',
-    desc: "We Connect you with top hospitals and expert doctors for exceptional care.",
+    desc: 'We Connect you with top hospitals and expert doctors for exceptional care.',
     img: '/Sugrical.jpg',
   },
   {
@@ -33,7 +33,7 @@ const OurServiceSection = () => {
         <h2 className='text-3xl sm:text-4xl font-bold text-white mb-2'>
           Our <span className='text-[#ff3576]'>Services</span>
         </h2>
-        <p className='text-base sm:text-lg text-white/70 mb-8 sm:mb-12'> 
+        <p className='text-base sm:text-lg text-white/70 mb-8 sm:mb-12'>
           Care that&apos;s safer, smarter, and surgery-free.
         </p>
         <div className='w-full grid grid-cols-1 md:grid-cols-3 gap-6'>

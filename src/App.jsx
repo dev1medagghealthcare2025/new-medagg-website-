@@ -69,11 +69,11 @@ function App() {
           <Route path='/blog/:slug' element={<BlogPost />} />
           <Route path='/gallery' element={<Gallery />} />
           <Route path='/career' element={<CareerPage />} />
-          <Route path="/contact-us" element={<ContactUsPage />} />
-          <Route path="/uae" element={<UAEPage />} />
-          <Route path="/breast-nodule-vae" element={<BreastNoduleVAEPage />} />
-          <Route path="/breast-nodule-cryoablation" element={<BreastNoduleCryoablationPage />} />
-          <Route path="/pfe" element={<Planter />} />
+          <Route path='/contact-us' element={<ContactUsPage />} />
+          <Route path='/uae' element={<UAEPage />} />
+          <Route path='/breast-nodule-vae' element={<BreastNoduleVAEPage />} />
+          <Route path='/breast-nodule-cryoablation' element={<BreastNoduleCryoablationPage />} />
+          <Route path='/pfe' element={<Planter />} />
           <Route path='/transcatheter-aortic-valve-replacement' element={<Transcatheter_aortic_valve_implantation />} />
           <Route path='/cto' element={<CTO_treatmentpage />} />
           <Route path='/rfa' element={<RFA_treatmentpage />} />
@@ -95,8 +95,8 @@ function App() {
       <Footer />
       <Chatbot />
       <BackToTop />
-      <CallFab position="right" phone="+919363656010" />
-      <FloatingWhatsApp phone="+918925928840" position="left" />
+      <CallFab position='right' phone='+919363656010' />
+      <FloatingWhatsApp phone='+918925928840' position='left' />
     </div>
   );
 }

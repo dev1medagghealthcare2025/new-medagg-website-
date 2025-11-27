@@ -80,7 +80,7 @@ export default function Consultourdoctor() {
     <section className='w-full py-8 sm:py-10 lg:py-12 px-4 sm:px-6 lg:px-8 bg-white'>
       <div className='max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center relative'>
         {/* Vertical Dotted Line */}
-        <div className='hidden lg:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-3/4 w-px bg-repeat-y bg-[length:1px_10px]' style={{backgroundImage: 'linear-gradient(to bottom, #9ca3af 50%, transparent 50%)'}}></div>
+        <div className='hidden lg:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-3/4 w-px bg-repeat-y bg-[length:1px_10px]' style={{ backgroundImage: 'linear-gradient(to bottom, #9ca3af 50%, transparent 50%)' }}></div>
         {/* Left: Steps */}
         <div className='flex flex-col justify-center'>
           <div className='text-center lg:text-left mb-6'>

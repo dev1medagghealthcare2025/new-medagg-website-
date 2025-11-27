@@ -62,9 +62,9 @@ export default function The_Story_of_Our_Transformation() {
                   className='w-full h-auto object-cover'
                 />
                 <div className='absolute inset-0 bg-black/20'></div>
-                
+
                 {/* Play Button */}
-                <div 
+                <div
                   className='absolute inset-0 flex items-center justify-center'
                 >
                   <button

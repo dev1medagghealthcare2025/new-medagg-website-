@@ -45,30 +45,30 @@ const How_CTO_works = () => {
   ];
 
   return (
-    <div className="py-10 md:py-16 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="text-left mb-8 md:mb-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#2d2552]">
-            How <span className="text-[#ff3576]">CTO Treatment</span> Works
+    <div className='py-10 md:py-16 bg-gray-50'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6'>
+        <div className='text-left mb-8 md:mb-12'>
+          <h2 className='text-2xl sm:text-3xl md:text-4xl font-bold text-[#2d2552]'>
+            How <span className='text-[#ff3576]'>CTO Treatment</span> Works
           </h2>
-          <p className="mt-2 text-base md:text-lg text-gray-600">Step-by-step breakdown of the procedure</p>
+          <p className='mt-2 text-base md:text-lg text-gray-600'>Step-by-step breakdown of the procedure</p>
         </div>
 
-        <div className="relative">
+        <div className='relative'>
           {/* Vertical Line for desktop */}
-          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-[#ff3576] transform -translate-x-1/2"></div>
+          <div className='hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-[#ff3576] transform -translate-x-1/2'></div>
 
           {steps.map((item, index) => (
-            <div key={index} className="relative mb-8 md:mb-10">
-              <div className="flex flex-col md:flex-row md:items-center">
+            <div key={index} className='relative mb-8 md:mb-10'>
+              <div className='flex flex-col md:flex-row md:items-center'>
                 {/* Image Block (mobile first) */}
                 <div className={`w-full md:w-5/12 px-0 md:px-4 py-2 md:py-4 order-1 ${item.align === 'left' ? 'md:order-3' : 'md:order-1'}`}>
-                  <img src={item.image} alt={item.alt} className="rounded-lg shadow-lg w-full h-auto object-cover" />
+                  <img src={item.image} alt={item.alt} className='rounded-lg shadow-lg w-full h-auto object-cover' />
                 </div>
 
                 {/* Step Circle (desktop only) */}
-                <div className="hidden md:flex w-full md:w-2/12 justify-center order-2 md:order-2">
-                  <div className="z-10 bg-[#ff3576] text-white rounded-full w-10 h-10 flex items-center justify-center font-bold">
+                <div className='hidden md:flex w-full md:w-2/12 justify-center order-2 md:order-2'>
+                  <div className='z-10 bg-[#ff3576] text-white rounded-full w-10 h-10 flex items-center justify-center font-bold'>
                     {item.step}
                   </div>
                 </div>
@@ -76,13 +76,13 @@ const How_CTO_works = () => {
                 {/* Content Block */}
                 <div className={`w-full md:w-5/12 px-0 md:px-4 py-2 md:py-4 order-2 ${item.align === 'left' ? 'md:order-1' : 'md:order-3'}`}>
                   {/* Mobile Step pill */}
-                  <div className="md:hidden inline-flex items-center justify-center text-xs font-semibold text-white bg-[#ff3576] rounded-full h-6 px-3 mb-2">
+                  <div className='md:hidden inline-flex items-center justify-center text-xs font-semibold text-white bg-[#ff3576] rounded-full h-6 px-3 mb-2'>
                     Step {item.step}
                   </div>
-                  <h3 className="text-base sm:text-lg font-bold text-[#ff3576]">
-                    <span className="text-[#2d2552]">{item.title}</span>
+                  <h3 className='text-base sm:text-lg font-bold text-[#ff3576]'>
+                    <span className='text-[#2d2552]'>{item.title}</span>
                   </h3>
-                  <p className="mt-2 text-gray-600 text-sm sm:text-base">{item.description}</p>
+                  <p className='mt-2 text-gray-600 text-sm sm:text-base'>{item.description}</p>
                 </div>
               </div>
             </div>

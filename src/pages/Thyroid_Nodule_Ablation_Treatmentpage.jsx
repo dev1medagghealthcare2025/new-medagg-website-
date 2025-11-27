@@ -21,7 +21,7 @@ const Thyroid_Nodule_Ablation_Treatmentpage = () => (
     <HowThyroidWork />
     <Thyroid_bookappoinment />
     <CompareTreatmentOptionThyroid />
-    <WhatHappensThyroidAblation videoUrl="https://youtube.com/shorts/0OJM9PpKc0E?si=QfoaSsFNcqCXIPGq" />
+    <WhatHappensThyroidAblation videoUrl='https://youtube.com/shorts/0OJM9PpKc0E?si=QfoaSsFNcqCXIPGq' />
     <OurDoctor />
     <OurTestimonial />
     <Consultourdoctor />

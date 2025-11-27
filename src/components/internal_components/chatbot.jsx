@@ -132,7 +132,7 @@ Remember: Accuracy in treatment matching is crucial for patient trust and safety
 const EMERGENCY_KEYWORDS = [
   'chest pain', 'heart attack', 'stroke', 'difficulty breathing', 'can\'t breathe',
   'severe bleeding', 'unconscious', 'suicide', 'overdose', 'severe allergic reaction',
-  'anaphylaxis', 'severe head injury', 'broken bone', 'severe burn'
+  'anaphylaxis', 'severe head injury', 'broken bone', 'severe burn',
 ];
 
 // Medical context tracking
@@ -143,12 +143,12 @@ const createMedicalContext = () => ({
   currentIntent: null, // 'inquiry', 'booking', 'emergency'
   suggestedTreatments: [],
   conversationSummary: '',
-  riskLevel: 'low'
+  riskLevel: 'low',
 });
 
 const initialMessages = [
   {
-    text: "Greetings, I'm IRA, your Interventional Radiology Assistant. How may I assist with your healthcare needs today?",
+    text: 'Greetings, I\'m IRA, your Interventional Radiology Assistant. How may I assist with your healthcare needs today?',
     sender: 'bot',
     timestamp: new Date(),
   },
@@ -162,35 +162,35 @@ const coreQuestions = [
     id: 'intent',
     question: 'What are you looking for today?',
     options: ['Seeking Treatment', 'Seeking General Information'],
-    field: 'user_intent'
+    field: 'user_intent',
   },
   {
     id: 'age_group',
     question: 'Do you fall in any of these age groups?',
     options: ['Below 25', '25 to 35', '35 to 45', 'Above 45'],
     field: 'age_group',
-    condition: { field: 'user_intent', value: 'Seeking Treatment' }
+    condition: { field: 'user_intent', value: 'Seeking Treatment' },
   },
   {
     id: 'symptoms_duration',
     question: 'How long have you been experiencing these symptoms?',
     options: ['Less than 6 months', '6 months to 1 year', '1-2 years', 'More than 2 years'],
     field: 'symptoms_duration',
-    condition: { field: 'user_intent', value: 'Seeking Treatment' }
+    condition: { field: 'user_intent', value: 'Seeking Treatment' },
   },
   {
     id: 'non_surgical_preference',
     question: 'Are you looking for a non-surgical solution?',
     options: ['Yes', 'No'],
     field: 'non_surgical_preference',
-    condition: { field: 'user_intent', value: 'Seeking Treatment' }
+    condition: { field: 'user_intent', value: 'Seeking Treatment' },
   },
   {
     id: 'medical_insurance',
     question: 'Do you hold any medical insurance?',
     options: ['Yes', 'No'],
     field: 'medical_insurance',
-    condition: { field: 'user_intent', value: 'Seeking Treatment' }
+    condition: { field: 'user_intent', value: 'Seeking Treatment' },
   },
   {
     id: 'name',
@@ -199,7 +199,7 @@ const coreQuestions = [
     field: 'name',
     isInput: true,
     placeholder: 'Enter your full name',
-    condition: { field: 'user_intent', value: 'Seeking Treatment' }
+    condition: { field: 'user_intent', value: 'Seeking Treatment' },
   },
   {
     id: 'phone',
@@ -208,7 +208,7 @@ const coreQuestions = [
     field: 'phone',
     isInput: true,
     placeholder: 'Enter your phone number',
-    condition: { field: 'user_intent', value: 'Seeking Treatment' }
+    condition: { field: 'user_intent', value: 'Seeking Treatment' },
   },
   {
     id: 'city',
@@ -217,22 +217,22 @@ const coreQuestions = [
     field: 'city',
     isInput: true,
     placeholder: 'Enter your city',
-    condition: { field: 'user_intent', value: 'Seeking Treatment' }
+    condition: { field: 'user_intent', value: 'Seeking Treatment' },
   },
   {
     id: 'preferred_language',
     question: 'What is your preferred language for consultation?',
     options: ['English', 'Hindi', 'Tamil', 'Telugu', 'Kannada', 'Malayalam'],
     field: 'preferred_language',
-    condition: { field: 'user_intent', value: 'Seeking Treatment' }
+    condition: { field: 'user_intent', value: 'Seeking Treatment' },
   },
   {
     id: 'appointment_timing',
     question: 'When can we call you to fix your appointment slot?',
     options: ['Today', 'over the next 2 days', 'next week'],
     field: 'appointment_timing',
-    condition: { field: 'user_intent', value: 'Seeking Treatment' }
-  }
+    condition: { field: 'user_intent', value: 'Seeking Treatment' },
+  },
 ];
 
 const questionnaires = {
@@ -247,16 +247,16 @@ const questionnaires = {
         question: 'Have you been diagnosed of Uterine fibroids?',
         options: ['Yes', 'No'],
         field: 'uterine_fibroids_diagnosed',
-        condition: { field: 'user_intent', value: 'Seeking Treatment' }
+        condition: { field: 'user_intent', value: 'Seeking Treatment' },
       },
       {
         id: 'ufe_reports',
         question: 'Do you have any of these reports available?',
         options: ['USG Abdomen', 'MRI Abdomen', 'No Report'],
         field: 'fibroid_tests',
-        condition: { field: 'uterine_fibroids_diagnosed', value: 'Yes' }
-      }
-    ]
+        condition: { field: 'uterine_fibroids_diagnosed', value: 'Yes' },
+      },
+    ],
   },
   PAE: {
     procedure: 'PAE',
@@ -269,14 +269,14 @@ const questionnaires = {
         question: 'Have you been diagnosed of Enlarged Prostate?',
         options: ['Yes', 'No'],
         field: 'enlarged_prostate_diagnosed',
-        condition: { field: 'user_intent', value: 'Seeking Treatment' }
+        condition: { field: 'user_intent', value: 'Seeking Treatment' },
       },
       {
         id: 'pae_symptoms',
         question: 'Do you have Frequent urination?',
         options: ['Yes', 'No'],
         field: 'frequent_urination',
-        condition: { field: 'user_intent', value: 'Seeking Treatment' }
+        condition: { field: 'user_intent', value: 'Seeking Treatment' },
       },
       {
         id: 'pae_reports',
@@ -284,9 +284,9 @@ const questionnaires = {
         options: ['PSA Test', 'USG Pelvic', 'Uroflowmetry', 'No Report'],
         field: 'prostate_tests',
         multiSelect: true,
-        condition: { field: 'enlarged_prostate_diagnosed', value: 'Yes' }
-      }
-    ]
+        condition: { field: 'enlarged_prostate_diagnosed', value: 'Yes' },
+      },
+    ],
   },
   GAE: {
     procedure: 'GAE',
@@ -299,7 +299,7 @@ const questionnaires = {
         question: 'Have you been diagnosed of Osteoarthritis?',
         options: ['Yes', 'No'],
         field: 'osteoarthritis_diagnosed',
-        condition: { field: 'user_intent', value: 'Seeking Treatment' }
+        condition: { field: 'user_intent', value: 'Seeking Treatment' },
       },
       {
         id: 'gae_reports',
@@ -307,9 +307,9 @@ const questionnaires = {
         options: ['X-Ray Knee', 'MRI Knee', 'No Report'],
         field: 'knee_reports',
         multiSelect: true,
-        condition: { field: 'osteoarthritis_diagnosed', value: 'Yes' }
-      }
-    ]
+        condition: { field: 'osteoarthritis_diagnosed', value: 'Yes' },
+      },
+    ],
   },
   TNA: {
     procedure: 'TNA',
@@ -322,14 +322,14 @@ const questionnaires = {
         question: 'Do you have Swollen Neck?',
         options: ['Yes', 'No'],
         field: 'swollen_neck',
-        condition: { field: 'user_intent', value: 'Seeking Treatment' }
+        condition: { field: 'user_intent', value: 'Seeking Treatment' },
       },
       {
         id: 'tna_diagnosis',
         question: 'Have you been diagnosed of Thyroid Nodule?',
         options: ['Yes', 'No'],
         field: 'thyroid_nodule_diagnosed',
-        condition: { field: 'user_intent', value: 'Seeking Treatment' }
+        condition: { field: 'user_intent', value: 'Seeking Treatment' },
       },
       {
         id: 'tna_reports',
@@ -337,16 +337,16 @@ const questionnaires = {
         options: ['USG Neck', 'FNAC', 'No Report'],
         field: 'thyroid_reports',
         multiSelect: true,
-        condition: { field: 'thyroid_nodule_diagnosed', value: 'Yes' }
+        condition: { field: 'thyroid_nodule_diagnosed', value: 'Yes' },
       },
       {
         id: 'tna_appointment',
         question: 'Can we fix up an appointment for you?',
         options: ['Yes', 'No'],
         field: 'fix_appointment',
-        condition: { field: 'non_surgical_preference', value: 'Yes' }
-      }
-    ]
+        condition: { field: 'non_surgical_preference', value: 'Yes' },
+      },
+    ],
   },
   VV: {
     procedure: 'VV',
@@ -359,23 +359,23 @@ const questionnaires = {
         question: 'Do you have bulging veins or discolaration in legs?',
         options: ['Yes', 'No'],
         field: 'bulging_veins_discoloration',
-        condition: { field: 'user_intent', value: 'Seeking Treatment' }
+        condition: { field: 'user_intent', value: 'Seeking Treatment' },
       },
       {
         id: 'vv_diagnosis',
         question: 'Have you been diagnosed of Varicose Veins?',
         options: ['Yes', 'No'],
         field: 'varicose_veins_diagnosed',
-        condition: { field: 'user_intent', value: 'Seeking Treatment' }
+        condition: { field: 'user_intent', value: 'Seeking Treatment' },
       },
       {
         id: 'vv_reports',
         question: 'Do you have any of these reports available?',
         options: ['Doppler Scan', 'No Report'],
         field: 'varicose_vein_reports',
-        condition: { field: 'varicose_veins_diagnosed', value: 'Yes' }
-      }
-    ]
+        condition: { field: 'varicose_veins_diagnosed', value: 'Yes' },
+      },
+    ],
   },
   VCE: {
     procedure: 'VCE',
@@ -388,30 +388,30 @@ const questionnaires = {
         question: 'Do you have bulging veins or pain in scrotum?',
         options: ['Yes', 'No'],
         field: 'bulging_veins_scrotum',
-        condition: { field: 'user_intent', value: 'Seeking Treatment' }
+        condition: { field: 'user_intent', value: 'Seeking Treatment' },
       },
       {
         id: 'vce_diagnosis',
         question: 'Have you been diagnosed of Varicocele?',
         options: ['Yes', 'No'],
         field: 'varicocele_diagnosed',
-        condition: { field: 'user_intent', value: 'Seeking Treatment' }
+        condition: { field: 'user_intent', value: 'Seeking Treatment' },
       },
       {
         id: 'vce_reports',
         question: 'Do you have any of these reports available?',
         options: ['Doppler Scan', 'No Report'],
         field: 'varicocele_reports',
-        condition: { field: 'varicocele_diagnosed', value: 'Yes' }
+        condition: { field: 'varicocele_diagnosed', value: 'Yes' },
       },
       {
         id: 'vce_appointment',
         question: 'Can we fix up an appointment for you?',
         options: ['Yes', 'No'],
         field: 'fix_appointment_vce',
-        condition: { field: 'non_surgical_preference', value: 'Yes' }
-      }
-    ]
+        condition: { field: 'non_surgical_preference', value: 'Yes' },
+      },
+    ],
   },
   FTR: {
     procedure: 'FTR',
@@ -424,17 +424,17 @@ const questionnaires = {
         question: 'Have you been Diagnosed with Blocked FT?',
         options: ['Yes', 'No'],
         field: 'blocked_ft_diagnosed',
-        condition: { field: 'user_intent', value: 'Seeking Treatment' }
+        condition: { field: 'user_intent', value: 'Seeking Treatment' },
       },
       {
         id: 'ftr_reports',
         question: 'Do you have HSG Report?',
         options: ['Yes', 'No'],
         field: 'hsg_report_available',
-        condition: { field: 'blocked_ft_diagnosed', value: 'Yes' }
-      }
-    ]
-  }
+        condition: { field: 'blocked_ft_diagnosed', value: 'Yes' },
+      },
+    ],
+  },
 };
 
 // Function to get the full questionnaire for a procedure
@@ -471,88 +471,88 @@ const getQuestionnaire = (procedure) => {
 
   return {
     ...procedureData,
-    questions: combinedQuestions
+    questions: combinedQuestions,
   };
 };
 
 // Function to get next question based on current responses
 const getNextQuestion = (currentStep, responses, questionnaire) => {
   const allQuestions = questionnaire.questions;
-  
+
   for (let i = currentStep; i < allQuestions.length; i++) {
     const question = allQuestions[i];
-    
+
     // Check if question has a condition
     if (question.condition) {
       const conditionField = question.condition.field;
       const conditionValue = question.condition.value;
-      
+
       // Skip question if condition is not met
       if (responses[conditionField] !== conditionValue) {
         continue;
       }
     }
-    
+
     return { question, index: i };
   }
-  
+
   return null; // No more questions
 };
 
 // Enhanced symptom detection function
 const detectProcedureFromSymptoms = (input) => {
   console.log('Checking input for symptoms:', input); // Debug log
-  
+
   const symptomMap = {
     UFE: [
       'ufe', 'uterine fibroid embolization', 'uae', 'uterine artery embolization',
       'uterus', 'womb',
-      'heavy periods', 'heavy bleeding', 'menstrual', 'period pain', 'pelvic pain', 
+      'heavy periods', 'heavy bleeding', 'menstrual', 'period pain', 'pelvic pain',
       'fibroid', 'fibroids', 'uterine', 'bloating', 'frequent urination', 'back pain',
-      'heavy menstruation', 'prolonged periods', 'painful periods'
+      'heavy menstruation', 'prolonged periods', 'painful periods',
     ],
     PAE: [
       'pae', 'prostatic artery embolization',
       'prostate gland',
       'prostate', 'bph', 'urination', 'frequent bathroom', 'weak stream', 'enlarged prostate',
       'difficulty urinating', 'nighttime urination', 'bladder', 'urinary problems',
-      'can\'t empty bladder', 'frequent peeing', 'prostate issues'
+      'can\'t empty bladder', 'frequent peeing', 'prostate issues',
     ],
     GAE: [
       'gae', 'genicular artery embolization',
       'knee', 'knees', 'joint',
       'knee pain', 'joint pain', 'arthritis', 'walking pain', 'stiffness',
       'climbing stairs', 'knee swelling', 'joint stiffness', 'osteoarthritis',
-      'knee arthritis', 'difficulty walking', 'knee discomfort'
+      'knee arthritis', 'difficulty walking', 'knee discomfort',
     ],
     TNA: [
       'tna', 'thyroid nodule ablation', 'thyroid ablation',
       'thyroid', 'neck',
       'neck lump', 'swollen neck', 'thyroid nodule', 'neck swelling',
       'difficulty swallowing', 'voice changes', 'hoarse voice', 'neck discomfort',
-      'thyroid problems', 'neck mass'
+      'thyroid problems', 'neck mass',
     ],
     VV: [
       'vv', 'varicose vein treatment',
       'legs', 'leg',
       'varicose veins', 'spider veins', 'leg veins', 'bulging veins', 'leg pain',
       'discoloration', 'leg swelling', 'heaviness in legs', 'cramping legs',
-      'visible veins', 'leg discomfort', 'vein problems'
+      'visible veins', 'leg discomfort', 'vein problems',
     ],
     VCE: [
       'vce', 'varicocele embolization',
       'testicles', 'scrotum',
       'varicocele', 'testicular pain', 'scrotal swelling', 'scrotum pain',
       'male fertility', 'testicular discomfort', 'scrotal heaviness',
-      'testicular veins', 'fertility issues', 'sperm problems'
+      'testicular veins', 'fertility issues', 'sperm problems',
     ],
     FTR: [
       'ftr', 'fallopian tube recanalization', 'fte',
       'fallopian tubes',
       'fallopian tube', 'blocked tubes', 'infertility', 'can\'t conceive',
       'difficulty conceiving', 'fertility problems', 'trying to get pregnant',
-      'blocked fallopian', 'tube blockage', 'conception issues'
-    ]
+      'blocked fallopian', 'tube blockage', 'conception issues',
+    ],
   };
 
   for (const [procedure, symptoms] of Object.entries(symptomMap)) {
@@ -570,29 +570,29 @@ const detectProcedureFromSymptoms = (input) => {
 const getProcedureInfo = (procedure) => {
   const procedureInfoMap = {
     UFE: {
-      message: "I understand you're experiencing symptoms related to uterine fibroids or heavy bleeding. Our UFE (Uterine Fibroid Embolization) is a non-surgical treatment that can help. Let me ask you a few questions to better understand your condition."
+      message: 'I understand you\'re experiencing symptoms related to uterine fibroids or heavy bleeding. Our UFE (Uterine Fibroid Embolization) is a non-surgical treatment that can help. Let me ask you a few questions to better understand your condition.',
     },
     PAE: {
-      message: "It sounds like you're having prostate-related symptoms. Our PAE (Prostatic Artery Embolization) is a minimally invasive treatment for enlarged prostate. I'll ask some questions to assess your condition."
+      message: 'It sounds like you\'re having prostate-related symptoms. Our PAE (Prostatic Artery Embolization) is a minimally invasive treatment for enlarged prostate. I\'ll ask some questions to assess your condition.',
     },
     GAE: {
-      message: "I can help with your knee pain concerns. Our GAE (Genicular Artery Embolization) treats knee arthritis without surgery. Let me gather some information about your symptoms."
+      message: 'I can help with your knee pain concerns. Our GAE (Genicular Artery Embolization) treats knee arthritis without surgery. Let me gather some information about your symptoms.',
     },
     TNA: {
-      message: "For thyroid nodule concerns, we offer TNA (Thyroid Nodule Ablation) as a non-surgical option. I'll ask you some questions to understand your condition better."
+      message: 'For thyroid nodule concerns, we offer TNA (Thyroid Nodule Ablation) as a non-surgical option. I\'ll ask you some questions to understand your condition better.',
     },
     VV: {
-      message: "I understand you're dealing with varicose vein issues. We provide non-surgical varicose vein treatment. Let me ask about your specific symptoms."
+      message: 'I understand you\'re dealing with varicose vein issues. We provide non-surgical varicose vein treatment. Let me ask about your specific symptoms.',
     },
     VCE: {
-      message: "For varicocele concerns, we offer VCE (Varicocele Embolization) as a minimally invasive treatment. I'll gather some information about your condition."
+      message: 'For varicocele concerns, we offer VCE (Varicocele Embolization) as a minimally invasive treatment. I\'ll gather some information about your condition.',
     },
     FTR: {
-      message: "I understand you're facing fertility challenges with blocked fallopian tubes. Our FTR (Fallopian Tube Recanalization) can help restore fertility. Let me ask some questions."
-    }
+      message: 'I understand you\'re facing fertility challenges with blocked fallopian tubes. Our FTR (Fallopian Tube Recanalization) can help restore fertility. Let me ask some questions.',
+    },
   };
 
-  return procedureInfoMap[procedure] || { message: "Let me help you with your medical concern." };
+  return procedureInfoMap[procedure] || { message: 'Let me help you with your medical concern.' };
 };
 
 // Quick response buttons for AI-powered interactions
@@ -612,12 +612,12 @@ const Chatbot = () => {
   const [isTyping, setIsTyping] = useState(false);
   const [activeCondition, setActiveCondition] = useState(null);
   const [isQuickResponsesOpen, setIsQuickResponsesOpen] = useState(false);
-  
+
   // AI and Medical Context states
   const [medicalContext, setMedicalContext] = useState(createMedicalContext());
   const [conversationHistory, setConversationHistory] = useState([]);
   const [isAIProcessing, setIsAIProcessing] = useState(false);
-  
+
   // Appointment booking states
   const [isBookingFlow, setIsBookingFlow] = useState(false);
   const [bookingStep, setBookingStep] = useState(0);
@@ -626,10 +626,10 @@ const Chatbot = () => {
     city: '',
     phone: '',
     language: '',
-    procedure: ''
+    procedure: '',
   });
   const [isSubmittingBooking, setIsSubmittingBooking] = useState(false);
-  
+
   // Questionnaire states
   const [isQuestionnaireActive, setIsQuestionnaireActive] = useState(false);
   const [questionnaireStep, setQuestionnaireStep] = useState(0);
@@ -637,7 +637,7 @@ const Chatbot = () => {
   const [isSubmittingQuestionnaire, setIsSubmittingQuestionnaire] = useState(false);
   const [currentQuestionnaire, setCurrentQuestionnaire] = useState(null);
   const [tempMultiSelect, setTempMultiSelect] = useState([]);
-  
+
   const messagesEndRef = useRef(null);
   const chatContainerRef = useRef(null);
 
@@ -766,8 +766,8 @@ const Chatbot = () => {
   // Emergency response function
   const getEmergencyResponse = useCallback(() => {
     return {
-      text: "🚨 This sounds like a medical emergency. Please call emergency services immediately (108 in India or your local emergency number) or go to the nearest emergency room. If you're experiencing chest pain, difficulty breathing, or any life-threatening symptoms, seek immediate medical attention. I'm here to help with non-emergency medical questions after you've received proper emergency care.",
-      isEmergency: true
+      text: '🚨 This sounds like a medical emergency. Please call emergency services immediately (108 in India or your local emergency number) or go to the nearest emergency room. If you\'re experiencing chest pain, difficulty breathing, or any life-threatening symptoms, seek immediate medical attention. I\'m here to help with non-emergency medical questions after you\'ve received proper emergency care.',
+      isEmergency: true,
     };
   }, []);
 
@@ -775,35 +775,34 @@ const Chatbot = () => {
   const callOpenAI = async (userInput, context = []) => {
     try {
       setIsAIProcessing(true);
-      
+
       // Check if Groq API key is available
       const apiKey = import.meta.env.VITE_GROQ_API_KEY;
       if (!apiKey || apiKey === 'your_groq_api_key_here') {
         throw new Error('Groq API key not configured');
       }
-      
+
       // Build conversation context
       const messages = [
         { role: 'system', content: MEDICAL_SYSTEM_PROMPT },
         ...context,
-        { role: 'user', content: userInput }
+        { role: 'user', content: userInput },
       ];
 
       const requestPayload = {
         model: 'llama-3.1-8b-instant',
         messages: messages,
         max_tokens: 150,
-        temperature: 0.3
+        temperature: 0.3,
       };
-
 
       const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${import.meta.env.VITE_GROQ_API_KEY}`,
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(requestPayload)
+        body: JSON.stringify(requestPayload),
       });
 
       if (!response.ok) {
@@ -813,14 +812,14 @@ const Chatbot = () => {
       const data = await response.json();
       return {
         text: data.choices[0].message.content,
-        usage: data.usage
+        usage: data.usage,
       };
     } catch (error) {
       console.error('API Error:', error);
       // Fallback to helpful guidance (no apologies)
       return {
         text: 'I understand your query. To make sure you get the most accurate and relevant guidance, our care team is available to assist you directly. Connect with our care team at +91 93636 56010 or +91 89259 28840 for clear, step-by-step guidance on how to proceed.',
-        error: true
+        error: true,
       };
     } finally {
       setIsAIProcessing(false);
@@ -831,25 +830,25 @@ const Chatbot = () => {
   const updateMedicalContext = useCallback((userInput, aiResponse) => {
     setMedicalContext(prev => {
       const updated = { ...prev };
-      
+
       // Extract symptoms and concerns from user input
       const lowercaseInput = userInput.toLowerCase();
-      
+
       // Common symptom keywords
       const symptomKeywords = ['pain', 'ache', 'swelling', 'bleeding', 'lump', 'nodule', 'difficulty', 'problem'];
       const foundSymptoms = symptomKeywords.filter(symptom => lowercaseInput.includes(symptom));
-      
+
       if (foundSymptoms.length > 0) {
         updated.symptoms = [...new Set([...updated.symptoms, ...foundSymptoms])];
       }
-      
+
       // Detect treatment interest
       if (lowercaseInput.includes('appointment') || lowercaseInput.includes('book') || lowercaseInput.includes('schedule')) {
         updated.currentIntent = 'booking';
       } else if (foundSymptoms.length > 0) {
         updated.currentIntent = 'inquiry';
       }
-      
+
       return updated;
     });
   }, []);
@@ -863,15 +862,15 @@ const Chatbot = () => {
     setQuestionnaireStep(0);
     setQuestionnaireResponses({ procedure });
     setCurrentQuestionnaire(questionnaire);
-    
+
     const botMessage = {
       text: questionnaire.welcomeMessage,
       sender: 'bot',
       timestamp: new Date(),
     };
-    
+
     setMessages(prev => [...prev, botMessage]);
-    
+
     // Ask first question after a short delay
     setTimeout(() => {
       const firstQuestion = {
@@ -883,7 +882,7 @@ const Chatbot = () => {
         options: questionnaire.questions[0].options,
         isInput: questionnaire.questions[0].isInput,
         field: questionnaire.questions[0].field,
-        placeholder: questionnaire.questions[0].placeholder
+        placeholder: questionnaire.questions[0].placeholder,
       };
       setMessages(prev => [...prev, firstQuestion]);
     }, 1000);
@@ -895,7 +894,7 @@ const Chatbot = () => {
     { field: 'city', question: 'Which city are you located in?', placeholder: 'Enter your city' },
     { field: 'phone', question: 'What is your phone number?', placeholder: 'Enter your phone number' },
     { field: 'language', question: 'What is your preferred language for consultation?', placeholder: 'e.g., English, Hindi, Tamil' },
-    { field: 'procedure', question: 'Which procedure or treatment are you interested in?', placeholder: 'e.g., PAE, GAE, Thyroid treatment' }
+    { field: 'procedure', question: 'Which procedure or treatment are you interested in?', placeholder: 'e.g., PAE, GAE, Thyroid treatment' },
   ];
 
   // Function to start booking flow
@@ -903,15 +902,15 @@ const Chatbot = () => {
     setIsBookingFlow(true);
     setBookingStep(0);
     setBookingData({ name: '', city: '', phone: '', language: '', procedure: '' });
-    
+
     const botMessage = {
       text: 'I\'d be happy to help you book an appointment! Let me collect some information from you.',
       sender: 'bot',
       timestamp: new Date(),
     };
-    
+
     setMessages(prev => [...prev, botMessage]);
-    
+
     // Ask first question after a short delay
     setTimeout(() => {
       const firstQuestion = {
@@ -946,10 +945,10 @@ const Chatbot = () => {
         timestamp: new Date(),
         aiGenerated: true,
         recommendedTreatment: currentQuestionnaire.treatmentPage,
-        youtubeVideo: currentQuestionnaire.youtubeVideo
+        youtubeVideo: currentQuestionnaire.youtubeVideo,
       };
       setMessages(prev => [...prev, infoMessage]);
-      
+
       // Reset questionnaire state
       setIsQuestionnaireActive(false);
       setQuestionnaireStep(0);
@@ -967,10 +966,10 @@ const Chatbot = () => {
         timestamp: new Date(),
         aiGenerated: true,
         recommendedTreatment: currentQuestionnaire.treatmentPage,
-        youtubeVideo: currentQuestionnaire.youtubeVideo
+        youtubeVideo: currentQuestionnaire.youtubeVideo,
       };
       setMessages(prev => [...prev, infoMessage]);
-      
+
       // Reset questionnaire state
       setIsQuestionnaireActive(false);
       setQuestionnaireStep(0);
@@ -981,11 +980,11 @@ const Chatbot = () => {
 
     // Find next valid question based on conditions
     const nextQuestionData = getNextQuestion(questionnaireStep + 1, updatedResponses, currentQuestionnaire);
-    
+
     if (nextQuestionData) {
       // Move to next question
       setQuestionnaireStep(nextQuestionData.index);
-      
+
       setTimeout(() => {
         const nextQuestion = {
           text: nextQuestionData.question.question,
@@ -996,7 +995,7 @@ const Chatbot = () => {
           options: nextQuestionData.question.options,
           isInput: nextQuestionData.question.isInput,
           field: nextQuestionData.question.field,
-          placeholder: nextQuestionData.question.placeholder
+          placeholder: nextQuestionData.question.placeholder,
         };
         setMessages(prev => [...prev, nextQuestion]);
       }, 500);
@@ -1016,7 +1015,7 @@ const Chatbot = () => {
       // Move to next question
       const nextStep = bookingStep + 1;
       setBookingStep(nextStep);
-      
+
       setTimeout(() => {
         const nextQuestion = {
           text: bookingQuestions[nextStep].question,
@@ -1053,7 +1052,7 @@ const Chatbot = () => {
         'swollen_neck', 'thyroid_nodule_diagnosed', 'thyroid_reports', 'fix_appointment',
         'bulging_veins_discoloration', 'varicose_veins_diagnosed', 'varicose_vein_reports',
         'bulging_veins_scrotum', 'varicocele_diagnosed', 'varicocele_reports', 'fix_appointment_vce',
-        'blocked_ft_diagnosed', 'hsg_report_available'
+        'blocked_ft_diagnosed', 'hsg_report_available',
       ];
 
       const responsesForSubmission = {};
@@ -1100,9 +1099,9 @@ const Chatbot = () => {
           source: `Website - ${questionnaire.procedure} Chatbot Questionnaire`,
         },
       };
-      
+
       console.log('TeleCRM Payload:', payload);
-      
+
       const response = await fetch('https://api.telecrm.in/enterprise/658abddbf911ed2d692b0cf5/autoupdatelead', {
         method: 'POST',
         headers: {
@@ -1115,12 +1114,12 @@ const Chatbot = () => {
       if (response.ok) {
         // TeleCRM submission successful - show concise thank-you + treatment link
         const thankYouMessage = {
-          text: `Thank you. Our medical team will review your answers and contact you soon.`,
+          text: 'Thank you. Our medical team will review your answers and contact you soon.',
           sender: 'bot',
           timestamp: new Date(),
           aiGenerated: true,
           // Provide the treatment page so renderer can show a CTA
-          recommendedTreatment: questionnaire.treatmentPage
+          recommendedTreatment: questionnaire.treatmentPage,
         };
         setMessages(prev => [...prev, thankYouMessage]);
       } else {
@@ -1229,17 +1228,17 @@ const Chatbot = () => {
       'FTE': '/fte',
       'TAVI': '/transcatheter-aortic-valve-replacement',
       'Aortic Valve': '/transcatheter-aortic-valve-replacement',
-      'RFA': '/rfa'
+      'RFA': '/rfa',
     };
 
     const responseText = aiResponseText.toLowerCase();
-    
+
     for (const [keyword, route] of Object.entries(treatmentMap)) {
       if (responseText.includes(keyword.toLowerCase())) {
         return route;
       }
     }
-    
+
     return '/#services'; // Default fallback to home page services section
   }, []);
 
@@ -1264,7 +1263,7 @@ const Chatbot = () => {
         text: emergencyResponse.text,
         sender: 'bot',
         timestamp: new Date(),
-        isEmergency: true
+        isEmergency: true,
       };
       setMessages(prev => [...prev, botMessage]);
       return;
@@ -1272,11 +1271,11 @@ const Chatbot = () => {
 
     // Check if user wants contact information
     const lowerInput = userInput.toLowerCase();
-    if (lowerInput.includes('contact') || lowerInput.includes('phone') || lowerInput.includes('email') || 
+    if (lowerInput.includes('contact') || lowerInput.includes('phone') || lowerInput.includes('email') ||
         lowerInput.includes('address') || lowerInput.includes('office') || lowerInput.includes('location') ||
         lowerInput.includes('reach') || lowerInput.includes('call')) {
       const contactResponse = {
-        text: `Here's our contact information:\n\n📞 **Phone:** +91 9363656010\n📧 **Email:** contact@medagg.com\n📍 **Location:** Perungudi, Chennai\n\nOur team is available to assist you with any questions or to schedule your consultation. Feel free to reach out to us anytime!`,
+        text: 'Here\'s our contact information:\n\n📞 **Phone:** +91 9363656010\n📧 **Email:** contact@medagg.com\n📍 **Location:** Perungudi, Chennai\n\nOur team is available to assist you with any questions or to schedule your consultation. Feel free to reach out to us anytime!',
         sender: 'bot',
         timestamp: new Date(),
       };
@@ -1286,20 +1285,20 @@ const Chatbot = () => {
 
     // Enhanced symptom detection for automatic questionnaire triggering
     const detectedProcedure = detectProcedureFromSymptoms(lowerInput);
-    
+
     if (detectedProcedure) {
       console.log('Detected procedure:', detectedProcedure); // Debug log
-      
+
       // Provide brief information first, then start questionnaire
       const procedureInfo = getProcedureInfo(detectedProcedure);
-      
+
       const infoMessage = {
         text: procedureInfo.message,
         sender: 'bot',
         timestamp: new Date(),
       };
       setMessages(prev => [...prev, infoMessage]);
-      
+
       // Start questionnaire after brief delay
       setTimeout(() => {
         console.log('Starting questionnaire for:', detectedProcedure); // Debug log
@@ -1313,15 +1312,15 @@ const Chatbot = () => {
     try {
       // Get AI response
       const aiResponse = await callOpenAI(userInput, conversationHistory);
-      
+
       // Detect recommended treatment from AI response
       const recommendedTreatmentRoute = detectRecommendedTreatment(aiResponse.text);
-      
+
       // Update conversation history
       setConversationHistory(prev => [
         ...prev,
         { role: 'user', content: userInput },
-        { role: 'assistant', content: aiResponse.text }
+        { role: 'assistant', content: aiResponse.text },
       ].slice(-10)); // Keep last 10 messages for context
 
       // Update medical context
@@ -1332,7 +1331,7 @@ const Chatbot = () => {
         sender: 'bot',
         timestamp: new Date(),
         aiGenerated: true,
-        recommendedTreatment: recommendedTreatmentRoute
+        recommendedTreatment: recommendedTreatmentRoute,
       };
 
       setMessages(prev => [...prev, botMessage]);
@@ -1342,7 +1341,7 @@ const Chatbot = () => {
         text: 'I understand your query. To make sure you get the most accurate and relevant guidance, our care team is available to assist you directly. Connect with our care team at +91 93636 56010 or +91 89259 28840 for clear, step-by-step guidance on how to proceed.',
         sender: 'bot',
         timestamp: new Date(),
-        error: true
+        error: true,
       };
       setMessages(prev => [...prev, errorMessage]);
     } finally {
@@ -1372,7 +1371,7 @@ const Chatbot = () => {
     setMessages(prev => [...prev, userMessage]);
     // Auto-close the Quick Responses panel after a selection
     setIsQuickResponsesOpen(false);
-    
+
     // Check if it's a booking request
     if (response.toLowerCase().includes('book') && response.toLowerCase().includes('consultation')) {
       startBookingFlow();
@@ -1383,7 +1382,7 @@ const Chatbot = () => {
         timestamp: new Date(),
         aiGenerated: true,
         // Show CTA button pointing to treatments overview
-        recommendedTreatment: '/#services'
+        recommendedTreatment: '/#services',
       };
       setMessages(prev => [...prev, botMessage]);
     } else if (response === 'Tell me about non-surgical options') {
@@ -1392,7 +1391,7 @@ const Chatbot = () => {
         sender: 'bot',
         timestamp: new Date(),
         aiGenerated: true,
-        recommendedTreatment: '/#services'
+        recommendedTreatment: '/#services',
       };
       setMessages(prev => [...prev, botMessage]);
     } else {
@@ -1471,7 +1470,7 @@ const Chatbot = () => {
     <>
       {/* Chatbot toggle button */}
       {!isOpen && (
-        <div 
+        <div
           className='fixed z-40 bottom-4 right-4 sm:bottom-8 sm:right-8 no-pointer'
         >
           <div
@@ -1525,7 +1524,6 @@ const Chatbot = () => {
               </button>
             </div>
           </div>
-
 
           {/* Messages */}
           <div
@@ -1685,7 +1683,7 @@ const Chatbot = () => {
 
           {/* Quick responses */}
           <div className='px-4 py-3 bg-gradient-to-b from-white to-gray-50 border-t border-gray-100'>
-            <button 
+            <button
               onClick={() => {
                 if (isBookingFlow && bookingStep < bookingQuestions.length) return;
                 setIsQuickResponsesOpen(!isQuickResponsesOpen);

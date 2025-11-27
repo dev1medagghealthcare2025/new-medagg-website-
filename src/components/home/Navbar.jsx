@@ -65,7 +65,7 @@ export default function Navbar() {
                 className='h-14 xl:h-15 w-auto opacity-90'
               />
               <div className='ml-1.5 leading-tight'>
-                
+
                 <div className='text-white/80 text-[11px]'>
                 Corporate Member of ISVIR
                   <br />

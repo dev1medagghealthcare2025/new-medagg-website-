@@ -56,7 +56,7 @@ const HowGAEWork = () => {
           <div className='space-y-12 md:space-y-16'>
             {steps.map((step) => {
               const isOdd = step.step % 2 !== 0;
-              
+
               return (
                 <div key={step.step} className='relative'>
                   {/* Step Circle */}
@@ -124,4 +124,4 @@ const HowGAEWork = () => {
   );
 };
 
-export default HowGAEWork; 
+export default HowGAEWork;

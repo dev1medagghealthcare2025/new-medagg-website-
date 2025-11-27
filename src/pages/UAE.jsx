@@ -23,7 +23,7 @@ const UAEPage = () => {
       <AreYouExperiencingUAE />
       <ThinkYouMightNeedUAE />
       <UAE_Compare />
-      <WhatHappenUAE videoUrl="https://youtube.com/shorts/iw5G9U2LMNI?si=ql6ur0THJoZDrlYe" />
+      <WhatHappenUAE videoUrl='https://youtube.com/shorts/iw5G9U2LMNI?si=ql6ur0THJoZDrlYe' />
       <OurDoctor />
       <Consultourdoctor />
       <FAQ_Home />

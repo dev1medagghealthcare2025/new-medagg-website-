@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function About_herosection() {
   const navigate = useNavigate();
-  
+
   const openChatbot = () => {
     // Use setTimeout to ensure DOM is ready
     setTimeout(() => {
@@ -63,7 +63,7 @@ export default function About_herosection() {
                 <h1 className='text-3xl sm:text-4xl font-bold text-white leading-tight'>
                 Skip Surgery, Embrace Precision
                   <br />
-                  
+
                 </h1>
 
                 <p className='text-white/90 text-lg leading-relaxed max-w-lg'>

@@ -56,106 +56,106 @@ const UAE_Herosection = () => {
   };
   return (
     <section
-      className="relative bg-cover bg-center text-white py-8 sm:py-10 lg:py-14 px-4 sm:px-6 lg:px-8"
-      style={{ backgroundImage: "url('/UAE_BG_image.jpg')", minHeight: '460px' }}
+      className='relative bg-cover bg-center text-white py-8 sm:py-10 lg:py-14 px-4 sm:px-6 lg:px-8'
+      style={{ backgroundImage: 'url(\'/UAE_BG_image.jpg\')', minHeight: '460px' }}
     >
-      <div className="absolute inset-0 bg-[#2d2552] bg-opacity-60"></div>
-      <div className="relative max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className='absolute inset-0 bg-[#2d2552] bg-opacity-60'></div>
+      <div className='relative max-w-7xl mx-auto'>
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 items-center'>
           {/* Left Content */}
-          <div className="text-white text-center lg:text-left">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight text-white mb-3 sm:mb-5">
+          <div className='text-white text-center lg:text-left'>
+            <h1 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight text-white mb-3 sm:mb-5'>
               Uterine Artery Embolization
             </h1>
-            <p className="text-base sm:text-lg md:text-xl text-gray-200 font-medium max-w-2xl mx-auto lg:mx-0">
+            <p className='text-base sm:text-lg md:text-xl text-gray-200 font-medium max-w-2xl mx-auto lg:mx-0'>
               Minimally invasive, uterus-preserving treatment for fibroids.
             </p>
           </div>
 
           {/* Right Side: Form */}
-          <div className="w-full max-w-md mx-auto">
-            <div className="bg-white rounded-xl shadow-2xl p-4">
-              <h2 className="text-base sm:text-lg font-bold text-[#2d2552] mb-3 text-center">Get Expert Consultation</h2>
+          <div className='w-full max-w-md mx-auto'>
+            <div className='bg-white rounded-xl shadow-2xl p-4'>
+              <h2 className='text-base sm:text-lg font-bold text-[#2d2552] mb-3 text-center'>Get Expert Consultation</h2>
               <form onSubmit={handleSubmit}>
                 <textarea
-                  name="healthConcern"
+                  name='healthConcern'
                   value={formData.healthConcern}
                   onChange={handleInputChange}
-                  placeholder="Describe Your Health Concern"
-                  className="w-full border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm resize-none mb-3 focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all"
-                  rows="2"
+                  placeholder='Describe Your Health Concern'
+                  className='w-full border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm resize-none mb-3 focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all'
+                  rows='2'
                   required
                 ></textarea>
                 <input
-                  type="text"
-                  name="city"
+                  type='text'
+                  name='city'
                   value={formData.city}
                   onChange={handleInputChange}
-                  placeholder="City"
-                  className="w-full border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm mb-3 focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all"
+                  placeholder='City'
+                  className='w-full border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm mb-3 focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all'
                   required
                 />
                 <select
-                  name="preferredLanguage"
+                  name='preferredLanguage'
                   value={formData.preferredLanguage}
                   onChange={handleInputChange}
-                  className="w-full border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm mb-3 focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all bg-white text-black"
-                  aria-label="Preferred Language"
+                  className='w-full border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm mb-3 focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all bg-white text-black'
+                  aria-label='Preferred Language'
                 >
-                  <option value="" disabled>Preferred Language</option>
-                  <option value="English">English</option>
-                  <option value="Hindi">Hindi</option>
-                  <option value="Tamil">Tamil</option>
-                  <option value="Telugu">Telugu</option>
-                  <option value="Kannada">Kannada</option>
-                  <option value="Malayalam">Malayalam</option>
-                  <option value="Bengali">Bengali</option>
-                  <option value="Marathi">Marathi</option>
-                  <option value="Gujarati">Gujarati</option>
-                  <option value="Punjabi">Punjabi</option>
-                  <option value="Urdu">Urdu</option>
+                  <option value='' disabled>Preferred Language</option>
+                  <option value='English'>English</option>
+                  <option value='Hindi'>Hindi</option>
+                  <option value='Tamil'>Tamil</option>
+                  <option value='Telugu'>Telugu</option>
+                  <option value='Kannada'>Kannada</option>
+                  <option value='Malayalam'>Malayalam</option>
+                  <option value='Bengali'>Bengali</option>
+                  <option value='Marathi'>Marathi</option>
+                  <option value='Gujarati'>Gujarati</option>
+                  <option value='Punjabi'>Punjabi</option>
+                  <option value='Urdu'>Urdu</option>
                 </select>
-                <div className="flex flex-col sm:flex-row gap-2.5 mb-3">
+                <div className='flex flex-col sm:flex-row gap-2.5 mb-3'>
                   <input
-                    type="text"
-                    name="fullName"
+                    type='text'
+                    name='fullName'
                     value={formData.fullName}
                     onChange={handleInputChange}
-                    placeholder="Full Name"
-                    className="w-full sm:w-1/2 border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all"
+                    placeholder='Full Name'
+                    className='w-full sm:w-1/2 border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all'
                     required
                   />
                   <input
-                    type="tel"
-                    name="phoneNumber"
+                    type='tel'
+                    name='phoneNumber'
                     value={formData.phoneNumber}
                     onChange={handleInputChange}
-                    placeholder="Phone Number"
-                    className="w-full sm:w-1/2 border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all"
+                    placeholder='Phone Number'
+                    className='w-full sm:w-1/2 border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all'
                     required
                   />
                 </div>
                 <button
-                  type="submit"
+                  type='submit'
                   disabled={isSubmitting}
-                  className="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold text-sm sm:text-base py-2.5 rounded-lg transition-colors shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98] disabled:bg-gray-400"
+                  className='w-full bg-pink-500 hover:bg-pink-600 text-white font-bold text-sm sm:text-base py-2.5 rounded-lg transition-colors shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98] disabled:bg-gray-400'
                 >
                   {isSubmitting ? 'Submitting...' : 'Speak To Experts'}
                 </button>
                 {formStatus === 'success' && (
-                  <p className="text-green-600 text-center mt-3 text-sm font-semibold">
+                  <p className='text-green-600 text-center mt-3 text-sm font-semibold'>
                     Thank you for reaching out. Our expert will contact you shortly.
                   </p>
                 )}
                 {formStatus === 'error' && (
-                  <p className="text-red-600 text-center mt-3 text-sm font-semibold">
+                  <p className='text-red-600 text-center mt-3 text-sm font-semibold'>
                     Something went wrong. Please try again.
                   </p>
                 )}
               </form>
             </div>
-            <div className="flex flex-wrap justify-center lg:justify-start gap-2.5 mt-4 px-2">
-             
+            <div className='flex flex-wrap justify-center lg:justify-start gap-2.5 mt-4 px-2'>
+
             </div>
           </div>
         </div>

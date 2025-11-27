@@ -108,7 +108,7 @@ const allServices = {
 
 const ArrowButton = ({ highlight }) => (
   <button
-    className={`w-9 h-9 flex items-center justify-center rounded-full focus:outline-none mt-2 bg-white text-[#1a1446] border border-gray-200 shadow-md hover:bg-[#ff3576] hover:text-white hover:border-[#ff3576] transition-colors duration-300`}
+    className={'w-9 h-9 flex items-center justify-center rounded-full focus:outline-none mt-2 bg-white text-[#1a1446] border border-gray-200 shadow-md hover:bg-[#ff3576] hover:text-white hover:border-[#ff3576] transition-colors duration-300'}
   >
     <svg width='20' height='20' fill='none' stroke='currentColor' strokeWidth='2' viewBox='0 0 24 24'>
       <circle cx='12' cy='12' r='10' fill='none' />

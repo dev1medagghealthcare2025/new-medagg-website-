@@ -4,14 +4,14 @@ const othersFeatures = [
   { title: 'Advertising-Driven', description: 'Platforms that prioritize sponsored listings over patient needs, creating confusion about the best options.' },
   { title: 'Long Delays', description: 'Weeks of waiting for appointments, followed by more waiting for treatment plans and procedures.' },
   { title: 'No Guidance', description: 'Patients left to navigate complex medical systems alone, with minimal support or explanation.' },
-  { title: 'Hidden Costs', description: 'Unclear pricing structures leading to surprise bills and financial stress during recovery.' }
+  { title: 'Hidden Costs', description: 'Unclear pricing structures leading to surprise bills and financial stress during recovery.' },
 ];
 
 const medaggFeatures = [
   { title: 'Care Custodians', description: 'A dedicated care team focused solely on finding you the best treatment option based on medical needs, not advertising.' },
   { title: 'Rapid Response', description: 'Most patients connect with specialists within 48 hours, with treatment plans developed shortly after.' },
   { title: 'End-to-End Support', description: 'Our team guides you from initial questions through recovery, providing resources and answering concerns.' },
-  { title: 'Complete Transparency', description: 'Upfront pricing, clear treatment explanations, and honest discussions about expected outcomes.' }
+  { title: 'Complete Transparency', description: 'Upfront pricing, clear treatment explanations, and honest discussions about expected outcomes.' },
 ];
 
 export default function What_We_Do_Differently() {
@@ -40,7 +40,7 @@ export default function What_We_Do_Differently() {
               </div>
               <h3 className='text-2xl font-bold text-gray-700'>Others</h3>
             </div>
-            
+
             <div className='space-y-6'>
               {othersFeatures.map((feature, idx) => (
                 <div key={idx} className='flex items-start gap-4'>
@@ -68,7 +68,7 @@ export default function What_We_Do_Differently() {
               </div>
               <h3 className='text-2xl font-bold text-[#ff3576]'>Medagg</h3>
             </div>
-            
+
             <div className='space-y-6'>
               {medaggFeatures.map((feature, idx) => (
                 <div key={idx} className='flex items-start gap-4'>

@@ -167,7 +167,7 @@ export default function GAE_Herosection() {
             )}
           </form>
           {/* Pills below the form */}
-        
+
         </div>
       </div>
     </section>

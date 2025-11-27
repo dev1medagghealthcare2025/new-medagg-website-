@@ -7,7 +7,7 @@ import CareerOpening from '../components/Career/career_opening';
 import CareerGrowth from '../components/Career/career_growth';
 const CareerPage = () => {
   return (
-    <main className="w-full">
+    <main className='w-full'>
       <Navbar />
       <Treatmentnavbar />
       <CareerHeroSection />

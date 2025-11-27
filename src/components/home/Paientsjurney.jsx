@@ -25,18 +25,18 @@ const PatientJourney = () => {
 
         {/* Desktop View - Image */}
         <div className='hidden lg:block mt-12'>
-          <img 
-            src='/Paients_Jurney_new.png' 
-            alt='Patient Journey Flowchart' 
+          <img
+            src='/Paients_Jurney_new.png'
+            alt='Patient Journey Flowchart'
             className='w-full h-auto'
           />
         </div>
 
         {/* Mobile View - Image */}
         <div className='lg:hidden w-full mt-12 flex justify-center'>
-          <img 
-            src='/mobile_paients-removebg.png' 
-            alt='Patient Journey Flowchart for Mobile' 
+          <img
+            src='/mobile_paients-removebg.png'
+            alt='Patient Journey Flowchart for Mobile'
             className='w-full max-w-md h-auto'
           />
         </div>

@@ -1,16 +1,16 @@
-import React from "react";
+import React from 'react';
 
 const videoUrls = [
-  "https://youtu.be/zMwLTnIUnX4?si=C--38zx7_-voktza",
-  "https://youtu.be/we7sPUMcgbc?si=ksz0J2YKEpChAPlc",
-  "https://youtu.be/adwnsupBfCo?si=_XfShg6qiRokXehw",
-  "https://youtu.be/tkxq0-PhUe0?si=MMloNLZvx6ExHsN2",
-  "https://youtu.be/z2AtMviOHX8?si=ZBJ30f-GReygNxmE",
-  "https://youtu.be/fyUfJ8OfJjs?si=NBH4QFbSG319KMz5",
-  "https://youtu.be/nj4hohs6FLk?si=b7gRl8YI_9gadre3",
-  "https://youtu.be/9UYErUyDt3I?si=slmImFesxlCUTDcN",
-  "https://youtu.be/DoWb0iGyKEU?si=Iq1KtuoMl0Si2X8M",
-  "https://youtu.be/4cbPC9a_j2U?si=zPNdIAgJVaj-ru5s",
+  'https://youtu.be/zMwLTnIUnX4?si=C--38zx7_-voktza',
+  'https://youtu.be/we7sPUMcgbc?si=ksz0J2YKEpChAPlc',
+  'https://youtu.be/adwnsupBfCo?si=_XfShg6qiRokXehw',
+  'https://youtu.be/tkxq0-PhUe0?si=MMloNLZvx6ExHsN2',
+  'https://youtu.be/z2AtMviOHX8?si=ZBJ30f-GReygNxmE',
+  'https://youtu.be/fyUfJ8OfJjs?si=NBH4QFbSG319KMz5',
+  'https://youtu.be/nj4hohs6FLk?si=b7gRl8YI_9gadre3',
+  'https://youtu.be/9UYErUyDt3I?si=slmImFesxlCUTDcN',
+  'https://youtu.be/DoWb0iGyKEU?si=Iq1KtuoMl0Si2X8M',
+  'https://youtu.be/4cbPC9a_j2U?si=zPNdIAgJVaj-ru5s',
 ];
 
 // Extract the YouTube video ID from various URL formats
@@ -26,9 +26,9 @@ const getYouTubeId = (url) => {
     if (embed?.[1]) return embed[1];
 
     const parts = new URL(url);
-    return parts.pathname.split("/").filter(Boolean).pop();
+    return parts.pathname.split('/').filter(Boolean).pop();
   } catch {
-    return "";
+    return '';
   }
 };
 
@@ -40,58 +40,58 @@ const TestiominalCard = ({ id, title, description }) => {
   const embedSrc = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&controls=1&rel=0&modestbranding=1`;
 
   return (
-    <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-      <div className="relative aspect-video bg-black">
+    <div className='bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow'>
+      <div className='relative aspect-video bg-black'>
         {!playing ? (
           <button
-            type="button"
+            type='button'
             onClick={() => setPlaying(true)}
-            className="group w-full h-full relative"
-            aria-label="Play testimonial video"
+            className='group w-full h-full relative'
+            aria-label='Play testimonial video'
           >
             <img
               src={thumb}
-              alt={title || "Patient testimonial"}
-              className="w-full h-full object-cover"
-              loading="lazy"
+              alt={title || 'Patient testimonial'}
+              className='w-full h-full object-cover'
+              loading='lazy'
             />
-            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-16 h-16 rounded-full bg-[#ff3576] flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
-                <svg viewBox="0 0 24 24" className="w-7 h-7 text-white" fill="currentColor">
-                  <path d="M8 5v14l11-7z" />
+            <div className='absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors' />
+            <div className='absolute inset-0 flex items-center justify-center'>
+              <div className='w-16 h-16 rounded-full bg-[#ff3576] flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform'>
+                <svg viewBox='0 0 24 24' className='w-7 h-7 text-white' fill='currentColor'>
+                  <path d='M8 5v14l11-7z' />
                 </svg>
               </div>
             </div>
           </button>
         ) : (
           <iframe
-            className="absolute inset-0 w-full h-full"
+            className='absolute inset-0 w-full h-full'
             src={embedSrc}
-            title={title || "Patient testimonial"}
-            allow="autoplay; encrypted-media; picture-in-picture"
+            title={title || 'Patient testimonial'}
+            allow='autoplay; encrypted-media; picture-in-picture'
             allowFullScreen
           />
         )}
       </div>
 
       {(title || description) ? (
-        <div className="p-4">
+        <div className='p-4'>
           {title ? (
-            <h3 className="text-[#2d2552] font-semibold text-base mb-1">{title}</h3>
+            <h3 className='text-[#2d2552] font-semibold text-base mb-1'>{title}</h3>
           ) : null}
           {description ? (
             <>
-              <p className="text-sm text-gray-600 leading-relaxed">
+              <p className='text-sm text-gray-600 leading-relaxed'>
                 {expanded || description.length <= 160
                   ? description
                   : `${description.slice(0, 160)}...`}
               </p>
               {description.length > 160 && (
                 <button
-                  type="button"
+                  type='button'
                   onClick={() => setExpanded((e) => !e)}
-                  className="mt-2 text-xs font-semibold text-[#ff3576] hover:text-pink-600"
+                  className='mt-2 text-xs font-semibold text-[#ff3576] hover:text-pink-600'
                 >
                   {expanded ? 'Show less' : 'Read more'}
                 </button>
@@ -135,7 +135,7 @@ const Testiominal_main = () => {
     [items[8]?.id]:
       'Laser circumcision represents a significant advancement in treating tight foreskin. As the procedure utilizes a laser to make the incision, it involves no cuts or bleeding. The patient was highly satisfied with the outcome. For further details, consider listening to their feedback.',
     [items[9]?.id]:
-      "Varicose veins are swollen, prominent veins that typically appear in the legs and often result in pain and discomfort. Laser treatments are sophisticated procedures that can effectively treat varicose veins, as evidenced by our patient’s positive feedback.",
+      'Varicose veins are swollen, prominent veins that typically appear in the legs and often result in pain and discomfort. Laser treatments are sophisticated procedures that can effectively treat varicose veins, as evidenced by our patient’s positive feedback.',
   };
 
   const titlesById = {
@@ -143,26 +143,26 @@ const Testiominal_main = () => {
   };
 
   return (
-    <section className="py-10 sm:py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className='py-10 sm:py-12'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         {/* Header */}
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold">
-            <span className="text-[#2d2552]">Patient </span>
-            <span className="text-[#ff3576]">Testimonial</span>
+        <div className='flex items-center justify-between mb-6'>
+          <h2 className='text-2xl sm:text-3xl lg:text-4xl font-extrabold'>
+            <span className='text-[#2d2552]'>Patient </span>
+            <span className='text-[#ff3576]'>Testimonial</span>
           </h2>
 
           {/* View All / Show Less */}
           <button
             onClick={() => setShowAll((s) => !s)}
-            className="text-[#ff3576] font-semibold hover:text-pink-600 transition-colors text-sm sm:text-base"
+            className='text-[#ff3576] font-semibold hover:text-pink-600 transition-colors text-sm sm:text-base'
           >
-            {showAll ? "Show Less" : "View All"}
+            {showAll ? 'Show Less' : 'View All'}
           </button>
         </div>
 
         {/* Grid: 1 / 2 / 3 columns */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5'>
           {visibleItems.map((v, idx) => (
             <TestiominalCard
               key={v.id + idx}

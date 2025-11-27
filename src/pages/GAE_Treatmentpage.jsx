@@ -22,7 +22,7 @@ const GAE_Treatmentpage = () => (
     <GAE_Are_you_experience />
     <GAE_Bookanappoinment />
     <GAE_Compare_treatment_option />
-    <What_happen_in_GAE videoUrl="https://youtube.com/shorts/vM5o0rX3lag?si=OX06gQBB8iRG9EhM" />
+    <What_happen_in_GAE videoUrl='https://youtube.com/shorts/vM5o0rX3lag?si=OX06gQBB8iRG9EhM' />
     <Ourdoctor />
     <OurTestimonial />
     <Consultourdoctor />

@@ -59,88 +59,88 @@ const FTE_HeroSection = () => {
   };
   return (
     <section
-      className="relative bg-cover bg-center text-white py-8 sm:py-10 lg:py-14 px-4 sm:px-6 lg:px-8"
-      style={{ backgroundImage: "url('/FTE_Herosection_bg.jpg')", minHeight: '460px' }}
+      className='relative bg-cover bg-center text-white py-8 sm:py-10 lg:py-14 px-4 sm:px-6 lg:px-8'
+      style={{ backgroundImage: 'url(\'/FTE_Herosection_bg.jpg\')', minHeight: '460px' }}
     >
-            <div className="absolute inset-0 bg-[#2D2552] opacity-60"></div>
-      <div className="relative max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div className='absolute inset-0 bg-[#2D2552] opacity-60'></div>
+      <div className='relative max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center'>
         {/* Left Side: Content */}
-        <div className="text-center md:text-left">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-3 sm:mb-5 text-white">
+        <div className='text-center md:text-left'>
+          <h1 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-3 sm:mb-5 text-white'>
             Fallopian Tube Recanalization
           </h1>
-          <p className="text-base sm:text-lg md:text-xl text-gray-200 font-medium">
+          <p className='text-base sm:text-lg md:text-xl text-gray-200 font-medium'>
             Safe, scar-free solution to open blocked fallopian tubes.
           </p>
         </div>
 
         {/* Right Side: Form */}
         <div>
-          <div className="bg-white text-gray-800 rounded-xl shadow-2xl p-4 max-w-md mx-auto w-full">
-            <h2 className="text-base sm:text-lg font-bold text-center text-[#2D2552] mb-3">Get Expert Consultation</h2>
+          <div className='bg-white text-gray-800 rounded-xl shadow-2xl p-4 max-w-md mx-auto w-full'>
+            <h2 className='text-base sm:text-lg font-bold text-center text-[#2D2552] mb-3'>Get Expert Consultation</h2>
             <form onSubmit={handleSubmit}>
                 <textarea
-                  name="concern"
+                  name='concern'
                   value={formData.concern}
                   onChange={handleChange}
-                  className="w-full border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm resize-none mb-3 focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all"
-                  rows="2"
-                  placeholder="Describe Your Health Concern"
+                  className='w-full border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm resize-none mb-3 focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all'
+                  rows='2'
+                  placeholder='Describe Your Health Concern'
                   required
                 ></textarea>
                 <input
-                  type="text"
-                  name="city"
+                  type='text'
+                  name='city'
                   value={formData.city}
                   onChange={handleChange}
-                  placeholder="City"
-                  className="w-full border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm mb-3 focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all"
+                  placeholder='City'
+                  className='w-full border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm mb-3 focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all'
                   required
                 />
                 <select
-                  name="preferredLanguage"
+                  name='preferredLanguage'
                   value={formData.preferredLanguage}
                   onChange={handleChange}
-                  className="w-full border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm mb-3 focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all bg-white text-black"
-                  aria-label="Preferred Language"
+                  className='w-full border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm mb-3 focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all bg-white text-black'
+                  aria-label='Preferred Language'
                 >
-                  <option value="" disabled>Preferred Language</option>
-                  <option value="English">English</option>
-                  <option value="Hindi">Hindi</option>
-                  <option value="Tamil">Tamil</option>
-                  <option value="Telugu">Telugu</option>
-                  <option value="Kannada">Kannada</option>
-                  <option value="Malayalam">Malayalam</option>
-                  <option value="Bengali">Bengali</option>
-                  <option value="Marathi">Marathi</option>
-                  <option value="Gujarati">Gujarati</option>
-                  <option value="Punjabi">Punjabi</option>
-                  <option value="Urdu">Urdu</option>
+                  <option value='' disabled>Preferred Language</option>
+                  <option value='English'>English</option>
+                  <option value='Hindi'>Hindi</option>
+                  <option value='Tamil'>Tamil</option>
+                  <option value='Telugu'>Telugu</option>
+                  <option value='Kannada'>Kannada</option>
+                  <option value='Malayalam'>Malayalam</option>
+                  <option value='Bengali'>Bengali</option>
+                  <option value='Marathi'>Marathi</option>
+                  <option value='Gujarati'>Gujarati</option>
+                  <option value='Punjabi'>Punjabi</option>
+                  <option value='Urdu'>Urdu</option>
                 </select>
-                <div className="flex flex-col sm:flex-row gap-2.5 mb-3">
+                <div className='flex flex-col sm:flex-row gap-2.5 mb-3'>
                   <input
-                    type="text"
-                    name="fullName"
+                    type='text'
+                    name='fullName'
                     value={formData.fullName}
                     onChange={handleChange}
-                    placeholder="Full Name"
-                    className="w-full sm:w-1/2 border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all"
+                    placeholder='Full Name'
+                    className='w-full sm:w-1/2 border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all'
                     required
                   />
                   <input
-                    type="tel"
-                    name="phone"
+                    type='tel'
+                    name='phone'
                     value={formData.phone}
                     onChange={handleChange}
-                    placeholder="Phone Number"
-                    className="w-full sm:w-1/2 border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all"
+                    placeholder='Phone Number'
+                    className='w-full sm:w-1/2 border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all'
                     required
                   />
                 </div>
                 <button
-                  type="submit"
+                  type='submit'
                   disabled={isSubmitting}
-                  className="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold text-sm sm:text-base py-2.5 rounded-lg transition-colors shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98] disabled:bg-gray-400"
+                  className='w-full bg-pink-500 hover:bg-pink-600 text-white font-bold text-sm sm:text-base py-2.5 rounded-lg transition-colors shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98] disabled:bg-gray-400'
                 >
                   {isSubmitting ? 'Submitting...' : 'Speak To Experts'}
                 </button>
@@ -156,8 +156,8 @@ const FTE_HeroSection = () => {
                 )}
               </form>
           </div>
-          <div className="flex flex-wrap justify-center gap-2.5 mt-4 px-2">
-            
+          <div className='flex flex-wrap justify-center gap-2.5 mt-4 px-2'>
+
           </div>
         </div>
       </div>

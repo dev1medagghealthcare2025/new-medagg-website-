@@ -13,10 +13,9 @@ import VV_BookAnAppointment from '../components/Treatment_Pages/vv_bookanappoinm
 import OurTestimonial from '../components/home/our_testimonial';
 import FAQ_Home from '../components/home/FAQ_Home';
 
-
 const VaricoseVeinPage = () => {
   return (
-    <div className="bg-white">
+    <div className='bg-white'>
       <Navbar />
       <Treatmentnavbar />
       <VaricoseVeinHeroSection />
@@ -25,13 +24,12 @@ const VaricoseVeinPage = () => {
       <AreYouExperiencingVaricocele />
       <VV_BookAnAppointment />
       <CompareTreatmentOptions />
-      <WhatHappensInEndovenousAblation videoUrl="https://youtube.com/shorts/HKUDEpX8MPw?si=QhzEi3qij_1r_mcU" />
+      <WhatHappensInEndovenousAblation videoUrl='https://youtube.com/shorts/HKUDEpX8MPw?si=QhzEi3qij_1r_mcU' />
       <Ourdoctor />
       <OurTestimonial/>
       <ConsultOurDoctor />
       <FAQ_Home/>
-      
-     
+
     </div>
   );
 };

@@ -44,18 +44,18 @@ const FeatureCard = ({ feature }) => {
 
 const WhyChooseEndovascularCoiling = () => {
   return (
-    <div className="py-12 md:py-24 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="text-center md:text-left">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#2d2552] mb-4">
-            Why Choose <span className="text-[#ff3576]">Endovascular Coiling?</span>
+    <div className='py-12 md:py-24 bg-white'>
+      <div className='container mx-auto px-4'>
+        <div className='text-center md:text-left'>
+          <h2 className='text-3xl md:text-4xl font-bold text-[#2d2552] mb-4'>
+            Why Choose <span className='text-[#ff3576]'>Endovascular Coiling?</span>
           </h2>
-          <p className="text-lg text-gray-600 mb-12">
+          <p className='text-lg text-gray-600 mb-12'>
             Safe, effective alternative to surgical clipping with faster recovery and fewer risks
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8'>
           {features.map((feature, index) => (
             <FeatureCard key={index} feature={feature} />
           ))}

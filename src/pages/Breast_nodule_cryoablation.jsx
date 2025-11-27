@@ -15,7 +15,7 @@ import FAQ_Home from '../components/home/FAQ_Home';
 
 const BreastNoduleCryoablationPage = () => {
   return (
-    <div className="bg-white">
+    <div className='bg-white'>
       <Navbar />
       <Treatmentnavbar />
       <CryoablationHeroSection />
@@ -24,7 +24,7 @@ const BreastNoduleCryoablationPage = () => {
       <AreYouExperiencingCryoablation />
       <BookAnAppointmentCryo />
       <CompareTreatmentCryoablation />
-      <WhatHappensInCryoablation videoUrl="https://youtube.com/shorts/xniZMciljic?si=d4HK5sNyGO2ndjfU" />
+      <WhatHappensInCryoablation videoUrl='https://youtube.com/shorts/xniZMciljic?si=d4HK5sNyGO2ndjfU' />
       <OurDoctor />
       <OurTestimonial/>
       <Consultourdoctor />

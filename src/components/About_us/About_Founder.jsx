@@ -30,10 +30,9 @@ export default function About_Founder() {
             <p className='text-gray-600 text-base lg:text-lg leading-relaxed'>
             Guided by ethics rather than advertising, we provide unbiased access to trusted hospitals and specialists, ensuring patients can compare costs, understand options, and make confident decisions. Through this commitment, we’re bridging gaps, simplifying choices, and making advanced Interventional Radiology accessible across India — one informed choice at a time.
             </p>
-            
+
           </div>
         </div>
-
 
       </div>
     </section>

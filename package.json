@@ -42,8 +42,8 @@
     "serve": "npx vite preview",
     "build:css": "npx tailwindcss -i ./src/index.css -o ./src/tailwind.output.css",
     "watch:css": "npx tailwindcss -i ./src/index.css -o ./src/tailwind.output.css --watch",
-    "lint": "eslint . --ext .js,.jsx",
-    "lint:fix": "eslint . --ext .js,.jsx --fix"
+    "lint": "eslint src --ext .js,.jsx",
+    "lint:fix": "eslint src --ext .js,.jsx --fix"
   },
   "engines": {
     "node": "20.x"

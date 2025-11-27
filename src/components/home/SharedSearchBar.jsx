@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const SharedSearchBar = ({ query, setQuery, handleSearch, results = [], isLoading }) => {
   return (
-    <div className="w-full max-w-xl">
+    <div className='w-full max-w-xl'>
       {/* Search Bar */}
       <form
         onSubmit={handleSearch}

@@ -56,94 +56,94 @@ const Thyroid_bookappoinment = () => {
   };
 
   return (
-    <section className="py-10 md:py-16 bg-white">
+    <section className='py-10 md:py-16 bg-white'>
       <div
-        className="relative w-full max-w-[1201px] mx-auto rounded-[20px] overflow-hidden bg-cover bg-center p-6 sm:p-8 md:p-12 min-h-[420px] md:h-[421px]"
-        style={{ backgroundImage: "url('/book and appoinment background.jpg')" }}
+        className='relative w-full max-w-[1201px] mx-auto rounded-[20px] overflow-hidden bg-cover bg-center p-6 sm:p-8 md:p-12 min-h-[420px] md:h-[421px]'
+        style={{ backgroundImage: 'url(\'/book and appoinment background.jpg\')' }}
       >
-                <div className="absolute inset-0 bg-[#2d2552] opacity-20"></div>
-        
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-center h-full">
+                <div className='absolute inset-0 bg-[#2d2552] opacity-20'></div>
+
+        <div className='relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-center h-full'>
           {/* Left Content */}
-          <div className="text-white space-y-5 text-center md:text-left max-w-xl mx-auto md:mx-0">
-            <h2 className="text-3xl md:text-4xl font-bold leading-tight">
-              <span className="text-white">Think You Might Have A</span> <br />
-              <span className="text-[#ff3576]">Thyroid Nodule?</span>
+          <div className='text-white space-y-5 text-center md:text-left max-w-xl mx-auto md:mx-0'>
+            <h2 className='text-3xl md:text-4xl font-bold leading-tight'>
+              <span className='text-white'>Think You Might Have A</span> <br />
+              <span className='text-[#ff3576]'>Thyroid Nodule?</span>
             </h2>
-            <p className="text-base md:text-lg text-gray-200 max-w-md mx-auto md:mx-0">
+            <p className='text-base md:text-lg text-gray-200 max-w-md mx-auto md:mx-0'>
               Book your scan review and get expert advice from our IR specialists.
             </p>
-            <Link to="/contact-us">
-              <button className="w-full sm:w-auto bg-[#ff3576] text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-pink-700 transition-colors shadow-lg">
+            <Link to='/contact-us'>
+              <button className='w-full sm:w-auto bg-[#ff3576] text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-pink-700 transition-colors shadow-lg'>
                 Book Appointment
               </button>
             </Link>
           </div>
 
           {/* Right Form */}
-          <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-2xl w-full max-w-xl mx-auto lg:mx-0">
-            <h3 className="text-lg font-bold text-gray-800 mb-4">Get Expert Consultation</h3>
-            <form onSubmit={handleSubmit} className="space-y-4">
+          <div className='bg-white rounded-2xl p-4 sm:p-6 shadow-2xl w-full max-w-xl mx-auto lg:mx-0'>
+            <h3 className='text-lg font-bold text-gray-800 mb-4'>Get Expert Consultation</h3>
+            <form onSubmit={handleSubmit} className='space-y-4'>
               <textarea
-                name="healthConcern"
+                name='healthConcern'
                 value={formData.healthConcern}
                 onChange={handleInputChange}
-                placeholder="Describe Your Health Concern"
+                placeholder='Describe Your Health Concern'
                 rows={2}
-                className="w-full px-2 py-1.5 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                className='w-full px-2 py-1.5 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500'
               />
               <input
-                type="text"
-                name="city"
+                type='text'
+                name='city'
                 value={formData.city}
                 onChange={handleInputChange}
-                placeholder="City"
-                className="w-full px-2 py-1.5 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                placeholder='City'
+                className='w-full px-2 py-1.5 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500'
               />
               <select
-                name="preferredLanguage"
+                name='preferredLanguage'
                 value={formData.preferredLanguage}
                 onChange={handleInputChange}
-                className="w-full px-2 py-1.5 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-black"
-                aria-label="Preferred Language"
+                className='w-full px-2 py-1.5 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-black'
+                aria-label='Preferred Language'
               >
-                <option value="" disabled>Preferred Language</option>
-                <option value="English">English</option>
-                <option value="Hindi">Hindi</option>
-                <option value="Tamil">Tamil</option>
-                <option value="Telugu">Telugu</option>
-                <option value="Kannada">Kannada</option>
-                <option value="Malayalam">Malayalam</option>
-                <option value="Bengali">Bengali</option>
-                <option value="Marathi">Marathi</option>
-                <option value="Gujarati">Gujarati</option>
-                <option value="Punjabi">Punjabi</option>
-                <option value="Urdu">Urdu</option>
+                <option value='' disabled>Preferred Language</option>
+                <option value='English'>English</option>
+                <option value='Hindi'>Hindi</option>
+                <option value='Tamil'>Tamil</option>
+                <option value='Telugu'>Telugu</option>
+                <option value='Kannada'>Kannada</option>
+                <option value='Malayalam'>Malayalam</option>
+                <option value='Bengali'>Bengali</option>
+                <option value='Marathi'>Marathi</option>
+                <option value='Gujarati'>Gujarati</option>
+                <option value='Punjabi'>Punjabi</option>
+                <option value='Urdu'>Urdu</option>
               </select>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                 <input
-                  type="text"
-                  name="fullName"
+                  type='text'
+                  name='fullName'
                   value={formData.fullName}
                   onChange={handleInputChange}
-                  placeholder="Full Name"
-                  className="w-full px-2 py-1.5 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  placeholder='Full Name'
+                  className='w-full px-2 py-1.5 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500'
                   required
                 />
                 <input
-                  type="tel"
-                  name="phoneNumber"
+                  type='tel'
+                  name='phoneNumber'
                   value={formData.phoneNumber}
                   onChange={handleInputChange}
-                  placeholder="Phone Number"
-                  className="w-full px-2 py-1.5 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  placeholder='Phone Number'
+                  className='w-full px-2 py-1.5 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500'
                   required
                 />
               </div>
               <button
-                type="submit"
+                type='submit'
                 disabled={isSubmitting}
-                className="w-full bg-[#ff3576] text-white py-3 rounded-lg font-bold text-lg hover:bg-pink-700 transition-colors shadow-lg disabled:bg-gray-400"
+                className='w-full bg-[#ff3576] text-white py-3 rounded-lg font-bold text-lg hover:bg-pink-700 transition-colors shadow-lg disabled:bg-gray-400'
               >
                 {isSubmitting ? 'Submitting...' : 'Speak To Experts'}
               </button>

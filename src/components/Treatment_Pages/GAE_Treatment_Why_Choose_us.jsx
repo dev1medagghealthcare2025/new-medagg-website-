@@ -5,7 +5,6 @@ const GAE_Treatment_Why_Choose_us = () => {
   return (
     <section className='w-full bg-white py-12 sm:py-16 lg:py-20'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-       
 
         {/* Main Content */}
         <div className='mb-12 sm:mb-16'>
@@ -26,7 +25,7 @@ const GAE_Treatment_Why_Choose_us = () => {
             </div>
             <h3 className='text-lg sm:text-xl font-bold text-[#2d2552] mb-3 sm:mb-4 transition-colors duration-300 group-hover:text-white'>Non-Surgical</h3>
             <p className='text-gray-600 text-sm leading-relaxed flex-grow transition-colors duration-300 group-hover:text-white'>
-            No open surgery, No Scars, 
+            No open surgery, No Scars,
            <br/> No Sutures.
             </p>
           </div>

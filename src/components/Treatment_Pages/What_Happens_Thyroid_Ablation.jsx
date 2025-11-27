@@ -105,7 +105,7 @@ const WhatHappensThyroidAblation = ({ videoUrl }) => {
                   style={{
                     backgroundImage: `url(https://i.ytimg.com/vi/${ytId}/hqdefault.jpg)`,
                     backgroundSize: 'cover',
-                    backgroundPosition: 'center'
+                    backgroundPosition: 'center',
                   }}
                   aria-label='Play video'
                 >

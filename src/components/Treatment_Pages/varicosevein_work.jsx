@@ -35,28 +35,28 @@ const steps = [
 
 const VaricoseVeinWork = () => {
   return (
-    <div className="py-12 md:py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <div className="text-left max-w-4xl mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#2d2552]">
-            How <span className="text-[#ff3576]">Endovenous Ablation</span> Works
+    <div className='py-12 md:py-20 bg-gray-50'>
+      <div className='container mx-auto px-4'>
+        <div className='text-left max-w-4xl mb-12'>
+          <h2 className='text-3xl md:text-4xl font-bold text-[#2d2552]'>
+            How <span className='text-[#ff3576]'>Endovenous Ablation</span> Works
           </h2>
-          <p className="mt-4 text-lg text-gray-600">
+          <p className='mt-4 text-lg text-gray-600'>
             Step-by-step breakdown of the endovenous ablation procedure
           </p>
         </div>
 
-        <div className="relative">
+        <div className='relative'>
           {/* Vertical line for desktop */}
-          <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-10 bottom-10 w-0.5 bg-[#ff3576] opacity-30"></div>
+          <div className='hidden md:block absolute left-1/2 -translate-x-1/2 top-10 bottom-10 w-0.5 bg-[#ff3576] opacity-30'></div>
 
           {steps.map((item, index) => (
             <div
               key={item.step}
-              className="relative md:grid md:grid-cols-2 md:gap-16 items-center mb-12 group"
+              className='relative md:grid md:grid-cols-2 md:gap-16 items-center mb-12 group'
             >
               {/* Step Number Circle for Desktop */}
-              <div className="hidden md:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 items-center justify-center w-12 h-12 bg-[#ff3576] rounded-full text-white font-bold text-xl shadow-md z-10">
+              <div className='hidden md:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 items-center justify-center w-12 h-12 bg-[#ff3576] rounded-full text-white font-bold text-xl shadow-md z-10'>
                 {item.step}
               </div>
 
@@ -65,16 +65,16 @@ const VaricoseVeinWork = () => {
                 <img
                   src={item.imgSrc}
                   alt={item.title}
-                  className="rounded-lg shadow-lg object-cover w-full max-w-md"
+                  className='rounded-lg shadow-lg object-cover w-full max-w-md'
                 />
               </div>
 
               {/* Content */}
               <div className={`mt-6 md:mt-0 ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
-                <h3 className="text-xl font-bold text-[#2d2552] mb-2">
-                  <span className="text-[#ff3576]">Step {item.step}: </span>{item.title}
+                <h3 className='text-xl font-bold text-[#2d2552] mb-2'>
+                  <span className='text-[#ff3576]'>Step {item.step}: </span>{item.title}
                 </h3>
-                <p className="text-gray-600">{item.description}</p>
+                <p className='text-gray-600'>{item.description}</p>
               </div>
             </div>
           ))}

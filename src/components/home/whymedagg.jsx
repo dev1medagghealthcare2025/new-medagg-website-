@@ -115,7 +115,7 @@ const WhyMedagg = () => (
       </div>
       <div className='flex items-center justify-center mt-12'>
         <div className='text-center md:text-left'>
-    
+
         </div>
       </div>
     </div>
