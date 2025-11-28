@@ -68,19 +68,114 @@ function parseTableLineToCells(line) {
   return raw.map(c => c.trim());
 }
 
+// --- Frontmatter (.md) support helpers ---
+function parseFrontmatter(md) {
+  if (!md) return { data: {}, content: '' };
+  const fmMatch = md.match(/^---\s*\n([\s\S]*?)\n---\s*\n?/);
+  if (!fmMatch) return { data: {}, content: md };
+  const fmBlock = fmMatch[1];
+  const rest = md.slice(fmMatch[0].length);
+  const data = {};
+  fmBlock.split(/\r?\n/).forEach((line) => {
+    const m = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
+    if (!m) return;
+    const key = m[1];
+    let val = m[2].trim();
+    if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith('\'') && val.endsWith('\''))) {
+      val = val.slice(1, -1);
+    }
+    if (/^\[.*\]$/.test(val)) {
+      const inner = val.slice(1, -1).trim();
+      data[key] = inner ? inner.split(',').map((s) => s.trim().replace(/^['"]|['"]$/g, '')) : [];
+    } else {
+      data[key] = val;
+    }
+  });
+  return { data, content: rest };
+}
+
+function basicMarkdownToHtml(md) {
+  if (!md) return '';
+  let html = md;
+  // images
+  html = html.replace(/!\[([^\]]*)\]\(([^\)]+)\)/g, '<img src="$2" alt="$1" />');
+  // links
+  html = html.replace(/\[([^\]]+)\]\(([^\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+  // headings
+  html = html.replace(/^######\s*(.*)$/gm, '<h6>$1</h6>');
+  html = html.replace(/^#####\s*(.*)$/gm, '<h5>$1</h5>');
+  html = html.replace(/^####\s*(.*)$/gm, '<h4>$1</h4>');
+  html = html.replace(/^###\s*(.*)$/gm, '<h3>$1</h3>');
+  html = html.replace(/^##\s*(.*)$/gm, '<h2>$1</h2>');
+  html = html.replace(/^#\s*(.*)$/gm, '<h1>$1</h1>');
+  // paragraphs
+  html = html
+    .split(/\n{2,}/)
+    .map((block) => {
+      const trimmed = block.trim();
+      if (!trimmed) return '';
+      if (/^<h\d|^<img|^<ul|^<ol|^<p|^<blockquote/.test(trimmed)) return trimmed;
+      const withBreaks = trimmed.replace(/\n/g, '<br/>');
+      return `<p>${withBreaks}</p>`;
+    })
+    .join('\n');
+  return html;
+}
+
+function readFrontmatterPosts(dirAbs) {
+  const posts = [];
+  if (!fs.existsSync(dirAbs)) return posts;
+  const files = fs.readdirSync(dirAbs).filter((f) => f.toLowerCase().endsWith('.md'));
+  for (const file of files) {
+    if (file === 'blog_post.md') continue; // skip legacy export table
+    const full = path.join(dirAbs, file);
+    try {
+      const raw = fs.readFileSync(full, 'utf8');
+      const { data, content } = parseFrontmatter(raw);
+      const title = data.title || stripHtml(content).slice(0, 80) || file.replace(/\.md$/i, '');
+      const slug = (data.slug || file.replace(/\.md$/i, ''))
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+      const date = data.date || new Date().toISOString().slice(0, 10);
+      const html = basicMarkdownToHtml(content);
+      const featuredImage = data.cover || extractFirstImage(html);
+      const excerpt = data.excerpt || generateExcerpt(html);
+      const post = {
+        id: undefined,
+        title,
+        slug,
+        date,
+        status: 'publish',
+        excerpt,
+        content: html,
+        featuredImage: featuredImage || null,
+        categories: [],
+        tags: Array.isArray(data.tags) ? data.tags : [],
+        author: data.author || 'Medagg Healthcare',
+        link: '',
+      };
+      if (post.slug && post.title && post.content) posts.push(post);
+    } catch (e) {
+      console.warn('Failed to parse frontmatter post', file, e?.message);
+    }
+  }
+  return posts;
+}
+
 function main() {
   if (!fs.existsSync(INPUT_PATH)) {
     console.error(`Input file not found: ${INPUT_PATH}`);
-    process.exit(1);
+    // continue; we may still have standalone .md files to ingest
   }
-  const content = fs.readFileSync(INPUT_PATH, 'utf8');
-  const lines = content.split(/\r?\n/);
+  const content = fs.existsSync(INPUT_PATH) ? fs.readFileSync(INPUT_PATH, 'utf8') : '';
+  const lines = content ? content.split(/\r?\n/) : [];
 
   // Find header row with the post fields
   const headerIndex = lines.findIndex(l => /\|post_id\|.*\|post_name\|.*\|post_type\|/i.test(l));
-  if (headerIndex === -1) {
+  if (headerIndex === -1 && content) {
     console.error('Could not locate the detailed header row containing post_id/post_name/post_type.');
-    process.exit(1);
+    // continue without exiting; frontmatter posts may exist
   }
 
   const headerLine = lines[headerIndex];
@@ -214,6 +309,15 @@ function main() {
       postsBySlug.set(post.slug, post);
       rowsIncluded++;
     }
+  }
+
+  // Merge in frontmatter-based posts
+  try {
+    const blogsDir = path.resolve(__dirname, '..', 'public', 'blogs');
+    const fmPosts = readFrontmatterPosts(blogsDir);
+    for (const p of fmPosts) postsBySlug.set(p.slug, p);
+  } catch (e) {
+    console.warn('Frontmatter ingest skipped due to error:', e?.message);
   }
 
   const posts = Array.from(postsBySlug.values())

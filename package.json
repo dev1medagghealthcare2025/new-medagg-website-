@@ -38,12 +38,13 @@
   "scripts": {
     "start": "npx vite",
     "dev": "npx vite --force",
-    "build": "cross-env ROLLUP_USE_NODEJS=true vite build",
+    "build": "npm run blog:build && cross-env ROLLUP_USE_NODEJS=true vite build",
     "serve": "npx vite preview",
     "build:css": "npx tailwindcss -i ./src/index.css -o ./src/tailwind.output.css",
     "watch:css": "npx tailwindcss -i ./src/index.css -o ./src/tailwind.output.css --watch",
     "lint": "eslint src --ext .js,.jsx",
-    "lint:fix": "eslint src --ext .js,.jsx --fix"
+    "lint:fix": "eslint src --ext .js,.jsx --fix",
+    "blog:build": "node scripts/parseBlogExport.js"
   },
   "engines": {
     "node": "20.x"
