@@ -50,6 +50,7 @@ import JoinWithUs from './pages/Join_with_us';
 import Testiominal from './pages/Testiominal';
 import PolicyPage from './pages/policy';
 import TermsConditionPage from './pages/terms_condition';
+import DiabeticFootPage from './pages/Diabetic _Foot';
 
 function App() {
   return (
@@ -83,6 +84,7 @@ function App() {
           <Route path='/breast-nodule-rfa' element={<BreastNoduleRadiofrequencyAblation />} />
                     <Route path='/join-with-us' element={<JoinWithUs />} />
           <Route path='/testimonials' element={<Testiominal />} />
+          <Route path='/diabetic-foot' element={<DiabeticFootPage />} />
           {/* Policy page routes */}
           <Route path='/policy' element={<PolicyPage />} />
           <Route path='/privacy-policy' element={<PolicyPage />} />

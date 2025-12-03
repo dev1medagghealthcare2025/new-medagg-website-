@@ -100,8 +100,8 @@ const BlogList = () => {
         ) : (
           <>
             <div className='space-y-12 mb-12'>
-              {posts.slice(0, visibleCount).map((post) => (
-                <article key={post.id} className='flex flex-col md:flex-row items-start gap-8 border-b border-gray-200 pb-8'>
+              {posts.slice(0, visibleCount).map((post, idx) => (
+                <article key={post.slug || post.title || idx} className='flex flex-col md:flex-row items-start gap-8 border-b border-gray-200 pb-8'>
                   {/* Featured Image */}
                   {post.featuredImage && (
                     <div className='w-full md:w-1/3 flex-shrink-0'>

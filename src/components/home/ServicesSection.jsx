@@ -103,6 +103,13 @@ const allServices = {
       icon: '/Breast_nodule_icon.svg',
       path: '/breast-nodule-vae',
     },
+    {
+      title: 'Diabetic Foot',
+      desc: 'Minimally invasive care to improve blood flow and support limb salvage.',
+      img: '/diabetic footer.png',
+      icon: '/diabetic footer.png',
+      path: '/diabetic-foot',
+    },
   ],
 };
 
@@ -187,7 +194,9 @@ const OurServiceSection = () => {
                 onClick={() => handleCardClick(service.path)}
                 className='flex flex-col items-center text-center cursor-pointer group'
               >
-                <div className='w-20 h-20 p-3 rounded-2xl bg-white shadow-md flex items-center justify-center ring-1 ring-gray-100 group-hover:shadow-lg group-hover:ring-pink-200 transition-all'>
+                <div
+                  className={`w-20 h-20 ${service.title === 'Diabetic Foot' ? 'p-1' : 'p-3'} rounded-2xl bg-white shadow-md flex items-center justify-center ring-1 ring-gray-100 group-hover:shadow-lg group-hover:ring-pink-200 transition-all`}
+                >
                   <img src={service.icon} alt={`${service.title} icon`} className='w-full h-full object-contain' />
                 </div>
                 <p className='text-[13px] font-semibold mt-2 text-[#1a1446] group-hover:text-pink-600 transition-colors leading-snug'>
@@ -247,7 +256,7 @@ const OurServiceSection = () => {
                 <img
                   src={t.img}
                   alt=''
-                  className='w-12 h-12 object-contain flex-shrink-0'
+                  className={`${t.title === 'Diabetic Foot' ? 'w-16 h-16' : 'w-12 h-12'} object-contain flex-shrink-0`}
                   aria-hidden='true'
                 />
               </div>
