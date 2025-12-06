@@ -25,7 +25,7 @@ export default function Navbar() {
           <div className='flex-shrink-0'>
             <Link to='/' className='flex items-center'>
               <img
-                src='/Medagg logo(1).png'
+                src='/new_medagg.png'
                 alt='Medagg Healthcare'
                 className='w-16 h-10 sm:w-18 sm:h-11 lg:w-[90px] lg:h-[56px]'
               />
