@@ -57,9 +57,9 @@ const DiabeticHeroSection = () => {
   return (
     <section
       className="relative w-full bg-cover bg-center py-8 sm:py-10 lg:py-14 px-4 sm:px-6 lg:px-8"
-      style={{ backgroundImage: "url('/Diabetic.png')", minHeight: '460px' }}
+      style={{ backgroundImage: "url('/diabetic_foot_new.png')", minHeight: '460px' }}
     >
-      <div className="absolute inset-0 bg-[#2d2552] bg-opacity-40" />
+      <div className="absolute inset-0 bg-[#2d2552] bg-opacity-30" />
 
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">

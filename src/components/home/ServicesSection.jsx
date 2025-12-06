@@ -110,6 +110,14 @@ const allServices = {
       icon: '/diabetic footer.png',
       path: '/diabetic-foot',
     },
+
+    {
+      title: 'Frozen Shoulder',
+      desc: 'A breakthrough non-surgical option to relieve frozen shoulder pain and stiffness.',
+      img: '/frozen shouder.png',
+      icon: '/frozen shouder.png',
+      path: '/frozen-shoulder',
+    },
   ],
 };
 

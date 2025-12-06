@@ -51,7 +51,7 @@ import Testiominal from './pages/Testiominal';
 import PolicyPage from './pages/policy';
 import TermsConditionPage from './pages/terms_condition';
 import DiabeticFootPage from './pages/Diabetic _Foot';
-
+import FrozenShoulderPage from './pages/frozen_shoulder';
 function App() {
   return (
     <div className='min-h-screen bg-pink-50 flex flex-col isolate'>
@@ -85,6 +85,7 @@ function App() {
                     <Route path='/join-with-us' element={<JoinWithUs />} />
           <Route path='/testimonials' element={<Testiominal />} />
           <Route path='/diabetic-foot' element={<DiabeticFootPage />} />
+          <Route path='/frozen-shoulder' element={<FrozenShoulderPage />} />
           {/* Policy page routes */}
           <Route path='/policy' element={<PolicyPage />} />
           <Route path='/privacy-policy' element={<PolicyPage />} />

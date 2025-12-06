@@ -44,7 +44,8 @@
     "watch:css": "npx tailwindcss -i ./src/index.css -o ./src/tailwind.output.css --watch",
     "lint": "eslint src --ext .js,.jsx",
     "lint:fix": "eslint src --ext .js,.jsx --fix",
-    "blog:build": "node scripts/parseBlogExport.js"
+    "blog:build": "node scripts/parseBlogExport.js",
+    "build:blogs": "npm run blog:build"
   },
   "engines": {
     "node": "20.x"
