@@ -43,6 +43,16 @@ const treatments = [
   { title: 'Plantar Fascitis', path: '/pfe', subTreatments: [{ title: 'Plantar Fascitis Embolization', path: '/pfe' }] },
   { title: 'Varicose Veins', path: '/varicose-vein', subTreatments: [{ title: 'Endovenous Ablation', path: '/varicose-vein' }] },
 
+  // New: Endovascular Recanalization & Stenting - Diabetic Foot
+  { title: 'Diabetic Foot', path: '/diabetic-foot', subTreatments: [
+    { title: 'Endovascular Recanalization & Stenting', path: '/diabetic-foot' }
+  ] },
+
+  // New: Adhesive Capsulitis Embolization - Frozen Shoulder
+  { title: 'Frozen Shoulder', path: '/frozen-shoulder', subTreatments: [
+    { title: 'Adhesive Capsulitis Embolization', path: '/frozen-shoulder' }
+  ] },
+
 ];
 
 const DropdownMenu = ({ items, stackSubBelow = false, depth = 0 }) => {
