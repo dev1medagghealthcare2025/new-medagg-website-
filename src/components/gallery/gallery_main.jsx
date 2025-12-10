@@ -120,6 +120,38 @@ const ALL_ITEMS = [
     src: '/camp6.jpeg',
     categories: ['Our Camps'],
   },
+  // Conference images
+  {
+    id: 31,
+    src: '/DSC03316.JPG',
+    categories: ['Conference'],
+  },
+  {
+    id: 32,
+    src: '/conf_1.JPG',
+    categories: ['Conference'],
+  },
+  {
+    id: 33,
+    src: '/conf_2.JPG',
+    categories: ['Conference'],
+  },
+  {
+    id: 34,
+    src: '/conf_3.JPG',
+    categories: ['Conference'],
+  },
+  {
+    id: 35,
+    src: '/conf_4.JPG',
+    categories: ['Conference'],
+  },
+  // Additional Celebrations images
+  {
+    id: 36,
+    src: '/new_one.jpg',
+    categories: ['Celebrations'],
+  },
 ];
 
 export default function GalleryMain() {
