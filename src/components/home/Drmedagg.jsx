@@ -9,7 +9,7 @@ const Drmedagg = () => {
         {/* Left: Bot Illustration */}
         <div className='flex-shrink-0 flex justify-center items-center min-w-[240px] max-[390px]:min-w-[210px] max-[360px]:min-w-[190px] max-[340px]:min-w-[180px] sm:min-w-[260px] max-w-[350px] md:ml-0'>
           <img
-            src='/Dr_medagg_new-removebg-preview.png'
+            src='/Ira_fr_web.png'
             alt='Dr. Medagg Bot'
             className='max-w-[320px] max-[390px]:max-w-[260px] max-[360px]:max-w-[240px] w-full h-auto'
           />

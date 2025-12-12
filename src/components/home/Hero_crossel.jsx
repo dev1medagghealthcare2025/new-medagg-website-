@@ -114,7 +114,7 @@ const Hero_crossel = ({ query, setQuery, handleSearch, results, isLoading }) => 
             {/* Dr. Medagg Character */}
             <div className='flex justify-center'>
               <img
-                src='/Dr_medagg_new-removebg-preview.png'
+                src='/Ira_fr_web.png'
                 alt='Dr. Medagg'
                 className='h-80 w-auto object-contain'
               />
