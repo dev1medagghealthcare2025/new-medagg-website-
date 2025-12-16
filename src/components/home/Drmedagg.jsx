@@ -18,12 +18,12 @@ const Drmedagg = () => {
         <div className='flex-1 flex flex-col justify-center items-start w-full max-w-none md:max-w-lg min-w-0 gap-3 mx-auto md:pl-0 overflow-visible'>
           <div className='w-full pr-1'>
             <h2 className='text-lg sm:text-2xl md:text-3xl lg:text-4xl font-extrabold leading-tight tracking-tight text-left flex items-center gap-1.5 sm:gap-2 mb-1 w-full origin-left'>
-              <span className='text-[#ff3576] whitespace-nowrap'>Meet IRA :</span>
+              <span className='text-[#ff3576] whitespace-nowrap'>Meet IRa :</span>
               <span className='text-[#1a1446] font-bold whitespace-nowrap'>Your Medagg Health Companion</span>
             </h2>
           </div>
           <p className='text-lg max-[360px]:text-base text-[#7c6e97] font-medium text-left w-full leading-relaxed'>
-          From instant answers,  booking appointments, Or Finding the Right Treatment, Ira is here to simplify your healthcare journey — anytime, anywhere.
+          From instant answers,  booking appointments, Or Finding the Right Treatment, IRa is here to simplify your healthcare journey — anytime, anywhere.
           </p>
           {/* Actions Group (search removed as requested) */}
           <div className='flex flex-col gap-3 w-full'>

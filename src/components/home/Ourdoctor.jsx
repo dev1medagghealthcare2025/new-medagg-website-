@@ -145,20 +145,7 @@ const doctors = [
     city: 'Hyderabad',
     image: '/Sailesh Kumar Garge.png',
   },
-  {
-    name: 'Dr. Avinash Malla',
-    degrees: 'MBBS, DMRD, DNB',
-    specialty: 'Interventional Radiology',
-    city: 'Hyderabad',
-    image: '/Avinash Malla.png',
-  },
-  {
-    name: 'Dr. Arjun Somi Reddy',
-    degrees: 'MBBS, DMRD, DNB',
-    specialty: 'Interventional Radiology',
-    city: 'Hyderabad',
-    image: '/Arjun Somi Reddy.png',
-  },
+
 
   // Vijayawada Doctors
   {

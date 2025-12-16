@@ -52,6 +52,10 @@ import PolicyPage from './pages/policy';
 import TermsConditionPage from './pages/terms_condition';
 import DiabeticFootPage from './pages/Diabetic _Foot';
 import FrozenShoulderPage from './pages/frozen_shoulder';
+import Cursor from './components/ui/Cursor';
+import ImageCursorStyle from './components/ui/ImageCursorStyle';
+import { UI_ENHANCEMENTS_ENABLED, IMAGE_CURSOR_ENABLED } from './config/uiEnhancements';
+import ButtonInteractions from './components/ui/ButtonInteractions';
 function App() {
   return (
     <div className='min-h-screen bg-pink-50 flex flex-col isolate'>
@@ -100,6 +104,14 @@ function App() {
       <BackToTop />
       <CallFab position='right' phone='+919363656010' />
       <FloatingWhatsApp phone='+918925928840' position='left' />
+      {IMAGE_CURSOR_ENABLED && <ImageCursorStyle />}
+      <ButtonInteractions />
+      {UI_ENHANCEMENTS_ENABLED && (
+        <>
+          <Cursor />
+          <style>{`@media (pointer: fine) { body { cursor: none; } a,button,[role="button"], input, textarea, select { cursor: none; } }`}</style>
+        </>
+      )}
     </div>
   );
 }

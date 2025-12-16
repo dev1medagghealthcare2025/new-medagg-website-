@@ -169,10 +169,7 @@ export default function Trusted_by_Patients_Across_India() {
                 <MessageCircle className='w-5 h-5' />
                 <span>Talk With Medagg</span>
               </button>
-              <button className='bg-transparent border-2 border-white text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center gap-2 hover:bg-white/10 transition-colors shadow-lg'>
-                <Phone className='w-5 h-5' />
-                <span>+91 9363656010</span>
-              </button>
+              
             </div>
           </div>
         </div>

@@ -32,11 +32,11 @@ const getYouTubeId = (url) => {
   }
 };
 
-const TestiominalCard = ({ id, title, description }) => {
+const TestiominalCard = ({ id, title, description, customThumbnail }) => {
   const [playing, setPlaying] = React.useState(false);
   const [expanded, setExpanded] = React.useState(false);
 
-  const thumb = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+  const thumb = customThumbnail || `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
   const embedSrc = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&controls=1&rel=0&modestbranding=1`;
 
   return (
@@ -142,6 +142,12 @@ const Testiominal_main = () => {
     [items[0]?.id]: 'Rapid Recovery with Minimally Invasive Treatment',
   };
 
+  const customThumbnailsById = {
+    [items[0]?.id]: '/1st_testimonial.png',
+    [items[1]?.id]: '/2nd_Testimonial.png',
+    [items[2]?.id]: '/3rd_testimonial.png',
+  };
+
   return (
     <section className='py-10 sm:py-12'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
@@ -169,6 +175,7 @@ const Testiominal_main = () => {
               id={v.id}
               title={titlesById[v.id] /* add more titles as needed */}
               description={descriptionsById[v.id]}
+              customThumbnail={customThumbnailsById[v.id]}
             />
           ))}
         </div>

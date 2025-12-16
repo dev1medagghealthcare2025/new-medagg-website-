@@ -21,12 +21,12 @@ const InvestorHerosection = ({ scrollToInfoRef }) => {
               <span className='text-white'>of Non-Surgical Healthcare</span>
             </h1>
 
-            <p className='text-base sm:text-lg lg:text-xl text-gray-200 max-w-3xl leading-8 lg:leading-9'>
+            {/* <p className='text-base sm:text-lg lg:text-xl text-gray-200 max-w-3xl leading-8 lg:leading-9'>
               Medagg Healthcare is leading India’s transformation toward Interventional Radiology (IR) —
               minimally invasive, image-guided treatments that enable faster recovery, lower costs, and better
               outcomes. Our platform connects hospitals and patients through transparency, technology, and trust,
               empowering both to make informed, ethical decisions.
-            </p>
+            </p> */}
 
             <p className='text-base sm:text-lg lg:text-xl text-gray-200 max-w-3xl leading-8 lg:leading-9 mt-3'>
               Join us in shaping the future of healthcare — invest in Medagg Healthcare and be part of India’s

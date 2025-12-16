@@ -86,7 +86,7 @@ const Hero_crossel = ({ query, setQuery, handleSearch, results, isLoading }) => 
                       <span className='text-white text-xs'>Dr</span>
                     </div>
                     <div className='bg-white rounded-lg p-2 shadow-sm flex-1'>
-                      <p className='text-xs text-gray-700'>Hello! I'm Dr. IRA</p>
+                      <p className='text-xs text-gray-700'>Hello! I'm IRa</p>
                     </div>
                   </div>
 
