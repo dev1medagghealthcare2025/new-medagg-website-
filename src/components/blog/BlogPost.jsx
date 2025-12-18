@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Calendar, User, ArrowLeft, Tag, Folder, Share2, Clock } from 'lucide-react';
 import DOMPurify from 'dompurify';
 import blogPosts from '../../data/blogPosts.json';
+import '../../assets/css/blog.css';
 
 const BlogPost = () => {
   const { slug } = useParams();
@@ -35,16 +36,45 @@ const BlogPost = () => {
   // Compute related posts locally (by shared category if available, else latest)
   const loadRelatedPosts = (current) => {
     try {
+      const allPosts = blogPosts.filter(p => p.slug !== current.slug);
+
+      // 1. Try to find posts with shared categories
       const currentCats = (current.categories || []).map(c => (c || '').toLowerCase());
-      let candidates = blogPosts.filter(p => p.slug !== current.slug);
+      let candidates = [];
       if (currentCats.length > 0) {
-        candidates = candidates.filter(p => (p.categories || []).some(c => currentCats.includes((c || '').toLowerCase())));
+        candidates = allPosts.filter(p => 
+          (p.categories || []).some(c => currentCats.includes((c || '').toLowerCase()))
+        );
       }
-      // Fallback to latest if none
-      if (candidates.length === 0) {
-        candidates = blogPosts.filter(p => p.slug !== current.slug);
+
+      // 2. If no category matches, try to find posts with shared tags
+      if (candidates.length < 3) {
+        const currentTags = (current.tags || []).map(t => (t || '').toLowerCase());
+        if (currentTags.length > 0) {
+          const tagCandidates = allPosts.filter(p => 
+            (p.tags || []).some(t => currentTags.includes((t || '').toLowerCase()))
+          );
+          // Add tag-based candidates, avoiding duplicates
+          tagCandidates.forEach(p => {
+            if (!candidates.some(c => c.slug === p.slug)) {
+              candidates.push(p);
+            }
+          });
+        }
       }
+
+      // 3. If still not enough, fill with the latest posts
+      if (candidates.length < 3) {
+        const latestPosts = [...allPosts].sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
+        latestPosts.forEach(p => {
+          if (candidates.length < 3 && !candidates.some(c => c.slug === p.slug)) {
+            candidates.push(p);
+          }
+        });
+      }
+
       const sorted = [...candidates].sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
+
       setRelatedPosts(sorted.slice(0, 3).map(post => ({
         id: post.id,
         title: post.title,
@@ -82,9 +112,30 @@ const BlogPost = () => {
   };
 
   // Sanitize HTML content
-  const createSafeHTML = (htmlContent) => {
+  // Sanitize HTML content, and remove the first h1 if it's a duplicate of the main title
+  const createSafeHTML = (htmlContent, mainTitle) => {
+    // Normalize titles for a more robust comparison
+    const normalize = (str) => {
+      return stripHtml(str)
+        .toLowerCase()
+        .replace(/\s*-\s*medagg\s*$/,'') // Remove '- medagg' suffix
+        .replace(/[^a-z0-9]/g, '') // Remove non-alphanumeric characters
+        .trim();
+    };
+
+    const normalizedMainTitle = normalize(mainTitle);
+
+    const processedHtml = htmlContent.replace(/<h1.*?>.*?<\/h1>/i, (match) => {
+      const normalizedH1 = normalize(match);
+      // If the normalized titles are identical, remove the H1 from the content
+      if (normalizedH1 === normalizedMainTitle) {
+        return ''; // Remove this H1 tag
+      }
+      return match; // Keep it
+    });
+
     return {
-      __html: DOMPurify.sanitize(htmlContent, {
+      __html: DOMPurify.sanitize(processedHtml, {
         ALLOWED_TAGS: [
           'p', 'br', 'strong', 'em', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
           'ul', 'ol', 'li', 'blockquote', 'a', 'img', 'figure', 'figcaption',
@@ -273,8 +324,8 @@ const BlogPost = () => {
 
             {/* Article Content */}
             <div
-              className='prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-pink-600 prose-a:no-underline hover:prose-a:underline prose-strong:text-gray-900 prose-img:rounded-lg prose-img:shadow-md'
-              dangerouslySetInnerHTML={createSafeHTML(post.content)}
+              className='blog-content prose prose-lg max-w-none prose-headings:text-gray-900 prose-headings:font-bold prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mt-8 prose-h2:mt-16 prose-h3:mt-10 prose-ul:mt-8 prose-li:mt-4 prose-a:text-pink-600 prose-a:no-underline hover:prose-a:underline prose-strong:text-gray-900 prose-img:rounded-lg prose-img:shadow-md'
+              dangerouslySetInnerHTML={createSafeHTML(post.content, post.title)}
             />
 
             {/* Article Footer */}
@@ -302,7 +353,7 @@ const BlogPost = () => {
             <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
               {relatedPosts.map((relatedPost) => (
                 <Link
-                  key={relatedPost.id}
+                  key={relatedPost.slug}
                   to={`/blog/${relatedPost.slug}`}
                   className='bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow group'
                 >

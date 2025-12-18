@@ -49,6 +49,17 @@ function generateExcerpt(html, maxLength = 180) {
   return (lastSpace > 60 ? cut.slice(0, lastSpace) : cut) + '...';
 }
 
+function generateTagsFromTitle(title) {
+  if (!title) return [];
+  const stopWords = new Set(['a', 'an', 'the', 'in', 'on', 'for', 'and', 'with', 'to', 'of', 'is', 'it', 'how', 'what', 'when', 'why', 'can', 'be', 'vs', 'or', 'your', 'you', 'should', 'know']);
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, '')
+    .split(/\s+/)
+    .filter(word => word.length > 3 && !stopWords.has(word))
+    .slice(0, 5);
+}
+
 function safeJsonWrite(filePath, data) {
   const dir = path.dirname(filePath);
   if (!fs.existsSync(dir)) {
@@ -96,29 +107,75 @@ function parseFrontmatter(md) {
 
 function basicMarkdownToHtml(md) {
   if (!md) return '';
+
   let html = md;
-  // images
-  html = html.replace(/!\[([^\]]*)\]\(([^\)]+)\)/g, '<img src="$2" alt="$1" />');
-  // links
-  html = html.replace(/\[([^\]]+)\]\(([^\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
-  // headings
+
+
+  // Block-level: Headings
   html = html.replace(/^######\s*(.*)$/gm, '<h6>$1</h6>');
   html = html.replace(/^#####\s*(.*)$/gm, '<h5>$1</h5>');
   html = html.replace(/^####\s*(.*)$/gm, '<h4>$1</h4>');
   html = html.replace(/^###\s*(.*)$/gm, '<h3>$1</h3>');
   html = html.replace(/^##\s*(.*)$/gm, '<h2>$1</h2>');
   html = html.replace(/^#\s*(.*)$/gm, '<h1>$1</h1>');
-  // paragraphs
+
+  // Block-level: Unordered lists - This is more complex, handle it with paragraphs
+  // The paragraph splitter will handle list blocks
+
+  // Inline-level: Images and Links
+  html = html.replace(/!\[([^\]]*)\]\(([^\)]+)\)/g, '<img src="$2" alt="$1" />');
+  html = html.replace(/\[([^\]]+)\]\(([^\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+  
+  // Inline-level: Bold
+  html = html.replace(/\*\*([^\*]+)\*\*/g, '<strong>$1</strong>');
+
+  // Paragraphs and Lists
   html = html
     .split(/\n{2,}/)
     .map((block) => {
       const trimmed = block.trim();
       if (!trimmed) return '';
-      if (/^<h\d|^<img|^<ul|^<ol|^<p|^<blockquote/.test(trimmed)) return trimmed;
+
+      // Handle Markdown tables
+      if (trimmed.includes('|') && trimmed.includes('---')) {
+        const lines = trimmed.split('\n').map(l => l.trim());
+        if (lines.length > 1 && lines[1].match(/^\|?[-|:\s]+[-|:]\|?$/)) {
+          const headers = lines[0].split('|').map(h => h.trim()).filter(Boolean);
+          const headerHtml = `<thead><tr>${headers.map(h => `<th>${h}</th>`).join('')}</tr></thead>`;
+
+          const bodyRows = lines.slice(2);
+          const bodyHtml = `<tbody>${bodyRows.map(rowLine => {
+            const cells = rowLine.split('|').map(c => c.trim()).filter(Boolean);
+            if (cells.length === headers.length) {
+              return `<tr>${cells.map(c => `<td>${c}</td>`).join('')}</tr>`;
+            }
+            return '';
+          }).join('')}</tbody>`;
+
+          return `<table>${headerHtml}${bodyHtml}</table>`;
+        }
+      }
+
+      // Handle unordered lists
+      if (/^[-*]/.test(trimmed)) {
+        const items = trimmed.split(/\n/).map(item => {
+          const content = item.replace(/^\s*[-*]\s+/, '');
+          return `<li>${content.replace(/\*\*([^\*]+)\*\*/g, '<strong>$1</strong>')}</li>`;
+        }).join('');
+        return `<ul>${items}</ul>`;
+      }
+
+      // If it's already a block-level element, leave it
+      if (/^<(h[1-6]|ul|ol|p|blockquote|img)/.test(trimmed)) {
+        return trimmed;
+      }
+
+      // Otherwise, wrap in a paragraph, converting single newlines to <br>
       const withBreaks = trimmed.replace(/\n/g, '<br/>');
       return `<p>${withBreaks}</p>`;
     })
     .join('\n');
+
   return html;
 }
 
@@ -132,13 +189,18 @@ function readFrontmatterPosts(dirAbs) {
     try {
       const raw = fs.readFileSync(full, 'utf8');
       const { data, content } = parseFrontmatter(raw);
-      const title = data.title || stripHtml(content).slice(0, 80) || file.replace(/\.md$/i, '');
+
+      // Site-specific: Update 'Book an Appointment' links on the raw content
+      const appointmentLinkRegex = /https:\/\/medagghealthcare\.com\/book-an-appointment[^\)]*/g;
+      const updatedContent = content.replace(appointmentLinkRegex, '/contact-us');
+
+      const title = data.title || stripHtml(updatedContent).slice(0, 80) || file.replace(/\.md$/i, '');
       const slug = (data.slug || file.replace(/\.md$/i, ''))
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/^-+|-+$/g, '');
       const date = data.date || new Date().toISOString().slice(0, 10);
-      const html = basicMarkdownToHtml(content);
+      const html = basicMarkdownToHtml(updatedContent);
       const featuredImage = data.cover || extractFirstImage(html);
       const excerpt = data.excerpt || generateExcerpt(html);
       const post = {
@@ -150,10 +212,10 @@ function readFrontmatterPosts(dirAbs) {
         excerpt,
         content: html,
         featuredImage: featuredImage || null,
-        categories: [],
-        tags: Array.isArray(data.tags) ? data.tags : [],
+        categories: data.categories || [],
+        tags: (data.tags && data.tags.length > 0) ? data.tags : generateTagsFromTitle(title),
         author: data.author || 'Medagg Healthcare',
-        link: '',
+        link: data.link || '',
       };
       if (post.slug && post.title && post.content) posts.push(post);
     } catch (e) {
@@ -300,7 +362,7 @@ function main() {
       content: contentHtml,
       featuredImage: featuredImage || null,
       categories: [],
-      tags: [],
+      tags: generateTagsFromTitle(title),
       author: 'Medagg Healthcare',
       link,
     };
@@ -315,7 +377,10 @@ function main() {
   try {
     const blogsDir = path.resolve(__dirname, '..', 'public', 'blogs');
     const fmPosts = readFrontmatterPosts(blogsDir);
-    for (const p of fmPosts) postsBySlug.set(p.slug, p);
+    for (const p of fmPosts) {
+      p.tags = p.tags || generateTagsFromTitle(p.title);
+      postsBySlug.set(p.slug, p);
+    }
   } catch (e) {
     console.warn('Frontmatter ingest skipped due to error:', e?.message);
   }
