@@ -3,7 +3,8 @@ title: "Ayurvedic Treatment for Frozen Shoulder: Natural Healing Remedies"
 description: "Ayurvedic therapies (Abhyanga, Swedana, Panchakarma), herbs, diet, yoga, and modern non‑surgical IR options to relieve pain, reduce stiffness, and restore mobility in adhesive capsulitis."
 image: "https://images.surferseo.art/07529083-b11e-4641-bd90-576b4212f0d0.webp"
 author: "Medagg Healthcare"
-date: "2025-12-08"
+date: "2025-12-18"
+cover: "/Ayurvedic_blogs.png"
 ---
 
 # Ayurvedic Treatment for Frozen Shoulder: Natural Healing Remedies - medagg

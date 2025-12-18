@@ -136,6 +136,22 @@ function basicMarkdownToHtml(md) {
       const trimmed = block.trim();
       if (!trimmed) return '';
 
+      // Remove decorative separators (long runs of -, _, or *)
+      if (/^[-_*]{3,}$/.test(trimmed)) {
+        return '';
+      }
+
+      // Handle setext-style headings (underline with === or ---)
+      const setextMatch = trimmed.split(/\n/);
+      if (setextMatch.length === 2 && /^=\s*=*$/.test(setextMatch[1])) {
+        const text = setextMatch[0].trim();
+        return `<h1>${text}</h1>`;
+      }
+      if (setextMatch.length === 2 && /^-\s*-*$/.test(setextMatch[1])) {
+        const text = setextMatch[0].trim();
+        return `<h2>${text}</h2>`;
+      }
+
       // Handle Markdown tables
       if (trimmed.includes('|') && trimmed.includes('---')) {
         const lines = trimmed.split('\n').map(l => l.trim());
@@ -163,6 +179,15 @@ function basicMarkdownToHtml(md) {
           return `<li>${content.replace(/\*\*([^\*]+)\*\*/g, '<strong>$1</strong>')}</li>`;
         }).join('');
         return `<ul>${items}</ul>`;
+      }
+
+      // Handle ordered lists (1. 2. 3.)
+      if (/^\d+\.\s+/.test(trimmed)) {
+        const items = trimmed.split(/\n/).map(item => {
+          const content = item.replace(/^\s*\d+\.\s+/, '');
+          return `<li>${content.replace(/\*\*([^\*]+)\*\*/g, '<strong>$1</strong>')}</li>`;
+        }).join('');
+        return `<ol>${items}</ol>`;
       }
 
       // If it's already a block-level element, leave it

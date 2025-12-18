@@ -1,10 +1,10 @@
 ---
 title: "Liver Cancer Treatment Cost: Get the Best Options in India"
 slug: "liver-cancer-treatment-cost"
-date: "2025-11-27"
+date: "2025-12-18"
 author: "Medagg Healthcare"
 tags: ["Liver Cancer", "Treatment Cost", "India", "Interventional Radiology"]
-cover: ""
+cover: "/Affordable-Liver-Cancer-Treatment-Cost_-1024x557.jpg"
 excerpt: "Understand liver cancer treatment costs in India, why care is affordable yet high quality, and how IR offers cost‑effective, minimally invasive options."
 ---
 

@@ -3,7 +3,8 @@ title: "Membranous Dysmenorrhea: Causes, Pain, and the Best Non-Surgical Treatme
 description: "Rare but real: understanding membranous dysmenorrhea (decidual cast), its causes, pain pattern, diagnosis, conventional care, and modern image-guided (IR) options when standard therapy fails."
 image: "https://images.surferseo.art/b1604df3-aca6-4886-ae3c-f8eaedadfa5f.png"
 author: "Medagg Healthcare"
-date: "2025-12-08"
+date: "2025-12-18"
+cover: "/Membranous-Dysmenorrhea-TB-1024x557.jpg"
 ---
 
 # Membranous Dysmenorrhea: Causes, Pain, and the Best Non-Surgical Treatment Options - medagg

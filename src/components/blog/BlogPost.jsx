@@ -118,7 +118,8 @@ const BlogPost = () => {
     const normalize = (str) => {
       return stripHtml(str)
         .toLowerCase()
-        .replace(/\s*-\s*medagg\s*$/,'') // Remove '- medagg' suffix
+        // remove trailing brand/site suffix regardless of separator type
+        .replace(/\s*[-–—:|]*\s*medagg\s*$/i, '')
         .replace(/[^a-z0-9]/g, '') // Remove non-alphanumeric characters
         .trim();
     };
@@ -127,15 +128,46 @@ const BlogPost = () => {
 
     const processedHtml = htmlContent.replace(/<h1.*?>.*?<\/h1>/i, (match) => {
       const normalizedH1 = normalize(match);
-      // If the normalized titles are identical, remove the H1 from the content
-      if (normalizedH1 === normalizedMainTitle) {
+      // Remove if identical or if one is a clear prefix/suffix of the other
+      if (
+        normalizedH1 === normalizedMainTitle ||
+        normalizedH1.startsWith(normalizedMainTitle) ||
+        normalizedMainTitle.startsWith(normalizedH1)
+      ) {
         return ''; // Remove this H1 tag
       }
       return match; // Keep it
     });
 
+    // Additionally, remove a leading duplicate <p><strong>Title</strong></p> if present
+    let refinedHtml = processedHtml;
+    const strongLead = refinedHtml.match(/^\s*<p><strong>(.*?)<\/strong><\/p>/i);
+    if (strongLead) {
+      const normStrong = normalize(strongLead[1]);
+      if (
+        normStrong === normalizedMainTitle ||
+        normStrong.startsWith(normalizedMainTitle) ||
+        normalizedMainTitle.startsWith(normStrong)
+      ) {
+        refinedHtml = refinedHtml.replace(strongLead[0], '');
+      }
+    }
+
+    // And remove a leading duplicate <h2> that matches the main title (common from setext underline style)
+    const h2Lead = refinedHtml.match(/^\s*<h2[^>]*>(.*?)<\/h2>/i);
+    if (h2Lead) {
+      const normH2 = normalize(h2Lead[1]);
+      if (
+        normH2 === normalizedMainTitle ||
+        normH2.startsWith(normalizedMainTitle) ||
+        normalizedMainTitle.startsWith(normH2)
+      ) {
+        refinedHtml = refinedHtml.replace(h2Lead[0], '');
+      }
+    }
+
     return {
-      __html: DOMPurify.sanitize(processedHtml, {
+      __html: DOMPurify.sanitize(refinedHtml, {
         ALLOWED_TAGS: [
           'p', 'br', 'strong', 'em', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
           'ul', 'ol', 'li', 'blockquote', 'a', 'img', 'figure', 'figcaption',

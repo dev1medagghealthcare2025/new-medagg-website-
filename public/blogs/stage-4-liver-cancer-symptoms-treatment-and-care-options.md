@@ -1,10 +1,10 @@
 ---
 title: "Stage 4 Liver Cancer: Symptoms, Treatment, and Care Options"
 slug: "stage-4-liver-cancer-symptoms-treatment-and-care-options"
-date: "2025-11-27"
+date: "2025-12-18"
 author: "Medagg Healthcare"
 tags: ["Liver Cancer", "Stage 4", "Interventional Radiology", "Palliative Care"]
-cover: "https://images.surferseo.art/31e4dfc2-2778-4dcf-a911-ea83269472eb.png"
+cover: "/Navigating-Stage-4-Liver-Cancer-1024x557.jpg"
 excerpt: "Stage 4 liver cancer is advanced but not the end of the road. Learn symptoms, diagnosis, modern treatments including IR, and how to plan care."
 ---
 

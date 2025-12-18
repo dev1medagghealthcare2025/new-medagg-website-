@@ -3,7 +3,8 @@ title: "Understanding the Difference Between BPH and Prostate Cancer"
 description: "Clear comparison of benign prostatic hyperplasia (BPH) vs prostate cancer: symptoms, causes, diagnosis, treatments, and minimally invasive IR options."
 image: "https://images.surferseo.art/d79c0f89-808e-4999-bb08-4541ae92f562.png"
 author: "Medagg Healthcare"
-date: "2025-12-08"
+date: "2025-12-18"
+cover: "/Understanding-the-Difference-Between-BPH-and-Prostate-Cancer-1024x557.jpg"
 ---
 
 # Understanding the Difference Between BPH and Prostate Cancer - medagg

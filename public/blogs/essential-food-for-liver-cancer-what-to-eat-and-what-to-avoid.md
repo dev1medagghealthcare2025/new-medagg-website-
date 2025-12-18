@@ -1,10 +1,10 @@
 ---
 title: "Essential Food for Liver Cancer: What to Eat and What to Avoid"
 slug: "essential-food-for-liver-cancer-what-to-eat-and-what-to-avoid"
-date: "2025-11-27"
+date: "2025-12-18"
 author: "Medagg Healthcare"
 tags: ["Liver Cancer", "Nutrition", "Interventional Radiology"]
-cover: "https://images.surferseo.art/7120e774-7043-4e6a-92c2-28ffd4f43512.png"
+cover: "/Essential-Food-for-Liver-Cancer_-1024x557.jpg"
 excerpt: "Food won’t cure cancer, but the right diet supports liver function, boosts immunity, and helps recovery during treatment. Here’s what to eat and what to avoid."
 ---
 

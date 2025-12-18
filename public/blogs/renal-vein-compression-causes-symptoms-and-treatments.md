@@ -1,10 +1,10 @@
 ---
 title: "Renal Vein Compression: Causes, Symptoms, and Treatments"
 slug: "renal-vein-compression-causes-symptoms-and-treatments"
-date: "2025-11-27"
+date: "2025-12-18"
 author: "Medagg Healthcare"
 tags: ["Renal Vein", "Nutcracker Syndrome", "Pelvic Congestion"]
-cover: "https://images.surferseo.art/a52ad4f7-3463-4072-b18d-3ed7ac557d3d.png"
+cover: "/Renal_vein.png"
 excerpt: "Left flank pain, pelvic discomfort, or blood in urine may point to renal vein compression (nutcracker syndrome). Learn causes, signs, diagnosis, and modern treatments."
 ---
 

@@ -1,10 +1,10 @@
 ---
 title: "Effective Hemoptysis Treatment: Causes, Options, and What to Expect"
 slug: "effective-hemoptysis-treatment-causes-options-and-what-to-expect"
-date: "2025-11-27"
+date: "2025-12-18"
 author: "Medagg Healthcare"
 tags: ["Hemoptysis", "Interventional Radiology", "Pulmonology"]
-cover: "https://images.surferseo.art/d288077e-eccc-4957-8c80-24279e18116a.png"
+cover: "/Effective-Hemoptysis-Treatment_-1024x557.jpg"
 excerpt: "Coughing up blood can be alarming. Learn causes, diagnosis, modern non‑surgical options like bronchial artery embolization, and what recovery looks like."
 ---
 

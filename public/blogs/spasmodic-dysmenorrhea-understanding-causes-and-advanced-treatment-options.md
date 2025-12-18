@@ -3,7 +3,8 @@ title: "Spasmodic Dysmenorrhea: Understanding, Causes, and Advanced Treatment Op
 description: "Clear guide to primary spasmodic dysmenorrhea: causes, symptoms, conventional care (NSAIDs, hormones, heat, TENS) and modern non‑surgical interventional radiology options for refractory pelvic pain."
 image: "https://images.surferseo.art/c55d6bb6-d857-48a6-bb0e-fc942a7ebe6e.png"
 author: "Medagg Healthcare"
-date: "2025-12-08"
+date: "2025-12-18"
+cover: "/several_menstrual.jpg"
 ---
 
 # Spasmodic Dysmenorrhea: Understanding, Causes, and Advanced Treatment Options - medagg

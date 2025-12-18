@@ -3,7 +3,8 @@ title: "What is Pelvic Floor Dysfunction? Causes and Solutions"
 description: "Causes, symptoms, diagnosis, lifestyle therapies (Kegels, biofeedback), advanced image‑guided options, and multidisciplinary care for pelvic floor dysfunction."
 image: "https://images.surferseo.art/6cc16b83-aeba-41ca-99af-64fce2d8ab32.webp"
 author: "Medagg Healthcare"
-date: "2025-12-08"
+date: "2025-12-18"
+cover: "/Pelvic.png"
 ---
 
 # What is Pelvic Floor Dysfunction? Causes and Solutions - medagg

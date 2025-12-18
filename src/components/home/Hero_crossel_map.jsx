@@ -11,7 +11,7 @@ const HeroCrosselMap = ({ query, setQuery, handleSearch, results, isLoading }) =
                   <div className='relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center w-full h-full'>
         {/* Left Content */}
                 <div className='text-white flex flex-col items-center md:items-start text-center md:text-left space-y-4 md:space-y-6 pl-4 sm:pl-6 lg:pl-12'>
-                               <h1 className='text-4xl md:text-5xl font-bold leading-snug text-white mt-2'>
+                <h1 className='text-4xl md:text-5xl font-bold leading-snug text-white mt-2'>
             Non - Surgical<br />Solutions
           </h1>
           <p className='text-base md:text-lg text-gray-200'>
