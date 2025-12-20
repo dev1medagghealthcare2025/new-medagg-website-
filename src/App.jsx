@@ -12,11 +12,16 @@ function ScrollToTop() {
     }
     // Otherwise, scroll to very top
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    // Track SPA page view
+    try {
+      trackPageView(location.pathname, location.search);
+    } catch {}
   }, [location.pathname, location.hash, location.search]);
   return null;
 }
 import { Routes, Route, useLocation } from 'react-router-dom';
 import React from 'react';
+import { initGA, trackPageView } from './lib/analytics';
 import Footer from './components/layout/Footer';
 import Home from './pages/Home';
 import Gallery from './pages/Gallery';
@@ -57,6 +62,13 @@ import ImageCursorStyle from './components/ui/ImageCursorStyle';
 import { UI_ENHANCEMENTS_ENABLED, IMAGE_CURSOR_ENABLED } from './config/uiEnhancements';
 import ButtonInteractions from './components/ui/ButtonInteractions';
 function App() {
+  // Initialize Google Analytics 4 once
+  React.useEffect(() => {
+    try {
+      const gaId = import.meta.env && import.meta.env.VITE_GA_ID;
+      if (gaId) initGA(gaId);
+    } catch {}
+  }, []);
   return (
     <div className='min-h-screen bg-pink-50 flex flex-col isolate'>
       <main className='flex-grow'>

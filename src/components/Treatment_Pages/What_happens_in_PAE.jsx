@@ -17,17 +17,17 @@ const getEmbedUrl = (url) => {
     }
     if (u.hostname.includes('youtube.com') || u.hostname.includes('youtube-nocookie.com')) {
       const v = u.searchParams.get('v');
-      if (v) return `https://www.youtube.com/embed/${v}`;
+      if (v) return `https://www.youtube-nocookie.com/embed/${v}`;
       const parts = u.pathname.split('/').filter(Boolean);
       const shortsIndex = parts.indexOf('shorts');
       if (shortsIndex !== -1 && parts[shortsIndex + 1]) {
-        return `https://www.youtube.com/embed/${parts[shortsIndex + 1]}`;
+        return `https://www.youtube-nocookie.com/embed/${parts[shortsIndex + 1]}`;
       }
       return null;
     }
     if (u.hostname === 'youtu.be') {
       const id = u.pathname.replace('/', '');
-      return id ? `https://www.youtube.com/embed/${id}` : null;
+      return id ? `https://www.youtube-nocookie.com/embed/${id}` : null;
     }
     if (u.hostname.includes('vimeo.com')) {
       const id = u.pathname.split('/').filter(Boolean).pop();
@@ -41,7 +41,44 @@ const getEmbedUrl = (url) => {
 
 const isMp4 = (url) => typeof url === 'string' && url.trim().toLowerCase().endsWith('.mp4');
 
-const What_happens_in_PAE = ({ videoUrl }) => (
+// Detect portrait-oriented videos like YouTube Shorts
+const isPortraitVideo = (url) => {
+  if (!url) return false;
+  try {
+    const u = new URL(url);
+    const parts = u.pathname.split('/').filter(Boolean);
+    if (parts.includes('shorts')) return true; // Shorts are usually 9:16
+    const orientation = u.searchParams.get('orientation');
+    if (orientation && orientation.toLowerCase() === 'portrait') return true;
+  } catch {
+    // ignore
+  }
+  return false;
+};
+
+// Helper to decide portrait based on URL or explicit override prop
+const isPortrait = (url, orientation) => {
+  if (orientation && orientation.toLowerCase() === 'portrait') return true;
+  if (orientation && orientation.toLowerCase() === 'landscape') return false;
+  return isPortraitVideo(url);
+};
+
+// Choose aspect ratio class for iframe embeds
+const getAspectClass = (url, orientation) => (isPortrait(url, orientation) ? 'aspect-[9/16]' : 'aspect-video');
+
+// Avoid cropping by not over-scaling portrait iframes; let the player letterbox as needed
+const getIframeClass = (url, orientation) => {
+  return 'w-full h-full';
+};
+
+// Decide a narrower max width for portrait videos so they don't appear too large
+const getWrapperWidthClass = (url, orientation) => {
+  return isPortrait(url, orientation)
+    ? 'max-w-[220px] md:max-w-[260px] lg:max-w-[300px]' // smallest portrait widths
+    : 'max-w-2xl'; // ~672px for landscape
+};
+
+const What_happens_in_PAE = ({ videoUrl, orientation }) => (
   <section className='bg-[#FAFAFC] w-full py-10 px-4 md:px-10 lg:px-20'>
     <div className='max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center'>
       {/* Left Side */}
@@ -70,18 +107,23 @@ const What_happens_in_PAE = ({ videoUrl }) => (
       {/* Right Side - Video */}
       <div className='flex justify-center items-center'>
         {videoUrl ? (
-          <div className='w-full max-w-2xl aspect-video rounded-xl overflow-hidden shadow-md'>
+          <div
+            className={`w-full ${getWrapperWidthClass(videoUrl, orientation)} ${getEmbedUrl(videoUrl) ? getAspectClass(videoUrl, orientation) : ''} rounded-xl overflow-hidden shadow-md`}
+            style={getEmbedUrl(videoUrl) ? { aspectRatio: isPortrait(videoUrl, orientation) ? '9 / 16' : '16 / 9' } : undefined}
+          >
             {getEmbedUrl(videoUrl) ? (
               <iframe
                 src={getEmbedUrl(videoUrl)}
                 title='PAE Video'
-                className='w-full h-full'
+                className={getIframeClass(videoUrl, orientation)}
                 frameBorder='0'
                 allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
                 allowFullScreen
+                loading='lazy'
+                referrerPolicy='strict-origin-when-cross-origin'
               />
             ) : isMp4(videoUrl) ? (
-              <video src={videoUrl} controls className='w-full h-full bg-black' />
+              <video src={videoUrl} controls className='w-full h-auto bg-black' />
             ) : (
               <div className='w-full h-full bg-gray-200 flex items-center justify-center text-[#2D2357] font-semibold'>
                 Unsupported video URL

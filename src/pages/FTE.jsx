@@ -24,7 +24,10 @@ const FTE = () => {
       <AreYouExperienceFTE />
       <BookAppointmentFTE />
       <CompareTreatmentOptionFTE />
-      <WhatHappensInFTE videoUrl='https://www.youtube.com/shorts/UdfJkfTMdz8' />
+      <WhatHappensInFTE
+        videoUrl='https://www.youtube.com/shorts/UdfJkfTMdz8'
+        orientation="portrait"
+      />
       <OurDoctor />
       <OurTestimonial />
       <Consultourdoctor />

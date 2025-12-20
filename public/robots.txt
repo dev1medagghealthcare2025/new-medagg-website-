@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+Disallow: /tmp/
+Allow: /
+
+Sitemap: https://nosurgeries.in/sitemap.xml

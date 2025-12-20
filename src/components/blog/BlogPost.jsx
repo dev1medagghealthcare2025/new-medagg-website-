@@ -93,6 +93,42 @@ const BlogPost = () => {
     }
   }, [slug]);
 
+  // Ensure images inside HTML content have sensible alt text
+  useEffect(() => {
+    if (!post) return;
+    const container = document.querySelector('.blog-content');
+    if (!container) return;
+    const imgs = container.querySelectorAll('img');
+
+    const deriveAltFromSrc = (src) => {
+      try {
+        const url = new URL(src, window.location.origin);
+        const file = url.pathname.split('/').filter(Boolean).pop() || '';
+        const base = file.replace(/\.[a-zA-Z0-9]+$/, '').replace(/[-_]+/g, ' ').trim();
+        return base || '';
+      } catch {
+        return '';
+      }
+    };
+
+    imgs.forEach((img) => {
+      const hasAlt = img.hasAttribute('alt');
+      const alt = (img.getAttribute('alt') || '').trim();
+      if (!hasAlt || alt === '') {
+        const fromTitle = (post && typeof post.title === 'string') ? stripHtml(post.title).trim() : '';
+        const fromSrc = deriveAltFromSrc(img.getAttribute('src') || '');
+        const fallback = fromSrc || fromTitle || 'Blog image';
+        // If image is clearly decorative by class hint, keep empty alt
+        if (img.classList.contains('decorative') || img.getAttribute('aria-hidden') === 'true') {
+          img.setAttribute('alt', '');
+          img.setAttribute('role', 'presentation');
+        } else {
+          img.setAttribute('alt', fallback);
+        }
+      }
+    });
+  }, [post]);
+
   // Format date
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('en-US', {

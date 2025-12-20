@@ -6,19 +6,19 @@ const getEmbedUrl = (url) => {
   if (!url) return null;
   try {
     const u = new URL(url);
-    if (u.hostname.includes('youtube.com')) {
+    if (u.hostname.includes('youtube.com') || u.hostname.includes('youtube-nocookie.com')) {
       const v = u.searchParams.get('v');
-      if (v) return `https://www.youtube.com/embed/${v}`;
+      if (v) return `https://www.youtube-nocookie.com/embed/${v}`;
       const parts = u.pathname.split('/').filter(Boolean);
       const shortsIndex = parts.indexOf('shorts');
       if (shortsIndex !== -1 && parts[shortsIndex + 1]) {
-        return `https://www.youtube.com/embed/${parts[shortsIndex + 1]}`;
+        return `https://www.youtube-nocookie.com/embed/${parts[shortsIndex + 1]}`;
       }
       return null;
     }
     if (u.hostname === 'youtu.be') {
       const id = u.pathname.replace('/', '');
-      return id ? `https://www.youtube.com/embed/${id}` : null;
+      return id ? `https://www.youtube-nocookie.com/embed/${id}` : null;
     }
     if (u.hostname.includes('vimeo.com')) {
       const id = u.pathname.split('/').filter(Boolean).pop();
@@ -32,7 +32,39 @@ const getEmbedUrl = (url) => {
 
 const isMp4 = (url) => typeof url === 'string' && url.trim().toLowerCase().endsWith('.mp4');
 
-const WhatHappensInVaricoceleEmbolization = ({ videoUrl }) => {
+// Detect portrait-oriented videos like YouTube Shorts
+const isPortraitVideo = (url) => {
+  if (!url) return false;
+  try {
+    const u = new URL(url);
+    const parts = u.pathname.split('/').filter(Boolean);
+    if (parts.includes('shorts')) return true; // Shorts are usually 9:16
+    const o = u.searchParams.get('orientation');
+    if (o && o.toLowerCase() === 'portrait') return true;
+  } catch {
+    // ignore
+  }
+  return false;
+};
+
+// Allow explicit override via prop
+const isPortrait = (url, orientation) => {
+  if (orientation && orientation.toLowerCase() === 'portrait') return true;
+  if (orientation && orientation.toLowerCase() === 'landscape') return false;
+  return isPortraitVideo(url);
+};
+
+// Aspect class for container when using Tailwind aspect utilities
+const getAspectClass = (url, orientation) => (isPortrait(url, orientation) ? 'aspect-[9/16]' : 'aspect-video');
+
+// Wrapper width: reduce portrait width so it doesn't look oversized
+const getWrapperWidthClass = (url, orientation) => {
+  return isPortrait(url, orientation)
+    ? 'max-w-[220px] md:max-w-[260px] lg:max-w-[300px]'
+    : 'max-w-2xl';
+};
+
+const WhatHappensInVaricoceleEmbolization = ({ videoUrl, orientation }) => {
   const features = [
     'Detailed explanation of the procedure',
     'Animation of how embolization works',
@@ -67,7 +99,10 @@ const WhatHappensInVaricoceleEmbolization = ({ videoUrl }) => {
           {/* Right Column: Video */}
           <div className='w-full'>
             {videoUrl ? (
-              <div className='w-full max-w-2xl aspect-video rounded-2xl overflow-hidden shadow-md mx-auto'>
+              <div
+                className={`w-full ${getWrapperWidthClass(videoUrl, orientation)} ${getEmbedUrl(videoUrl) ? getAspectClass(videoUrl, orientation) : ''} rounded-2xl overflow-hidden shadow-md mx-auto`}
+                style={getEmbedUrl(videoUrl) ? { aspectRatio: isPortrait(videoUrl, orientation) ? '9 / 16' : '16 / 9' } : undefined}
+              >
                 {getEmbedUrl(videoUrl) ? (
                   <iframe
                     src={getEmbedUrl(videoUrl)}
@@ -76,9 +111,11 @@ const WhatHappensInVaricoceleEmbolization = ({ videoUrl }) => {
                     frameBorder='0'
                     allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
                     allowFullScreen
+                    loading='lazy'
+                    referrerPolicy='strict-origin-when-cross-origin'
                   />
                 ) : isMp4(videoUrl) ? (
-                  <video src={videoUrl} controls className='w-full h-full bg-black' />
+                  <video src={videoUrl} controls className='w-full h-auto bg-black' />
                 ) : (
                   <div className='w-full h-full bg-gray-200 flex items-center justify-center text-[#2d2552] font-semibold'>
                     Unsupported video URL

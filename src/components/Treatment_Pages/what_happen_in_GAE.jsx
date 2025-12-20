@@ -11,21 +11,21 @@ const getEmbedUrl = (url) => {
   if (!url) return null;
   try {
     const u = new URL(url);
-    // YouTube (standard and shorts)
-    if (u.hostname.includes('youtube.com')) {
+    // YouTube (standard, nocookie, and shorts)
+    if (u.hostname.includes('youtube.com') || u.hostname.includes('youtube-nocookie.com')) {
       const v = u.searchParams.get('v');
-      if (v) return `https://www.youtube.com/embed/${v}`;
+      if (v) return `https://www.youtube-nocookie.com/embed/${v}`;
       // Handle YouTube Shorts: /shorts/<id>
       const parts = u.pathname.split('/').filter(Boolean);
       const shortsIndex = parts.indexOf('shorts');
       if (shortsIndex !== -1 && parts[shortsIndex + 1]) {
-        return `https://www.youtube.com/embed/${parts[shortsIndex + 1]}`;
+        return `https://www.youtube-nocookie.com/embed/${parts[shortsIndex + 1]}`;
       }
       return null;
     }
     if (u.hostname === 'youtu.be') {
       const id = u.pathname.replace('/', '');
-      return id ? `https://www.youtube.com/embed/${id}` : null;
+      return id ? `https://www.youtube-nocookie.com/embed/${id}` : null;
     }
     // Vimeo
     if (u.hostname.includes('vimeo.com')) {
@@ -40,7 +40,44 @@ const getEmbedUrl = (url) => {
 
 const isMp4 = (url) => typeof url === 'string' && url.trim().toLowerCase().endsWith('.mp4');
 
-const What_happen_in_GAE = ({ videoUrl }) => (
+// Detect portrait-oriented videos like YouTube Shorts
+const isPortraitVideo = (url) => {
+  if (!url) return false;
+  try {
+    const u = new URL(url);
+    const parts = u.pathname.split('/').filter(Boolean);
+    if (parts.includes('shorts')) return true; // Shorts are usually 9:16
+    const o = u.searchParams.get('orientation');
+    if (o && o.toLowerCase() === 'portrait') return true;
+  } catch {
+    // ignore
+  }
+  return false;
+};
+
+// Allow explicit override via prop
+const isPortrait = (url, orientation) => {
+  if (orientation && orientation.toLowerCase() === 'portrait') return true;
+  if (orientation && orientation.toLowerCase() === 'landscape') return false;
+  return isPortraitVideo(url);
+};
+
+// Aspect ratio class for Tailwind
+const getAspectClass = (url, orientation) => (isPortrait(url, orientation) ? 'aspect-[9/16]' : 'aspect-video');
+
+// For GAE: avoid cropping by not over-scaling portrait iframes; let the player letterbox as needed
+const getIframeClass = (url, orientation) => {
+  return 'w-full h-full';
+};
+
+// Narrower widths for portrait so it doesn't look oversized
+const getWrapperWidthClass = (url, orientation) => {
+  return isPortrait(url, orientation)
+    ? 'max-w-[220px] md:max-w-[260px] lg:max-w-[300px]'
+    : 'max-w-2xl';
+};
+
+const What_happen_in_GAE = ({ videoUrl, orientation }) => (
   <section className='bg-[#FAFAFC] w-full py-12 sm:py-16 lg:py-20'>
     <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center'>
@@ -77,18 +114,23 @@ const What_happen_in_GAE = ({ videoUrl }) => (
         {/* Right Side - Video */}
         <div className='flex justify-center items-center'>
           {videoUrl ? (
-            <div className='w-full max-w-2xl aspect-video rounded-2xl overflow-hidden shadow-lg'>
+            <div
+              className={`w-full ${getWrapperWidthClass(videoUrl, orientation)} ${getEmbedUrl(videoUrl) ? getAspectClass(videoUrl, orientation) : ''} rounded-2xl overflow-hidden shadow-lg`}
+              style={getEmbedUrl(videoUrl) ? { aspectRatio: isPortrait(videoUrl, orientation) ? '9 / 16' : '16 / 9' } : undefined}
+            >
               {getEmbedUrl(videoUrl) ? (
                 <iframe
                   src={getEmbedUrl(videoUrl)}
                   title='GAE Video'
-                  className='w-full h-full'
+                  className={getIframeClass(videoUrl, orientation)}
                   frameBorder='0'
                   allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
                   allowFullScreen
+                  loading='lazy'
+                  referrerPolicy='strict-origin-when-cross-origin'
                 />
               ) : isMp4(videoUrl) ? (
-                <video src={videoUrl} controls className='w-full h-full bg-black' />
+                <video src={videoUrl} controls className='w-full h-auto bg-black' />
               ) : (
                 <div className='w-full h-full bg-gray-200 flex items-center justify-center text-[#2d2552] font-semibold'>
                   Unsupported video URL

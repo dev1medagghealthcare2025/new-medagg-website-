@@ -6,19 +6,19 @@ const getEmbedUrl = (url) => {
   if (!url) return null;
   try {
     const u = new URL(url);
-    if (u.hostname.includes('youtube.com')) {
+    if (u.hostname.includes('youtube.com') || u.hostname.includes('youtube-nocookie.com')) {
       const v = u.searchParams.get('v');
-      if (v) return `https://www.youtube.com/embed/${v}?modestbranding=1&rel=0`;
+      if (v) return `https://www.youtube-nocookie.com/embed/${v}?modestbranding=1&rel=0`;
       const parts = u.pathname.split('/').filter(Boolean);
       const shortsIndex = parts.indexOf('shorts');
       if (shortsIndex !== -1 && parts[shortsIndex + 1]) {
-        return `https://www.youtube.com/embed/${parts[shortsIndex + 1]}?modestbranding=1&rel=0`;
+        return `https://www.youtube-nocookie.com/embed/${parts[shortsIndex + 1]}?modestbranding=1&rel=0`;
       }
       return null;
     }
     if (u.hostname === 'youtu.be') {
       const id = u.pathname.replace('/', '');
-      return id ? `https://www.youtube.com/embed/${id}?modestbranding=1&rel=0` : null;
+      return id ? `https://www.youtube-nocookie.com/embed/${id}?modestbranding=1&rel=0` : null;
     }
     if (u.hostname.includes('vimeo.com')) {
       const id = u.pathname.split('/').filter(Boolean).pop();
@@ -36,7 +36,7 @@ const isMp4 = (url) => typeof url === 'string' && url.trim().toLowerCase().endsW
 const getYouTubeId = (url) => {
   try {
     const u = new URL(url);
-    if (u.hostname.includes('youtube.com')) {
+    if (u.hostname.includes('youtube.com') || u.hostname.includes('youtube-nocookie.com')) {
       const v = u.searchParams.get('v');
       if (v) return v;
       const parts = u.pathname.split('/').filter(Boolean);
@@ -51,12 +51,41 @@ const getYouTubeId = (url) => {
   return null;
 };
 
-const WhatHappensThyroidAblation = ({ videoUrl }) => {
+// Detect portrait-oriented videos like YouTube Shorts
+const isPortraitVideo = (url) => {
+  if (!url) return false;
+  try {
+    const u = new URL(url);
+    const parts = u.pathname.split('/').filter(Boolean);
+    if (parts.includes('shorts')) return true; // Shorts are typically 9:16
+    const o = u.searchParams.get('orientation');
+    if (o && o.toLowerCase() === 'portrait') return true;
+  } catch {
+    // ignore
+  }
+  return false;
+};
+
+// Allow explicit override via prop
+const isPortrait = (url, orientation) => {
+  if (orientation && orientation.toLowerCase() === 'portrait') return true;
+  if (orientation && orientation.toLowerCase() === 'landscape') return false;
+  return isPortraitVideo(url);
+};
+
+// Wrapper width control for portrait so it doesn't look oversized
+const getWrapperWidthClass = (url, orientation) => {
+  return isPortrait(url, orientation)
+    ? 'max-w-[220px] md:max-w-[260px] lg:max-w-[300px]'
+    : 'max-w-2xl';
+};
+
+const WhatHappensThyroidAblation = ({ videoUrl, orientation }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const ytId = getYouTubeId(videoUrl);
   const embedUrl = getEmbedUrl(videoUrl);
   return (
-  <section className='w-full bg-white py-12 md:py-20'>
+  <section className='w-full bg-[#FAFAFC] py-12 md:py-20'>
     <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 items-center'>
         {/* Text Content */}
@@ -85,9 +114,12 @@ const WhatHappensThyroidAblation = ({ videoUrl }) => {
         {/* Video */}
         <div className='relative w-full'>
           {videoUrl ? (
-            <div className='w-full max-w-2xl relative rounded-2xl overflow-hidden shadow-md mx-auto z-10' style={{ paddingBottom: '56.25%', minHeight: '200px' }}>
+            <div
+              className={`w-full ${getWrapperWidthClass(videoUrl, orientation)} relative rounded-2xl overflow-hidden shadow-md mx-auto z-10`}
+              style={{ aspectRatio: isPortrait(videoUrl, orientation) ? '9 / 16' : '16 / 9', minHeight: '200px' }}
+            >
               {isMp4(videoUrl) ? (
-                <video src={videoUrl} controls className='absolute inset-0 w-full h-full bg-black' />
+                <video src={videoUrl} controls className='absolute inset-0 w-full h-auto bg-black' />
               ) : embedUrl ? (
                 <iframe
                   src={embedUrl}
@@ -96,6 +128,8 @@ const WhatHappensThyroidAblation = ({ videoUrl }) => {
                   frameBorder='0'
                   allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
                   allowFullScreen
+                  loading='lazy'
+                  referrerPolicy='strict-origin-when-cross-origin'
                 />
               ) : ytId ? (
                 <button
@@ -130,7 +164,7 @@ const WhatHappensThyroidAblation = ({ videoUrl }) => {
               )}
             </div>
           ) : (
-            <div className='relative w-full bg-gray-200 rounded-2xl' style={{ paddingBottom: '56.25%' }} />
+            <div className='relative w-full bg-gray-200 rounded-2xl' style={{ aspectRatio: '16 / 9' }} />
           )}
         </div>
       </div>
