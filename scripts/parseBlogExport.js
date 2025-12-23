@@ -412,6 +412,22 @@ function main() {
 
   const posts = Array.from(postsBySlug.values())
     .filter(p => p.slug && p.title && p.content)
+    // Exclude specific topics from listings
+    .filter(p => {
+      const denySlugs = new Set([
+        // Add exact slugs here if known, e.g. 'understanding-anal-fissures-causes-symptoms-and-treatment-options'
+        'piles',
+      ]);
+      const denyRegexes = [
+        /\banal\s*fissure(s)?\b/i,
+        /\bfistula(s)?\b/i,
+        /\bpile(s)?\b/i,
+      ];
+      if (denySlugs.has((p.slug || '').toLowerCase())) return false;
+      const title = p.title || '';
+      if (denyRegexes.some(rx => rx.test(title))) return false;
+      return true;
+    })
     .sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
 
   safeJsonWrite(OUTPUT_PATH, posts);

@@ -19,15 +19,15 @@ export default function Navbar() {
 
   return (
     <nav className='w-full bg-[#392C5C] sticky top-0 z-50'>
-      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-        <div className='flex items-center justify-between h-[84px] lg:h-[92px]'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-0'>
+        <div className='flex items-center justify-between h-[72px] lg:h-[80px]'>
           {/* Logo */}
           <div className='flex-shrink-0'>
             <Link to='/' className='flex items-center'>
               <img
-                src='/new_medagg.png'
+                src='/New_medagg_logo.png'
                 alt='Medagg Healthcare'
-                className='w-16 h-10 sm:w-18 sm:h-11 lg:w-[90px] lg:h-[56px]'
+                className='block w-[120px] h-[64px] lg:w-[140px] lg:h-[72px]'
               />
             </Link>
           </div>

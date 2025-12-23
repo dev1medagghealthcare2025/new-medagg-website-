@@ -4,6 +4,7 @@ description: "Causes, diagnosis, and the best non-surgical option for blocked fa
 image: "https://images.surferseo.art/9d23d3b4-5cd8-4ab9-a570-b7e42381e34a.png"
 author: "Medagg Healthcare"
 date: "2025-12-12"
+cover: "/fallopian_tube.png"
 ---
 
 # Fallopian Tube Blockage Treatment Without Surgery - medagg

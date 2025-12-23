@@ -4,6 +4,7 @@ description: "Causes, symptoms, and modern treatment options for intramural fibr
 image: "https://images.surferseo.art/5a1c6176-ca12-4ae3-beb6-94d7879d6418.jpeg"
 author: "Medagg Healthcare"
 date: "2025-12-06"
+cover: "/Intramural%20Uterine%20Fibroid.jpeg"
 ---
 
 # Intramural Uterine Fibroid - medagg

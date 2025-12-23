@@ -291,7 +291,7 @@ export default function Treatmentnavbar() {
   };
 
   return (
-    <nav className='sticky top-[84px] lg:top-[92px] z-40 w-full bg-white border-b border-gray-200 shadow-xl shadow-black/15 ring-1 ring-black/5'>
+    <nav className='sticky top-[72px] lg:top-[80px] z-40 w-full bg-white border-b border-gray-200 shadow-xl shadow-black/15 ring-1 ring-black/5'>
       <div className='relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         {showLeftArrow && (
           <button

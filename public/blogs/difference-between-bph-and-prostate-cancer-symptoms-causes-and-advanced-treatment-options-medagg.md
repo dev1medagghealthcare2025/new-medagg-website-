@@ -4,6 +4,7 @@ description: "Clear comparison of BPH vs prostate cancer: symptoms, causes, diag
 image: "https://images.surferseo.art/6e5a2e3c-3d8b-4d03-9a7e-4f5d3b1b9ad0.png"
 author: "Medagg Healthcare"
 date: "2025-12-12"
+cover: "/Difference-Between-BPH-and-Prostate-Cancer.png"
 ---
 
 # Difference Between BPH and Prostate Cancer: Symptoms, Causes, and Advanced Treatment Options - medagg
