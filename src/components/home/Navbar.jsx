@@ -60,7 +60,7 @@ export default function Navbar() {
             {/* ISVIR Logo and Label (Desktop only) */}
             <div className='hidden lg:flex items-center h-10 pl-2 ml-0.5 border-l border-white/10'>
               <img
-                src='/isvir_logo-2-removebg-preview.png'
+                src='/New_ISVIR_LOGO.png'
                 alt='ISVIR logo'
                 className='h-14 xl:h-15 w-auto opacity-90'
               />
@@ -79,7 +79,7 @@ export default function Navbar() {
           <div className='flex items-center gap-2 lg:hidden'>
             {/* ISVIR Logo (mobile only) */}
             <img
-              src='/isvir_logo-2-removebg-preview.png'
+              src='/New_ISVIR_LOGO.png'
               alt='ISVIR logo'
               className='h-10 w-auto opacity-90'
             />

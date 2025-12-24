@@ -6,6 +6,7 @@ import HeroCrosselMap from './Hero_crossel_map';
 import SharedSearchBar from './SharedSearchBar';
 import MobileHeroSection from './MobileHeroSection';
 import FloatingBadgeCTA from './FloatingBadgeCTA';
+import curatedData from '../../data/treatment_keywords.json';
 
 const OriginalHeroSlide = ({ query, setQuery, handleSearch, results, isLoading }) => (
   <section
@@ -459,13 +460,135 @@ const HeroSection = () => {
       }));
   };
 
+  // Curated search using provided keyword/symptom lists for higher precision
+  const curatedSearch = (searchQuery, { strict = true } = {}) => {
+    const normalize = (s = '') => s.toLowerCase().trim().replace(/\s+/g, ' ');
+    const q = normalize(searchQuery);
+    if (!q) return [];
+
+    const tokens = q.split(/[^a-z0-9]+/).filter(Boolean).filter(t => t.length >= 3);
+
+    // Simple edit distance within 1 for len>=5
+    const editDistanceLe1 = (a, b) => {
+      if (a === b) return true;
+      if (Math.abs(a.length - b.length) > 1) return false;
+      // Ensure a is shorter
+      if (a.length > b.length) [a, b] = [b, a];
+      let i = 0, j = 0, diffs = 0;
+      while (i < a.length && j < b.length) {
+        if (a[i] === b[j]) { i++; j++; continue; }
+        diffs++;
+        if (diffs > 1) return false;
+        if (a.length === b.length) { i++; j++; }
+        else { j++; }
+      }
+      if (j < b.length || i < a.length) diffs++;
+      return diffs <= 1;
+    };
+
+    const WEIGHTS = {
+      ir_procedures: 1.5,
+      medical_terms: 1.3,
+      symptoms: 1.2,
+      lay_searches: 1.0,
+    };
+
+    const phraseMatch = (phrase) => {
+      const p = normalize(phrase);
+      if (!p) return 0;
+      // Exact/substring match boost
+      let score = 0;
+      if (q.includes(p) || p.includes(q)) score += 1.5;
+      // Token overlap scoring
+      const ptokens = p.split(/[^a-z0-9]+/).filter(Boolean);
+      let tokenScore = 0;
+      for (const t of tokens) {
+        for (const tk of ptokens) {
+          if (tk === t || tk.startsWith(t)) { tokenScore += 1; break; }
+          if (t.length >= 5 && tk.length >= 5 && editDistanceLe1(t, tk)) { tokenScore += 0.7; break; }
+        }
+      }
+      // Normalize a bit by unique matches
+      score += Math.min(tokenScore, tokens.length);
+      return score;
+    };
+
+    const scored = curatedData.map(item => {
+      let score = 0;
+      const excludes = (item.exclude || []).map(normalize);
+      // Exclusion guard: if any exclude phrase present, zero score
+      for (const ex of excludes) {
+        if (ex && (q.includes(ex) || ex.includes(q))) return { item, score: 0 };
+      }
+
+      const cats = item.categories || {};
+      for (const [cat, list] of Object.entries(cats)) {
+        const weight = WEIGHTS[cat] || 1.0;
+        (list || []).forEach(phrase => {
+          const pm = phraseMatch(phrase);
+          if (pm > 0) score += pm * weight;
+        });
+      }
+
+      // Slight boost if treatment name is partially in query
+      if (item.name && phraseMatch(item.name) > 0) score += 1.5;
+
+      // Apply item weight multiplier
+      const multiplier = typeof item.weight === 'number' ? item.weight : 1.0;
+      score *= multiplier;
+      return { item, score };
+    })
+    .filter(s => s.score > 0)
+    .sort((a, b) => b.score - a.score);
+
+    if (scored.length === 0) return [];
+
+    // Decision: strict means only return the single most accurate if over threshold and margin
+    const THRESHOLD = 3.0;
+    const MARGIN = 1.0;
+    const top = scored[0];
+    const second = scored[1];
+
+    if (!strict) {
+      // return up to 3 items regardless of threshold
+      return scored.slice(0, 3).map(({ item }) => ({ name: item.name, path: item.path }));
+    }
+
+    if (top.score >= THRESHOLD && (!second || top.score - second.score >= MARGIN)) {
+      return [{ name: top.item.name, path: top.item.path }];
+    }
+
+    return [];
+  };
+
+  // Live suggestions on keypress (debounced)
+  useEffect(() => {
+    const q = (query || '').trim();
+    // Clearing state for empty query is handled in the other effect
+    if (!q) return;
+
+    const handler = setTimeout(() => {
+      // Try curated precise match first; if none, fall back to existing fuzzy
+      const curated = curatedSearch(q, { strict: true });
+      if (curated.length > 0) {
+        setResults(curated);
+        return;
+      }
+      const keywordResults = performKeywordSearch(q);
+      setResults(keywordResults);
+      // Keep isLoading for submit/AI only to avoid flicker while typing
+    }, 200); // small debounce for better UX
+
+    return () => clearTimeout(handler);
+  }, [query]);
+
   const handleSearch = async (e) => {
     e.preventDefault();
     if (!query.trim()) return;
     setIsLoading(true);
     setResults([]);
 
-    // Try AI search first for better understanding of user intent
+    // Try curated precise search first
     const systemPrompt = `
       You are an intelligent medical search assistant for a healthcare provider specializing in interventional radiology. 
       
@@ -505,7 +628,16 @@ const HeroSection = () => {
     `;
 
     try {
-      // First try fallback search immediately for faster results
+      // Curated first for accuracy
+      const curated = curatedSearch(query, { strict: true });
+      if (curated.length > 0) {
+        console.log('Curated Results:', curated);
+        setResults(curated);
+        setIsLoading(false);
+        return;
+      }
+
+      // If curated has nothing, use fast local fuzzy keyword search
       const keywordResults = performKeywordSearch(query);
       if (keywordResults.length > 0) {
         console.log('Quick Keyword Results:', keywordResults);
