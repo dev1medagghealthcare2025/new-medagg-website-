@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 
 const SharedSearchBar = ({ query, setQuery, handleSearch, results = [], isLoading }) => {
   return (
-    <div className='w-full max-w-xl'>
+    <div className='w-full max-w-xl relative'>
       {/* Search Bar */}
       <form
         onSubmit={handleSearch}
-        className='flex items-center bg-white rounded-xl overflow-hidden shadow-lg w-full border border-gray-100 mb-4'>
+        className='flex items-center bg-white rounded-xl overflow-hidden shadow-lg w-full border border-gray-100 mb-0'>
         <span className='pl-3 sm:pl-5 text-gray-400 flex-shrink-0'>
           <svg width='18' height='18' className='sm:w-5 sm:h-5' fill='none' stroke='currentColor' strokeWidth='2' viewBox='0 0 24 24'>
             <circle cx='11' cy='11' r='8' />
@@ -32,20 +32,23 @@ const SharedSearchBar = ({ query, setQuery, handleSearch, results = [], isLoadin
         </button>
       </form>
 
-      {/* Search Results */}
-      {isLoading && <div className='text-white/90 font-medium mb-1 text-sm sm:text-base'>Searching...</div>}
-      {results.length > 0 && (
-        <div className='bg-white/10 backdrop-blur-sm p-3 sm:p-4 rounded-lg max-w-lg w-full mb-4'>
-          <p className='text-white/90 font-medium mb-1 text-sm sm:text-base'>Suggested results:</p>
-          <ul>
-            {results.map((result, index) => (
-              <li key={index}>
-                <Link to={result.path} className='text-lg sm:text-xl font-bold text-white hover:text-pink-400 transition-colors'>
-                  {result.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
+      {/* Suggestions overlay (dark theme, no layout shift) */}
+      {(isLoading || results.length > 0) && (
+        <div className='absolute left-0 right-0 top-full mt-1 z-50'>
+          <div className='bg-white/10 backdrop-blur-sm p-3 sm:p-4 rounded-lg w-full'>
+            <p className='text-white/90 font-medium mb-1 text-sm sm:text-base'>Suggested results{isLoading ? '...' : ':'}</p>
+            {results.length > 0 && (
+              <ul>
+                {results.map((result, index) => (
+                  <li key={index}>
+                    <Link to={result.path} className='text-lg sm:text-xl font-bold text-white hover:text-pink-400 transition-colors'>
+                      {result.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
       )}
     </div>

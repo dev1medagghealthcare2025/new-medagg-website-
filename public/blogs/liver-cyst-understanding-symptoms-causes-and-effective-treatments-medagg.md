@@ -4,6 +4,7 @@ description: "Types of liver cysts, causes, symptoms, diagnosis, when to treat, 
 image: "https://images.surferseo.art/c2099013-a232-4987-b5aa-12d2e71206ee.png"
 author: "Medagg Healthcare"
 date: "2025-12-11"
+cover: "/Liver_cryst.png"
 ---
 
 # Liver Cyst: Understanding Symptoms, Causes, and Effective Treatments - medagg

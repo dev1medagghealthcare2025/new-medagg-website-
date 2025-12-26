@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useDeferredValue, useTransition, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Groq from 'groq-sdk';
 import Hero_crossel from './Hero_crossel';
@@ -7,6 +7,10 @@ import SharedSearchBar from './SharedSearchBar';
 import MobileHeroSection from './MobileHeroSection';
 import FloatingBadgeCTA from './FloatingBadgeCTA';
 import curatedData from '../../data/treatment_keywords.json';
+
+// Memoized, non-search slides to avoid re-rendering while typing
+const MemoHeroCrossel = React.memo(Hero_crossel);
+const MemoHeroCrosselMap = React.memo(HeroCrosselMap);
 
 const OriginalHeroSlide = ({ query, setQuery, handleSearch, results, isLoading }) => (
   <section
@@ -91,14 +95,17 @@ const HeroSection = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const totalSlides = 3;
+  // Defer query updates to reduce re-render pressure while typing
+  const deferredQuery = useDeferredValue(query);
+  const [isPending, startTransition] = useTransition();
 
   // Clear results when query is emptied
   useEffect(() => {
-    if (!query.trim()) {
+    if (!(deferredQuery || '').trim()) {
       setResults([]);
       setIsLoading(false);
     }
-  }, [query]);
+  }, [deferredQuery]);
 
   // Data structure for treatment suggestions
   const treatmentSuggestions = [
@@ -399,7 +406,11 @@ const HeroSection = () => {
     return () => clearInterval(slideInterval);
   }, [totalSlides]);
 
-  const groq = new Groq({ apiKey: import.meta.env.VITE_GROQ_API_KEY, dangerouslyAllowBrowser: true });
+  // Create Groq client once to avoid re-instantiation during typing
+  const groqRef = useRef(null);
+  if (!groqRef.current) {
+    groqRef.current = new Groq({ apiKey: import.meta.env.VITE_GROQ_API_KEY, dangerouslyAllowBrowser: true });
+  }
 
   // Enhanced fuzzy keyword search function
   const performKeywordSearch = (searchQuery) => {
@@ -505,7 +516,7 @@ const HeroSection = () => {
       for (const t of tokens) {
         for (const tk of ptokens) {
           if (tk === t || tk.startsWith(t)) { tokenScore += 1; break; }
-          if (t.length >= 5 && tk.length >= 5 && editDistanceLe1(t, tk)) { tokenScore += 0.7; break; }
+          if (t.length >= 4 && tk.length >= 4 && editDistanceLe1(t, tk)) { tokenScore += 0.7; break; }
         }
       }
       // Normalize a bit by unique matches
@@ -513,7 +524,7 @@ const HeroSection = () => {
       return score;
     };
 
-    const scored = curatedData.map(item => {
+    const scoredRaw = curatedData.map(item => {
       let score = 0;
       const excludes = (item.exclude || []).map(normalize);
       // Exclusion guard: if any exclude phrase present, zero score
@@ -537,9 +548,30 @@ const HeroSection = () => {
       const multiplier = typeof item.weight === 'number' ? item.weight : 1.0;
       score *= multiplier;
       return { item, score };
-    })
-    .filter(s => s.score > 0)
-    .sort((a, b) => b.score - a.score);
+    }).filter(s => s.score > 0);
+
+    // If query contains a specific anchor, prefer items that mention that anchor
+    const ANCHORS = ['breast','thyroid','prostate','uterus','uterine','knee','varicose','varicocele','fallopian','tube','tubes','shoulder','plantar','fasciitis','diabetic','foot'];
+    const anchorHit = tokens.find(t => ANCHORS.includes(t));
+
+    let scored = scoredRaw;
+    if (anchorHit) {
+      const containsAnchor = (text) => (text || '').toLowerCase().includes(anchorHit);
+      const itemHasAnchor = (it) => {
+        if (containsAnchor(it.name)) return true;
+        const cats = it.categories || {};
+        for (const list of Object.values(cats)) {
+          if ((list || []).some(phrase => containsAnchor(phrase))) return true;
+        }
+        return false;
+      };
+      const filtered = scoredRaw.filter(s => itemHasAnchor(s.item));
+      if (filtered.length > 0) {
+        scored = filtered;
+      }
+    }
+
+    scored = scored.sort((a, b) => b.score - a.score);
 
     if (scored.length === 0) return [];
 
@@ -550,7 +582,7 @@ const HeroSection = () => {
     const second = scored[1];
 
     if (!strict) {
-      // return up to 3 items regardless of threshold
+      // return up to 3 items regardless of threshold (for generic queries)
       return scored.slice(0, 3).map(({ item }) => ({ name: item.name, path: item.path }));
     }
 
@@ -563,24 +595,36 @@ const HeroSection = () => {
 
   // Live suggestions on keypress (debounced)
   useEffect(() => {
-    const q = (query || '').trim();
+    const q = (deferredQuery || '').trim();
     // Clearing state for empty query is handled in the other effect
     if (!q) return;
 
+    // 150ms for desktop (precise pointer), 200ms for mobile/touch
+    const isFinePointer = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(pointer: fine)').matches;
+    const debounceMs = isFinePointer ? 150 : 200;
+
     const handler = setTimeout(() => {
-      // Try curated precise match first; if none, fall back to existing fuzzy
-      const curated = curatedSearch(q, { strict: true });
+      // Determine if query is generic and lacks specific organ/treatment anchors
+      const qn = q.toLowerCase();
+      const tokens = qn.split(/[^a-z0-9]+/).filter(Boolean);
+      const GENERIC_TERMS = new Set(['pain', 'swelling', 'lump', 'veins', 'urine', 'bleeding', 'infertility', 'pregnancy', 'problem', 'treatment']);
+      const SPECIFIC_TERMS = new Set(['breast','thyroid','prostate','uterus','uterine','knee','varicose','varicocele','fallopian','tube','tubes','shoulder','plantar','fasciitis','diabetic','foot','vein','pae','ufe','gae','ftr','rfa','turp']);
+      const hasGeneric = tokens.some(t => GENERIC_TERMS.has(t));
+      const hasSpecific = tokens.some(t => SPECIFIC_TERMS.has(t));
+
+      // Use non-strict only if generic AND no specific anchors
+      const curated = curatedSearch(q, { strict: !(hasGeneric && !hasSpecific) });
       if (curated.length > 0) {
-        setResults(curated);
+        startTransition(() => setResults(curated));
         return;
       }
       const keywordResults = performKeywordSearch(q);
-      setResults(keywordResults);
+      startTransition(() => setResults(keywordResults));
       // Keep isLoading for submit/AI only to avoid flicker while typing
-    }, 200); // small debounce for better UX
+    }, debounceMs); // small debounce for better UX (150ms desktop, 200ms mobile)
 
     return () => clearTimeout(handler);
-  }, [query]);
+  }, [deferredQuery]);
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -628,8 +672,12 @@ const HeroSection = () => {
     `;
 
     try {
-      // Curated first for accuracy
-      const curated = curatedSearch(query, { strict: true });
+      // Curated first for accuracy; broaden if query is generic
+      const qn = query.toLowerCase().trim();
+      const GENERIC_TERMS = new Set(['pain', 'swelling', 'lump', 'veins', 'urine', 'bleeding', 'infertility', 'pregnancy', 'problem', 'treatment']);
+      const isGeneric = qn.split(/[^a-z0-9]+/).filter(Boolean).some(t => GENERIC_TERMS.has(t));
+
+      const curated = curatedSearch(query, { strict: !isGeneric });
       if (curated.length > 0) {
         console.log('Curated Results:', curated);
         setResults(curated);
@@ -646,7 +694,7 @@ const HeroSection = () => {
         return;
       }
 
-      const chatCompletion = await groq.chat.completions.create({
+      const chatCompletion = await groqRef.current.chat.completions.create({
         messages: [
           {
             role: 'system',
@@ -723,19 +771,19 @@ const HeroSection = () => {
           }
 
           if (unique.length > 0) {
-            setResults(unique);
+            startTransition(() => setResults(unique));
           } else {
             // Fallback to fuzzy keyword search if AI is unusable
             const keywordResults = performKeywordSearch(query);
             console.log('Fallback Keyword Results:', keywordResults);
-            setResults(keywordResults);
+            startTransition(() => setResults(keywordResults));
           }
         } catch (parseError) {
           console.error('JSON Parse Error:', parseError);
           // Fallback to fuzzy keyword search
           const keywordResults = performKeywordSearch(query);
           console.log('Fallback Keyword Results:', keywordResults);
-          setResults(keywordResults);
+          startTransition(() => setResults(keywordResults));
         }
       }
     } catch (error) {
@@ -743,7 +791,7 @@ const HeroSection = () => {
       // Fallback to fuzzy keyword search
       const keywordResults = performKeywordSearch(query);
       console.log('Fallback Keyword Results:', keywordResults);
-      setResults(keywordResults);
+      startTransition(() => setResults(keywordResults));
     } finally {
       setIsLoading(false);
     }
@@ -799,7 +847,7 @@ const HeroSection = () => {
 
           {/* Slide 2: New Hero Crossel */}
           <div className='w-full flex-shrink-0'>
-            <Hero_crossel
+            <MemoHeroCrossel
               query={query}
               setQuery={setQuery}
               handleSearch={handleSearch}
@@ -810,7 +858,7 @@ const HeroSection = () => {
 
           {/* Slide 3: Map Hero Crossel */}
           <div className='w-full flex-shrink-0'>
-            <HeroCrosselMap
+            <MemoHeroCrosselMap
               query={query}
               setQuery={setQuery}
               handleSearch={handleSearch}

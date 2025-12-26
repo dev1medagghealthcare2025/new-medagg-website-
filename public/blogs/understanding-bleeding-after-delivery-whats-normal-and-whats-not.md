@@ -5,6 +5,7 @@ date: "2025-11-28"
 author: "Medagg Healthcare"
 tags: ["Postpartum", "PPH", "Uterine Artery Embolisation", "Women's Health"]
 cover: "https://images.surferseo.art/414cb4b7-a70c-4cc8-b5be-8d1e4987e46f.png"
+cover: "/understand_bleeding.png"
 excerpt: "Lochia stages, what postpartum bleeding is normal vs abnormal, red‑flag symptoms, and how Interventional Radiology (UAE) treats severe bleeding without surgery."
 ---
 

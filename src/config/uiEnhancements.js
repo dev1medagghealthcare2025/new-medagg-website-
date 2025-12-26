@@ -1,6 +1,9 @@
 // Central toggle for UI enhancements. Set to false to instantly disable.
 export const UI_ENHANCEMENTS_ENABLED = false;
 
+// Blog listing grouped UI (non-destructive; set to false to revert instantly)
+export const GROUPED_BLOGS_UI = true;
+
 // Cursor visual style: 'ring' | 'ring-particles' (particles not yet enabled)
 export const CURSOR_STYLE = 'ring';
 
