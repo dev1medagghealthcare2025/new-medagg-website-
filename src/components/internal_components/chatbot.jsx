@@ -148,7 +148,7 @@ const createMedicalContext = () => ({
 
 const initialMessages = [
   {
-    text: 'Greetings, I\'m IRa, your Interventional Radiology Assistant. How may I assist with your healthcare needs today?',
+    text: 'Hi, I’m IRa 👋I help people understand treatment options — especially non-surgical ones — and guide them to the right care. How can I help you today?',
     sender: 'bot',
     timestamp: new Date(),
   },
@@ -570,27 +570,28 @@ const detectProcedureFromSymptoms = (input) => {
 const getProcedureInfo = (procedure) => {
   const procedureInfoMap = {
     UFE: {
-      message: 'I understand you\'re experiencing symptoms related to uterine fibroids or heavy bleeding. Our UFE (Uterine Fibroid Embolization) is a non-surgical treatment that can help. Let me ask you a few questions to better understand your condition.',
+      message: 'Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help\nrelated to Uterine Fibroids.\nHow would you like me to help you?',
     },
     PAE: {
-      message: 'It sounds like you\'re having prostate-related symptoms. Our PAE (Prostatic Artery Embolization) is a minimally invasive treatment for enlarged prostate. I\'ll ask some questions to assess your condition.',
+      message: 'Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help\nrelated to Enlarged Prostate.\nHow would you like me to help you?',
     },
     GAE: {
-      message: 'I can help with your knee pain concerns. Our GAE (Genicular Artery Embolization) treats knee arthritis without surgery. Let me gather some information about your symptoms.',
+      message: 'Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help\nrelated to Knee Pain.\nHow would you like me to help you?',
     },
     TNA: {
-      message: 'For thyroid nodule concerns, we offer TNA (Thyroid Nodule Ablation) as a non-surgical option. I\'ll ask you some questions to understand your condition better.',
+      message: 'Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help\nrelated to Thyroid Nodules.\nHow would you like me to help you?',
     },
     VV: {
-      message: 'I understand you\'re dealing with varicose vein issues. We provide non-surgical varicose vein treatment. Let me ask about your specific symptoms.',
+      message: 'Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help\nrelated to Varicose Veins.\nHow would you like me to help you?',
     },
     VCE: {
-      message: 'For varicocele concerns, we offer VCE (Varicocele Embolization) as a minimally invasive treatment. I\'ll gather some information about your condition.',
+      message: 'Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help\nrelated to Varicocele.\nHow would you like me to help you?',
     },
     FTR: {
-      message: 'I understand you\'re facing fertility challenges with blocked fallopian tubes. Our FTR (Fallopian Tube Recanalization) can help restore fertility. Let me ask some questions.',
+      message: 'Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help\nrelated to Blocked Fallopian Tubes.\nHow would you like me to help you?',
     },
   };
+
 
   return procedureInfoMap[procedure] || { message: 'Let me help you with your medical concern.' };
 };

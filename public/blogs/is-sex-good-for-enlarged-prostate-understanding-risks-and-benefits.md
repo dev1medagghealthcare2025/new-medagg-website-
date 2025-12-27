@@ -4,6 +4,7 @@ description: "Learn how sex relates to BPH (enlarged prostate), potential risks 
 image: "https://txfertility.com/wp-content/uploads/2024/02/mast-int-25-1920x717.jpg"
 author: "Medagg Healthcare"
 date: "2025-12-06"
+cover: "/enlarged_prostate.png"
 ---
 
 # Is Sex Good for Enlarged Prostate? Understanding Risks and Benefits - medagg

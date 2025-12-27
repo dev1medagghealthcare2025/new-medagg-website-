@@ -4,6 +4,7 @@ description: "Overview of BPH (enlarged prostate), symptoms, impact on daily lif
 image: "https://images.surferseo.art/9c75911d-ef2f-4cdd-bafb-2cc40a5a8489.jpeg"
 author: "Medagg Healthcare"
 date: "2025-12-06"
+cover: "/Homeopathy.png"
 ---
 
 # Homeopathy Medicine for Prostate Enlargement - medagg

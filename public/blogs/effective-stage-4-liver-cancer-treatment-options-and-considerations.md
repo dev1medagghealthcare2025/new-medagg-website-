@@ -4,6 +4,7 @@ description: "Clear, patient‑friendly guide to advanced liver cancer: staging,
 image: "https://images.surferseo.art/fc623f88-b946-4b35-a3bc-0a62d87c8510.jpeg"
 author: "Medagg Healthcare"
 date: "2025-12-08"
+cover: "/Effective_Stage_4.png"
 ---
 
 # Effective Stage 4 Liver Cancer Treatment Options and Considerations - medagg

@@ -4,7 +4,7 @@ slug: "effective-approaches-to-liver-hemangioma-treatment-and-management"
 date: "2025-11-28"
 author: "Medagg Healthcare"
 tags: ["Liver Hemangioma", "Benign Liver Tumor", "Interventional Radiology", "Hepatology"]
-cover: "https://drpotevascular.com/wp-content/uploads/2024/06/liver-hemangioma.jpg"
+cover: "/Liver_Hemangioma.png"
 excerpt: "Most liver hemangiomas are harmless. Learn when treatment is needed, how they’re diagnosed, and the safest options today including IR embolization."
 ---
 

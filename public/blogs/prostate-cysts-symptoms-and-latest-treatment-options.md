@@ -4,6 +4,7 @@ description: "What prostate cysts are, symptoms, causes, conventional treatments
 image: "https://images.surferseo.art/18653091-1d69-4586-ad03-d7c76e0d47c0.jpeg"
 author: "Medagg Healthcare"
 date: "2025-12-06"
+cover: "/Prostate_Cysts.png"
 ---
 
 # Prostate Cysts: Symptoms and Latest Treatment Options - medagg

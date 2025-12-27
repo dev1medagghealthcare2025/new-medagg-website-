@@ -23,7 +23,7 @@ const DEFAULT_CITIES = [
 
 function RunningCity({
   cities = DEFAULT_CITIES,
-  speed = 28,           // seconds per loop (lower = faster)
+  speed = 32,           // seconds per loop (lower = faster)
   direction = 'ltr',    // 'ltr' (default) or 'rtl'
   pauseOnHover = true,  // pause animation on hover
 }) {
