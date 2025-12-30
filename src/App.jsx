@@ -87,6 +87,9 @@ function App() {
           <Route path='/gallery' element={<Gallery />} />
           <Route path='/career' element={<CareerPage />} />
           <Route path='/contact-us' element={<ContactUsPage />} />
+          {/* Alias routes for legacy/CTA links */}
+          <Route path='/book-an-appointment' element={<ContactUsPage />} />
+          <Route path='/book-appointment' element={<ContactUsPage />} />
           <Route path='/uae' element={<UAEPage />} />
           <Route path='/breast-nodule-vae' element={<BreastNoduleVAEPage />} />
           <Route path='/breast-nodule-cryoablation' element={<BreastNoduleCryoablationPage />} />

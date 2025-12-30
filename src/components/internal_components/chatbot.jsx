@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { treatments } from '../../data/treatments';
 import { Link, useNavigate } from 'react-router-dom';
+import { detectTreatment } from '../../utils/keywordMatcher';
 
 // Medical AI System Configuration
 const MEDICAL_SYSTEM_PROMPT = `You are IRa, an Interventional Radiology Assistant for Medagg Healthcare, specializing in Interventional Radiology and non-surgical treatments.
@@ -499,70 +500,34 @@ const getNextQuestion = (currentStep, responses, questionnaire) => {
   return null; // No more questions
 };
 
-// Enhanced symptom detection function
+// Enhanced symptom detection function powered by treatment_keywords.json
 const detectProcedureFromSymptoms = (input) => {
-  console.log('Checking input for symptoms:', input); // Debug log
-
-  const symptomMap = {
-    UFE: [
-      'ufe', 'uterine fibroid embolization', 'uae', 'uterine artery embolization',
-      'uterus', 'womb',
-      'heavy periods', 'heavy bleeding', 'menstrual', 'period pain', 'pelvic pain',
-      'fibroid', 'fibroids', 'uterine', 'bloating', 'frequent urination', 'back pain',
-      'heavy menstruation', 'prolonged periods', 'painful periods',
-    ],
-    PAE: [
-      'pae', 'prostatic artery embolization',
-      'prostate gland',
-      'prostate', 'bph', 'urination', 'frequent bathroom', 'weak stream', 'enlarged prostate',
-      'difficulty urinating', 'nighttime urination', 'bladder', 'urinary problems',
-      'can\'t empty bladder', 'frequent peeing', 'prostate issues',
-    ],
-    GAE: [
-      'gae', 'genicular artery embolization',
-      'knee', 'knees', 'joint',
-      'knee pain', 'joint pain', 'arthritis', 'walking pain', 'stiffness',
-      'climbing stairs', 'knee swelling', 'joint stiffness', 'osteoarthritis',
-      'knee arthritis', 'difficulty walking', 'knee discomfort',
-    ],
-    TNA: [
-      'tna', 'thyroid nodule ablation', 'thyroid ablation',
-      'thyroid', 'neck',
-      'neck lump', 'swollen neck', 'thyroid nodule', 'neck swelling',
-      'difficulty swallowing', 'voice changes', 'hoarse voice', 'neck discomfort',
-      'thyroid problems', 'neck mass',
-    ],
-    VV: [
-      'vv', 'varicose vein treatment',
-      'legs', 'leg',
-      'varicose veins', 'spider veins', 'leg veins', 'bulging veins', 'leg pain',
-      'discoloration', 'leg swelling', 'heaviness in legs', 'cramping legs',
-      'visible veins', 'leg discomfort', 'vein problems',
-    ],
-    VCE: [
-      'vce', 'varicocele embolization',
-      'testicles', 'scrotum',
-      'varicocele', 'testicular pain', 'scrotal swelling', 'scrotum pain',
-      'male fertility', 'testicular discomfort', 'scrotal heaviness',
-      'testicular veins', 'fertility issues', 'sperm problems',
-    ],
-    FTR: [
-      'ftr', 'fallopian tube recanalization', 'fte',
-      'fallopian tubes',
-      'fallopian tube', 'blocked tubes', 'infertility', 'can\'t conceive',
-      'difficulty conceiving', 'fertility problems', 'trying to get pregnant',
-      'blocked fallopian', 'tube blockage', 'conception issues',
-    ],
-  };
-
-  for (const [procedure, symptoms] of Object.entries(symptomMap)) {
-    const matchedSymptom = symptoms.find(symptom => input.includes(symptom));
-    if (matchedSymptom) {
-      console.log(`Found match: "${matchedSymptom}" for procedure: ${procedure}`); // Debug log
-      return procedure;
+  try {
+    const result = detectTreatment(input || '');
+    if (result) {
+      console.log('Detected treatment from keywords:', result);
+      // Fallback: derive procedure code from known routes if not mapped by name
+      const routeToProcedure = {
+        '/pae': 'PAE',
+        '/gae': 'GAE',
+        '/thyroid': 'TNA',
+        '/varicose-vein': 'VV',
+        '/varicocele-embolization': 'VCE',
+        '/fte': 'FTR',
+        '/uae': 'UFE',
+        '/pfe': 'PFE',
+      };
+      const inferred = result.procedureCode || routeToProcedure[result.path] || null;
+      return {
+        procedure: inferred,
+        displayName: result.displayName || result.name,
+        route: result.path,
+      };
     }
+  } catch (e) {
+    console.warn('Keyword detection failed, falling back to null', e);
   }
-  console.log('No procedure detected for input:', input); // Debug log
+  console.log('No procedure detected for input:', input);
   return null;
 };
 
@@ -570,25 +535,25 @@ const detectProcedureFromSymptoms = (input) => {
 const getProcedureInfo = (procedure) => {
   const procedureInfoMap = {
     UFE: {
-      message: 'Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help\nrelated to Uterine Fibroids.\nHow would you like me to help you?',
+      message: 'Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help related to Uterine Fibroids.',
     },
     PAE: {
-      message: 'Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help\nrelated to Enlarged Prostate.\nHow would you like me to help you?',
+      message: 'Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help related to Enlarged Prostate.',
     },
     GAE: {
-      message: 'Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help\nrelated to Knee Pain.\nHow would you like me to help you?',
+      message: 'Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help related to Knee Pain.',
     },
     TNA: {
-      message: 'Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help\nrelated to Thyroid Nodules.\nHow would you like me to help you?',
+      message: 'Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help related to Thyroid Nodules.',
     },
     VV: {
-      message: 'Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help\nrelated to Varicose Veins.\nHow would you like me to help you?',
+      message: 'Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help related to Varicose Veins.',
     },
     VCE: {
-      message: 'Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help\nrelated to Varicocele.\nHow would you like me to help you?',
+      message: 'Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help related to Varicocele.',
     },
     FTR: {
-      message: 'Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help\nrelated to Blocked Fallopian Tubes.\nHow would you like me to help you?',
+      message: 'Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help related to Blocked Fallopian Tubes.',
     },
   };
 
@@ -600,7 +565,7 @@ const getProcedureInfo = (procedure) => {
 const quickResponses = [
   'Book a consultation',
   'What treatments do you offer?',
-  'I have knee pain, can you help?',
+ // 'I have knee pain, can you help?',
   'Tell me about non-surgical options',
  // 'Insurance & billing questions'
 ];
@@ -664,18 +629,10 @@ const Chatbot = () => {
       const raw = localStorage.getItem('medagg_chatbot_state');
       if (raw) {
         const saved = JSON.parse(raw);
-        if (Array.isArray(saved.messages) && saved.messages.length) setMessages(reviveMessages(saved.messages));
+        // Messages are intentionally not loaded to reset chat on refresh
         if (typeof saved.isOpen === 'boolean') setIsOpen(saved.isOpen);
         if (typeof saved.inputValue === 'string') setInputValue(saved.inputValue);
-        if (saved.medicalContext) setMedicalContext(saved.medicalContext);
-        if (Array.isArray(saved.conversationHistory)) setConversationHistory(saved.conversationHistory);
-        if (typeof saved.isQuestionnaireActive === 'boolean') setIsQuestionnaireActive(saved.isQuestionnaireActive);
-        if (typeof saved.questionnaireStep === 'number') setQuestionnaireStep(saved.questionnaireStep);
-        if (saved.questionnaireResponses) setQuestionnaireResponses(saved.questionnaireResponses);
-        if (saved.currentQuestionnaire) setCurrentQuestionnaire(saved.currentQuestionnaire);
-        if (typeof saved.isBookingFlow === 'boolean') setIsBookingFlow(saved.isBookingFlow);
-        if (typeof saved.bookingStep === 'number') setBookingStep(saved.bookingStep);
-        if (saved.bookingData) setBookingData(saved.bookingData);
+        // Other states can be persisted if needed, but messages/history are reset.
       }
     } catch (e) {
       console.warn('Failed to load chatbot state', e);
@@ -728,13 +685,11 @@ const Chatbot = () => {
     bookingData,
   ]);
 
-  // When user chooses to view treatment, minimize chatbot on mobile and navigate
+  // When user chooses to view treatment, close chatbot and navigate
   const handleViewTreatment = useCallback((path) => {
     const target = path || '/treatments';
     try {
-      if (typeof window !== 'undefined' && window.innerWidth < 768) {
-        setIsOpen(false); // minimize on mobile to avoid overlaying destination page
-      }
+      setIsOpen(false); // always close the chatbot before navigating
     } catch (_) {}
     navigate(target);
   }, [navigate]);
@@ -859,32 +814,32 @@ const Chatbot = () => {
     const questionnaire = getQuestionnaire(procedure);
     if (!questionnaire) return;
 
+    console.log('[Questionnaire] Starting for procedure:', procedure, questionnaire);
     setIsQuestionnaireActive(true);
     setQuestionnaireStep(0);
     setQuestionnaireResponses({ procedure });
     setCurrentQuestionnaire(questionnaire);
 
-    const botMessage = {
-      text: questionnaire.welcomeMessage,
-      sender: 'bot',
-      timestamp: new Date(),
-    };
-
-    setMessages(prev => [...prev, botMessage]);
-
     // Ask first question after a short delay
     setTimeout(() => {
+      if (!questionnaire || !questionnaire.questions || !questionnaire.questions.length) {
+        console.warn('[Questionnaire] No questions available for', procedure);
+        return;
+      }
+      const q0 = questionnaire.questions[0];
       const firstQuestion = {
-        text: questionnaire.questions[0].question,
+        text: q0.question,
         sender: 'bot',
         timestamp: new Date(),
         isQuestionnaireQuestion: true,
-        questionId: questionnaire.questions[0].id,
-        options: questionnaire.questions[0].options,
-        isInput: questionnaire.questions[0].isInput,
-        field: questionnaire.questions[0].field,
-        placeholder: questionnaire.questions[0].placeholder,
+        questionId: q0.id,
+        options: q0.options,
+        isInput: q0.isInput,
+        field: q0.field,
+        placeholder: q0.placeholder,
+        multiSelect: !!q0.multiSelect,
       };
+      console.log('[Questionnaire] First question rendered:', firstQuestion);
       setMessages(prev => [...prev, firstQuestion]);
     }, 1000);
   }, []);
@@ -987,17 +942,20 @@ const Chatbot = () => {
       setQuestionnaireStep(nextQuestionData.index);
 
       setTimeout(() => {
+        const nq = nextQuestionData.question;
         const nextQuestion = {
-          text: nextQuestionData.question.question,
+          text: nq.question,
           sender: 'bot',
           timestamp: new Date(),
           isQuestionnaireQuestion: true,
-          questionId: nextQuestionData.question.id,
-          options: nextQuestionData.question.options,
-          isInput: nextQuestionData.question.isInput,
-          field: nextQuestionData.question.field,
-          placeholder: nextQuestionData.question.placeholder,
+          questionId: nq.id,
+          options: nq.options,
+          isInput: nq.isInput,
+          field: nq.field,
+          placeholder: nq.placeholder,
+          multiSelect: !!nq.multiSelect,
         };
+        console.log('[Questionnaire] Next question rendered:', nextQuestion);
         setMessages(prev => [...prev, nextQuestion]);
       }, 500);
     } else {
@@ -1285,26 +1243,42 @@ const Chatbot = () => {
     }
 
     // Enhanced symptom detection for automatic questionnaire triggering
-    const detectedProcedure = detectProcedureFromSymptoms(lowerInput);
+    const detection = detectProcedureFromSymptoms(lowerInput);
 
-    if (detectedProcedure) {
-      console.log('Detected procedure:', detectedProcedure); // Debug log
+    if (detection && detection.procedure && questionnaires[detection.procedure]) {
+      console.log('Detected procedure:', detection); // Debug log
 
       // Provide brief information first, then start questionnaire
-      const procedureInfo = getProcedureInfo(detectedProcedure);
+      const procedureInfo = getProcedureInfo(detection.procedure);
 
       const infoMessage = {
         text: procedureInfo.message,
         sender: 'bot',
         timestamp: new Date(),
+        // No CTA here for questionnaire flows
       };
       setMessages(prev => [...prev, infoMessage]);
 
       // Start questionnaire after brief delay
       setTimeout(() => {
-        console.log('Starting questionnaire for:', detectedProcedure); // Debug log
-        startQuestionnaire(detectedProcedure);
+        console.log('Starting questionnaire for:', detection.procedure); // Debug log
+        startQuestionnaire(detection.procedure);
       }, 1500);
+      return;
+    } else if (detection) {
+      // We detected a treatment from keywords, but it doesn't have a configured questionnaire.
+      // Show the standardized condition-intro message and a CTA to the treatment page.
+      const displayName = detection.displayName || 'this condition';
+      const infoText = `Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help\nrelated to ${displayName}.`;
+
+      const infoMessage = {
+        text: infoText,
+        sender: 'bot',
+        timestamp: new Date(),
+        aiGenerated: true,
+        recommendedTreatment: detection.route || '/#services',
+      };
+      setMessages(prev => [...prev, infoMessage]);
       return;
     }
 

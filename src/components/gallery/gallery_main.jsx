@@ -1,10 +1,12 @@
 import React, { useMemo, useState } from 'react';
 
-const TABS = ['All', 'Celebrations', 'Awards', 'Reviews', 'Our Camps', 'Media', 'Conference', 'Videos'];
+// const TABS = ['All', 'Celebrations', 'Awards', 'Reviews', 'Our Camps', 'Media', 'Conference', 'Videos'];
+const TABS = ['Conference', 'Videos'];
 
 // Sample items. Replace the src paths with your real images if needed.
 // These 3 images exist in your public/ folder already.
 const ALL_ITEMS = [
+  /*
   // Newly added Team Celebration images
   {
     id: 9,
@@ -44,11 +46,6 @@ const ALL_ITEMS = [
   },
   // Additional Awards images
   {
-    id: 16,
-    src: '/pic 8.jpeg',
-    categories: ['Awards'],
-  },
-  {
     id: 17,
     src: '/pic9.jpeg',
     categories: ['Awards'],
@@ -58,11 +55,7 @@ const ALL_ITEMS = [
     src: '/pic10.jpeg',
     categories: ['Awards'],
   },
-  {
-    id: 19,
-    src: '/pic11.jpeg',
-    categories: ['Awards'],
-  },
+ 
   // Newly added Reviews images
   {
     id: 20,
@@ -120,6 +113,7 @@ const ALL_ITEMS = [
     src: '/camp6.jpeg',
     categories: ['Our Camps'],
   },
+  */
   // Conference images
   {
     id: 31,
@@ -146,12 +140,14 @@ const ALL_ITEMS = [
     src: '/conf_4.JPG',
     categories: ['Conference'],
   },
+  /*
   // Additional Celebrations images
   {
     id: 36,
     src: '/new_one.jpg',
     categories: ['Celebrations'],
   },
+  */
 ];
 
 export default function GalleryMain() {

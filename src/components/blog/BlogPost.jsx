@@ -317,11 +317,11 @@ const BlogPost = () => {
         <article className='bg-white rounded-xl shadow-lg overflow-hidden'>
           {/* Featured Image */}
           {post.featuredImage && (
-            <div className='h-64 md:h-96 overflow-hidden'>
+            <div className='h-56 sm:h-72 md:h-96 bg-gray-100 overflow-hidden'>
               <img
                 src={post.featuredImage}
                 alt={post.featuredImageAlt || stripHtml(post.title)}
-                className='w-full h-full object-cover'
+                className='w-full h-full object-contain sm:object-cover object-center'
               />
             </div>
           )}
@@ -426,11 +426,11 @@ const BlogPost = () => {
                   className='bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow group'
                 >
                   {relatedPost.featuredImage && (
-                    <div className='h-32 overflow-hidden'>
+                    <div className='h-32 bg-gray-100 overflow-hidden'>
                       <img
                         src={relatedPost.featuredImage}
                         alt={relatedPost.featuredImageAlt || stripHtml(relatedPost.title)}
-                        className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-300'
+                        className='w-full h-full object-contain sm:object-cover object-center group-hover:scale-105 transition-transform duration-300'
                       />
                     </div>
                   )}
