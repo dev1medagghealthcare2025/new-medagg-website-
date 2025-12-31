@@ -53,6 +53,7 @@ export function detectTreatment(rawInput) {
       const { hit, exact } = phraseHit(inputNorm, ph);
       if (hit) score += 3 + (exact ? 1 : 0);
     }
+
     for (const ph of ir) {
       const { hit, exact } = phraseHit(inputNorm, ph);
       if (hit) score += 3 + (exact ? 1 : 0);

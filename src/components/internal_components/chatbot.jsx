@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { treatments } from '../../data/treatments';
 import { Link, useNavigate } from 'react-router-dom';
 import { detectTreatment } from '../../utils/keywordMatcher';
+import { detectTreatmentFuzzyGate } from '../../utils/keywordMatcherGate';
 
 // Medical AI System Configuration
 const MEDICAL_SYSTEM_PROMPT = `You are IRa, an Interventional Radiology Assistant for Medagg Healthcare, specializing in Interventional Radiology and non-surgical treatments.
@@ -503,9 +504,8 @@ const getNextQuestion = (currentStep, responses, questionnaire) => {
 // Enhanced symptom detection function powered by treatment_keywords.json
 const detectProcedureFromSymptoms = (input) => {
   try {
-    const result = detectTreatment(input || '');
-    if (result) {
-      console.log('Detected treatment from keywords:', result);
+    const tryMap = (res) => {
+      if (!res) return null;
       // Fallback: derive procedure code from known routes if not mapped by name
       const routeToProcedure = {
         '/pae': 'PAE',
@@ -517,12 +517,26 @@ const detectProcedureFromSymptoms = (input) => {
         '/uae': 'UFE',
         '/pfe': 'PFE',
       };
-      const inferred = result.procedureCode || routeToProcedure[result.path] || null;
+      const inferred = res.procedureCode || routeToProcedure[res.path] || null;
       return {
         procedure: inferred,
-        displayName: result.displayName || result.name,
-        route: result.path,
+        displayName: res.displayName || res.name,
+        route: res.path,
       };
+    };
+
+    // First attempt exact detection
+    const exact = detectTreatment(input || '');
+    if (exact) {
+      console.log('Detected treatment from keywords (exact):', exact);
+      return tryMap(exact);
+    }
+
+    // Fallback to fuzzy gate (question-start only)
+    const fuzzy = detectTreatmentFuzzyGate(input || '');
+    if (fuzzy) {
+      console.log('Detected treatment from keywords (fuzzy gate):', fuzzy);
+      return tryMap(fuzzy);
     }
   } catch (e) {
     console.warn('Keyword detection failed, falling back to null', e);
