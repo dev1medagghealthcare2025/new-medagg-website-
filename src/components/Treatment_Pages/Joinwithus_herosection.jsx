@@ -57,7 +57,7 @@ export function HeroSection() {
                 className="inline-block"
               >
                 <span className="px-4 py-2 rounded-full text-sm" style={{ background: "#FCE8F0", color: "#E9296A" }}>
-                  Medagg Healthcare – No2Surgeries Platform
+                  Medagg Healthcare – Nosurgeries Platform
                 </span>
               </motion.div>
               

@@ -4,7 +4,6 @@ import Treatmentnavbar from '../components/home/Treatmentnavbar';
 import JoinWithUsHero from '../components/Treatment_Pages/Joinwithus_herosection';
 import Joinwithus_future from '../components/Treatment_Pages/Joinwithus_future';
 import WhyPartnerMedagg from '../components/Treatment_Pages/Why_partner_medagg_joinwith';
-import JoinWithLanding from '../components/Treatment_Pages/Joinwith_Landing';
 import { LeadershipSection } from '../components/Treatment_Pages/Join_us_leader';
 import { GeographicPresence } from '../components/Treatment_Pages/Join_us_our_presence';
 import { FinalCTA } from '../components/Treatment_Pages/Join_us_last';
@@ -20,7 +19,6 @@ const JoinWithUs = () => {
       <GeographicPresence />
       <LeadershipSection />
       <FinalCTA />
-      <JoinWithLanding />
       {/* Other sections for this page can be added here */}
     </div>
   );

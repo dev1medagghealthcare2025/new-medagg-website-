@@ -1,3 +1,4 @@
+import React from 'react';
 import { motion } from "motion/react";
 import { Clock, Activity, Lightbulb, Target, GitBranch, ArrowRight } from "lucide-react";
 
@@ -44,29 +45,29 @@ export function ProblemResponse() {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left - Problems */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="space-y-8"
-          >
-            <div className="inline-block px-4 py-2 rounded-full mb-4" style={{ background: "rgba(43, 52, 69, 0.1)" }}>
-              <span style={{ color: "#2B3445" }}>Current Challenges</span>
-            </div>
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-8 items-start">
+          {/* Column Titles */}
+          <div className="inline-block px-4 py-2 rounded-full mb-4 justify-self-center" style={{ background: "rgba(43, 52, 69, 0.1)" }}>
+            <span className="font-bold text-lg" style={{ color: "#2B3445" }}>Current Challenges</span>
+          </div>
+          <div className="hidden lg:block"></div> {/* Spacer for the arrow column*/}
+          <div className="inline-block px-4 py-2 rounded-full mb-4 justify-self-center" style={{ background: "#FCE8F0" }}>
+            <span className="font-bold text-lg" style={{ color: "#E9296A" }}>Our Response</span>
+          </div>
 
-            {problems.map((problem, index) => {
-              const Icon = problem.icon;
-              return (
+          {/* Paired Items */}
+          {problems.map((problem, index) => {
+            const solution = solutions[index];
+            const Icon = problem.icon;
+            return (
+              <React.Fragment key={index}>
+                {/* Left - Problem Card */}
                 <motion.div
-                  key={index}
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="flex items-center gap-4 p-6 bg-white rounded-3xl shadow-sm"
+                  className="flex items-center gap-4 p-6 bg-white rounded-3xl shadow-sm h-full"
                 >
                   <div 
                     className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
@@ -76,54 +77,39 @@ export function ProblemResponse() {
                   </div>
                   <p className="text-lg text-gray-700">{problem.text}</p>
                 </motion.div>
-              );
-            })}
 
-            {/* Connector arrow */}
-            <div className="hidden lg:flex items-center justify-end">
-              <motion.div
-                animate={{ x: [0, 10, 0] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <ArrowRight className="w-12 h-12" style={{ color: "#E9296A" }} />
-              </motion.div>
-            </div>
-          </motion.div>
+                {/* Center - Arrow */}
+                <div className="hidden lg:flex items-center justify-center h-full">
+                    <motion.div
+                        animate={{ x: [0, 10, 0] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: index * 0.2 }}
+                    >
+                        <ArrowRight className="w-12 h-12" style={{ color: "#E9296A" }} />
+                    </motion.div>
+                </div>
 
-          {/* Right - Solutions */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="space-y-6"
-          >
-            <div className="inline-block px-4 py-2 rounded-full mb-4" style={{ background: "#FCE8F0" }}>
-              <span style={{ color: "#E9296A" }}>Our Response</span>
-            </div>
-
-            {solutions.map((solution, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.15 }}
-                whileHover={{ y: -5 }}
-                className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
-                style={{
-                  borderLeft: `4px solid ${solution.color}`
-                }}
-              >
-                <h3 className="text-2xl mb-3" style={{ color: solution.color }}>
-                  {solution.title}
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  {solution.description}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
+                {/* Right - Solution Card */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.15 }}
+                  whileHover={{ y: -5 }}
+                  className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-shadow cursor-pointer h-full"
+                  style={{
+                    borderLeft: `4px solid ${solution.color}`
+                  }}
+                >
+                  <h3 className="text-2xl mb-3" style={{ color: solution.color }}>
+                    {solution.title}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    {solution.description}
+                  </p>
+                </motion.div>
+              </React.Fragment>
+            )
+          })}
         </div>
       </div>
     </section>

@@ -5,15 +5,15 @@ export function LeadershipSection() {
   const leaders = [
     {
       name: "Ramesh Krishnan",
-      title: "Co-Founder & Chief Strategy Officer",
-      description: "Healthcare innovation strategist with 15+ years driving interventional radiology adoption across emerging markets.",
+      title: "Founder & Managing Partner",
+      description: "Brings decades of experience across international healthcare systems.",
       image: "/Ramesh Krishnan.png"
     },
     {
       name: "Sumitha Karthik",
-      title: "Co-Founder & Chief Operations Officer",
-      description: "Clinical operations expert focused on building scalable healthcare systems and physician engagement platforms.",
-      image: "/sk_new.jpeg"
+      title: "Co-Founder & Partner",
+      description: "Brings deep expertise in healthcare operations, patient journeys, and execution at scale.",
+      image: "/sk_new-removebg-preview.png"
     }
   ];
 
@@ -52,7 +52,7 @@ export function LeadershipSection() {
               whileHover={{ y: -10 }}
               className="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all overflow-hidden"
             >
-              <div className="relative h-[380px] sm:h-[440px] rounded-2xl overflow-hidden" style={{ background: "linear-gradient(135deg, #F5F5F7 0%, #FCE8F0 100%)" }}>
+              <div className="relative h-[380px] sm:h-[440px] rounded-2xl overflow-hidden" style={{ backgroundColor: "#FDF2F8" }}>
                 <img
                   src={leader.image}
                   alt={leader.name}
@@ -89,7 +89,7 @@ export function LeadershipSection() {
           >
             <div className="relative z-10">
               <p className="text-2xl lg:text-3xl text-white leading-relaxed italic text-center mb-6">
-              Together, they steward Medagg and No2Surgeries with a unified intent:
+              Together, they steward Medagg and Nosurgeries with a unified intent:
               Advancing Interventional Radiology through structure, collaboration, and continuity.
               </p>
               
