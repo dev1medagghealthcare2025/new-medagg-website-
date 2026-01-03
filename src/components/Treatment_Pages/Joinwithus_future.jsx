@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { Clock, Activity, Lightbulb, Target, GitBranch, ArrowRight } from "lucide-react";
 
 export function ProblemResponse() {

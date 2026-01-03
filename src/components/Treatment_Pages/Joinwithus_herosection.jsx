@@ -54,7 +54,7 @@ export function HeroSection() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="inline-block"
+                className="inline-block mt-6 lg:mt-0"
               >
                 <span className="px-4 py-2 rounded-full text-sm" style={{ background: "#FCE8F0", color: "#E9296A" }}>
                   Medagg Healthcare – Nosurgeries Platform

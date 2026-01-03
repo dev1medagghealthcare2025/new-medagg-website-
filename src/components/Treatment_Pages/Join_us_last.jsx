@@ -1,4 +1,4 @@
-import { motion, animate } from "motion/react";
+import { motion, animate } from "framer-motion";
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowRight } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
@@ -57,6 +57,8 @@ function CTAContent() {
     experience: '',
     city: '',
     preferredLanguage: '',
+    designation: '',
+    company: '',
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -87,6 +89,8 @@ function CTAContent() {
             experience: formData.experience,
             city: formData.city,
             preferredLanguage: formData.preferredLanguage,
+            designation: formData.designation,
+            company: formData.company,
             specialization: formData.message, // Map message to specialization
             source: 'Website - Join With Us CTA',
           },
@@ -95,7 +99,7 @@ function CTAContent() {
 
       if (response.ok) {
         setFormStatus('success');
-        setFormData({ name: '', phone: '', email: '', experience: '', city: '', preferredLanguage: '', message: '' });
+        setFormData({ name: '', phone: '', email: '', experience: '', city: '', preferredLanguage: '', designation: '', company: '', message: '' });
       } else {
         setFormStatus('error');
       }
@@ -108,7 +112,7 @@ function CTAContent() {
   };
   return (
     <div 
-      id="partner"
+      id="join-with-us-section"
       className="py-24 px-6 lg:px-12 relative overflow-hidden"
       style={{ background: "linear-gradient(135deg, #2B3445 0%, #1a1f2e 100%)" }}
     >
@@ -168,6 +172,8 @@ function CTAContent() {
                 <input type='email' name='email' value={formData.email} onChange={handleInputChange} placeholder='Email ID*' className='w-full px-4 py-2.5 bg-white border border-slate-300 rounded-md text-slate-900 caret-slate-900 placeholder:text-slate-500 focus:ring-pink-500 focus:border-pink-500' required />
                 <input type='text' name='city' value={formData.city} onChange={handleInputChange} placeholder='Select City*' className='w-full px-4 py-2.5 bg-white border border-slate-300 rounded-md text-slate-900 caret-slate-900 placeholder:text-slate-500 focus:ring-pink-500 focus:border-pink-500' required />
                 <input type='text' name='experience' value={formData.experience} onChange={handleInputChange} placeholder='Experience (Years)*' className='w-full px-4 py-2.5 bg-white border border-slate-300 rounded-md text-slate-900 caret-slate-900 placeholder:text-slate-500 focus:ring-pink-500 focus:border-pink-500' required />
+                <input type='text' name='designation' value={formData.designation} onChange={handleInputChange} placeholder='Designation' className='w-full px-4 py-2.5 bg-white border border-slate-300 rounded-md text-slate-900 caret-slate-900 placeholder:text-slate-500 focus:ring-pink-500 focus:border-pink-500' />
+                <input type='text' name='company' value={formData.company} onChange={handleInputChange} placeholder='Company Name' className='w-full px-4 py-2.5 bg-white border border-slate-300 rounded-md text-slate-900 caret-slate-900 placeholder:text-slate-500 focus:ring-pink-500 focus:border-pink-500' />
                 <select name='preferredLanguage' value={formData.preferredLanguage} onChange={handleInputChange} className='w-full px-4 py-2.5 bg-white border border-slate-300 rounded-md text-slate-900 caret-slate-900 focus:ring-pink-500 focus:border-pink-500'>
                   <option value='' disabled className="text-slate-500">Preferred Language</option>
                   <option value='English' className="bg-white text-slate-900">English</option>

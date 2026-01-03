@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { Users } from "lucide-react";
 
 export function LeadershipSection() {
@@ -56,7 +56,7 @@ export function LeadershipSection() {
                 <img
                   src={leader.image}
                   alt={leader.name}
-                  className="w-full h-full object-contain object-top"
+                  className={`w-full h-full object-contain ${leader.name === 'Ramesh Krishnan' ? 'object-bottom lg:object-top' : 'object-top'}`}
                 />
               </div>
               

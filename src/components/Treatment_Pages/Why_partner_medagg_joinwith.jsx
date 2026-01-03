@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { Stethoscope, Building2, Package, Heart } from "lucide-react";
 
 // Helper component for the connecting lines with arrows
@@ -56,26 +56,26 @@ function RoleCard({ role, delay = 0 }) {
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay }}
       whileHover={{ y: -10 }}
-      className="relative max-w-xs w-full z-10"
+      className="relative w-full max-w-[150px] lg:max-w-xs z-10"
     >
       <div 
-        className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all cursor-pointer h-full"
+        className="bg-white rounded-2xl lg:rounded-3xl p-3 lg:p-8 shadow-lg hover:shadow-2xl transition-all cursor-pointer h-full"
         style={{ border: `2px solid ${role.color}20` }}
       >
         <div 
-          className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6"
-          style={{ background: `${role.color}15` }}
+          className="w-10 h-10 lg:w-16 lg:h-16 rounded-xl lg:rounded-2xl grid place-items-center shrink-0 mb-3 lg:mb-4 mx-auto"
+          style={{ background: `#FCE8F0` }}
         >
           {role.image ? (
-            <img src={role.image} alt={role.title} className="w-12 h-12 object-contain" />
+            <img src={role.image} alt={role.title} className="w-8 h-8 lg:w-12 lg:h-12 object-contain mx-auto block" />
           ) : (
-            <Icon className="w-8 h-8" style={{ color: role.color }} />
+            <Icon className="w-6 h-6 lg:w-8 lg:h-8 mx-auto block" style={{ color: role.color }} />
           )}
         </div>
-        <h3 className="text-xl mb-3" style={{ color: role.color }}>
+        <h3 className="text-sm lg:text-xl mb-1 lg:mb-2" style={{ color: role.color }}>
           {role.title}
         </h3>
-        <p className="text-gray-600 leading-relaxed">
+        <p className="text-xs lg:text-base text-gray-600 leading-relaxed">
           {role.description}
         </p>
       </div>
@@ -91,17 +91,17 @@ function CentralImage() {
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, delay: 0.2 }}
-      className="flex flex-col items-center justify-center mx-8"
+      className="flex flex-col items-center justify-center mx-2 lg:mx-8 shrink-0"
     >
-      <div className="relative w-80 sm:w-96 md:w-[24rem] h-80 sm:h-96 md:h-[24rem] flex items-center justify-center">
+      <div className="relative w-28 h-28 lg:w-80 lg:h-80 flex items-center justify-center">
         <motion.div
-          className="absolute inset-10 sm:inset-12 md:inset-14 rounded-full border"
+          className="absolute inset-4 lg:inset-12 rounded-full border"
           style={{ borderColor: "#E9296A" }}
           animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0.1, 0.5] }}
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute inset-14 sm:inset-16 md:inset-20 rounded-full border"
+          className="absolute inset-6 lg:inset-16 rounded-full border"
           style={{ borderColor: "#E9296A" }}
           animate={{ scale: [1, 1.3, 1], opacity: [0.35, 0, 0.35] }}
           transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
@@ -109,8 +109,8 @@ function CentralImage() {
         <motion.img
           src="/Standing_IRa.png"
           alt="IR Assistant"
-          className="relative w-72 sm:w-80 md:w-96 h-auto object-contain"
-          animate={{ y: [0, -8, 0] }}
+          className="relative w-24 lg:w-72 h-auto object-contain"
+          animate={{ y: [0, -5, 0] }}
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
         />
       </div>
@@ -130,7 +130,7 @@ export function EcosystemFlow() {
       icon: Building2,
       title: "Hospitals & Centres",
       description: "Facilities enabling coordinated IR pathways",
-      color: "#2B3445"
+      color: "#E9296A"
     },
     {
       icon: Package,
@@ -148,32 +148,32 @@ export function EcosystemFlow() {
   ];
 
   return (
-    <section id="ecosystem" className="py-24 px-6 lg:px-12 bg-white">
+    <section id="ecosystem" className="py-12 lg:py-24 px-4 lg:px-12 bg-white">
       <div className="container mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10 lg:mb-12"
         >
-          <h2 className="text-4xl lg:text-5xl mb-4" style={{ color: "#2B3445" }}>
+          <h2 className="text-2xl lg:text-5xl mb-3 lg:mb-4" style={{ color: "#2B3445" }}>
             One Operating System.
           </h2>
-          <h3 className="text-3xl lg:text-4xl mb-6" style={{ color: "#E9296A" }}>
+          <h3 className="text-xl lg:text-4xl mb-4 lg:mb-6" style={{ color: "#E9296A" }}>
             Multiple Interdependent Roles.
           </h3>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-base lg:text-xl text-gray-600 max-w-3xl mx-auto">
             A unified ecosystem where every stakeholder contributes to advancing interventional radiology
           </p>
         </motion.div>
 
-        <div className="relative flex flex-col items-center space-y-4">
+        <div className="relative flex flex-col items-center space-y-2 lg:space-y-4">
           
           {/* Top Card: Patients */}
           <div className="relative flex flex-col items-center">
             <RoleCard role={roles[3]} />
-            <div className="absolute bottom-0 translate-y-full h-12 w-24">
+            <div className="absolute bottom-0 translate-y-full h-6 lg:h-12 w-12 lg:w-24">
               <ConnectingLine direction="down" />
             </div>
           </div>
@@ -182,14 +182,14 @@ export function EcosystemFlow() {
           <div className="flex items-center justify-center w-full">
             <div className="relative flex items-center">
               <RoleCard role={roles[0]} delay={0.2} />
-              <div className="absolute right-0 translate-x-full h-24 w-12">
+              <div className="absolute right-0 translate-x-full h-12 lg:h-24 w-6 lg:w-12">
                 <ConnectingLine direction="right" />
               </div>
             </div>
             <CentralImage />
             <div className="relative flex items-center">
               <RoleCard role={roles[2]} delay={0.4} />
-              <div className="absolute left-0 -translate-x-full h-24 w-12">
+              <div className="absolute left-0 -translate-x-full h-12 lg:h-24 w-6 lg:w-12">
                 <ConnectingLine direction="left" />
               </div>
             </div>
@@ -197,11 +197,11 @@ export function EcosystemFlow() {
 
           {/* Bottom Card: Hospitals */}
           <div className="relative flex flex-col items-center">
-            <div className="absolute top-0 -translate-y-full h-12 w-24">
+             <div className="absolute top-0 -translate-y-full h-6 lg:h-12 w-12 lg:w-24">
               <ConnectingLine direction="up" />
             </div>
             <RoleCard role={roles[1]} delay={0.6} />
-            <p className="text-xl font-extrabold mt-12" style={{ color: "#2B3445" }}>Medagg Healthcare Platform</p>
+            <p className="text-sm lg:text-xl font-bold mt-4 lg:mt-12" style={{ color: "#2B3445" }}>Medagg Healthcare Platform</p>
           </div>
 
         </div>
@@ -212,10 +212,10 @@ export function EcosystemFlow() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-center mt-20"
+          className="text-center mt-12 lg:mt-20"
         >
-          <div className="inline-block px-6 py-3 rounded-full" style={{ background: "#FCE8F0" }}>
-            <p className="text-lg" style={{ color: "#E9296A" }}>
+          <div className="inline-block px-4 lg:px-6 py-2 lg:py-3 rounded-full" style={{ background: "#FCE8F0" }}>
+            <p className="text-sm lg:text-lg" style={{ color: "#E9296A" }}>
               Continuous collaboration driving better patient outcomes
             </p>
           </div>

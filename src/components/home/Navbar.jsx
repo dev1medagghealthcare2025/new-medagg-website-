@@ -36,7 +36,7 @@ export default function Navbar() {
           <div className='hidden lg:block'>
             <ul className='flex items-center space-x-4 xl:space-x-5'>
               <li><Link to='/about' className='text-white hover:text-pink-400 transition-colors text-base font-semibold'>About</Link></li>
-              <li><Link to='/blog' className='text-white hover:text-pink-400 transition-colors text-base font-semibold'>Blog</Link></li>
+              <li><Link to='/blog' className='text-white hover:text-pink-400 transition-colors text-base font-semibold'>Blogs</Link></li>
               <li><Link to='/contact-us' className='text-white hover:text-pink-400 transition-colors text-base font-semibold'>Contact Us</Link></li>
             </ul>
           </div>
