@@ -22,23 +22,6 @@ export function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-white via-[#F5F5F7] to-[#FCE8F0]">
-      {/* Decorative curved shapes */}
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 0.1, scale: 1 }}
-          transition={{ duration: 1.2 }}
-          className="absolute -top-40 -right-40 w-96 h-96 rounded-full"
-          style={{ background: "radial-gradient(circle, #E9296A 0%, transparent 70%)" }}
-        />
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 0.08, scale: 1 }}
-          transition={{ duration: 1.2, delay: 0.2 }}
-          className="absolute -bottom-40 -left-40 w-[600px] h-[600px] rounded-full"
-          style={{ background: "radial-gradient(circle, #2B3445 0%, transparent 70%)" }}
-        />
-      </div>
 
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -101,7 +84,7 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="relative"
           >
-            <div className="bg-white rounded-[2.5rem] p-8 shadow-2xl border border-gray-100">
+            <div className="bg-transparent lg:bg-white rounded-[2.5rem] p-6 lg:p-8 shadow-none lg:shadow-2xl border-0 lg:border lg:border-gray-100">
               <div className="aspect-video rounded-2xl overflow-hidden mb-6">
                 <img
                   src="/Herosection_partner_with_us.png"
@@ -125,13 +108,7 @@ export function HeroSection() {
               </div>
             </div>
 
-            {/* Decorative floating elements */}
-            <motion.div
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-6 -right-6 w-24 h-24 rounded-full"
-              style={{ background: "linear-gradient(135deg, #E9296A 0%, #FCE8F0 100%)", opacity: 0.2 }}
-            />
+            {/* Decorative floating elements removed */}
           </motion.div>
         </div>
       </div>

@@ -39,76 +39,11 @@ export function GeographicPresence() {
             transition={{ duration: 0.8 }}
             className="relative"
           >
-            <div className="bg-white rounded-3xl p-8 shadow-2xl">
-              {/* Simplified India map representation */}
-              <div className="relative aspect-square max-w-md mx-auto">
-                {/* Background shape representing India */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <img
-                    src="https://images.unsplash.com/photo-1546833998-07256bcc76ad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbmRpYSUyMG1hcCUyMGlsbHVzdHJhdGlvbnxlbnwxfHx8fDE3NjY4MjQ1MTd8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                    alt="India Map"
-                    className="w-full h-full object-contain opacity-20"
-                  />
-                </div>
-
-                {/* Region markers */}
-                {regions.map((region, index) => (
-                  <motion.div
-                    key={region.name}
-                    initial={{ opacity: 0, scale: 0 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="absolute z-10"
-                    style={region.position}
-                  >
-                    <div className="relative group cursor-pointer">
-                      {/* Pulsing effect */}
-                      <motion.div
-                        animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
-                        transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
-                        className="absolute inset-0 rounded-full"
-                        style={{ background: "#E9296A" }}
-                      />
-                      
-                      <div 
-                        className="relative w-8 h-8 rounded-full flex items-center justify-center transform group-hover:scale-125 transition-transform"
-                        style={{ background: "#E9296A" }}
-                      >
-                        <MapPin className="w-4 h-4 text-white" />
-                      </div>
-
-                      {/* Tooltip */}
-                      <div 
-                        className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 rounded-full whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity text-sm"
-                        style={{ background: "#2B3445", color: "white" }}
-                      >
-                        {region.name}
-                      </div>
-
-                      {/* Connection lines */}
-                      {index < regions.length - 1 && (
-                        <svg className="absolute top-1/2 left-1/2 w-32 h-32 -z-10 overflow-visible pointer-events-none">
-                          <motion.line
-                            initial={{ pathLength: 0 }}
-                            whileInView={{ pathLength: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1.5, delay: index * 0.2 }}
-                            x1="0"
-                            y1="0"
-                            x2="64"
-                            y2="32"
-                            stroke="#E9296A"
-                            strokeWidth="1"
-                            strokeDasharray="3,3"
-                            opacity="0.3"
-                          />
-                        </svg>
-                      )}
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
+            <div className="rounded-3xl overflow-hidden shadow-2xl bg-white mx-auto max-w-xs sm:max-w-sm lg:max-w-md">
+              <video autoPlay loop muted playsInline className="w-full h-auto object-cover">
+                <source src="/medagg_cities_for_website.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
             </div>
           </motion.div>
 
