@@ -7,6 +7,7 @@ import WhyPartnerMedagg from '../components/Treatment_Pages/Why_partner_medagg_j
 import { LeadershipSection } from '../components/Treatment_Pages/Join_us_leader';
 import { GeographicPresence } from '../components/Treatment_Pages/Join_us_our_presence';
 import { FinalCTA } from '../components/Treatment_Pages/Join_us_last';
+import TimingChangesSection from '../components/Treatment_Pages/join_with_us_ira';
 
 const JoinWithUs = () => {
   return (
@@ -14,6 +15,7 @@ const JoinWithUs = () => {
       <Navbar />
       <Treatmentnavbar />
       <JoinWithUsHero />
+      <TimingChangesSection />
       <Joinwithus_future />
       <WhyPartnerMedagg />
       <GeographicPresence />

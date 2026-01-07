@@ -18,7 +18,7 @@ export function LeadershipSection() {
   ];
 
   return (
-    <section id="leadership" className="py-24 px-6 lg:px-12 bg-white">
+    <section id="leadership" className="py-24 px-6 lg:px-12" style={{ background: "#FFF7F9" }}>
       <div className="container mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -35,9 +35,7 @@ export function LeadershipSection() {
           <h2 className="text-4xl lg:text-5xl mb-4" style={{ color: "#2B3445" }}>
             Leadership & Stewardship
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Guided by expertise, driven by commitment to advancing interventional radiology
-          </p>
+          
         </motion.div>
 
         {/* Leader profiles */}

@@ -123,19 +123,19 @@ export function EcosystemFlow() {
     {
       icon: Stethoscope,
       title: "Interventional Radiologists",
-      description: "Expert practitioners delivering minimally invasive care",
+      description: "Clinical decision-makers whose early engagement shapes pathways and intent.",
       color: "#E9296A"
     },
     {
       icon: Building2,
       title: "Hospitals & Centres",
-      description: "Facilities enabling coordinated IR pathways",
+      description: "Care environments where IR is delivered consistently within routine workflows.",
       color: "#E9296A"
     },
     {
       icon: Package,
       title: "IR Supply & Industry Partners",
-      description: "Technology and device manufacturers",
+      description: "Enablement partners aligning technology to established clinical direction.",
       color: "#E9296A"
     },
     {
@@ -147,8 +147,22 @@ export function EcosystemFlow() {
     }
   ];
 
+  const MobileEcosystemView = () => {
+    return (
+      <div className="block lg:hidden relative mb-19 mt-11">
+        <div className="w-full flex justify-center overflow-visible">
+          <img 
+            src="/ecosystem_medagg.png" 
+            alt="Ecosystem Flow" 
+            className="w-full h-auto max-w-2xl scale-125"
+          />
+        </div>
+      </div>
+    );
+  };
+
   return (
-    <section id="ecosystem" className="py-12 lg:py-24 px-4 lg:px-12 bg-white">
+    <section id="ecosystem" className="py-12 lg:py-24 px-4 lg:px-12 bg-gray-100">
       <div className="container mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -157,18 +171,17 @@ export function EcosystemFlow() {
           transition={{ duration: 0.6 }}
           className="text-center mb-10 lg:mb-12"
         >
-          <h2 className="text-2xl lg:text-5xl mb-3 lg:mb-4" style={{ color: "#2B3445" }}>
-            One Operating System.
+          <h2 className="text-2xl lg:text-5xl mb-6 font-bold text-[#2B3445] text-center uppercase tracking-tight">
+            HOW THE <span style={{ color: '#E9296A' }}>ECOSYSTEM</span> OPERATES
           </h2>
-          <h3 className="text-xl lg:text-4xl mb-4 lg:mb-6" style={{ color: "#E9296A" }}>
-            Multiple Interdependent Roles.
-          </h3>
-          <p className="text-base lg:text-xl text-gray-600 max-w-3xl mx-auto">
-            A unified ecosystem where every stakeholder contributes to advancing interventional radiology
+          <p className="text-base lg:text-xl text-gray-600 max-w-3xl mx-auto whitespace-normal lg:whitespace-nowrap">
+            One Operating System. Multiple Interdependent Roles.
           </p>
         </motion.div>
 
-        <div className="relative flex flex-col items-center space-y-2 lg:space-y-4">
+        <MobileEcosystemView />
+
+        <div className="hidden lg:flex flex-col items-center space-y-4 relative">
           
           {/* Top Card: Patients */}
           <div className="relative flex flex-col items-center">
@@ -212,7 +225,7 @@ export function EcosystemFlow() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-center mt-12 lg:mt-20"
+          className="hidden lg:block text-center mt-12 lg:mt-20"
         >
           <div className="inline-block px-4 lg:px-6 py-2 lg:py-3 rounded-full" style={{ background: "#FCE8F0" }}>
             <p className="text-sm lg:text-lg" style={{ color: "#E9296A" }}>
