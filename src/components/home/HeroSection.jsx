@@ -1,6 +1,4 @@
-import React, { useState, useEffect, useDeferredValue, useTransition, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import Groq from 'groq-sdk';
+import React, { useState, useEffect, useDeferredValue, useTransition } from 'react';
 import Hero_crossel from './Hero_crossel';
 import HeroCrosselMap from './Hero_crossel_map';
 import SharedSearchBar from './SharedSearchBar';
@@ -97,7 +95,7 @@ const HeroSection = () => {
   const totalSlides = 3;
   // Defer query updates to reduce re-render pressure while typing
   const deferredQuery = useDeferredValue(query);
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
 
   // Clear results when query is emptied
   useEffect(() => {
@@ -406,12 +404,6 @@ const HeroSection = () => {
     return () => clearInterval(slideInterval);
   }, [totalSlides]);
 
-  // Create Groq client once to avoid re-instantiation during typing
-  const groqRef = useRef(null);
-  if (!groqRef.current) {
-    groqRef.current = new Groq({ apiKey: import.meta.env.VITE_GROQ_API_KEY, dangerouslyAllowBrowser: true });
-  }
-
   // Enhanced fuzzy keyword search function
   const performKeywordSearch = (searchQuery) => {
     const query = searchQuery.toLowerCase().trim();
@@ -632,47 +624,7 @@ const HeroSection = () => {
     setIsLoading(true);
     setResults([]);
 
-    // Try curated precise search first
-    const systemPrompt = `
-      You are an intelligent medical search assistant for a healthcare provider specializing in interventional radiology. 
-      
-      CRITICAL: You must handle ALL types of typos, misspellings, abbreviations, and variations in user input including:
-      
-      COMMON MEDICAL TYPOS & VARIATIONS:
-      - Knee: "nee", "knee", "kne", "knea", "knee pain", "joint pain"
-      - Prostate: "prostat", "prostrate", "prostate", "BPH", "enlarged prostate"
-      - Thyroid: "thyriod", "thyroid", "thyroids", "neck lump", "goiter"
-      - Breast: "brest", "breast", "chest", "breast lump", "breast mass"
-      - Heart: "hart", "heart", "cardiac", "chest pain", "valve"
-      - Vein: "vien", "vein", "veins", "leg veins", "varicose"
-      - Artery: "artery", "arteries", "blood vessel"
-      - Pain: "pian", "pain", "ache", "hurt", "discomfort"
-      - Nodule: "noduel", "nodule", "lump", "mass", "growth"
-      - Embolization: "embolisation", "embolization", "blocking"
-      
-      SYMPTOM VARIATIONS:
-      - Urination issues: "pee problems", "bathroom issues", "weak stream"
-      - Swelling: "swolen", "swelling", "inflammation", "enlarged"
-      - Difficulty: "dificulty", "difficulty", "trouble", "hard to"
-      - Treatment: "treatmnt", "treatment", "therapy", "procedure"
-      
-      Your goal is to understand ANY medical query with spelling mistakes and suggest relevant treatments.
-
-      Available treatments and their paths:
-      ${treatmentSuggestions.map(t => `- ${t.name}: ${t.path}`).join('\n')}
-
-      OUTPUT INSTRUCTIONS (json):
-      - You MUST return a json object ONLY.
-      - Do not include any explanation, prose, or markdown.
-      - The json must be strictly valid and match this schema exactly:
-        {"results": [{"name": "Treatment Name", "path": "/path"}]}
-      - If no treatments match, return:
-        {"results": []}
-      - This line intentionally includes the word json to comply with API requirements: json
-    `;
-
     try {
-      // Curated first for accuracy; broaden if query is generic
       const qn = query.toLowerCase().trim();
       const GENERIC_TERMS = new Set(['pain', 'swelling', 'lump', 'veins', 'urine', 'bleeding', 'infertility', 'pregnancy', 'problem', 'treatment']);
       const isGeneric = qn.split(/[^a-z0-9]+/).filter(Boolean).some(t => GENERIC_TERMS.has(t));
@@ -681,114 +633,15 @@ const HeroSection = () => {
       if (curated.length > 0) {
         console.log('Curated Results:', curated);
         setResults(curated);
-        setIsLoading(false);
         return;
       }
 
       // If curated has nothing, use fast local fuzzy keyword search
       const keywordResults = performKeywordSearch(query);
-      if (keywordResults.length > 0) {
-        console.log('Quick Keyword Results:', keywordResults);
-        setResults(keywordResults);
-        setIsLoading(false);
-        return;
-      }
-
-      const chatCompletion = await groqRef.current.chat.completions.create({
-        messages: [
-          {
-            role: 'system',
-            content: systemPrompt,
-          },
-          {
-            role: 'user',
-            content: query,
-          },
-        ],
-        model: 'llama-3.1-8b-instant',
-        temperature: 0.3,
-        max_tokens: 512,
-        top_p: 1,
-        stream: false,
-        response_format: { type: 'json_object' },
-      });
-
-      const responseContent = chatCompletion.choices[0]?.message?.content;
-      if (responseContent) {
-        try {
-          const parsedResults = JSON.parse(responseContent);
-          console.log('AI Results:', parsedResults);
-          const aiResults = parsedResults.results || [];
-
-          // Allow only known treatment pages. If AI returns unknown paths, map by name to best known treatment.
-          const allowedPaths = new Set(treatmentSuggestions.map(t => t.path));
-
-          const normalize = (s = '') => s.toLowerCase().trim();
-          const findBestByName = (name = '') => {
-            const n = normalize(name);
-            if (!n) return null;
-            // Simple scoring: exact include in name, then includes in keywords/name, else character overlap
-            let best = null;
-            let bestScore = 0;
-            treatmentSuggestions.forEach(t => {
-              const tn = normalize(t.name);
-              let score = 0;
-              if (tn.includes(n) || n.includes(tn)) score += 5;
-              t.keywords.forEach(k => {
-                const kn = normalize(k);
-                if (kn && (kn.includes(n) || n.includes(kn))) score += 2;
-              });
-              // character overlap
-              let matches = 0;
-              for (const ch of n) if (tn.includes(ch)) matches++;
-              if (n.length > 0) score += matches / n.length;
-              if (score > bestScore) {
-                bestScore = score;
-                best = t;
-              }
-            });
-            return best;
-          };
-
-          // Filter/map AI results to allowed items
-          const mapped = aiResults
-            .map((r) => {
-              if (r && r.path && allowedPaths.has(r.path)) return { name: r.name, path: r.path };
-              const mappedTreatment = r?.name ? findBestByName(r.name) : null;
-              return mappedTreatment ? { name: mappedTreatment.name, path: mappedTreatment.path } : null;
-            })
-            .filter(Boolean);
-
-          // Ensure uniqueness and top 3
-          const unique = [];
-          const seen = new Set();
-          for (const item of mapped) {
-            if (!seen.has(item.path)) {
-              seen.add(item.path);
-              unique.push(item);
-            }
-            if (unique.length >= 3) break;
-          }
-
-          if (unique.length > 0) {
-            startTransition(() => setResults(unique));
-          } else {
-            // Fallback to fuzzy keyword search if AI is unusable
-            const keywordResults = performKeywordSearch(query);
-            console.log('Fallback Keyword Results:', keywordResults);
-            startTransition(() => setResults(keywordResults));
-          }
-        } catch (parseError) {
-          console.error('JSON Parse Error:', parseError);
-          // Fallback to fuzzy keyword search
-          const keywordResults = performKeywordSearch(query);
-          console.log('Fallback Keyword Results:', keywordResults);
-          startTransition(() => setResults(keywordResults));
-        }
-      }
+      console.log('Quick Keyword Results:', keywordResults);
+      startTransition(() => setResults(keywordResults));
     } catch (error) {
       console.error('Error fetching search results:', error);
-      // Fallback to fuzzy keyword search
       const keywordResults = performKeywordSearch(query);
       console.log('Fallback Keyword Results:', keywordResults);
       startTransition(() => setResults(keywordResults));
