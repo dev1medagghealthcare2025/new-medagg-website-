@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { CheckCircle2 } from 'lucide-react';
 
 // Helpers for video embedding (YouTube, Shorts, Vimeo, MP4)
@@ -64,6 +64,7 @@ const getWrapperWidthClass = (url, orientation) => {
     : 'max-w-2xl';
 };
 
+
 const WhatHappensInEndovenousAblation = ({ videoUrl, orientation }) => {
   const features = [
     'Detailed explanation of the procedure',
@@ -71,8 +72,35 @@ const WhatHappensInEndovenousAblation = ({ videoUrl, orientation }) => {
     'Hear from our medical experts',
   ];
 
+  // --- Instagram Reel Carousel Auto-scroll Logic ---
+  const reelCarouselRef = useRef(null);
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    const carousel = reelCarouselRef.current;
+    if (!carousel) return;
+    let animationId;
+    const scrollSpeed = 1; // px per frame
+    function autoScroll() {
+      if (!paused && carousel) {
+        carousel.scrollLeft += scrollSpeed;
+        // Loop scroll
+        if (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth) {
+          carousel.scrollLeft = 0;
+        }
+      }
+      animationId = requestAnimationFrame(autoScroll);
+    }
+    animationId = requestAnimationFrame(autoScroll);
+    return () => {
+      if (animationId) cancelAnimationFrame(animationId);
+    };
+  }, [paused]);
+  // --- End Carousel Logic ---
+
   return (
-    <div className='bg-gray-50 py-16 sm:py-24'>
+    <>
+      <div className='bg-gray-50 py-16 sm:py-24'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center'>
           {/* Left Content */}
@@ -125,6 +153,41 @@ const WhatHappensInEndovenousAblation = ({ videoUrl, orientation }) => {
         </div>
       </div>
     </div>
+      {/* Instagram Reels Carousel Section */}
+    <div className="bg-white py-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h3 className="text-2xl font-bold text-[#2d2552] mb-6">Watch Related Instagram Reels</h3>
+        <div
+          className="flex gap-6 overflow-x-auto scrollbar-hide pb-4"
+          ref={reelCarouselRef}
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
+          {[
+            "https://www.instagram.com/reel/DPJe_Sek7mb/?igsh=M3I4NW91ZHNyNmxr",
+            "https://www.instagram.com/reel/DQ1x0zcAGxt/?igsh=ZGRpMDFtbTNnbTds",
+            "https://www.instagram.com/reel/DSfG0oWE5Le/?igsh=MXNybXUzOWF5MWxucw==",
+            "https://www.instagram.com/reel/DJ1qCdkztXD/?igsh=NWd4d3ZldjZ2MTUz",
+            "https://www.instagram.com/reel/DHiw1aWzzRV/?igsh=MXJoaXpleHMza3FtdQ==",
+            "https://www.instagram.com/reel/DEKjPUiTmSR/?igsh=NmV5NzN5czZ3NzI2"
+          ].map((url, idx) => (
+            <div key={idx} className="bg-white rounded-xl shadow-lg border border-gray-200 flex-shrink-0 w-[320px] h-[440px] flex items-center justify-center">
+              <iframe
+                src={`https://www.instagram.com/reel/${url.split("/reel/")[1]?.split("/")[0]}/embed/`}
+                className="w-full h-full rounded-xl bg-black"
+                allow="autoplay; encrypted-media"
+                allowFullScreen
+                loading="lazy"
+                title={`Instagram Reel ${idx+1}`}
+                frameBorder="0"
+                style={{ border: 0 }}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+    </>
   );
 };
 

@@ -140,6 +140,28 @@ const ALL_ITEMS = [
     src: '/conf_4.JPG',
     categories: ['Conference'],
   },
+  // Instagram Reel for Conference
+  {
+    id: 36,
+    instagramUrl: 'https://www.instagram.com/reel/DRg_01wDG26/?igsh=NDA3ODRtOGQybmxl',
+    categories: ['Conference'],
+  },
+  {
+    id: 37,
+    instagramUrl: 'https://www.instagram.com/reel/DS4CCAHk3Tf/?igsh=MW96N2E0ZXQ3MHFuYQ==',
+    categories: ['Conference'],
+  },
+  { id: 38, instagramUrl: 'https://www.instagram.com/reel/DS187OSk5vF/?igsh=MTBtN2NhMW43ZmN2dQ==', categories: ['Conference'] },
+  { id: 39, instagramUrl: 'https://www.instagram.com/reel/DSwkXiVk9aX/?igsh=Ynp6aHB4azJyYmxo', categories: ['Conference'] },
+  { id: 40, instagramUrl: 'https://www.instagram.com/reel/DStzZTjExNT/?igsh=MWR1OTN1dHZndDM2Yw==', categories: ['Conference'] },
+  { id: 41, instagramUrl: 'https://www.instagram.com/reel/DSpJotCDZ3e/?igsh=OWpvYW02bGQzcm01', categories: ['Conference'] },
+  { id: 42, instagramUrl: 'https://www.instagram.com/reel/DSm5WW5EznX/?igsh=MWNtcTU0NWZ4Y3pqYw==', categories: ['Conference'] },
+  { id: 43, instagramUrl: 'https://www.instagram.com/reel/DSjkx9Kkwqw/?igsh=MTQyNnlseWN6ejkyeQ==', categories: ['Conference'] },
+  { id: 44, instagramUrl: 'https://www.instagram.com/reel/DSew93gEyaU/?igsh=NDUxYnd4aXYzN3Vp', categories: ['Conference'] },
+  { id: 45, instagramUrl: 'https://www.instagram.com/reel/DSb8YvTDe98/?igsh=dXpzbmthN3Vxc3Fl', categories: ['Conference'] },
+  { id: 46, instagramUrl: 'https://www.instagram.com/reel/DRyq8bFk-U3/?igsh=bGtsandwdDF4a3dn', categories: ['Conference'] },
+  { id: 47, instagramUrl: 'https://www.instagram.com/reel/DRoXm9HE7hR/?igsh=MWozczBlM2VpeGZ3YQ==', categories: ['Conference'] },
+  { id: 48, instagramUrl: 'https://www.instagram.com/reel/DRW0RlKkmN4/?igsh=MWExeno1ZTF1a2Q0eQ==', categories: ['Conference'] }
   /*
   // Additional Celebrations images
   {
@@ -323,12 +345,25 @@ export default function GalleryMain() {
                 style={{ breakInside: 'avoid' }}
               >
                 <div className='w-full bg-gray-100'>
-                  <img
-                    src={item.src}
-                    alt={item.title || ''}
-                    loading='lazy'
-                    className='block w-full h-auto object-contain'
-                  />
+                  {item.instagramUrl ? (
+                    <iframe
+                      src={`https://www.instagram.com/reel/${item.instagramUrl.split('/reel/')[1]?.split('/')[0]}/embed/`}
+                      className='block w-full h-[400px] bg-black'
+                      allow='autoplay; encrypted-media'
+                      allowFullScreen
+                      loading='lazy'
+                      title='Instagram Reel'
+                      frameBorder='0'
+                      style={{ border: 0 }}
+                    />
+                  ) : (
+                    <img
+                      src={item.src}
+                      alt={item.title || ''}
+                      loading='lazy'
+                      className='block w-full h-auto object-contain'
+                    />
+                  )}
                 </div>
                 {item.title ? (
                   <figcaption className='px-3 py-2 text-sm text-gray-700 line-clamp-1'>
