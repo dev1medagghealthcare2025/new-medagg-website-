@@ -337,12 +337,6 @@ export default function Treatmentnavbar() {
                       {treatment.subTreatments && <span className='text-xs'>▼</span>}
                     </Link>
                   )}
-
-                  {!isMobile && openIndex === idx && treatment.subTreatments && (
-                    <div className='hidden group-hover/main:block'>
-                      <DropdownMenu items={treatment.subTreatments} />
-                    </div>
-                  )}
                   {idx < orderedTreatments.length - 1 && (
                     <span className='text-gray-300'>|</span>
                   )}

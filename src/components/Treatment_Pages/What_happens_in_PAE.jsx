@@ -174,26 +174,56 @@ const What_happens_in_PAE = ({ videoUrl, orientation }) => {
       <div className="bg-white py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h3 className="text-2xl font-bold text-[#2d2552] mb-6">Watch Related Instagram Reels</h3>
-          <div
-            className="flex gap-6 overflow-x-auto scrollbar-hide pb-4"
-            ref={reelCarouselRef}
-            onMouseEnter={() => setPaused(true)}
-            onMouseLeave={() => setPaused(false)}
-          >
-            {reelLinks.map((url, idx) => (
-              <div key={idx} className="bg-white rounded-xl shadow-lg border border-gray-200 flex-shrink-0 w-[320px] h-[440px] flex items-center justify-center">
-                <iframe
-                  src={`https://www.instagram.com/reel/${url.split("/reel/")[1]?.split("/")[0]}/embed/`}
-                  className="w-full h-full rounded-xl bg-black"
-                  allow="autoplay; encrypted-media"
-                  allowFullScreen
-                  loading="lazy"
-                  title={`Instagram Reel ${idx+1}`}
-                  frameBorder="0"
-                  style={{ border: 0 }}
-                />
-              </div>
-            ))}
+          <div className="relative">
+            {/* Play/Pause Button Overlay */}
+            <button
+              type="button"
+              onClick={() => setPaused((prev) => !prev)}
+              className="absolute z-10 right-3 top-3 bg-white/90 border border-gray-300 rounded-full shadow px-3 py-1 flex items-center gap-1 text-sm font-semibold text-[#2d2552] hover:bg-white focus:outline-none"
+              style={{transition: 'background 0.2s'}}
+              aria-label={paused ? "Play carousel" : "Pause carousel"}
+            >
+              {paused ? (
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M5 3v12M13 3v12" stroke="#2d2552" strokeWidth="2" strokeLinecap="round"/></svg>
+              ) : (
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M6 4l8 5-8 5V4z" fill="#2d2552"/></svg>
+              )}
+              {paused ? "Play" : "Pause"}
+            </button>
+            <div
+              className="flex gap-6 overflow-x-auto scrollbar-hide pb-4"
+              ref={reelCarouselRef}
+              onMouseEnter={() => setPaused(true)}
+              onMouseLeave={() => setPaused(false)}
+              onClick={(e) => {
+                if (e.target === reelCarouselRef.current) setPaused(false);
+              }}
+            >
+              {reelLinks.map((url, idx) => (
+                <div
+                  key={idx}
+                  className="bg-white rounded-xl shadow-lg border border-gray-200 flex-shrink-0 w-[320px] h-[440px] flex items-center justify-center"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setPaused(true);
+                  }}
+                >
+                  <iframe
+                    src={`https://www.instagram.com/reel/${url.split("/reel/")[1]?.split("/")[0]}/embed/`}
+                    className="w-full h-full rounded-xl bg-black"
+                    allow="autoplay; encrypted-media"
+                    allowFullScreen
+                    loading="lazy"
+                    title={`Instagram Reel ${idx+1}`}
+                    frameBorder="0"
+                    style={{ border: 0 }}
+                    tabIndex={0}
+                    onFocus={() => setPaused(true)}
+                    onBlur={() => setPaused(false)}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
