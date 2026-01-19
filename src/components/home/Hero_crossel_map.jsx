@@ -1,7 +1,7 @@
 import React from 'react';
 import SharedSearchBar from './SharedSearchBar';
 
-const HeroCrosselMap = ({ query, setQuery, handleSearch, results, isLoading }) => {
+const HeroCrosselMap = ({ query, setQuery, handleSearch, results, isLoading, onSearchFocus, onSearchBlur }) => {
   return (
     <div
             className='relative w-full h-screen flex items-right justify-end p-0 md:p-0 bg-cover bg-right'
@@ -23,6 +23,8 @@ const HeroCrosselMap = ({ query, setQuery, handleSearch, results, isLoading }) =
             handleSearch={handleSearch}
             results={results}
             isLoading={isLoading}
+            onInputFocus={onSearchFocus}
+            onInputBlur={onSearchBlur}
           />
         </div>
 

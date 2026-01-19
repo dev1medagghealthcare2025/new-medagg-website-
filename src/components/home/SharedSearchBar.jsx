@@ -1,7 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const SharedSearchBar = ({ query, setQuery, handleSearch, results = [], isLoading }) => {
+const SharedSearchBar = ({
+  query,
+  setQuery,
+  handleSearch,
+  results = [],
+  isLoading,
+  onInputFocus,
+  onInputBlur,
+}) => {
   return (
     <div className='w-full max-w-xl relative'>
       {/* Search Bar */}
@@ -20,6 +28,8 @@ const SharedSearchBar = ({ query, setQuery, handleSearch, results = [], isLoadin
           className='flex-1 px-3 sm:px-4 py-3 sm:py-4 outline-none text-gray-700 bg-transparent placeholder-gray-500 text-sm sm:text-base font-medium'
           value={query || ''}
           onChange={(e) => setQuery && setQuery(e.target.value)}
+          onFocus={onInputFocus}
+          onBlur={onInputBlur}
         />
         <button
           type='submit'

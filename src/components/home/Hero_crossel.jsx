@@ -1,7 +1,7 @@
 import React from 'react';
 import SharedSearchBar from './SharedSearchBar';
 
-const Hero_crossel = ({ query, setQuery, handleSearch, results, isLoading }) => {
+const Hero_crossel = ({ query, setQuery, handleSearch, results, isLoading, onSearchFocus, onSearchBlur }) => {
   const socialIcons = [
     { icon: 'facebook', color: '#1877F2' },
     { icon: 'instagram', color: '#E4405F' },
@@ -54,6 +54,8 @@ const Hero_crossel = ({ query, setQuery, handleSearch, results, isLoading }) => 
             handleSearch={handleSearch}
             results={results}
             isLoading={isLoading}
+            onInputFocus={onSearchFocus}
+            onInputBlur={onSearchBlur}
           />
 
         </div>

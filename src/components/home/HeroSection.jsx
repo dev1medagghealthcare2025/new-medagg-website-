@@ -10,7 +10,15 @@ import curatedData from '../../data/treatment_keywords.json';
 const MemoHeroCrossel = React.memo(Hero_crossel);
 const MemoHeroCrosselMap = React.memo(HeroCrosselMap);
 
-const OriginalHeroSlide = ({ query, setQuery, handleSearch, results, isLoading }) => (
+const OriginalHeroSlide = ({
+  query,
+  setQuery,
+  handleSearch,
+  results,
+  isLoading,
+  onSearchFocus,
+  onSearchBlur,
+}) => (
   <section
     className='relative w-full min-h-screen bg-cover bg-center rounded-none overflow-hidden flex items-center'
     style={{
@@ -79,6 +87,8 @@ const OriginalHeroSlide = ({ query, setQuery, handleSearch, results, isLoading }
               handleSearch={handleSearch}
               results={results}
               isLoading={isLoading}
+              onInputFocus={onSearchFocus}
+              onInputBlur={onSearchBlur}
             />
           </div>
         </div>
@@ -92,6 +102,7 @@ const HeroSection = () => {
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isInteracting, setIsInteracting] = useState(false);
   const totalSlides = 3;
   // Defer query updates to reduce re-render pressure while typing
   const deferredQuery = useDeferredValue(query);
@@ -397,12 +408,13 @@ const HeroSection = () => {
 
   // Auto-slide functionality
   useEffect(() => {
+    if (isInteracting) return;
     const slideInterval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % totalSlides);
     }, 20000); // Change slide every 20 seconds
 
     return () => clearInterval(slideInterval);
-  }, [totalSlides]);
+  }, [isInteracting, totalSlides]);
 
   // Enhanced fuzzy keyword search function
   const performKeywordSearch = (searchQuery) => {
@@ -654,6 +666,14 @@ const HeroSection = () => {
     setCurrentSlide(slideIndex);
   };
 
+  const handleSearchInputFocus = () => {
+    setIsInteracting(true);
+  };
+
+  const handleSearchInputBlur = () => {
+    setIsInteracting(false);
+  };
+
   return (
     <>
       {/* Mobile Hero Section - Visible only on mobile */}
@@ -695,6 +715,8 @@ const HeroSection = () => {
               handleSearch={handleSearch}
               results={results}
               isLoading={isLoading}
+              onSearchFocus={handleSearchInputFocus}
+              onSearchBlur={handleSearchInputBlur}
             />
           </div>
 
@@ -706,6 +728,8 @@ const HeroSection = () => {
               handleSearch={handleSearch}
               results={results}
               isLoading={isLoading}
+              onSearchFocus={handleSearchInputFocus}
+              onSearchBlur={handleSearchInputBlur}
             />
           </div>
 
@@ -717,6 +741,8 @@ const HeroSection = () => {
               handleSearch={handleSearch}
               results={results}
               isLoading={isLoading}
+              onSearchFocus={handleSearchInputFocus}
+              onSearchBlur={handleSearchInputBlur}
             />
           </div>
         </div>
