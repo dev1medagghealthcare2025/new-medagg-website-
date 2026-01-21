@@ -159,7 +159,7 @@ export default function Treatmentnavbar() {
   }, []);
 
   // Ensure hovered item + its submenu are fully visible without manual scrolling
-  const handleMouseEnter = (idx, targetEl) => {
+  const handleMouseEnter = (idx, targetEl, doScroll = true) => {
     if (isMobile) return; // no hover logic on mobile
     setOpenIndex(idx);
     const container = scrollContainerRef.current;
@@ -171,36 +171,29 @@ export default function Treatmentnavbar() {
     const containerWidth = container.clientWidth;
     const currentScroll = container.scrollLeft;
 
-    // Assume submenu minimum width (matches DropdownMenu minWidth ~280 + padding)
-    const submenuWidth = 320; // px
-    const padding = 16; // viewport breathing room
+    if (doScroll) {
+      // Keep only the hovered tab visible (do NOT auto-scroll to fit submenu width)
+      const padding = 12;
+      let desired = currentScroll;
+      const visibleLeft = currentScroll + padding;
+      const visibleRight = currentScroll + containerWidth - padding;
 
-    // We want: keep the hovered item label visible (>=8px from left), and try to fit submenu within right edge
-    let desired = currentScroll;
-    const visibleLeft = (scroll) => scroll + 0;
-    const visibleRight = (scroll) => scroll + containerWidth - padding;
+      if (itemLeft < visibleLeft) {
+        desired = Math.max(0, itemLeft - padding);
+      } else if (itemLeft + itemWidth > visibleRight) {
+        desired = Math.max(0, itemLeft + itemWidth - (containerWidth - padding));
+      }
 
-    // If submenu overflows right edge, shift left so submenu fits
-    if (itemLeft + submenuWidth > visibleRight(desired)) {
-      desired = itemLeft + submenuWidth - (containerWidth - padding);
+      // Clamp within allowed scroll range
+      const maxScroll = container.scrollWidth - containerWidth;
+      if (desired < 0) desired = 0;
+      if (desired > maxScroll) desired = maxScroll;
+
+      // Only scroll if needed; smooth to avoid sudden jumps
+      if (desired !== currentScroll) {
+        container.scrollTo({ left: desired, behavior: 'smooth' });
+      }
     }
-    // Special case: for the very first tab, never scroll right; keep start fully visible
-    if (idx === 0) {
-      desired = 0;
-      try { setShowLeftArrow(false); } catch (e) { /* no-op */ }
-    }
-    // Never push scroll so far that the hovered item's label gets cropped on the left
-    // Keep at least 8px of space from the left edge to the start of the hovered item
-    const maxAllowedScroll = Math.max(0, itemLeft - 8);
-    desired = Math.min(desired, maxAllowedScroll);
-
-    // Clamp within allowed scroll range
-    const maxScroll = container.scrollWidth - containerWidth;
-    if (desired < 0) desired = 0;
-    if (desired > maxScroll) desired = maxScroll;
-
-    // Instant correction so user never needs to scroll manually
-    container.scrollTo({ left: desired, behavior: 'auto' });
     // Ensure arrow visibility reflects the new scroll position immediately
     try { checkArrows(); } catch (e) { /* no-op */ }
 
@@ -285,6 +278,11 @@ export default function Treatmentnavbar() {
 
   const scroll = (direction) => {
     if (scrollContainerRef.current) {
+      if (!isMobile) {
+        setOpenIndex(null);
+        setFixedOpen(false);
+        fixedHoverRef.current = false;
+      }
       const scrollAmount = direction === 'left' ? -300 : 300;
       scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
@@ -303,7 +301,7 @@ export default function Treatmentnavbar() {
         )}
         <div
           ref={scrollContainerRef}
-          className='w-full overflow-x-auto overflow-y-visible scrollbar-hide pb-2 pl-4 pr-4'
+          className='w-full overflow-x-auto overflow-y-visible scrollbar-hide pb-2 pl-4 pr-12'
         >
             <ul className='flex items-center justify-start whitespace-nowrap py-2'>
               {/* Small left spacer to keep first item clear of edge */}
@@ -312,9 +310,8 @@ export default function Treatmentnavbar() {
                 <li
                   key={idx}
                   className='relative group/main flex items-center first:ml-0 last:mr-2'
-                  onMouseEnter={(e) => handleMouseEnter(idx, e.currentTarget)}
-                  onMouseMove={(e) => openIndex === idx && handleMouseEnter(idx, e.currentTarget)}
-                  onFocus={(e) => handleMouseEnter(idx, e.currentTarget)}
+                  onMouseEnter={(e) => handleMouseEnter(idx, e.currentTarget, false)}
+                  onFocus={(e) => handleMouseEnter(idx, e.currentTarget, true)}
                   onMouseLeave={() => {
                     if (isMobile) return;
                     setOpenIndex(null);
@@ -349,7 +346,7 @@ export default function Treatmentnavbar() {
         {showRightArrow && (
           <button
             onClick={() => scroll('right')}
-            className='absolute right-4 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-50 rounded-full shadow-md p-2 z-30 border border-gray-200'
+            className='absolute right-2 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-50 rounded-full shadow-md p-2 z-30 border border-gray-200'
           >
             <ChevronRight className='h-4 w-4 text-gray-700' />
           </button>
