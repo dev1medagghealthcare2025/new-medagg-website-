@@ -13,9 +13,14 @@ import FAQ_Home from '../components/home/FAQ_Home';
 import Navbar from '../components/home/Navbar';
 import Treatmentnavbar from '../components/home/Treatmentnavbar';
 import RunningCity from '../components/home/running_city';
+import PageMeta from '../components/PageMeta';
 
 const Home = () => (
   <div className='w-full min-h-screen bg-pink-50'>
+    <PageMeta
+      title='Non - Surgical Solutions | Non-Surgical Treatments - MEDAGG | No Surgeries'
+      description='Discover advanced non-surgical medical treatments at MEDAGG. We provide minimally invasive alternatives for various conditions. Get better without surgery.'
+    />
     <Navbar />
     <Treatmentnavbar />
     <HeroSection />

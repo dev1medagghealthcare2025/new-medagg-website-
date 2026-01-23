@@ -12,8 +12,13 @@ import Ourdoctor from '../components/home/Ourdoctor';
 import Consultourdoctor from '../components/home/Consultourdoctor';
 import OurTestimonial from '../components/home/our_testimonial';
 import FAQ_Home from '../components/home/FAQ_Home';
+import PageMeta from '../components/PageMeta';
 const GAE_Treatmentpage = () => (
   <>
+    <PageMeta
+      title='Nonsurgical Treatments For Knee Pain | Knee Treatment Without Surgery In Chennai'
+      description='Relieve chronic knee pain and osteoarthritis without surgery. Genicular Artery Embolization (GAE) in Chennai offers long-term, non-invasive relief.'
+    />
     <Navbar />
     <Treatmentnavbar />
     <GAE_HeroSection />

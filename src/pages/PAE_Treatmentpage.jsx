@@ -12,8 +12,13 @@ import OurDoctor from '../components/home/Ourdoctor';
 import Consultourdoctor from '../components/home/Consultourdoctor';
 import PAE_Treatment_Testimonials from '../components/Treatment_Pages/Have_Postate';
 import FAQ_Home from '../components/home/FAQ_Home';
+import PageMeta from '../components/PageMeta';
 const PAE_Treatmentpage = () => (
   <>
+    <PageMeta
+      title='Prostate Artery Embolization Non Surgical Treatment With PAE in Chennai'
+      description='Effective BPH relief with Prostate Artery Embolization (PAE) in Chennai. A non-surgical, painless treatment for enlarged prostate. Book today!'
+    />
     <Navbar />
     <Treatmentnavbar />
     <PAE_HeroSection />

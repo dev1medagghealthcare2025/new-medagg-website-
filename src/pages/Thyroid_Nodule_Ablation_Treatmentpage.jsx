@@ -11,9 +11,14 @@ import OurDoctor from '../components/home/Ourdoctor';
 import Consultourdoctor from '../components/home/Consultourdoctor';
 import OurTestimonial from '../components/home/our_testimonial';
 import FAQ_Home from '../components/home/FAQ_Home';
+import PageMeta from '../components/PageMeta';
 
 const Thyroid_Nodule_Ablation_Treatmentpage = () => (
   <>
+    <PageMeta
+      title='Best Thyroid Nodule Treatment in India | Treating a Large Thyroid Nodule Without Surgery'
+      description='Treat large thyroid nodules without scars or surgery. Our advanced non-surgical ablation in India ensures quick recovery and hormone preservation.'
+    />
     <Navbar />
     <Treatmentnavbar />
     <Thyroid_Herosection />

@@ -12,10 +12,15 @@ import OurDoctor from '../components/home/Ourdoctor';
 import Consultourdoctor from '../components/home/Consultourdoctor';
 import OurTestimonial from '../components/home/our_testimonial';
 import FAQ_Home from '../components/home/FAQ_Home';
+import PageMeta from '../components/PageMeta';
 
 const Varicocele_embolization = () => {
   return (
     <>
+      <PageMeta
+        title='Best Specialists for Varicocele Embolization | Non-surgical Varicocele Treatment in Chennai'
+        description='Seek expert non-surgical varicocele treatment in Chennai. Our embolization procedure offers quick recovery and solves infertility or pain issues.'
+      />
       <Navbar />
       <Treatmentnavbar />
       <Varicocele_herosection />
