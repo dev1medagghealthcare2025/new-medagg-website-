@@ -12,9 +12,15 @@ import OurDoctor from '../components/home/Ourdoctor';
 import OurTestimonial from '../components/home/our_testimonial';
 import Consultourdoctor from '../components/home/Consultourdoctor';
 import FAQ_Home from '../components/home/FAQ_Home';
+import PageMeta from '../components/PageMeta';
+
 const DiabeticFootPage = () => {
   return (
     <>
+      <PageMeta
+        title='Endovascular Treatment For Diabetic Foot - MEDAGG'
+        description='Prevent amputation with endovascular treatment for diabetic foot at MEDAGG. Restore blood flow and promote healing without major surgery.'
+      />
       <Navbar />
       <Treatmentnavbar />
       <DiabeticHeroSection />

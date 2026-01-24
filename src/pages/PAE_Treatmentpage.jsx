@@ -11,7 +11,7 @@ import PAE_Treatment_Book_Appointment from '../components/Treatment_Pages/Compar
 import OurDoctor from '../components/home/Ourdoctor';
 import Consultourdoctor from '../components/home/Consultourdoctor';
 import PAE_Treatment_Testimonials from '../components/Treatment_Pages/Have_Postate';
-import FAQ_Home from '../components/home/FAQ_Home';
+import PaeFaq from '../components/Treatment_Pages/Pae_faq';
 import PageMeta from '../components/PageMeta';
 const PAE_Treatmentpage = () => (
   <>
@@ -34,7 +34,7 @@ const PAE_Treatmentpage = () => (
     <OurDoctor />
     <OurTestimonial />
     <Consultourdoctor />
-    <FAQ_Home/>
+    <PaeFaq />
   </>
 );
 

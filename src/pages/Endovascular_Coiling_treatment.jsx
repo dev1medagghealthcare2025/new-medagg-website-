@@ -12,10 +12,15 @@ import Ourdoctor from '../components/home/Ourdoctor';
 import Consultourdoctor from '../components/home/Consultourdoctor';
 import OurTestimonial from '../components/home/our_testimonial';
 import FAQ_Home from '../components/home/FAQ_Home';
+import PageMeta from '../components/PageMeta';
 
 const Endovascular_Coiling_treatment = () => {
   return (
     <div>
+      <PageMeta
+        title='Endovascular Coiling Surgery Treatment | Best Interventional Neurology Hospital in Chennai'
+        description='Advanced non-surgical treatment for brain aneurysms. Our interventional neurology experts in Chennai provide life-saving endovascular coiling.'
+      />
       <Navbar />
       <Treatmentnavbar />
       <EndovascularCoilingHeroSection />

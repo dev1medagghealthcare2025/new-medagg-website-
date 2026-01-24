@@ -12,10 +12,15 @@ import OurDoctor from '../components/home/Ourdoctor';
 import Consultourdoctor from '../components/home/Consultourdoctor';
 import OurTestimonial from '../components/home/our_testimonial';
 import FAQ_Home from '../components/home/FAQ_Home';
+import PageMeta from '../components/PageMeta';
 
 const TranscatheterAorticValveImplantation = () => {
   return (
     <>
+      <PageMeta
+        title='Transcatheter Aortic Valve Implantation - MEDAGG | No Surgeries'
+        description='Non-surgical aortic valve replacement (TAVI/TAVR). A life-changing heart procedure for high-risk patients without the need for open-heart surgery.'
+      />
       <Navbar />
       <Treatmentnavbar />
       <TaviHeroSection />

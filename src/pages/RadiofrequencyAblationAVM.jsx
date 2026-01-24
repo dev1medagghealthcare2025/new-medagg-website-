@@ -12,10 +12,15 @@ import OurDoctor from '../components/home/Ourdoctor';
 import OurTestimonial from '../components/home/our_testimonial';
 import Consultourdoctor from '../components/home/Consultourdoctor';
 import FAQ_Home from '../components/home/FAQ_Home';
+import PageMeta from '../components/PageMeta';
 
 const RadiofrequencyAblationAVM = () => {
   return (
     <div className='min-h-screen bg-gray-50'>
+      <PageMeta
+        title='Radiofrequency Ablation for Arteriovenous Malformations - MEDAGG'
+        description='Manage Arteriovenous Malformations (AVM) with Radiofrequency Ablation. A safe, non-surgical approach to treating vascular malformations at MEDAGG.'
+      />
       <Navbar />
       <Treatmentnavbar />
       <RfaForAvmHeroSection />

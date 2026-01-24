@@ -12,10 +12,15 @@ import Ourdoctor from '../components/home/Ourdoctor';
 import Consultourdoctor from '../components/home/Consultourdoctor';
 import OurTestimonial from '../components/home/our_testimonial';
 import FAQ_Home from '../components/home/FAQ_Home';
+import PageMeta from '../components/PageMeta';
 
 const BreastNoduleVAEPage = () => {
   return (
     <div className='bg-white'>
+      <PageMeta
+        title='Breast Nodule Treatment | Emove That Benign Breast Lump Without Surgery'
+        description='Remove benign breast lumps safely with Vacuum-Assisted Excision (VAE). A non-surgical, scar-free procedure for your peace of mind.'
+      />
       <Navbar />
       <Treatmentnavbar />
       <BreastNoduleVAEHeroSection />

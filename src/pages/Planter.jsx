@@ -12,9 +12,15 @@ import OurDoctor from '../components/home/Ourdoctor';
 import Consultourdoctor from '../components/home/Consultourdoctor';
 import OurTestimonial from '../components/home/our_testimonial.jsx';
 import FAQ_Home from '../components/home/FAQ_Home.jsx';
+import PageMeta from '../components/PageMeta';
+
 const Planter = () => {
   return (
     <>
+      <PageMeta
+        title='Plantar Fasciitis Non Surgery | Plantar Fascial Embolization Treatment in Chennai'
+        description='End chronic heel pain with Plantar Fascial Embolization in Chennai. A revolutionary non-surgical solution for persistent Plantar Fasciitis.'
+      />
       <Navbar />
       <Treatmentnavbar />
       <PlanterHeroSection />

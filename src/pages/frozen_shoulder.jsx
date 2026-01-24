@@ -12,9 +12,15 @@ import OurTestimonial from '../components/home/our_testimonial';
 import ConsultOurDoctor from '../components/home/Consultourdoctor';
 import FAQ_Home from '../components/home/FAQ_Home';
 import BookAppointmentFrozen from '../components/Treatment_Pages/book_appoinment_frozen';
+import PageMeta from '../components/PageMeta';
+
 const FrozenShoulderPage = () => {
   return (
     <>
+      <PageMeta
+        title='Frozen Shoulder Treatment | An Alternative Treatment for Frozen Shoulder'
+        description='Restore shoulder mobility with our non-surgical embolization treatment. A fast and effective alternative to surgery for frozen shoulder relief.'
+      />
       <Navbar />
       <Treatmentnavbar />
       <FrozenShoulderHero />

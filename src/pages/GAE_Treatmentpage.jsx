@@ -11,8 +11,9 @@ import What_happen_in_GAE from '../components/Treatment_Pages/what_happen_in_GAE
 import Ourdoctor from '../components/home/Ourdoctor';
 import Consultourdoctor from '../components/home/Consultourdoctor';
 import OurTestimonial from '../components/home/our_testimonial';
-import FAQ_Home from '../components/home/FAQ_Home';
+import GaeFaq from '../components/Treatment_Pages/gae_faq';
 import PageMeta from '../components/PageMeta';
+
 const GAE_Treatmentpage = () => (
   <>
     <PageMeta
@@ -34,7 +35,7 @@ const GAE_Treatmentpage = () => (
     <Ourdoctor />
     <OurTestimonial />
     <Consultourdoctor />
-    <FAQ_Home />
+    <GaeFaq />
   </>
 );
 

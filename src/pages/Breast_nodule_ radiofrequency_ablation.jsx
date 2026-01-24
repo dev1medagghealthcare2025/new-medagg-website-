@@ -12,10 +12,15 @@ import Ourdoctor from '../components/home/Ourdoctor';
 import Our_testimonial from '../components/home/our_testimonial';
 import Consultourdoctor from '../components/home/Consultourdoctor';
 import FAQ_Home from '../components/home/FAQ_Home';
+import PageMeta from '../components/PageMeta';
 
 const BreastNoduleRadiofrequencyAblation = () => {
   return (
     <div className='bg-gray-50'>
+      <PageMeta
+        title='Breast Nodule Radiofrequency Ablation Treatment (RFA) - MEDAGG | No Surgeries'
+        description='Radiofrequency Ablation (RFA) for breast nodules. A precise, non-surgical method to treat lumps with minimal downtime and no scarring.'
+      />
       <Navbar />
       <Treatmentnavbar />
       <BreastNoduleHerosection />

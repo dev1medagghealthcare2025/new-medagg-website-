@@ -12,10 +12,15 @@ import ConsultOurDoctor from '../components/home/Consultourdoctor';
 import VV_BookAnAppointment from '../components/Treatment_Pages/vv_bookanappoinment';
 import OurTestimonial from '../components/home/our_testimonial';
 import FAQ_Home from '../components/home/FAQ_Home';
+import PageMeta from '../components/PageMeta';
 
 const VaricoseVeinPage = () => {
   return (
     <div className='bg-white'>
+      <PageMeta
+        title='Varicose Veins Treatment in Chennai | Endovenous Ablation For Varicose Veins'
+        description='Say goodbye to painful veins with Endovenous Ablation. Get the best non-surgical varicose veins treatment in Chennai for healthy, clear legs.'
+      />
       <Navbar />
       <Treatmentnavbar />
       <VaricoseVeinHeroSection />

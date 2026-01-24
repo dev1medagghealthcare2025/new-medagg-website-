@@ -8,9 +8,14 @@ import Type_of_paients_about from '../components/About_us/Type_of_paients_about'
 import What_We_Do_Differently from '../components/About_us/What_We_Do_Differently';
 import The_Story_of_Our_Transformation from '../components/About_us/The_Story_of_Our_Transformation';
 import Trusted_by_Patients_Across_India from '../components/About_us/Trusted_by_Patients_Across_India';
+import PageMeta from '../components/PageMeta';
 
 const About = () => (
   <div className='min-h-screen bg-white'>
+    <PageMeta
+      title='About - MEDAGG | No Surgeries'
+      description='Learn about MEDAGG&apos;s mission to provide cutting-edge, non-surgical healthcare. Meet our experts dedicated to interventional radiology and cardiology.'
+    />
     <Navbar />
     <Treatmentnavbar />
     <About_herosection />

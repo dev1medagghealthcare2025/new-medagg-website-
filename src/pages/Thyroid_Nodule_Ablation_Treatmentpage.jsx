@@ -10,7 +10,7 @@ import WhatHappensThyroidAblation from '../components/Treatment_Pages/What_Happe
 import OurDoctor from '../components/home/Ourdoctor';
 import Consultourdoctor from '../components/home/Consultourdoctor';
 import OurTestimonial from '../components/home/our_testimonial';
-import FAQ_Home from '../components/home/FAQ_Home';
+import ThyroidFaq from '../components/Treatment_Pages/Thyroid_faq';
 import PageMeta from '../components/PageMeta';
 
 const Thyroid_Nodule_Ablation_Treatmentpage = () => (
@@ -30,7 +30,7 @@ const Thyroid_Nodule_Ablation_Treatmentpage = () => (
     <OurDoctor />
     <OurTestimonial />
     <Consultourdoctor />
-    <FAQ_Home />
+    <ThyroidFaq />
   </>
 );
 

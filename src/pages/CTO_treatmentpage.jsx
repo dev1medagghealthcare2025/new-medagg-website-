@@ -12,10 +12,15 @@ import Ourdoctor from '../components/home/Ourdoctor';
 import Consultourdoctor from '../components/home/Consultourdoctor';
 import OurTestimonial from '../components/home/our_testimonial';
 import FAQ_Home from '../components/home/FAQ_Home';
+import PageMeta from '../components/PageMeta';
 
 const CTO_treatmentpage = () => {
   return (
     <div>
+      <PageMeta
+        title='Chronic Total Occlusion | Interventional Cardiologist Treatment | No Surgeries'
+        description='Expert interventional cardiology for Chronic Total Occlusion (CTO). We clear complete heart blockages using advanced non-surgical techniques.'
+      />
       <Navbar />
       <Treatmentnavbar />
       <CTO_Herosection />

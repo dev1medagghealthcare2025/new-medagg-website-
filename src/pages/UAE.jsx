@@ -11,10 +11,15 @@ import UAE_Compare from '../components/Treatment_Pages/UAE_Compare';
 import OurDoctor from '../components/home/Ourdoctor';
 import Consultourdoctor from '../components/home/Consultourdoctor';
 import FAQ_Home from '../components/home/FAQ_Home';
+import PageMeta from '../components/PageMeta';
 
 const UAEPage = () => {
   return (
     <>
+      <PageMeta
+        title='Non-Surgical Uterine Artery Embolization Treatment'
+        description='Treat uterine fibroids and adenomyosis without a hysterectomy. Uterine Artery Embolization (UAE) is a safe, non-surgical alternative for women.'
+      />
       <Navbar />
       <Treatmentnavbar />
       <UAE_Herosection />

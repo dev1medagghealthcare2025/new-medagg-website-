@@ -11,7 +11,7 @@ import CompareTreatmentOptionVaricocele from '../components/Treatment_Pages/Comp
 import OurDoctor from '../components/home/Ourdoctor';
 import Consultourdoctor from '../components/home/Consultourdoctor';
 import OurTestimonial from '../components/home/our_testimonial';
-import FAQ_Home from '../components/home/FAQ_Home';
+import VaricoceleFaq from '../components/Treatment_Pages/Varicocele.faq';
 import PageMeta from '../components/PageMeta';
 
 const Varicocele_embolization = () => {
@@ -33,7 +33,7 @@ const Varicocele_embolization = () => {
       <OurDoctor />
       <OurTestimonial />
       <Consultourdoctor />
-      <FAQ_Home />
+      <VaricoceleFaq />
       {/* Other components for the Varicocele Embolization page can be added here */}
     </>
   );

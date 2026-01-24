@@ -11,7 +11,7 @@ import WhatHappensInFTE from '../components/Treatment_Pages/what_happen_in_fte';
 import OurTestimonial from '../components/home/our_testimonial';
 import OurDoctor from '../components/home/Ourdoctor';
 import Consultourdoctor from '../components/home/Consultourdoctor';
-import FAQ_Home from '../components/home/FAQ_Home';
+import FtrFaq from '../components/Treatment_Pages/Ftr_faq';
 
 const FTE = () => {
   return (
@@ -31,7 +31,7 @@ const FTE = () => {
       <OurDoctor />
       <OurTestimonial />
       <Consultourdoctor />
-      <FAQ_Home />
+      <FtrFaq />
     </>
   );
 };

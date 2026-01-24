@@ -12,10 +12,15 @@ import BookAnAppointmentCryo from '../components/Treatment_Pages/BookAnAppointme
 import Consultourdoctor from '../components/home/Consultourdoctor';
 import OurTestimonial from '../components/home/our_testimonial';
 import FAQ_Home from '../components/home/FAQ_Home';
+import PageMeta from '../components/PageMeta';
 
 const BreastNoduleCryoablationPage = () => {
   return (
     <div className='bg-white'>
+      <PageMeta
+        title='Non-Surgical Breast Lump Treatment | Breast Nodules Non Surgical Treatment'
+        description='Freeze and eliminate benign breast nodules with Cryoablation. A painless, non-surgical treatment option designed for fast recovery and comfort.'
+      />
       <Navbar />
       <Treatmentnavbar />
       <CryoablationHeroSection />
