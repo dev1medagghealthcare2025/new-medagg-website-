@@ -11,7 +11,7 @@ import Bookanappoinment_cto from '../components/Treatment_Pages/bookanappoinment
 import Ourdoctor from '../components/home/Ourdoctor';
 import Consultourdoctor from '../components/home/Consultourdoctor';
 import OurTestimonial from '../components/home/our_testimonial';
-import FAQ_Home from '../components/home/FAQ_Home';
+import CtoFaq from '../components/Treatment_Pages/CTO_FAQ.jsx';
 import PageMeta from '../components/PageMeta';
 
 const CTO_treatmentpage = () => {
@@ -33,7 +33,8 @@ const CTO_treatmentpage = () => {
       <Ourdoctor />
       <OurTestimonial/>
       <Consultourdoctor />
-      <FAQ_Home/>
+      <CtoFaq />
+      
     </div>
   );
 };

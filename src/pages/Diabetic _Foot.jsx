@@ -11,7 +11,7 @@ import WhatHappenDiabetic from '../components/Treatment_Pages/what_happen_diabet
 import OurDoctor from '../components/home/Ourdoctor';
 import OurTestimonial from '../components/home/our_testimonial';
 import Consultourdoctor from '../components/home/Consultourdoctor';
-import FAQ_Home from '../components/home/FAQ_Home';
+import DiabeticFootFaq from '../components/Treatment_Pages/Diabetic_foot_faq.jsx';
 import PageMeta from '../components/PageMeta';
 
 const DiabeticFootPage = () => {
@@ -33,7 +33,7 @@ const DiabeticFootPage = () => {
       <OurDoctor />
       <OurTestimonial />
       <Consultourdoctor />
-      <FAQ_Home />
+      <DiabeticFootFaq />
       {/* Add additional sections for the Diabetic Foot page here */}
     </>
   );

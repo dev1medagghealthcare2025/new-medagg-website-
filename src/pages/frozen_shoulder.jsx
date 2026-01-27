@@ -10,8 +10,8 @@ import WhatHappensFrozen from '../components/Treatment_Pages/what_happen_frozen'
 import OurDoctor from '../components/home/Ourdoctor';
 import OurTestimonial from '../components/home/our_testimonial';
 import ConsultOurDoctor from '../components/home/Consultourdoctor';
-import FAQ_Home from '../components/home/FAQ_Home';
 import BookAppointmentFrozen from '../components/Treatment_Pages/book_appoinment_frozen';
+import FrozenFaq from '../components/Treatment_Pages/frzon_faq.jsx';
 import PageMeta from '../components/PageMeta';
 
 const FrozenShoulderPage = () => {
@@ -33,7 +33,7 @@ const FrozenShoulderPage = () => {
       <OurDoctor />
       <OurTestimonial />
       <ConsultOurDoctor />
-      <FAQ_Home />
+      <FrozenFaq />
 
     </>
   );

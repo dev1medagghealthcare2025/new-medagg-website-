@@ -10,7 +10,7 @@ import ThinkYouMightNeedUAE from '../components/Treatment_Pages/Think_you_might_
 import UAE_Compare from '../components/Treatment_Pages/UAE_Compare';
 import OurDoctor from '../components/home/Ourdoctor';
 import Consultourdoctor from '../components/home/Consultourdoctor';
-import FAQ_Home from '../components/home/FAQ_Home';
+import UaeFaq from '../components/Treatment_Pages/UAE_faq';
 import PageMeta from '../components/PageMeta';
 
 const UAEPage = () => {
@@ -31,7 +31,7 @@ const UAEPage = () => {
       <WhatHappenUAE videoUrl='https://youtube.com/shorts/iw5G9U2LMNI?si=ql6ur0THJoZDrlYe' />
       <OurDoctor />
       <Consultourdoctor />
-      <FAQ_Home />
+      <UaeFaq />
     </>
   );
 };

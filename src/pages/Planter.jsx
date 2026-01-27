@@ -11,7 +11,7 @@ import BookappoinmentPlanter from '../components/Treatment_Pages/Bookappoinment_
 import OurDoctor from '../components/home/Ourdoctor';
 import Consultourdoctor from '../components/home/Consultourdoctor';
 import OurTestimonial from '../components/home/our_testimonial.jsx';
-import FAQ_Home from '../components/home/FAQ_Home.jsx';
+import PlantarFaq from '../components/Treatment_Pages/Planter-faq.jsx';
 import PageMeta from '../components/PageMeta';
 
 const Planter = () => {
@@ -33,7 +33,8 @@ const Planter = () => {
       <OurDoctor />
       <OurTestimonial/>
       <Consultourdoctor />
-      <FAQ_Home/>
+      <PlantarFaq />
+     
 
       {/* You can add other components for the Planter page here */}
     </>

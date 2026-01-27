@@ -11,7 +11,7 @@ import Ourdoctor from '../components/home/Ourdoctor';
 import ConsultOurDoctor from '../components/home/Consultourdoctor';
 import VV_BookAnAppointment from '../components/Treatment_Pages/vv_bookanappoinment';
 import OurTestimonial from '../components/home/our_testimonial';
-import FAQ_Home from '../components/home/FAQ_Home';
+import VvFaq from '../components/Treatment_Pages/vv_faq';
 import PageMeta from '../components/PageMeta';
 
 const VaricoseVeinPage = () => {
@@ -33,7 +33,7 @@ const VaricoseVeinPage = () => {
       <Ourdoctor />
       <OurTestimonial/>
       <ConsultOurDoctor />
-      <FAQ_Home/>
+      <VvFaq />
 
     </div>
   );

@@ -11,7 +11,7 @@ import WhatHappensInTAVI from '../components/Treatment_Pages/What_Happens_in_TAV
 import OurDoctor from '../components/home/Ourdoctor';
 import Consultourdoctor from '../components/home/Consultourdoctor';
 import OurTestimonial from '../components/home/our_testimonial';
-import FAQ_Home from '../components/home/FAQ_Home';
+import TavrFaq from '../components/Treatment_Pages/TAVR_FAQ.jsx';
 import PageMeta from '../components/PageMeta';
 
 const TranscatheterAorticValveImplantation = () => {
@@ -33,7 +33,8 @@ const TranscatheterAorticValveImplantation = () => {
       <OurDoctor />
       <OurTestimonial/>
       <Consultourdoctor />
-      <FAQ_Home/>
+      <TavrFaq />
+      
       {/* Other components for the TAVI page can be added here */}
     </>
   );
