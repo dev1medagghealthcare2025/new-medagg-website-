@@ -3,6 +3,7 @@ import Navbar from '../components/home/Navbar';
 import Treatmentnavbar from '../components/home/Treatmentnavbar';
 import UAE_Herosection from '../components/Treatment_Pages/UAE_Herosection';
 import WhyChooseUAE from '../components/Treatment_Pages/why_choose_UAE';
+import UAEWhySurgeries from '../components/Treatment_Pages/UAE_Why_surgeries';
 import HowUAEWorks from '../components/Treatment_Pages/How_UAE_work';
 import WhatHappenUAE from '../components/Treatment_Pages/what_happen_UAE';
 import AreYouExperiencingUAE from '../components/Treatment_Pages/Are_you_experience_UAE';
@@ -26,6 +27,7 @@ const UAEPage = () => {
       <WhyChooseUAE />
       <HowUAEWorks />
       <AreYouExperiencingUAE />
+      <UAEWhySurgeries />
       <ThinkYouMightNeedUAE />
       <UAE_Compare />
       <WhatHappenUAE videoUrl='https://youtube.com/shorts/iw5G9U2LMNI?si=ql6ur0THJoZDrlYe' />
