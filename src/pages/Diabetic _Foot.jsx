@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../components/home/Navbar';
 import Treatmentnavbar from '../components/home/Treatmentnavbar';
 import DiabeticHeroSection from '../components/Treatment_Pages/Diabetic_herosection';
+import DiabeticFootWhySurgeries from '../components/Treatment_Pages/Diabetic_Foot_why_surgeries';
 import WhyChooseDiabeticFoot from '../components/Treatment_Pages/why_choose_diabetic_foot';
 import HowWorkDiabetic from '../components/Treatment_Pages/how_work_diabetic';
 import AreYouExperiencingDiabetic from '../components/Treatment_Pages/are_ experence_diabetic';
@@ -27,6 +28,7 @@ const DiabeticFootPage = () => {
       <WhyChooseDiabeticFoot />
       <HowWorkDiabetic />
       <AreYouExperiencingDiabetic />
+       <DiabeticFootWhySurgeries />
       <BookAppointmentDiabetic />
       <CompareDiabetic />
       <WhatHappenDiabetic />

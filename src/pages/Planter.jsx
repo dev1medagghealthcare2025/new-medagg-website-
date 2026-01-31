@@ -8,6 +8,7 @@ import AreYouExperiencingPlanter from '../components/Treatment_Pages/Are_You_Exp
 import CompareTreatmentPlanter from '../components/Treatment_Pages/Compare_treatment_Planter.jsx';
 import WhatHappensInPlantar from '../components/Treatment_Pages/What_Happens_in_Plantar.jsx';
 import BookappoinmentPlanter from '../components/Treatment_Pages/Bookappoinment_planter.jsx';
+import PlanterWhySurgeries from '../components/Treatment_Pages/Planter_why_surgeries.jsx';
 import OurDoctor from '../components/home/Ourdoctor';
 import Consultourdoctor from '../components/home/Consultourdoctor';
 import OurTestimonial from '../components/home/our_testimonial.jsx';
@@ -27,6 +28,7 @@ const Planter = () => {
       <WhyChoosePlantar />
       <HowPlantarWork />
       <AreYouExperiencingPlanter />
+      <PlanterWhySurgeries />
       <BookappoinmentPlanter />
       <CompareTreatmentPlanter />
       <WhatHappensInPlantar />
@@ -34,8 +36,6 @@ const Planter = () => {
       <OurTestimonial/>
       <Consultourdoctor />
       <PlantarFaq />
-     
-
       {/* You can add other components for the Planter page here */}
     </>
   );

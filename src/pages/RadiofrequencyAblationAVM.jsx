@@ -5,6 +5,7 @@ import RfaForAvmHeroSection from '../components/Treatment_Pages/Rfa_for_avm_hero
 import WhyChooseRFAForAVM from '../components/Treatment_Pages/Why_choose_RFA_for_AVM';
 import HowRFAForAVMWorks from '../components/Treatment_Pages/How_RFA_for_AVM_works';
 import AreYouExperiencingRFAForAVM from '../components/Treatment_Pages/Are_You_Experiencing_rfa_for_AVM';
+import AVMWhySurgeries from '../components/Treatment_Pages/AVM_Why-surgeries';
 import BookAppointmentRFAForAVM from '../components/Treatment_Pages/Bookanappoinment_rfa_for_avm';
 import CompareYourTreatmentRFAAVM from '../components/Treatment_Pages/Compare_Your_Treatment_rfa_avm';
 import WhatHappensInRFAForAVM from '../components/Treatment_Pages/What_Happens_in_RFA_for_AVM';
@@ -27,6 +28,7 @@ const RadiofrequencyAblationAVM = () => {
       <WhyChooseRFAForAVM />
       <HowRFAForAVMWorks />
       <AreYouExperiencingRFAForAVM />
+      <AVMWhySurgeries />
       <BookAppointmentRFAForAVM />
       <CompareYourTreatmentRFAAVM />
       <WhatHappensInRFAForAVM />

@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../components/home/Navbar';
 import Treatmentnavbar from '../components/home/Treatmentnavbar';
 import EndovascularCoilingHeroSection from '../components/Treatment_Pages/Endovascular_coiling_herosection';
+import ECWhySurgeries from '../components/Treatment_Pages/EC_Why_surgeries';
 import WhyChooseEndovascularCoiling from '../components/Treatment_Pages/Why_choose_endovascular_coiling';
 import HowECWorks from '../components/Treatment_Pages/HOW_EC_works';
 import AreYouExperiencingEC from '../components/Treatment_Pages/Are_You_Experiencing_ec';
@@ -27,6 +28,7 @@ const Endovascular_Coiling_treatment = () => {
       <WhyChooseEndovascularCoiling />
       <HowECWorks />
       <AreYouExperiencingEC />
+      <ECWhySurgeries />
       <EC_Book_Appointment />
       <TreatmentCompareEC />
       <WhatHappensInEndovascularCoiling />

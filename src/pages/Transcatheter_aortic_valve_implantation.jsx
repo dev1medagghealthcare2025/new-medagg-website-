@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../components/home/Navbar';
 import Treatmentnavbar from '../components/home/Treatmentnavbar';
 import TaviHeroSection from '../components/Treatment_Pages/Tavi_herosection';
+import TAVRWhySurgeries from '../components/Treatment_Pages/TAVR_Why_Surgeries';
 import WhyChooseTAVI from '../components/Treatment_Pages/Why_choose_TAVI';
 import HowTaviWorks from '../components/Treatment_Pages/How_TAVI_work';
 import AreYouExperiencingTAVI from '../components/Treatment_Pages/Are_You_Experiencing_TAVI';
@@ -27,6 +28,7 @@ const TranscatheterAorticValveImplantation = () => {
       <WhyChooseTAVI />
       <HowTaviWorks />
       <AreYouExperiencingTAVI />
+      <TAVRWhySurgeries />
       <BookAnAppointmentTAVI />
       <CompareTAVITreatments />
       <WhatHappensInTAVI />

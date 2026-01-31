@@ -5,6 +5,7 @@ import Radiofrequency_ablation_herosection from '../components/Treatment_Pages/R
 import Why_choose_rfa from '../components/Treatment_Pages/Why_choose_rfa';
 import How_rfa_work from '../components/Treatment_Pages/how_rfa_work';
 import Are_You_Experiencing_rfa from '../components/Treatment_Pages/Are_You_Experiencing_rfa';
+import RFAWhySurgeries from '../components/Treatment_Pages/RFA_Why_surgeries';
 import Bookanappoinment_rfa from '../components/Treatment_Pages/Bookanappoinment_rfa';
 import Compare_treatment_rfa from '../components/Treatment_Pages/compare_treatment_rfa';
 import What_Happens_in_RFA from '../components/Treatment_Pages/What_Happens_in_RFA';
@@ -22,6 +23,7 @@ const RFA_treatmentpage = () => {
       <Why_choose_rfa />
       <How_rfa_work />
       <Are_You_Experiencing_rfa />
+      <RFAWhySurgeries />
       <Bookanappoinment_rfa />
       <Compare_treatment_rfa />
       <What_Happens_in_RFA videoUrl='https://youtube.com/shorts/xniZMciljic?si=d4HK5sNyGO2ndjfU' />

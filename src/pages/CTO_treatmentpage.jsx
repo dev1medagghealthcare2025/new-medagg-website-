@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../components/home/Navbar';
 import Treatmentnavbar from '../components/home/Treatmentnavbar';
 import CTO_Herosection from '../components/Treatment_Pages/CTO_Herosection';
+import CTOWhySurgeries from '../components/Treatment_Pages/CTO_Why_surgeries';
 import Why_choose_CTO from '../components/Treatment_Pages/Why_choose_CTO';
 import How_CTO_works from '../components/Treatment_Pages/How_CTO_works';
 import What_Happens_in_CTO_treatment from '../components/Treatment_Pages/What_Happens_in_CTO_treatment';
@@ -27,6 +28,7 @@ const CTO_treatmentpage = () => {
       <Why_choose_CTO />
       <How_CTO_works />
       <Are_You_Experiencing_CTO />
+      <CTOWhySurgeries />
       <Bookanappoinment_cto />
       <Compare_treatment_cto />
       <What_Happens_in_CTO_treatment />

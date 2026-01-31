@@ -11,6 +11,7 @@ import OurDoctor from '../components/home/Ourdoctor';
 import OurTestimonial from '../components/home/our_testimonial';
 import ConsultOurDoctor from '../components/home/Consultourdoctor';
 import BookAppointmentFrozen from '../components/Treatment_Pages/book_appoinment_frozen';
+import FrozenShoulderWhySurgeries from '../components/Treatment_Pages/frozen shoulder_why_surgeries';
 import FrozenFaq from '../components/Treatment_Pages/frzon_faq.jsx';
 import PageMeta from '../components/PageMeta';
 
@@ -27,6 +28,7 @@ const FrozenShoulderPage = () => {
       <WhyChooseFrozenShoulder />
       <HowWorkFrozen />
       <AreYouExperiencingFrozen />
+      <FrozenShoulderWhySurgeries />
       <BookAppointmentFrozen />
       <CompareFrozen />
       <WhatHappensFrozen />
