@@ -12,6 +12,7 @@ import OurTestimonial from '../components/home/our_testimonial';
 import OurDoctor from '../components/home/Ourdoctor';
 import Consultourdoctor from '../components/home/Consultourdoctor';
 import FtrFaq from '../components/Treatment_Pages/Ftr_faq';
+import FTEWhySurgeries from '../components/Treatment_Pages/fte_why_surgeries';
 
 const FTE = () => {
   return (
@@ -22,6 +23,7 @@ const FTE = () => {
       <WhyChooseFTE />
       <HowFTEWork />
       <AreYouExperienceFTE />
+      <FTEWhySurgeries />
       <BookAppointmentFTE />
       <CompareTreatmentOptionFTE />
       <WhatHappensInFTE

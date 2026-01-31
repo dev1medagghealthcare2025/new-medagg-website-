@@ -13,6 +13,7 @@ import Our_testimonial from '../components/home/our_testimonial';
 import Consultourdoctor from '../components/home/Consultourdoctor';
 import FAQ_Home from '../components/home/FAQ_Home';
 import PageMeta from '../components/PageMeta';
+import BreastNoduleWhySurgeries from '../components/Treatment_Pages/Breast_Nodule_Why_Surgeries';
 
 const BreastNoduleRadiofrequencyAblation = () => {
   return (
@@ -27,6 +28,7 @@ const BreastNoduleRadiofrequencyAblation = () => {
       <WhyChooseBreastNoduleRFA />
       <HowBreastNoduleRFAWorks />
       <AreYouExperiencingBreastNoduleRFA />
+      <BreastNoduleWhySurgeries />
       <BookAnAppointmentBreastNoduleRFA />
       <CompareTreatmentBnRFA />
       <WhatHappensBnRFA />

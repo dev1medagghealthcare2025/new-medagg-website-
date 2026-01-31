@@ -13,6 +13,7 @@ import Consultourdoctor from '../components/home/Consultourdoctor';
 import OurTestimonial from '../components/home/our_testimonial';
 import VaricoceleFaq from '../components/Treatment_Pages/Varicocele.faq';
 import PageMeta from '../components/PageMeta';
+import VaricoceleWhySurgeries from '../components/Treatment_Pages/varicocele_why_surgeries';
 
 const Varicocele_embolization = () => {
   return (
@@ -27,6 +28,7 @@ const Varicocele_embolization = () => {
       <WhyChooseVaricocele />
       <HowVaricoceleEmbolizationWork />
       <AreYouExperiencingVaricocele />
+       <VaricoceleWhySurgeries />
       <BookAppointmentVaricocele />
       <CompareTreatmentOptionVaricocele />
       <WhatHappensInVaricoceleEmbolization videoUrl='https://youtube.com/shorts/3U_LMSCCdWI?si=PRGrCs4TpUB9gdXw' />

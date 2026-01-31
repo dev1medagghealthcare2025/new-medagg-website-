@@ -13,6 +13,7 @@ import Consultourdoctor from '../components/home/Consultourdoctor';
 import OurTestimonial from '../components/home/our_testimonial';
 import GaeFaq from '../components/Treatment_Pages/gae_faq';
 import PageMeta from '../components/PageMeta';
+import GAEWhySurgeries from '../components/Treatment_Pages/GAE_Why_Surgeries';
 
 const GAE_Treatmentpage = () => (
   <>
@@ -26,6 +27,7 @@ const GAE_Treatmentpage = () => (
     <GAE_Treatment_Why_Choose_us />
     <HowGAEWork />
     <GAE_Are_you_experience />
+     <GAEWhySurgeries />
     <GAE_Bookanappoinment />
     <GAE_Compare_treatment_option />
     <What_happen_in_GAE

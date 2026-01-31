@@ -40,7 +40,7 @@ const features = [
   },
 ];
 
-const UAEWhySurgeries = () => {
+const GAEWhySurgeries = () => {
   const gridRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -95,7 +95,7 @@ const UAEWhySurgeries = () => {
 
             <div className='mt-6 rounded-xl border border-[#ff3576]/30 bg-white px-5 py-4'>
               <p className='text-gray-700'>
-                <span className='font-semibold text-[#ff3576]'>Uterine Fibroids:</span> No surgeries for uterine fibroids through Fibroid Embolization, a minimally invasive treatment that relieves symptoms like heavy bleeding while preserving the uterus.
+                <span className='font-semibold text-[#ff3576]'>GAE (Knee Pain):</span> No surgeries for knee osteoarthritis pain using Genicular Artery Embolization to reduce pain and improve mobility.
               </p>
             </div>
 
@@ -132,4 +132,4 @@ const UAEWhySurgeries = () => {
   );
 };
 
-export default UAEWhySurgeries;
+export default GAEWhySurgeries;

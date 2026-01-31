@@ -13,6 +13,7 @@ import Consultourdoctor from '../components/home/Consultourdoctor';
 import PAE_Treatment_Testimonials from '../components/Treatment_Pages/Have_Postate';
 import PaeFaq from '../components/Treatment_Pages/Pae_faq';
 import PageMeta from '../components/PageMeta';
+import PAEWhySurgeries from '../components/Treatment_Pages/PAE_Why_Surgeries';
 const PAE_Treatmentpage = () => (
   <>
     <PageMeta
@@ -25,6 +26,7 @@ const PAE_Treatmentpage = () => (
     <PAE_Treatment_Why_Choose_Us />
     <PAE_Treatment_Procedure />
     <PAE_Treatment_FAQs />
+    <PAEWhySurgeries />
     <PAE_Treatment_Testimonials />
     <PAE_Treatment_Book_Appointment />
     <PAE_Treatment_About

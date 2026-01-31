@@ -12,6 +12,7 @@ import Consultourdoctor from '../components/home/Consultourdoctor';
 import OurTestimonial from '../components/home/our_testimonial';
 import ThyroidFaq from '../components/Treatment_Pages/Thyroid_faq';
 import PageMeta from '../components/PageMeta';
+import ThyroidWhySurgeries from '../components/Treatment_Pages/Thyroid_why_surgeries';
 
 const Thyroid_Nodule_Ablation_Treatmentpage = () => (
   <>
@@ -24,6 +25,7 @@ const Thyroid_Nodule_Ablation_Treatmentpage = () => (
     <Thyroid_Herosection />
     <WhyChooseThyroidAblation />
     <HowThyroidWork />
+    <ThyroidWhySurgeries />
     <Thyroid_bookappoinment />
     <CompareTreatmentOptionThyroid />
     <WhatHappensThyroidAblation videoUrl='https://youtube.com/shorts/0OJM9PpKc0E?si=QfoaSsFNcqCXIPGq' />

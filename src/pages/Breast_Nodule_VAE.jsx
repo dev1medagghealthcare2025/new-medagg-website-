@@ -13,6 +13,7 @@ import Consultourdoctor from '../components/home/Consultourdoctor';
 import OurTestimonial from '../components/home/our_testimonial';
 import FAQ_Home from '../components/home/FAQ_Home';
 import PageMeta from '../components/PageMeta';
+import BreastNoduleWhySurgeries from '../components/Treatment_Pages/Breast_Nodule_Why_Surgeries';
 
 const BreastNoduleVAEPage = () => {
   return (
@@ -27,6 +28,7 @@ const BreastNoduleVAEPage = () => {
       <WhyChooseVAE />
       <HowVAEWorks />
       <AreYouExperiencingVAE />
+      <BreastNoduleWhySurgeries />
       <BookAnAppointmentVAE />
       <CompareTreatmentVAE />
       <WhatHappensInVAE videoUrl='https://youtube.com/shorts/xniZMciljic?si=d4HK5sNyGO2ndjfU' />
