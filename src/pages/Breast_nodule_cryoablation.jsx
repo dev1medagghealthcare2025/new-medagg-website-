@@ -11,7 +11,7 @@ import OurDoctor from '../components/home/Ourdoctor';
 import BookAnAppointmentCryo from '../components/Treatment_Pages/BookAnAppointmentCryo';
 import Consultourdoctor from '../components/home/Consultourdoctor';
 import OurTestimonial from '../components/home/our_testimonial';
-import FAQ_Home from '../components/home/FAQ_Home';
+import BreastNoduleFaq from '../components/Treatment_Pages/breast_nodule_faq';
 import PageMeta from '../components/PageMeta';
 import BreastNoduleWhySurgeries from '../components/Treatment_Pages/Breast_Nodule_Why_Surgeries';
 
@@ -35,7 +35,7 @@ const BreastNoduleCryoablationPage = () => {
       <OurDoctor />
       <OurTestimonial/>
       <Consultourdoctor />
-      <FAQ_Home/>
+      <BreastNoduleFaq />
     </div>
   );
 };

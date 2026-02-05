@@ -101,7 +101,7 @@ function App() {
           <Route path='/radiofrequency-ablation-for-avm' element={<RadiofrequencyAblationAVM />} />
           <Route path='/investor' element={<Become_an_investor />} />
           <Route path='/breast-nodule-rfa' element={<BreastNoduleRadiofrequencyAblation />} />
-                    <Route path='/join-with-us' element={<JoinWithUs />} />
+          <Route path='/join-with-us' element={<JoinWithUs />} />
           <Route path='/testimonials' element={<Testiominal />} />
           <Route path='/diabetic-foot' element={<DiabeticFootPage />} />
           <Route path='/frozen-shoulder' element={<FrozenShoulderPage />} />

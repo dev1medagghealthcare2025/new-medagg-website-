@@ -11,7 +11,7 @@ import WhatHappensBnRFA from '../components/Treatment_Pages/what_happen_bn_rfs';
 import Ourdoctor from '../components/home/Ourdoctor';
 import Our_testimonial from '../components/home/our_testimonial';
 import Consultourdoctor from '../components/home/Consultourdoctor';
-import FAQ_Home from '../components/home/FAQ_Home';
+import BreastNoduleFaq from '../components/Treatment_Pages/breast_nodule_faq';
 import PageMeta from '../components/PageMeta';
 import BreastNoduleWhySurgeries from '../components/Treatment_Pages/Breast_Nodule_Why_Surgeries';
 
@@ -35,7 +35,7 @@ const BreastNoduleRadiofrequencyAblation = () => {
       <Ourdoctor />
       <Our_testimonial />
       <Consultourdoctor />
-      <FAQ_Home />
+      <BreastNoduleFaq />
         {/* Other components for this page can be added here */}
 
     </div>

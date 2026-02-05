@@ -28,7 +28,7 @@ const DiabeticFootPage = () => {
       <WhyChooseDiabeticFoot />
       <HowWorkDiabetic />
       <AreYouExperiencingDiabetic />
-       <DiabeticFootWhySurgeries />
+      <DiabeticFootWhySurgeries />
       <BookAppointmentDiabetic />
       <CompareDiabetic />
       <WhatHappenDiabetic />
