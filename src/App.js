@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import React from 'react';
 import Footer from './components/layout/Footer';
 import Home from './pages/Home';
@@ -14,9 +14,12 @@ function App() {
       <main className='flex-grow'>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/pae' element={<PAE_Treatmentpage />} />
-          <Route path='/gae' element={<GAE_Treatmentpage />} />
-          <Route path='/thyroid' element={<Thyroid_Nodule_Ablation_Treatmentpage />} />
+          <Route path='/prostate-artery-embolization-pae' element={<PAE_Treatmentpage />} />
+          <Route path='/pae' element={<Navigate to='/prostate-artery-embolization-pae' replace />} />
+          <Route path='/genicular-artery-embolization-gae' element={<GAE_Treatmentpage />} />
+          <Route path='/gae' element={<Navigate to='/genicular-artery-embolization-gae' replace />} />
+          <Route path='/thyroid-nodule-ablation' element={<Thyroid_Nodule_Ablation_Treatmentpage />} />
+          <Route path='/thyroid' element={<Navigate to='/thyroid-nodule-ablation' replace />} />
           <Route path='/about' element={<About />} />
         </Routes>
       </main>

@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const treatments = [
-  { title: 'Enlarged Prostate', path: '/pae', subTreatments: [{ title: 'Prostate Artery Embolization', path: '/pae' }] },
-  { title: 'Knee Pain', path: '/gae', subTreatments: [{ title: 'Genicular Artery Embolization', path: '/gae' }] },
-  { title: 'Thyroid Nodule', path: '/thyroid', subTreatments: [{ title: 'Thyroid Nodule Ablation', path: '/thyroid' }] },
+  { title: 'Enlarged Prostate', path: '/prostate-artery-embolization-pae', subTreatments: [{ title: 'Prostate Artery Embolization', path: '/prostate-artery-embolization-pae' }] },
+  { title: 'Knee Pain', path: '/genicular-artery-embolization-gae', subTreatments: [{ title: 'Genicular Artery Embolization', path: '/genicular-artery-embolization-gae' }] },
+  { title: 'Thyroid Nodule', path: '/thyroid-nodule-ablation', subTreatments: [{ title: 'Thyroid Nodule Ablation', path: '/thyroid-nodule-ablation' }] },
   { title: 'Varicocele', path: '/varicocele-embolization', subTreatments: [{ title: 'Varicocele Embolization', path: '/varicocele-embolization' }] },
-  { title: 'Fallopian Tube Block', path: '/fte', subTreatments: [{ title: 'Fallopian Tube Recanalization', path: '/fte' }] },
-  { title: 'Uterine Fibroids', path: '/uae', subTreatments: [{ title: 'Uterine Artery Embolization', path: '/uae' }] },
+  { title: 'Fallopian Tube Block', path: '/fallopian-tube-recanalization-ftr', subTreatments: [{ title: 'Fallopian Tube Recanalization', path: '/fallopian-tube-recanalization-ftr' }] },
+  { title: 'Uterine Fibroids', path: '/uterine-artery-embolization-uae', subTreatments: [{ title: 'Uterine Artery Embolization', path: '/uterine-artery-embolization-uae' }] },
   {
     title: 'Interventional',
     subTreatments: [
@@ -40,7 +40,7 @@ const treatments = [
   },
  // { title: 'Plantar Fascial Embolization', path: '/pfe' },
  // { title: 'Varicose Veins', path: '/varicose-vein' },
-  { title: 'Plantar Fascitis', path: '/pfe', subTreatments: [{ title: 'Plantar Fascitis Embolization', path: '/pfe' }] },
+  { title: 'Plantar Fascitis', path: '/plantar-fascial-embolization', subTreatments: [{ title: 'Plantar Fascitis Embolization', path: '/plantar-fascial-embolization' }] },
   { title: 'Varicose Veins', path: '/varicose-vein', subTreatments: [{ title: 'Endovenous Ablation', path: '/varicose-vein' }] },
 
   // New: Endovascular Recanalization & Stenting - Diabetic Foot

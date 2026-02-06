@@ -22,19 +22,19 @@ MEDAGG TREATMENT SPECIALTIES & SYMPTOM MAPPING:
 - PRIMARY: Knee pain, knee arthritis, joint stiffness
 - SYMPTOMS: Difficulty walking, climbing stairs, knee swelling, chronic knee discomfort
 - KEYWORDS: gae, knee, joint, arthritis, walking pain, stiffness, knee pain
-- PAGE LINK: /gae
+- PAGE LINK: /genicular-artery-embolization-gae
 
 🫁 PAE (Prostatic Artery Embolization):
 - PRIMARY: Enlarged prostate, BPH symptoms
 - SYMPTOMS: Frequent urination, weak urine stream, difficulty starting urination, nighttime urination
 - KEYWORDS: prostate, urination, BPH, frequent bathroom visits, weak stream
-- PAGE LINK: /pae
+- PAGE LINK: /prostate-artery-embolization-pae
 
 🦋 Thyroid Nodule Ablation:
 - PRIMARY: Thyroid nodules, thyroid lumps
 - SYMPTOMS: Neck swelling, difficulty swallowing, voice changes, neck discomfort
 - KEYWORDS: tna, thyroid, neck lump, swollen neck, swallowing difficulty, voice hoarse
-- PAGE LINK: /thyroid
+- PAGE LINK: /thyroid-nodule-ablation
 
 🌸 Breast Nodule VAE (Vacuum Assisted Excision):
 - PRIMARY: Breast lumps, breast nodules
@@ -82,7 +82,7 @@ MEDAGG TREATMENT SPECIALTIES & SYMPTOM MAPPING:
 - PRIMARY: Uterine fibroids, heavy menstrual bleeding
 - SYMPTOMS: Heavy periods, pelvic pain, frequent urination, bloating, back pain
 - KEYWORDS: fibroids, heavy bleeding, pelvic pain, menstrual problems
-- PAGE LINK: /ufe-treatment
+- PAGE LINK: /uterine-artery-embolization-uae
 
 🦶 Plantar Fascial Embolization (PFE):
 - PRIMARY: Chronic plantar fasciitis, heel pain
@@ -94,7 +94,7 @@ MEDAGG TREATMENT SPECIALTIES & SYMPTOM MAPPING:
 - PRIMARY: Blocked fallopian tubes, fertility issues
 - SYMPTOMS: Infertility, difficulty conceiving, blocked tubes
 - KEYWORDS: ftr, fte, fallopian tube recanalization, blocked tubes, infertility
-- PAGE LINK: /fte
+- PAGE LINK: /fallopian-tube-recanalization-ftr
 
 ❤️ TAVI (Transcatheter Aortic Valve Implantation):
 - PRIMARY: Aortic valve stenosis, heart valve problems
@@ -241,7 +241,7 @@ const questionnaires = {
   UFE: {
     procedure: 'UFE',
     welcomeMessage: 'Let’s begin a brief fibroid assessment.',
-    treatmentPage: '/uae',
+    treatmentPage: '/uterine-artery-embolization-uae',
     youtubeVideo: 'https://www.youtube.com/shorts/iw5G9U2LMNI',
     specificQuestions: [
       {
@@ -263,7 +263,7 @@ const questionnaires = {
   PAE: {
     procedure: 'PAE',
     welcomeMessage: 'Let’s begin a short prostate symptom check.',
-    treatmentPage: '/pae',
+    treatmentPage: '/prostate-artery-embolization-pae',
     youtubeVideo: 'https://www.youtube.com/shorts/c5DucffDYec',
     specificQuestions: [
       {
@@ -293,7 +293,7 @@ const questionnaires = {
   GAE: {
     procedure: 'GAE',
     welcomeMessage: 'Let’s get started with a quick knee pain assessment.',
-    treatmentPage: '/gae',
+    treatmentPage: '/genicular-artery-embolization-gae',
     youtubeVideo: 'https://www.youtube.com/shorts/vM5o0rX3lag',
     specificQuestions: [
       {
@@ -316,7 +316,7 @@ const questionnaires = {
   TNA: {
     procedure: 'TNA',
     welcomeMessage: 'Let’s start a brief thyroid nodule assessment.',
-    treatmentPage: '/thyroid',
+    treatmentPage: '/thyroid-nodule-ablation',
     youtubeVideo: 'https://www.youtube.com/shorts/HqoeDQTqAXc',
     specificQuestions: [
       {
@@ -418,7 +418,7 @@ const questionnaires = {
   FTR: {
     procedure: 'FTR',
     welcomeMessage: 'Let’s begin a short fertility assessment.',
-    treatmentPage: '/fte',
+    treatmentPage: '/fallopian-tube-recanalization-ftr',
     youtubeVideo: 'https://www.youtube.com/shorts/FstX8x8hkOE',
     specificQuestions: [
       {
@@ -510,11 +510,17 @@ const detectProcedureFromSymptoms = (input) => {
       const routeToProcedure = {
         '/pae': 'PAE',
         '/gae': 'GAE',
+        '/prostate-artery-embolization-pae': 'PAE',
+        '/genicular-artery-embolization-gae': 'GAE',
+        '/fallopian-tube-recanalization-ftr': 'FTR',
+        '/uterine-artery-embolization-uae': 'UFE',
+        '/thyroid-nodule-ablation': 'TNA',
         '/thyroid': 'TNA',
         '/varicose-vein': 'VV',
         '/varicocele-embolization': 'VCE',
         '/fte': 'FTR',
         '/uae': 'UFE',
+        '/plantar-fascial-embolization': 'PFE',
         '/pfe': 'PFE',
       };
       const inferred = res.procedureCode || routeToProcedure[res.path] || null;
@@ -1168,15 +1174,15 @@ const Chatbot = () => {
   // Function to detect recommended treatment from AI response
   const detectRecommendedTreatment = useCallback((aiResponseText) => {
     const treatmentMap = {
-      'GAE': '/gae',
-      'Genicular Artery Embolization': '/gae',
-      'knee pain': '/gae',
-      'PAE': '/pae',
-      'Prostatic Artery Embolization': '/pae',
+      'GAE': '/genicular-artery-embolization-gae',
+      'Genicular Artery Embolization': '/genicular-artery-embolization-gae',
+      'knee pain': '/genicular-artery-embolization-gae',
+      'PAE': '/prostate-artery-embolization-pae',
+      'Prostatic Artery Embolization': '/prostate-artery-embolization-pae',
       'prostate': '/pae',
       'BPH': '/pae',
-      'Thyroid': '/thyroid',
-      'thyroid nodule': '/thyroid',
+      'Thyroid': '/thyroid-nodule-ablation',
+      'thyroid nodule': '/thyroid-nodule-ablation',
       'Breast': '/breast-nodule-vae',
       'breast nodule': '/breast-nodule-vae',
       'VAE': '/breast-nodule-vae',
@@ -1190,15 +1196,16 @@ const Chatbot = () => {
       'Varicose': '/varicose-vein',
       'varicose vein': '/varicose-vein',
       'Varicocele': '/varicocele-embolization',
-      'UFE': '/uae',
-      'UAE': '/uae',
-      'Uterine Fibroid': '/uae',
-      'fibroid': '/uae',
-      'PFE': '/pfe',
-      'Plantar Fascial': '/pfe',
-      'heel pain': '/pfe',
-      'Fallopian': '/fte',
-      'FTE': '/fte',
+      'UFE': '/uterine-artery-embolization-uae',
+      'UAE': '/uterine-artery-embolization-uae',
+      'Uterine Fibroid': '/uterine-artery-embolization-uae',
+      'fibroid': '/uterine-artery-embolization-uae',
+      'PFE': '/plantar-fascial-embolization',
+      'Plantar Fascial': '/plantar-fascial-embolization',
+      'heel pain': '/plantar-fascial-embolization',
+      'Fallopian': '/fallopian-tube-recanalization-ftr',
+      'FTE': '/fallopian-tube-recanalization-ftr',
+      'FTR': '/fallopian-tube-recanalization-ftr',
       'TAVI': '/transcatheter-aortic-valve-replacement',
       'Aortic Valve': '/transcatheter-aortic-valve-replacement',
       'RFA': '/rfa',

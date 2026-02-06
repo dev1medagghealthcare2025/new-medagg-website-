@@ -19,7 +19,7 @@ function ScrollToTop() {
   }, [location.pathname, location.hash, location.search]);
   return null;
 }
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import React from 'react';
 import { initGA, trackPageView } from './lib/analytics';
 import Footer from './components/layout/Footer';
@@ -75,14 +75,18 @@ function App() {
         <ScrollToTop />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/pae' element={<PAE_Treatmentpage />} />
-          <Route path='/gae' element={<GAE_Treatmentpage />} />
-          <Route path='/thyroid' element={<Thyroid_Nodule_Ablation_Treatmentpage />} />
+          <Route path='/prostate-artery-embolization-pae' element={<PAE_Treatmentpage />} />
+          <Route path='/pae' element={<Navigate to='/prostate-artery-embolization-pae' replace />} />
+          <Route path='/genicular-artery-embolization-gae' element={<GAE_Treatmentpage />} />
+          <Route path='/gae' element={<Navigate to='/genicular-artery-embolization-gae' replace />} />
+          <Route path='/thyroid-nodule-ablation' element={<Thyroid_Nodule_Ablation_Treatmentpage />} />
+          <Route path='/thyroid' element={<Navigate to='/thyroid-nodule-ablation' replace />} />
           <Route path='/about' element={<About />} />
           <Route path='/varicocele-embolization' element={<Varicocele_embolization />} />
           <Route path='/varicose-vein' element={<VaricoseVeinPage />} />
           <Route path='/blog' element={<Blog />} />
-          <Route path='/fte' element={<FTE />} />
+          <Route path='/fallopian-tube-recanalization-ftr' element={<FTE />} />
+          <Route path='/fte' element={<Navigate to='/fallopian-tube-recanalization-ftr' replace />} />
           <Route path='/blog/:slug' element={<BlogPost />} />
           <Route path='/gallery' element={<Gallery />} />
           <Route path='/career' element={<CareerPage />} />
@@ -90,10 +94,12 @@ function App() {
           {/* Alias routes for legacy/CTA links */}
           <Route path='/book-an-appointment' element={<ContactUsPage />} />
           <Route path='/book-appointment' element={<ContactUsPage />} />
-          <Route path='/uae' element={<UAEPage />} />
+          <Route path='/uterine-artery-embolization-uae' element={<UAEPage />} />
+          <Route path='/uae' element={<Navigate to='/uterine-artery-embolization-uae' replace />} />
           <Route path='/breast-nodule-vae' element={<BreastNoduleVAEPage />} />
           <Route path='/breast-nodule-cryoablation' element={<BreastNoduleCryoablationPage />} />
-          <Route path='/pfe' element={<Planter />} />
+          <Route path='/plantar-fascial-embolization' element={<Planter />} />
+          <Route path='/pfe' element={<Navigate to='/plantar-fascial-embolization' replace />} />
           <Route path='/transcatheter-aortic-valve-replacement' element={<Transcatheter_aortic_valve_implantation />} />
           <Route path='/cto' element={<CTO_treatmentpage />} />
           <Route path='/rfa' element={<RFA_treatmentpage />} />

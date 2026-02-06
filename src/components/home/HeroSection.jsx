@@ -120,7 +120,7 @@ const HeroSection = () => {
   const treatmentSuggestions = [
     {
       name: 'Prostate Artery Embolization (PAE)',
-      path: '/pae',
+      path: '/prostate-artery-embolization-pae',
       keywords: [
         'prostate',
         'pae',
@@ -144,7 +144,7 @@ const HeroSection = () => {
     },
     {
       name: 'Geniculate Artery Embolization (GAE)',
-      path: '/gae',
+      path: '/genicular-artery-embolization-gae',
       keywords: [
         'geniculate artery embolization',
         'knee pain',
@@ -168,7 +168,7 @@ const HeroSection = () => {
     },
     {
       name: 'Fallopian Tube Recanalization (FTR)',
-      path: '/fte',
+      path: '/fallopian-tube-recanalization-ftr',
       keywords: [
         'fallopian tube recanalization',
         'blocked fallopian tube treatment',
@@ -212,7 +212,7 @@ const HeroSection = () => {
     },
     {
       name: 'Thyroid Nodule Ablation',
-      path: '/thyroid',
+      path: '/thyroid-nodule-ablation',
       keywords: [
         'thyroid nodule',
         'thyroid nodule ablation',
@@ -236,7 +236,7 @@ const HeroSection = () => {
     },
     {
       name: 'Uterine Fibroid Embolization (UFE)',
-      path: '/uae',
+      path: '/uterine-artery-embolization-uae',
       keywords: [
         'Uterine',
         'uterine fibroid embolization',

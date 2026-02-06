@@ -12,15 +12,15 @@ const quickLinks = [
 ];
 
 const services1 = [
-  { name: 'Knee Pain', path: '/gae' },
-  { name: 'Enlarged Prostate', path: '/pae' },
-  { name: 'Thyroid Nodule', path: '/thyroid' },
+  { name: 'Knee Pain', path: '/genicular-artery-embolization-gae' },
+  { name: 'Enlarged Prostate', path: '/prostate-artery-embolization-pae' },
+  { name: 'Thyroid Nodule', path: '/thyroid-nodule-ablation' },
   { name: 'Varicocele', path: '/varicocele-embolization' },
 ];
 
 const services2 = [
-  { name: 'Fallopian Tube Block', path: '/fte' },
-  { name: 'Uterine Fibroids', path: '/uae' },
+  { name: 'Fallopian Tube Block', path: '/fallopian-tube-recanalization-ftr' },
+  { name: 'Uterine Fibroids', path: '/uterine-artery-embolization-uae' },
   { name: 'Varicose Veins', path: '/varicose-vein' },
   { name: 'Breast Nodule', path: '/breast-nodule-vae' }, // Assuming this links to a general page
 ];
