@@ -32,10 +32,10 @@ const WhyChooseUAE = () => {
         {/* Main Content Section */}
         <div className='text-left'>
           <h2 className='text-3xl sm:text-4xl font-extrabold text-[#2d2552]'>
-            Why Choose <span className='text-[#ff3576]'>Uterine Artery Embolization?</span>
+            Why Choose <span className='text-[#ff3576]'>Uterine Artery Embolization (UAE)?</span>
           </h2>
           <p className='mt-4 text-lg text-gray-600'>
-            UAE shrinks fibroids by blocking their blood supply using small embolic particles, all while avoiding an open surgical procedure.
+            Uterine artery embolization (UAE) treatment is an effective option for fibroids and bulky uterus treatment. It reduces symptoms linked to bulky uterus with fibroid including pain and heavy bleeding. Patients often ask what is the normal size of uterus in cm when fibroids like subserosal fibroid or subserosal uterine fibroid enlarge it. With transparent uterine artery embolization cost in Chennai, Uterine artery embolization (UAE) offers relief without surgery.
           </p>
         </div>
 

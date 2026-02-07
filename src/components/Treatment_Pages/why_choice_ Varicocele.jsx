@@ -34,12 +34,12 @@ const WhyChooseVaricocele = () => {
         </div>
 
         {/* Main Content */}
-        <div className='mb-12 text-left'>
+        <div className='mb-12 text-center sm:text-left'>
           <h2 className='text-3xl sm:text-4xl font-bold text-[#2d2552]'>
             Why Choose <span className='text-[#ff3576]'>Varicocele Embolization?</span>
           </h2>
-          <p className='mt-4 max-w-3xl text-lg text-gray-600'>
-            Varicocele embolization offers targeted vein blockage while avoiding open surgery and preserving reproductive function.
+          <p className='mt-4 text-lg text-gray-600 w-full'>
+            Varicocele embolization is a minimally invasive, non-surgical treatment that blocks the abnormal veins causing a varicocele and helps restore healthier blood flow. It can reduce pain and heaviness and may support improved semen parameters and fertility in selected patients. The procedure is performed through a tiny puncture with minimal scarring and typically allows a quick return to normal activities. If you are looking for varicocele embolization in Chennai, this approach offers effective relief without open surgery.
           </p>
         </div>
 

@@ -29,12 +29,12 @@ const WhyChooseEndovenousAblation = () => {
     <div className='py-16 bg-white'>
       <div className='container mx-auto px-4'>
 
-        <div className='text-left max-w-4xl mb-12'>
+        <div className='text-center sm:text-left mb-12'>
           <h2 className='text-3xl md:text-4xl font-bold text-[#2d2552]'>
-            Why Choose <span className='text-[#ff3576]'>Endovenous Ablation?</span>
+            Why Choose <span className='text-[#ff3576]'>Endovenous Ablation for Varicose Veins</span>
           </h2>
-          <p className='mt-4 text-lg text-gray-600'>
-            Endovenous ablation targets diseased veins using heat or adhesive via catheter—leaving healthy veins intact.
+          <p className='mt-4 text-lg text-gray-600 w-full'>
+            Endovenous ablation for varicose veins is a modern alternative to laser treatment for varicose veins. It treats advanced varicose veins stages effectively. For patients wondering when to worry about varicose veins, this varicose veins treatment in Chennai offers safe relief.
           </p>
         </div>
 

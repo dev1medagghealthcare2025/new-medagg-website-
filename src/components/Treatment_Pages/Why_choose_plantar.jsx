@@ -34,12 +34,12 @@ const WhyChoosePlantar = () => {
         </div>
 
         {/* Main Content Section */}
-                        <div className='max-w-4xl text-left'>
+                        <div className='text-center sm:text-left'>
           <h2 className='text-3xl md:text-4xl font-bold text-[#2d2552] mb-4'>
-            Why Choose <span className='text-[#ff3576]'>Plantar Fascial Embolization?</span>
+            Why Choose <span className='text-[#ff3576]'>Plantar Fascial Embolization (PFE)?</span>
           </h2>
-          <p className='text-gray-600 text-lg md:text-xl mb-12'>
-            PFE targets the root cause of plantar fasciitis—without cutting the tissue or prolonged recovery.
+          <p className='mt-4 text-lg text-gray-600 w-full mb-12'>
+            Plantar fascial embolization treatment in Chennai offers relief for chronic heel pain. This plantar fasciitis non surgery option reduces inflammation and improves mobility without surgery.
           </p>
         </div>
 

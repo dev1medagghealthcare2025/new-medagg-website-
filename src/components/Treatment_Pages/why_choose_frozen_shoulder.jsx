@@ -29,13 +29,12 @@ const WhyChooseFrozenShoulder = () => {
     <section className="w-full bg-white py-10 sm:py-12 lg:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-8 text-center sm:text-left">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#1a1446]">
-            Why Choose <span className="text-pink-600">ACE?</span>
+            Why Choose <span className="text-pink-600">ACE for Frozen Shoulder?</span>
           </h2>
-          <p className="mt-3 text-gray-600 max-w-3xl">
-            Frozen shoulder treatment focuses on relieving stiffness and restoring full shoulder
-            mobility by releasing the tightened joint capsule.
+          <p className="mt-4 text-lg text-gray-600 w-full">
+            ACE is a minimally invasive option for frozen shoulder that targets inflamed blood vessels associated with pain and stiffness. By addressing the underlying inflammation, it may help improve shoulder mobility and reduce discomfort without open surgery. Most patients experience a quicker recovery and can return to routine activities sooner.
           </p>
         </div>
 

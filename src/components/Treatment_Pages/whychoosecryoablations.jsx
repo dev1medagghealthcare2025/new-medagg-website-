@@ -68,12 +68,12 @@ const WhyChooseCryoablation = () => {
         </div>
 
         {/* Main Content */}
-        <div className='text-left'>
+        <div className='text-center sm:text-left'>
           <h2 className='text-3xl sm:text-4xl font-bold text-[#2d2552]'>
-            Why Choose <span className='text-[#ff3576]'>Cryoablation?</span>
+            Why Choose <span className='text-[#ff3576]'>Breast Cryoablation??</span>
           </h2>
-          <p className='mt-4 max-w-3xl text-lg text-gray-600'>
-            Cryoablation is a minimally invasive treatment that uses extreme cold to freeze and destroy benign breast nodules, offering a non-surgical alternative with minimal scarring and quick recovery.
+          <p className='mt-4 text-lg text-gray-600 w-full'>
+            Cryoablation is a minimally invasive option to treat selected benign breast lumps without open surgery. It uses controlled freezing to destroy the targeted tissue while helping protect surrounding healthy structures. With a small puncture, minimal scarring, and typically quick recovery, many patients can return to routine activities sooner.
           </p>
         </div>
 

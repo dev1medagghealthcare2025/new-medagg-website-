@@ -30,12 +30,12 @@ const Why_choose_CTO = () => {
       <div className='container mx-auto px-4'>
 
         {/* Main Content Section */}
-        <div className='text-left mb-12'>
+        <div className='text-center sm:text-left mb-12'>
           <h2 className='text-3xl md:text-4xl font-bold text-[#2d2552]'>
-            Why Choose <span className='text-[#ff3576]'>CTO Revascularization?</span>
+            Why Choose <span className='text-[#ff3576]'>Chronic Total Occlusion (CTO) Intervention?</span>
           </h2>
-          <p className='mt-4 text-lg text-gray-600 max-w-3xl'>
-            An alternative to surgery for safely restoring cardiac blood flow and relieving symptoms.
+          <p className='mt-4 text-lg text-gray-600 w-full'>
+            Chronic total occlusion treatment restores blood flow in completely blocked arteries using advanced endovascular techniques without bypass surgery.
           </p>
         </div>
 

@@ -51,7 +51,7 @@ const WhyChooseEndovascularCoiling = () => {
             Why Choose <span className='text-[#ff3576]'>Endovascular Coiling?</span>
           </h2>
           <p className='text-lg text-gray-600 mb-12'>
-            Safe, effective alternative to surgical clipping with faster recovery and fewer risks
+            Endovascular coiling is performed at the best interventional neurology hospital in Chennai. This interventional neurology for minimally invasive treatment avoids open brain surgery. It is an advanced interventional neurology treatment with faster recovery.
           </p>
         </div>
 

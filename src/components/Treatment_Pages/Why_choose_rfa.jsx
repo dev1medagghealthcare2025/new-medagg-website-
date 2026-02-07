@@ -33,10 +33,10 @@ const Why_choose_rfa = () => {
         {/* Main Content */}
         <div className='text-left mb-12'>
           <h2 className='text-3xl md:text-4xl font-bold text-[#2d2552]'>
-            Why Choose <span className='text-[#ff3576]'>Radiofrequency Ablation?</span>
+            Why Choose <span className='text-[#ff3576]'>Radiofrequency Ablation (RFA)?</span>
           </h2>
           <p className='mt-4 text-lg text-gray-600'>
-            Effective rhythm control, fast recovery, and fewer risks compared to traditional surgery.
+            Radiofrequency ablation for arrhythmia treats abnormal heart rhythms by correcting faulty electrical pathways without open-heart surgery.
           </p>
         </div>
 

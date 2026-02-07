@@ -70,10 +70,10 @@ const WhyChooseVAE = () => {
         {/* Main Content */}
         <div className='text-center sm:text-left'>
           <h2 className='text-3xl sm:text-4xl font-bold text-[#2d2552]'>
-            Why Choose <span className='text-[#ff3576]'>Vacuum-Assisted Excision?</span>
+            Why Choose <span className='text-[#ff3576]'>Vacuum-Assisted Excision (VAE)?</span>
           </h2>
-          <p className='mt-4 max-w-3xl text-lg text-gray-600 mx-auto sm:mx-0'>
-            Vacuum-assisted excision removes benign nodules under imaging guidance, preserving breast appearance and reducing downtime.
+          <p className='mt-4 text-lg text-gray-600 w-full'>
+            Vacuum-assisted excision (VAE) is a minimally invasive option to remove selected benign breast lumps without open surgery. It is performed under imaging guidance through a small incision, helping minimize scarring and reduce the need for a hospital stay. Vacuum-assisted excision (VAE) offers precise removal, faster recovery, and excellent cosmetic results.
           </p>
         </div>
 

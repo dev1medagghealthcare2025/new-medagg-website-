@@ -32,13 +32,13 @@ const WhyChooseThyroidAblation = () => {
       <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
 
         {/* Main Content */}
-        <div className='text-center max-w-4xl mx-auto'>
+        <div className='text-center sm:text-left'>
           <h2 className='text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4'>
             <span className='text-[#2d2552]'>Why Choose </span>
-            <span className='text-pink-500'>Thyroid Ablation?</span>
+            <span className='text-pink-500'>Thyroid Nodule Ablation?</span>
           </h2>
-          <p className='text-gray-600 text-base sm:text-lg mb-8 sm:mb-10 lg:mb-12 px-4 sm:px-0'>
-            Thyroid nodule ablation uses image-guided heat or laser to destroy benign nodules, preserving your natural thyroid function.
+          <p className='mt-4 text-lg text-gray-600 w-full mb-8 sm:mb-10 lg:mb-12'>
+            Thyroid nodule ablation is a proven, minimally invasive option for treating selected thyroid nodules without open surgery. It uses targeted energy to shrink the nodule, helping relieve symptoms while preserving normal thyroid function. With no large incision and minimal scarring, most patients experience a faster recovery and return to routine activities sooner. If you are looking for thyroid nodule treatment without surgery in Chennai, thyroid ablation offers an effective, scar-minimizing alternative to traditional surgery.
           </p>
         </div>
 

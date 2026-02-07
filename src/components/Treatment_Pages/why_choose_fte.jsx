@@ -39,7 +39,7 @@ const WhyChooseFTE = () => {
             Why Choose <span className='text-[#ff3576]'>Fallopian Tube Recanalization?</span>
           </h2>
           <p className='mt-4 text-base sm:text-lg text-gray-600'>
-            Recanalization is fluoroscopy-guided and reopens tubes via catheter-based techniques—restoring natural conception potential.
+            Fallopian tube recanalization treatment helps women facing infertility due to blocked fallopian tubes. Common blocked fallopian tubes symptoms include difficulty conceiving. This fallopian tubes treatment restores natural tubal flow without surgery. As an effective fallopian tube blockage treatment, it avoids IVF in selected cases.
           </p>
         </div>
 

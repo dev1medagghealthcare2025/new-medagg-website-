@@ -9,10 +9,10 @@ const GAE_Treatment_Why_Choose_us = () => {
         {/* Main Content */}
         <div className='mb-12 sm:mb-16'>
           <h2 className='text-3xl sm:text-4xl lg:text-5xl font-bold text-[#2d2552] mb-4 sm:mb-6'>
-            Why Choose <span className='text-[#ff3576]'>GAE?</span>
+            Why Choose <span className='text-[#ff3576]'>Genicular Artery Embolization (GAE)?</span>
           </h2>
-          <p className='text-gray-600 text-base sm:text-lg max-w-2xl px-4'>
-            Genicular Artery Embolization offers significant advantages over traditional surgical approaches for treating chronic knee pain.
+          <p className='mt-4 text-lg text-gray-600 w-full'>
+            Genicular artery embolization (GAE) is a minimally invasive, non-surgical option for osteoarthritis-related knee pain and chronic inflammation. It works by reducing abnormal blood flow to inflamed areas around the knee, which may help decrease pain and improve mobility. With no large incisions and typically a faster recovery than surgery, many patients can return to daily activities sooner. If you are looking for knee pain treatment without surgery in Chennai, Genicular artery embolization (GAE) offers an effective alternative when medications and physiotherapy are not enough.
           </p>
         </div>
 

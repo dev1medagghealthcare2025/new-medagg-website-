@@ -40,7 +40,7 @@ const WhyChooseDiabeticFoot = () => {
           Why Choose <span className='text-pink-500'>Endovascular Treatment</span> For Diabetic Foot?
         </h2>
         <p className='text-gray-600 mb-8 sm:mb-10 max-w-3xl'>
-          Diabetic foot treatment focuses on healing wounds, improving circulation, and preventing infection to protect the foot and preserve mobility.
+          Endovascular treatment for diabetic foot improves blood flow, supports wound healing, and reduces amputation risk without open surgery.
         </p>
 
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5'>

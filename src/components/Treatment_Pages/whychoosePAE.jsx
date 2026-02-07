@@ -34,10 +34,10 @@ const WhyChoosePAE = () => {
 
         <div className='text-center sm:text-left mb-12'>
           <h2 className='text-3xl sm:text-4xl font-bold text-[#2d2552]'>
-            Why Choose <span className='text-[#ff3576]'>PAE?</span>
+            Why Choose <span className='text-[#ff3576]'>Prostate Artery Embolization (PAE)?</span>
           </h2>
-          <p className='mt-4 text-lg text-gray-600 max-w-3xl mx-auto sm:mx-0'>
-            Prostate Artery Embolization offers significant advantages over traditional surgical approaches for treating an enlarged prostate.
+          <p className='mt-4 text-lg text-gray-600 w-full'>
+            Prostate artery embolization (PAE) is a proven, minimally invasive option for men seeking relief from an enlarged prostate without surgery. By reducing excess blood flow to the prostate, Prostate artery embolization (PAE) can help shrink the gland and improve urinary symptoms safely. The procedure involves no cuts and typically does not require a hospital stay, helping you return to normal activities faster. As a trusted non-surgical treatment for prostate enlargement, Prostate artery embolization (PAE) also helps preserve quality of life. If you are looking for non-surgical enlarged prostate treatment in Chennai, Prostate artery embolization (PAE) offers effective outcomes with fewer surgical risks.
           </p>
         </div>
 
