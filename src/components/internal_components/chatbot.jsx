@@ -352,30 +352,262 @@ const questionnaires = {
   },
   VV: {
     procedure: 'VV',
-    welcomeMessage: 'Let’s quickly assess your vein symptoms.',
+    useCoreQuestions: false,
+    welcomeMessage: 'To understand your situation better, I’ll ask a few simple questions.',
     treatmentPage: '/varicose-vein',
     youtubeVideo: 'https://www.youtube.com/shorts/vyanUzoXLg0',
     specificQuestions: [
       {
-        id: 'vv_symptoms',
-        question: 'Do you have bulging veins or discolaration in legs?',
-        options: ['Yes', 'No'],
-        field: 'bulging_veins_discoloration',
-        condition: { field: 'user_intent', value: 'Seeking Treatment' },
+        id: 'vv_path_choice',
+        question: 'What would you like to do?',
+        options: ['Let\'s Chat', 'Book Consultation'],
+        field: 'vv_path_choice',
       },
       {
-        id: 'vv_diagnosis',
-        question: 'Have you been diagnosed of Varicose Veins?',
+        id: 'vv_symptom_gate',
+        question:
+          'Are you currently experiencing any of the following symptoms?\n• Leg pain / swelling\n• Visible or bulging veins\n• Itching or skin discoloration around veins\n• Discomfort after standing for long hours',
         options: ['Yes', 'No'],
-        field: 'varicose_veins_diagnosed',
-        condition: { field: 'user_intent', value: 'Seeking Treatment' },
+        field: 'vv_symptom_gate',
+        condition: { field: 'vv_path_choice', value: "Let's Chat" },
       },
       {
-        id: 'vv_reports',
-        question: 'Do you have any of these reports available?',
-        options: ['Doppler Scan', 'No Report'],
+        id: 'vv_atypical_choice',
+        question:
+          'Thank you for sharing that.\nYour symptoms may not be typical of varicose veins and could be related to another condition.\nTo understand better and guide you correctly, please choose one option below.',
+        options: ['Request Call Back', 'Close Request'],
+        field: 'vv_atypical_choice',
+        condition: { field: 'vv_symptom_gate', value: 'No' },
+      },
+      {
+        id: 'vv_consulted_doctor',
+        question: 'Have you already consulted a doctor for this condition?',
+        options: ['Yes', 'No'],
+        field: 'vv_consulted_doctor',
+        condition: { field: 'vv_symptom_gate', value: 'Yes' },
+      },
+      {
+        id: 'vv_surgery_advised',
+        question: 'Has any doctor advised surgery for your varicose veins?',
+        options: ['Yes', 'No'],
+        field: 'vv_surgery_advised',
+        condition: { field: 'vv_symptom_gate', value: 'Yes' },
+      },
+      {
+        id: 'vv_doppler_report',
+        question: 'Do you have a Doppler scan report of your leg veins?',
+        options: ['Yes, I have the report', 'No, not yet'],
         field: 'varicose_vein_reports',
-        condition: { field: 'varicose_veins_diagnosed', value: 'Yes' },
+        condition: { field: 'vv_symptom_gate', value: 'Yes' },
+      },
+      {
+        id: 'vv_consult_specialist',
+        question:
+          'I’d like you to know —\nNot all varicose veins need surgery. Many patients can be treated with minimally invasive, non-surgical options like Radiofrequency/Laser therapy.\n\nTo understand which option may be suitable for you, would you like to speak with a specialist?',
+        options: ['Yes, arrange a consultation', 'Not right now'],
+        field: 'vv_consult_specialist',
+        condition: { field: 'vv_symptom_gate', value: 'Yes' },
+      },
+      {
+        id: 'vv_callback_day',
+        question:
+          'When would it be convenient for our care team to contact you?\n(Office hours: Monday - Saturday 10.00AM - 6.00PM)',
+        options: ['Today', 'Tomorrow'],
+        field: 'appointment_timing',
+        condition: { field: 'vv_consult_specialist', value: 'Yes, arrange a consultation' },
+      },
+      {
+        id: 'vv_callback_time',
+        question: 'What time usually works best for you?',
+        options: ['Morning', 'Afternoon', 'Evening'],
+        field: 'vv_callback_time',
+        condition: { field: 'vv_consult_specialist', value: 'Yes, arrange a consultation' },
+      },
+      {
+        id: 'vv_age_group_consult',
+        question: 'Do you fall in any of these age groups?',
+        options: ['Below 25', '25 to 35', '35 to 45', 'Above 45'],
+        field: 'age_group',
+        condition: { field: 'vv_consult_specialist', value: 'Yes, arrange a consultation' },
+      },
+      {
+        id: 'vv_name_consult',
+        question: 'May I know your full name?',
+        options: [],
+        field: 'name',
+        isInput: true,
+        placeholder: 'Enter your full name',
+        condition: { field: 'vv_consult_specialist', value: 'Yes, arrange a consultation' },
+      },
+      {
+        id: 'vv_city_consult',
+        question: 'Which city are you currently located in?',
+        options: [],
+        field: 'city',
+        isInput: true,
+        placeholder: 'Enter your city',
+        condition: { field: 'vv_consult_specialist', value: 'Yes, arrange a consultation' },
+      },
+      {
+        id: 'vv_language_consult',
+        question: 'Which language would you be most comfortable speaking in during the consultation?',
+        options: ['English', 'Hindi', 'Tamil', 'Telugu', 'Kannada', 'Malayalam'],
+        field: 'preferred_language',
+        condition: { field: 'vv_consult_specialist', value: 'Yes, arrange a consultation' },
+      },
+      {
+        id: 'vv_phone_consult',
+        question: 'What is the best number to reach you on for the consultation?',
+        options: [],
+        field: 'phone',
+        isInput: true,
+        placeholder: 'Enter your phone number',
+        condition: { field: 'vv_consult_specialist', value: 'Yes, arrange a consultation' },
+      },
+      {
+        id: 'vv_phone_confirm_consult',
+        question: 'Is this the best number to reach you on for the consultation?',
+        options: ['Yes, this number is fine', 'No, I’d like to share another number'],
+        field: 'vv_phone_confirm',
+        condition: { field: 'vv_consult_specialist', value: 'Yes, arrange a consultation' },
+      },
+      {
+        id: 'vv_phone_alt_consult',
+        question: 'Please share the alternate number you’d like us to use.',
+        options: [],
+        field: 'vv_phone_alt',
+        isInput: true,
+        placeholder: 'Enter alternate phone number',
+        condition: { field: 'vv_phone_confirm', value: 'No, I’d like to share another number' },
+      },
+      {
+        id: 'vv_age_group',
+        question: 'Do you fall in any of these age groups?',
+        options: ['Below 25', '25 to 35', '35 to 45', 'Above 45'],
+        field: 'age_group',
+        condition: { field: 'vv_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'vv_name',
+        question: 'May I know your full name?',
+        options: [],
+        field: 'name',
+        isInput: true,
+        placeholder: 'Enter your full name',
+        condition: { field: 'vv_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'vv_city',
+        question: 'Which city are you currently located in?',
+        options: [],
+        field: 'city',
+        isInput: true,
+        placeholder: 'Enter your city',
+        condition: { field: 'vv_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'vv_language',
+        question: 'Which language would you be most comfortable speaking in during the consultation?',
+        options: ['English', 'Hindi', 'Tamil', 'Telugu', 'Kannada', 'Malayalam'],
+        field: 'preferred_language',
+        condition: { field: 'vv_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'vv_phone',
+        question: 'What is the best number to reach you on for the consultation?',
+        options: [],
+        field: 'phone',
+        isInput: true,
+        placeholder: 'Enter your phone number',
+        condition: { field: 'vv_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'vv_phone_confirm',
+        question: 'Is this the best number to reach you on for the consultation?',
+        options: ['Yes, this number is fine', 'No, I’d like to share another number'],
+        field: 'vv_phone_confirm',
+        condition: { field: 'vv_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'vv_phone_alt',
+        question: 'Please share the alternate number you’d like us to use.',
+        options: [],
+        field: 'vv_phone_alt',
+        isInput: true,
+        placeholder: 'Enter alternate phone number',
+        condition: { field: 'vv_phone_confirm', value: 'No, I’d like to share another number' },
+      },
+      {
+        id: 'vv_callback_day_book',
+        question:
+          'When would it be convenient for our care team to contact you?\n(Office hours: Monday - Saturday 10.00AM - 6.00PM)',
+        options: ['Today', 'Tomorrow'],
+        field: 'appointment_timing',
+        condition: { field: 'vv_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'vv_callback_time_book',
+        question: 'What time usually works best for you?',
+        options: ['Morning', 'Afternoon', 'Evening'],
+        field: 'vv_callback_time',
+        condition: { field: 'vv_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'vv_age_group_callback',
+        question: 'Do you fall in any of these age groups?',
+        options: ['Below 25', '25 to 35', '35 to 45', 'Above 45'],
+        field: 'age_group',
+        condition: { field: 'vv_atypical_choice', value: 'Request Call Back' },
+      },
+      {
+        id: 'vv_name_callback',
+        question: 'May I know your full name?',
+        options: [],
+        field: 'name',
+        isInput: true,
+        placeholder: 'Enter your full name',
+        condition: { field: 'vv_atypical_choice', value: 'Request Call Back' },
+      },
+      {
+        id: 'vv_city_callback',
+        question: 'Which city are you currently located in?',
+        options: [],
+        field: 'city',
+        isInput: true,
+        placeholder: 'Enter your city',
+        condition: { field: 'vv_atypical_choice', value: 'Request Call Back' },
+      },
+      {
+        id: 'vv_language_callback',
+        question: 'Which language would you be most comfortable speaking in during the consultation?',
+        options: ['English', 'Hindi', 'Tamil', 'Telugu', 'Kannada', 'Malayalam'],
+        field: 'preferred_language',
+        condition: { field: 'vv_atypical_choice', value: 'Request Call Back' },
+      },
+      {
+        id: 'vv_phone_callback',
+        question: 'What is the best number to reach you on for the consultation?',
+        options: [],
+        field: 'phone',
+        isInput: true,
+        placeholder: 'Enter your phone number',
+        condition: { field: 'vv_atypical_choice', value: 'Request Call Back' },
+      },
+      {
+        id: 'vv_phone_confirm_callback',
+        question: 'Is this the best number to reach you on for the consultation?',
+        options: ['Yes, this number is fine', 'No, I’d like to share another number'],
+        field: 'vv_phone_confirm',
+        condition: { field: 'vv_atypical_choice', value: 'Request Call Back' },
+      },
+      {
+        id: 'vv_phone_alt_callback',
+        question: 'Please share the alternate number you’d like us to use.',
+        options: [],
+        field: 'vv_phone_alt',
+        isInput: true,
+        placeholder: 'Enter alternate phone number',
+        condition: { field: 'vv_phone_confirm', value: 'No, I’d like to share another number' },
       },
     ],
   },
@@ -444,6 +676,14 @@ const getQuestionnaire = (procedure) => {
   const procedureData = questionnaires[procedure];
   if (!procedureData) return null;
 
+  // Allow certain procedures to fully override the core question set
+  if (procedureData.useCoreQuestions === false) {
+    return {
+      ...procedureData,
+      questions: [...(procedureData.specificQuestions || [])],
+    };
+  }
+
   // Reorder questions: core intro -> specific -> core contact info
   const contactInfoStartIndex = coreQuestions.findIndex(q => q.id === 'name');
   const introQuestions = coreQuestions.slice(0, contactInfoStartIndex);
@@ -489,8 +729,18 @@ const getNextQuestion = (currentStep, responses, questionnaire) => {
       const conditionField = question.condition.field;
       const conditionValue = question.condition.value;
 
+      const actualRaw = responses ? responses[conditionField] : undefined;
+      const actual =
+        typeof actualRaw === 'string'
+          ? actualRaw.trim()
+          : actualRaw == null
+              ? actualRaw
+              : String(actualRaw).trim();
+      const expected =
+        typeof conditionValue === 'string' ? conditionValue.trim() : String(conditionValue).trim();
+
       // Skip question if condition is not met
-      if (responses[conditionField] !== conditionValue) {
+      if (actual !== expected) {
         continue;
       }
     }
@@ -504,6 +754,25 @@ const getNextQuestion = (currentStep, responses, questionnaire) => {
 // Enhanced symptom detection function powered by treatment_keywords.json
 const detectProcedureFromSymptoms = (input) => {
   try {
+    const raw = (input || '').toString();
+    const lower = raw.toLowerCase();
+
+    // Explicit VV triggers to avoid missed matches from keyword files
+    // Handles: "vv", "varicose vein(s)", and common misspelling "varicoce vein(s)"
+    if (
+      /\bvv\b/i.test(lower) ||
+      lower.includes('varicose vein') ||
+      lower.includes('varicose veins') ||
+      lower.includes('varicoce vein') ||
+      lower.includes('varicoce veins')
+    ) {
+      return {
+        procedure: 'VV',
+        displayName: 'Varicose Veins',
+        route: '/varicose-vein',
+      };
+    }
+
     const tryMap = (res) => {
       if (!res) return null;
       // Fallback: derive procedure code from known routes if not mapped by name
@@ -532,14 +801,14 @@ const detectProcedureFromSymptoms = (input) => {
     };
 
     // First attempt exact detection
-    const exact = detectTreatment(input || '');
+    const exact = detectTreatment(raw);
     if (exact) {
       console.log('Detected treatment from keywords (exact):', exact);
       return tryMap(exact);
     }
 
     // Fallback to fuzzy gate (question-start only)
-    const fuzzy = detectTreatmentFuzzyGate(input || '');
+    const fuzzy = detectTreatmentFuzzyGate(raw);
     if (fuzzy) {
       console.log('Detected treatment from keywords (fuzzy gate):', fuzzy);
       return tryMap(fuzzy);
@@ -567,7 +836,7 @@ const getProcedureInfo = (procedure) => {
       message: 'Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help related to Thyroid Nodules.',
     },
     VV: {
-      message: 'Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help related to Varicose Veins.',
+      message: 'You’ve reached out regarding Varicose Veins, which are enlarged, twisted, blue or purple veins usually appearing in the legs due to damaged, one-way valves that allow blood to pool.',
     },
     VCE: {
       message: 'Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help related to Varicocele.',
@@ -840,6 +1109,15 @@ const Chatbot = () => {
     setQuestionnaireResponses({ procedure });
     setCurrentQuestionnaire(questionnaire);
 
+    if (questionnaire.welcomeMessage) {
+      const welcome = {
+        text: questionnaire.welcomeMessage,
+        sender: 'bot',
+        timestamp: new Date(),
+      };
+      setMessages(prev => [...prev, welcome]);
+    }
+
     // Ask first question after a short delay
     setTimeout(() => {
       if (!questionnaire || !questionnaire.questions || !questionnaire.questions.length) {
@@ -912,6 +1190,67 @@ const Chatbot = () => {
     const updatedResponses = { ...questionnaireResponses, [currentQuestion.field]: selectedOption };
     setQuestionnaireResponses(updatedResponses);
 
+    // VV: After selecting callback time, continue immediately to details collection
+    if (updatedResponses.procedure === 'VV' && (currentQuestion.id === 'vv_callback_time' || currentQuestion.id === 'vv_callback_time_book')) {
+      const nextIndex = currentQuestionnaire.questions.findIndex((q) => q.id === 'vv_age_group_consult' || q.id === 'vv_age_group');
+      if (nextIndex !== -1) {
+        setQuestionnaireStep(nextIndex);
+        setTimeout(() => {
+          const nq = currentQuestionnaire.questions[nextIndex];
+          const nextQuestion = {
+            text: nq.question,
+            sender: 'bot',
+            timestamp: new Date(),
+            isQuestionnaireQuestion: true,
+            questionId: nq.id,
+            options: nq.options,
+            isInput: nq.isInput,
+            field: nq.field,
+            placeholder: nq.placeholder,
+            multiSelect: !!nq.multiSelect,
+          };
+          setMessages(prev => [...prev, nextQuestion]);
+        }, 500);
+        return;
+      }
+    }
+
+    // VV: Close Request (atypical symptom path) should end the chat with resources
+    if (updatedResponses.procedure === 'VV' && currentQuestion.field === 'vv_atypical_choice' && selectedOption === 'Close Request') {
+      const closeMsg = {
+        text: 'No worries at all. Here are some useful resources you can check out anytime. If you’d like to talk to a specialist later, just message me “Hi” — I’ll be happy to arrange it for you. Thank you. Take care.',
+        sender: 'bot',
+        timestamp: new Date(),
+        aiGenerated: true,
+        recommendedTreatment: currentQuestionnaire.treatmentPage,
+        youtubeVideo: currentQuestionnaire.youtubeVideo,
+      };
+      setMessages(prev => [...prev, closeMsg]);
+      setIsQuestionnaireActive(false);
+      setQuestionnaireStep(0);
+      setQuestionnaireResponses({});
+      setCurrentQuestionnaire(null);
+      return;
+    }
+
+    // VV: Not right now should end the chat with resources
+    if (updatedResponses.procedure === 'VV' && currentQuestion.field === 'vv_consult_specialist' && selectedOption === 'Not right now') {
+      const closeMsg = {
+        text: 'No worries at all. Here are some useful resources you can check out anytime. If you’d like to talk to a specialist later, just message me “Hi” — I’ll be happy to arrange it for you. Thank you. Take care.',
+        sender: 'bot',
+        timestamp: new Date(),
+        aiGenerated: true,
+        recommendedTreatment: currentQuestionnaire.treatmentPage,
+        youtubeVideo: currentQuestionnaire.youtubeVideo,
+      };
+      setMessages(prev => [...prev, closeMsg]);
+      setIsQuestionnaireActive(false);
+      setQuestionnaireStep(0);
+      setQuestionnaireResponses({});
+      setCurrentQuestionnaire(null);
+      return;
+    }
+
     // Check if user selected "Seeking General Information" on first question
     if (currentQuestion.field === 'user_intent' && selectedOption === 'Seeking General Information') {
       // End questionnaire and show information response
@@ -979,8 +1318,9 @@ const Chatbot = () => {
         setMessages(prev => [...prev, nextQuestion]);
       }, 500);
     } else {
-      // All questions answered, set flag to trigger submission
-      setQuestionnaireStep(prev => prev + 1); // Increment step to mark completion
+      // No further valid questions (often because remaining questions are conditionally skipped).
+      // Mark questionnaire complete to trigger submission effect.
+      setQuestionnaireStep(currentQuestionnaire.questions.length);
     }
   }, [questionnaireStep, questionnaireResponses, currentQuestionnaire]);
 
@@ -1041,11 +1381,14 @@ const Chatbot = () => {
         }
       }
 
+      // If an alternate phone was provided, use it as the submission phone
+      const finalPhone = responses.vv_phone_alt ? responses.vv_phone_alt : responsesForSubmission.phone;
+
       console.log('Questionnaire Responses being submitted:', responsesForSubmission);
 
       const payload = {
         fields: {
-          phone: responsesForSubmission.phone || '',
+          phone: finalPhone || '',
           name: responsesForSubmission.name || '',
           city: responsesForSubmission.city || '',
           preferred_language: responsesForSubmission.preferred_language || '',
@@ -1091,15 +1434,24 @@ const Chatbot = () => {
       });
 
       if (response.ok) {
-        // TeleCRM submission successful - show concise thank-you + treatment link
-        const thankYouMessage = {
-          text: 'Thank you. Our medical team will review your answers and contact you soon.',
-          sender: 'bot',
-          timestamp: new Date(),
-          aiGenerated: true,
-          // Provide the treatment page so renderer can show a CTA
-          recommendedTreatment: questionnaire.treatmentPage,
-        };
+        // TeleCRM submission successful
+        const thankYouMessage =
+          questionnaire.procedure === 'VV'
+            ? {
+                text: 'Thank you. Your details have been noted. A member of our care team will contact you as discussed.\n\nMeanwhile, I’ll share helpful information about Varicose Veins and Endovenous Ablation for you to review.\n\nWishing you good health. Take care.',
+                sender: 'bot',
+                timestamp: new Date(),
+                aiGenerated: true,
+                recommendedTreatment: questionnaire.treatmentPage,
+                youtubeVideo: questionnaire.youtubeVideo,
+              }
+            : {
+                text: 'Thank you. Our medical team will review your answers and contact you soon.',
+                sender: 'bot',
+                timestamp: new Date(),
+                aiGenerated: true,
+                recommendedTreatment: questionnaire.treatmentPage,
+              };
         setMessages(prev => [...prev, thankYouMessage]);
       } else {
         const errorText = await response.text();
