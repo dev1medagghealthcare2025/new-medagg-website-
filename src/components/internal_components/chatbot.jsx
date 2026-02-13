@@ -238,6 +238,26 @@ const coreQuestions = [
 ];
 
 const questionnaires = {
+  MAIN_MENU: {
+    procedure: 'MAIN_MENU',
+    useCoreQuestions: false,
+    welcomeMessage:
+      'Hello 👋\nI’m IRa, your Interventional Radiology Assistant from Medagg Healthcare.\nI’m here to help you understand modern, non‑surgical treatment options and guide you step by step.\nWhich Condition would you like to know more about?',
+    treatmentPage: '/#services',
+    youtubeVideo: null,
+    specificQuestions: [
+      {
+        id: 'menu_choice',
+        question: 'Please choose one option:',
+        options: [
+          '1- Varicose Vein',
+          '2- Fallopian Tube Recanalization',
+          '3- Genicular Artery Embolization',
+        ],
+        field: 'menu_choice',
+      },
+    ],
+  },
   UFE: {
     procedure: 'UFE',
     welcomeMessage: 'Let’s begin a brief fibroid assessment.',
@@ -425,9 +445,11 @@ const questionnaires = {
       },
       {
         id: 'vv_age_group_consult',
-        question: 'Do you fall in any of these age groups?',
-        options: ['Below 25', '25 to 35', '35 to 45', 'Above 45'],
+        question: 'May I know your age?',
+        options: [],
         field: 'age_group',
+        isInput: true,
+        placeholder: 'Enter your age',
         condition: { field: 'vv_consult_specialist', value: 'Yes, arrange a consultation' },
       },
       {
@@ -465,26 +487,12 @@ const questionnaires = {
         condition: { field: 'vv_consult_specialist', value: 'Yes, arrange a consultation' },
       },
       {
-        id: 'vv_phone_confirm_consult',
-        question: 'Is this the best number to reach you on for the consultation?',
-        options: ['Yes, this number is fine', 'No, I’d like to share another number'],
-        field: 'vv_phone_confirm',
-        condition: { field: 'vv_consult_specialist', value: 'Yes, arrange a consultation' },
-      },
-      {
-        id: 'vv_phone_alt_consult',
-        question: 'Please share the alternate number you’d like us to use.',
-        options: [],
-        field: 'vv_phone_alt',
-        isInput: true,
-        placeholder: 'Enter alternate phone number',
-        condition: { field: 'vv_phone_confirm', value: 'No, I’d like to share another number' },
-      },
-      {
         id: 'vv_age_group',
-        question: 'Do you fall in any of these age groups?',
-        options: ['Below 25', '25 to 35', '35 to 45', 'Above 45'],
+        question: 'May I know your age?',
+        options: [],
         field: 'age_group',
+        isInput: true,
+        placeholder: 'Enter your age',
         condition: { field: 'vv_path_choice', value: 'Book Consultation' },
       },
       {
@@ -522,22 +530,6 @@ const questionnaires = {
         condition: { field: 'vv_path_choice', value: 'Book Consultation' },
       },
       {
-        id: 'vv_phone_confirm',
-        question: 'Is this the best number to reach you on for the consultation?',
-        options: ['Yes, this number is fine', 'No, I’d like to share another number'],
-        field: 'vv_phone_confirm',
-        condition: { field: 'vv_path_choice', value: 'Book Consultation' },
-      },
-      {
-        id: 'vv_phone_alt',
-        question: 'Please share the alternate number you’d like us to use.',
-        options: [],
-        field: 'vv_phone_alt',
-        isInput: true,
-        placeholder: 'Enter alternate phone number',
-        condition: { field: 'vv_phone_confirm', value: 'No, I’d like to share another number' },
-      },
-      {
         id: 'vv_callback_day_book',
         question:
           'When would it be convenient for our care team to contact you?\n(Office hours: Monday - Saturday 10.00AM - 6.00PM)',
@@ -554,9 +546,11 @@ const questionnaires = {
       },
       {
         id: 'vv_age_group_callback',
-        question: 'Do you fall in any of these age groups?',
-        options: ['Below 25', '25 to 35', '35 to 45', 'Above 45'],
+        question: 'May I know your age?',
+        options: [],
         field: 'age_group',
+        isInput: true,
+        placeholder: 'Enter your age',
         condition: { field: 'vv_atypical_choice', value: 'Request Call Back' },
       },
       {
@@ -592,22 +586,6 @@ const questionnaires = {
         isInput: true,
         placeholder: 'Enter your phone number',
         condition: { field: 'vv_atypical_choice', value: 'Request Call Back' },
-      },
-      {
-        id: 'vv_phone_confirm_callback',
-        question: 'Is this the best number to reach you on for the consultation?',
-        options: ['Yes, this number is fine', 'No, I’d like to share another number'],
-        field: 'vv_phone_confirm',
-        condition: { field: 'vv_atypical_choice', value: 'Request Call Back' },
-      },
-      {
-        id: 'vv_phone_alt_callback',
-        question: 'Please share the alternate number you’d like us to use.',
-        options: [],
-        field: 'vv_phone_alt',
-        isInput: true,
-        placeholder: 'Enter alternate phone number',
-        condition: { field: 'vv_phone_confirm', value: 'No, I’d like to share another number' },
       },
     ],
   },
@@ -1190,9 +1168,50 @@ const Chatbot = () => {
     const updatedResponses = { ...questionnaireResponses, [currentQuestion.field]: selectedOption };
     setQuestionnaireResponses(updatedResponses);
 
-    // VV: After selecting callback time, continue immediately to details collection
+    // MAIN_MENU: route to the selected questionnaire and end menu flow
+    if (updatedResponses.procedure === 'MAIN_MENU' && currentQuestion.id === 'menu_choice') {
+      const norm = (selectedOption || '').toString().trim().toLowerCase();
+      let nextProcedure = null;
+      if (norm === '1' || norm.startsWith('1-') || norm.includes('varicose')) nextProcedure = 'VV';
+      else if (norm === '2' || norm.startsWith('2-') || norm.includes('fallopian') || norm.includes('ftr') || norm.includes('fte')) nextProcedure = 'FTR';
+      else if (norm === '3' || norm.startsWith('3-') || norm.includes('genicular') || norm.includes('gae')) nextProcedure = 'GAE';
+
+      if (nextProcedure) {
+        setIsQuestionnaireActive(false);
+        setQuestionnaireStep(0);
+        setQuestionnaireResponses({});
+        setCurrentQuestionnaire(null);
+        setTimeout(() => startQuestionnaire(nextProcedure), 300);
+        return;
+      }
+
+      const retry = {
+        text: 'Please reply with 1, 2, or 3 to choose a condition.',
+        sender: 'bot',
+        timestamp: new Date(),
+        isQuestionnaireQuestion: true,
+        questionId: currentQuestion.id,
+        options: currentQuestion.options,
+        field: currentQuestion.field,
+      };
+      setMessages(prev => [...prev, retry]);
+      return;
+    }
+
+    // VV: After selecting callback time
+    // - Consult path: proceed to details collection (age/name/city/...) if not already collected.
+    // - Book Consultation path: details are collected earlier, so mark complete and submit.
     if (updatedResponses.procedure === 'VV' && (currentQuestion.id === 'vv_callback_time' || currentQuestion.id === 'vv_callback_time_book')) {
-      const nextIndex = currentQuestionnaire.questions.findIndex((q) => q.id === 'vv_age_group_consult' || q.id === 'vv_age_group');
+      const isBookPath = (updatedResponses.vv_path_choice || '').toString().trim() === 'Book Consultation';
+      if (isBookPath && currentQuestion.id === 'vv_callback_time_book') {
+        setQuestionnaireStep(currentQuestionnaire.questions.length);
+        return;
+      }
+
+      // Consult path: ask age if missing, otherwise continue from name.
+      const alreadyHasAge = !!(updatedResponses.age_group && updatedResponses.age_group.toString().trim());
+      const targetId = alreadyHasAge ? 'vv_name_consult' : 'vv_age_group_consult';
+      const nextIndex = currentQuestionnaire.questions.findIndex((q) => q.id === targetId);
       if (nextIndex !== -1) {
         setQuestionnaireStep(nextIndex);
         setTimeout(() => {
@@ -1351,7 +1370,12 @@ const Chatbot = () => {
 
   // Effect to submit questionnaire when all questions are answered
   useEffect(() => {
-    if (isQuestionnaireActive && currentQuestionnaire && questionnaireStep === currentQuestionnaire.questions.length) {
+    if (
+      isQuestionnaireActive &&
+      currentQuestionnaire &&
+      currentQuestionnaire.procedure !== 'MAIN_MENU' &&
+      questionnaireStep === currentQuestionnaire.questions.length
+    ) {
       submitQuestionnaireToTeleCRM(questionnaireResponses, currentQuestionnaire);
     }
   }, [questionnaireStep, isQuestionnaireActive, questionnaireResponses, currentQuestionnaire]);
@@ -1381,14 +1405,11 @@ const Chatbot = () => {
         }
       }
 
-      // If an alternate phone was provided, use it as the submission phone
-      const finalPhone = responses.vv_phone_alt ? responses.vv_phone_alt : responsesForSubmission.phone;
-
       console.log('Questionnaire Responses being submitted:', responsesForSubmission);
 
       const payload = {
         fields: {
-          phone: finalPhone || '',
+          phone: responsesForSubmission.phone || '',
           name: responsesForSubmission.name || '',
           city: responsesForSubmission.city || '',
           preferred_language: responsesForSubmission.preferred_language || '',
@@ -1578,13 +1599,32 @@ const Chatbot = () => {
   const generateResponse = useCallback(async (userInput) => {
     // Check if we're in questionnaire flow
     if (isQuestionnaireActive) {
-      // This should not happen as questionnaire uses option buttons
+      // Allow typed selection for MAIN_MENU
+      if (currentQuestionnaire && currentQuestionnaire.procedure === 'MAIN_MENU') {
+        const typed = (userInput || '').toString().trim();
+        if (typed) handleQuestionnaireResponse(typed);
+      }
       return;
     }
 
     // Check if we're in booking flow
     if (isBookingFlow) {
       handleBookingResponse(userInput);
+      return;
+    }
+
+    // Greeting -> show main menu
+    const greeting = (userInput || '').toString().trim().toLowerCase();
+    if (
+      greeting === 'hi' ||
+      greeting === 'hii' ||
+      greeting === 'hello' ||
+      greeting === 'hey' ||
+      greeting === 'hai' ||
+      greeting === 'hi ira' ||
+      greeting === 'hello ira'
+    ) {
+      startQuestionnaire('MAIN_MENU');
       return;
     }
 

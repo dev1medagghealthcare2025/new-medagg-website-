@@ -23,7 +23,7 @@ const MobileHeroSection = ({ query, setQuery, handleSearch, results = [], isLoad
             </a>
           </div>
           <div>
-            <h2 className='text-sm font-bold text-pink-500'>Join IRpreneur</h2>
+         
             <p className='text-xs text-white/80 max-w-[200px]'>A day-long immersion on business concepts designed for Interventional Radiologists (IRs).</p>
           </div>
         </div>
