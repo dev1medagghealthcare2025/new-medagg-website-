@@ -24,7 +24,7 @@ const MobileHeroSection = ({ query, setQuery, handleSearch, results = [], isLoad
           </div>
           <div>
          
-            <p className='text-xs text-white/80 max-w-[200px]'>A day-long immersion on business concepts designed for Interventional Radiologists (IRs).</p>
+            <p className='text-lg text-white/80 max-w-[200px]'>IRPreneur'25</p>
           </div>
         </div>
 
