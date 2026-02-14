@@ -289,12 +289,12 @@ export default function Treatmentnavbar() {
   };
 
   return (
-    <nav className='sticky top-[72px] lg:top-[80px] z-40 w-full bg-white border-b border-gray-200 shadow-xl shadow-black/15 ring-1 ring-black/5'>
+    <nav className='sticky top-[72px] lg:top-[80px] z-40 w-full bg-white border-b border-gray-200 shadow-xl shadow-black/15 ring-1 ring-black/5 overflow-x-hidden'>
       <div className='relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         {showLeftArrow && (
           <button
             onClick={() => scroll('left')}
-            className='absolute left-0 -translate-x-full top-1/2 -translate-y-1/2 bg-white hover:bg-gray-50 rounded-full shadow-md p-2 z-30 border border-gray-200'
+            className='absolute left-2 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-50 rounded-full shadow-md p-2 z-30 border border-gray-200'
           >
             <ChevronLeft className='h-4 w-4 text-gray-700' />
           </button>

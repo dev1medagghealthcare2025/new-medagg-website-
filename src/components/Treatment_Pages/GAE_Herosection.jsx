@@ -109,7 +109,7 @@ export default function GAE_Herosection() {
               name='preferredLanguage'
               value={formData.preferredLanguage}
               onChange={handleInputChange}
-              className='w-full border border-gray-200 rounded-lg p-2.5 text-xs sm:text-sm mb-3 focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all bg-white !text-black'
+              className='w-full border border-gray-200 rounded-lg p-3 text-sm sm:text-base mb-3 focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all bg-white !text-black'
               style={{ color: '#000' }}
               aria-label='Preferred Language'
             >

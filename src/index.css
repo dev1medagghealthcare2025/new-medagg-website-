@@ -61,7 +61,37 @@ p {
 }
 
 a {
-  @apply text-blue-700 hover:underline transition duration-200;
+  @apply text-blue-700 transition duration-200;
+}
+
+:is(a, button)[class*="bg-pink-"]
+, :is(a, button)[class*="hover:bg-pink-"]
+, :is(a, button)[class*="border-pink-"]
+, :is(a, button)[class*="bg-[#ff3576]"]
+, :is(a, button)[class*="hover:bg-[#ff3576]"]
+, :is(a, button)[class*="border-[#ff3576]"]
+, :is(a, button)[class*="bg-[#e1006a]"]
+, :is(a, button)[class*="hover:bg-[#e1006a]"]
+, :is(a, button)[class*="border-[#e1006a]"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transform: translateZ(0);
+  will-change: transform;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.hover-stable {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transform: translateZ(0);
+  will-change: transform;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

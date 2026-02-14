@@ -53,9 +53,9 @@ export default function Navbar() {
               <span className='hidden lg:inline text-white font-semibold text-sm xl:text-base leading-none'>+91 93636 56010</span>
             </a>
             {/* Buttons */}
-            <Link to='/join-with-us' className='hidden lg:flex h-10 px-1.5 border-2 border-pink-400 text-white text-sm rounded-lg font-normal hover:bg-pink-400 transition-colors items-center justify-center whitespace-nowrap leading-none shrink-0'>Partner With Us</Link>
-            <Link to='/investor' className='hidden lg:flex h-10 px-2 border-2 border-pink-400 text-white text-sm rounded-lg font-normal hover:bg-pink-400 transition-colors items-center justify-center whitespace-nowrap leading-none shrink-0'>Become an Investor</Link>
-            <Link to='/contact-us' className='h-9 lg:h-10 px-1.5 xl:px-2 bg-pink-500 text-white text-sm rounded-lg font-normal hover:bg-pink-600 transition-colors flex items-center justify-center whitespace-nowrap leading-none shrink-0'>Book Appointment</Link>
+            <Link to='/join-with-us' className='hover-stable hidden lg:flex h-10 px-1.5 border-2 border-pink-400 text-white text-sm rounded-lg font-normal hover:bg-pink-400 transition-colors items-center justify-center whitespace-nowrap leading-none shrink-0'>Partner With Us</Link>
+            <Link to='/investor' className='hover-stable hidden lg:flex h-10 px-2 border-2 border-pink-400 text-white text-sm rounded-lg font-normal hover:bg-pink-400 transition-colors items-center justify-center whitespace-nowrap leading-none shrink-0'>Become an Investor</Link>
+            <Link to='/contact-us' className='hover-stable h-9 lg:h-10 px-1.5 xl:px-2 bg-pink-500 text-white text-sm rounded-lg font-normal hover:bg-pink-600 transition-colors flex items-center justify-center whitespace-nowrap leading-none shrink-0'>Book Appointment</Link>
 
             {/* ISVIR Logo and Label (Desktop only) */}
             <div className='hidden lg:flex items-center h-10 pl-2 ml-0.5 border-l border-white/10'>
@@ -121,10 +121,10 @@ export default function Navbar() {
 
                 {/* Mobile Actions */}
                 <div className='pt-4 space-y-2'>
-                  <Link to='/join-with-us' onClick={() => setIsMenuOpen(false)} className='block w-full px-3 py-2 border-2 border-pink-400 text-white text-center rounded-lg font-normal hover:bg-pink-400 transition-colors'>Partner With Us</Link>
-                  <Link to='/investor' onClick={() => setIsMenuOpen(false)} className='block w-full px-3 py-2 border-2 border-pink-400 text-white text-center rounded-lg font-normal hover:bg-pink-400 transition-colors'>Become an Investor</Link>
-                  <Link to='/contact-us' onClick={() => setIsMenuOpen(false)} className='block w-full px-3 py-2 bg-pink-500 text-white text-center rounded-lg font-normal hover:bg-pink-600 transition-colors'>Book Appointment</Link>
-                  <a href='tel:+919363656010' onClick={() => setIsMenuOpen(false)} className='block w-full px-3 py-2 bg-pink-500 text-white text-center rounded-lg font-normal hover:bg-pink-600 transition-colors'>📞 Call Now</a>
+                  <Link to='/join-with-us' onClick={() => setIsMenuOpen(false)} className='hover-stable block w-full px-3 py-2 border-2 border-pink-400 text-white text-center rounded-lg font-normal hover:bg-pink-400 transition-colors'>Partner With Us</Link>
+                  <Link to='/investor' onClick={() => setIsMenuOpen(false)} className='hover-stable block w-full px-3 py-2 border-2 border-pink-400 text-white text-center rounded-lg font-normal hover:bg-pink-400 transition-colors'>Become an Investor</Link>
+                  <Link to='/contact-us' onClick={() => setIsMenuOpen(false)} className='hover-stable block w-full px-3 py-2 bg-pink-500 text-white text-center rounded-lg font-normal hover:bg-pink-600 transition-colors'>Book Appointment</Link>
+                  <a href='tel:+919363656010' onClick={() => setIsMenuOpen(false)} className='hover-stable block w-full px-3 py-2 bg-pink-500 text-white text-center rounded-lg font-normal hover:bg-pink-600 transition-colors'>📞 Call Now</a>
                 </div>
               </div>
             </div>
