@@ -13,38 +13,50 @@ const PUBLIC_DIR = path.resolve(__dirname, '..', 'public');
 const DATA_BLOG_JSON = path.resolve(__dirname, '..', 'src', 'data', 'blogPosts.json');
 const OUTPUT_SITEMAP = path.join(PUBLIC_DIR, 'sitemap.xml');
 
+const DEFAULT_LASTMOD = '2026-02-12';
+
 // Static routes pulled from src/App.jsx
 const STATIC_ROUTES = [
   '/',
-  '/pae',
-  '/gae',
-  '/thyroid',
   '/about',
-  '/varicocele-embolization',
-  '/varicose-vein',
   '/blog',
-  '/fte',
-  '/gallery',
-  '/career',
   '/contact-us',
-  '/uae',
-  '/breast-nodule-vae',
-  '/breast-nodule-cryoablation',
-  '/pfe',
-  '/transcatheter-aortic-valve-replacement',
-  '/cto',
-  '/rfa',
-  '/endovascular-coiling',
-  '/radiofrequency-ablation-for-avm',
-  '/investor',
-  '/breast-nodule-rfa',
   '/join-with-us',
-  '/testimonials',
+  '/investor',
+  '/prostate-artery-embolization-pae',
+  '/genicular-artery-embolization-gae',
+  '/thyroid-nodule-ablation',
+  '/varicocele-embolization',
+  '/fallopian-tube-recanalization-ftr',
+  '/uterine-artery-embolization-uae',
+  '/plantar-fascial-embolization',
+  '/varicose-vein',
   '/diabetic-foot',
   '/frozen-shoulder',
+  '/testimonials',
+  '/gallery',
+  '/career',
   '/policy',
-  '/privacy-policy',
-  '/terms'
+  '/terms',
+  '/prostate-artery-embolization-pae/',
+  '/contact-us/',
+  '/investor/',
+  '/blog/',
+  '/join-with-us/',
+  '/about/',
+  '/genicular-artery-embolization-gae/',
+  '/thyroid-nodule-ablation/',
+  '/varicocele-embolization/',
+  '/plantar-fascial-embolization/',
+  '/uterine-artery-embolization-uae/',
+  '/fallopian-tube-recanalization-ftr/',
+  '/diabetic-foot/',
+  '/varicose-vein/',
+  '/frozen-shoulder/',
+  '/gallery/',
+  '/career/',
+  '/policy/',
+  '/terms/'
 ];
 
 function isoDate(d = new Date()) {
@@ -89,18 +101,17 @@ function main() {
 
   // Static routes
   for (const route of STATIC_ROUTES) {
-    const lastmod = getFileMTimeSafe(path.join(PUBLIC_DIR, 'index.html'));
-    const priority = route === '/' ? 1.0 : 0.8;
-    const changefreq = route === '/' ? 'daily' : 'weekly';
-    urls.push(buildUrlEntry(route, { lastmod, changefreq, priority }));
+    const lastmod = DEFAULT_LASTMOD;
+    const priority = route === '/' ? 1.0 : 0.9;
+    urls.push(buildUrlEntry(route, { lastmod, priority }));
   }
 
   // Blog routes
   const blogSlugs = loadBlogSlugs();
   for (const { slug, date } of blogSlugs) {
     const loc = `/blog/${slug}`;
-    const lastmod = date ? isoDate(date) : isoDate();
-    urls.push(buildUrlEntry(loc, { lastmod, changefreq: 'monthly', priority: 0.6 }));
+    const lastmod = DEFAULT_LASTMOD;
+    urls.push(buildUrlEntry(loc, { lastmod, priority: 0.8 }));
   }
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n` +

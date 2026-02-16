@@ -37,7 +37,7 @@ const BreastNoduleRadiofrequencyAblation = () => {
       <Consultourdoctor />
       <BreastNoduleFaq />
         {/* Other components for this page can be added here */}
-
+        
     </div>
   );
 };
