@@ -1,8 +1,15 @@
+User-agent: Googlebot
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+Disallow: /tmp/
+Allow: /blog/
+
 User-agent: *
 Disallow: /admin/
 Disallow: /api/
 Disallow: /private/
 Disallow: /tmp/
-Allow: /
+Allow: /blog/
 
 Sitemap: https://nosurgeries.in/sitemap.xml
