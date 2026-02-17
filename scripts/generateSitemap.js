@@ -37,26 +37,7 @@ const STATIC_ROUTES = [
   '/gallery',
   '/career',
   '/policy',
-  '/terms',
-  '/prostate-artery-embolization-pae/',
-  '/contact-us/',
-  '/investor/',
-  '/blog/',
-  '/join-with-us/',
-  '/about/',
-  '/genicular-artery-embolization-gae/',
-  '/thyroid-nodule-ablation/',
-  '/varicocele-embolization/',
-  '/plantar-fascial-embolization/',
-  '/uterine-artery-embolization-uae/',
-  '/fallopian-tube-recanalization-ftr/',
-  '/diabetic-foot/',
-  '/varicose-vein/',
-  '/frozen-shoulder/',
-  '/gallery/',
-  '/career/',
-  '/policy/',
-  '/terms/'
+  '/terms'
 ];
 
 function isoDate(d = new Date()) {
