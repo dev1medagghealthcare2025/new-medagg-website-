@@ -1,24 +1,3 @@
-// Scroll to top (or to an in-page anchor) on every route change
-function ScrollToTop() {
-  const location = useLocation();
-  React.useEffect(() => {
-    // If URL contains a hash (e.g., /#services), scroll that element into view
-    if (location.hash) {
-      const el = document.querySelector(location.hash);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        return;
-      }
-    }
-    // Otherwise, scroll to very top
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-    // Track SPA page view
-    try {
-      trackPageView(location.pathname, location.search);
-    } catch {}
-  }, [location.pathname, location.hash, location.search]);
-  return null;
-}
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import React from 'react';
 import { initGA, trackPageView } from './lib/analytics';
@@ -61,6 +40,48 @@ import Cursor from './components/ui/Cursor';
 import ImageCursorStyle from './components/ui/ImageCursorStyle';
 import { UI_ENHANCEMENTS_ENABLED, IMAGE_CURSOR_ENABLED } from './config/uiEnhancements';
 import ButtonInteractions from './components/ui/ButtonInteractions';
+
+function ScrollToTop() {
+  const location = useLocation();
+  React.useEffect(() => {
+    if (location.hash) {
+      const el = document.querySelector(location.hash);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    try {
+      trackPageView(location.pathname, location.search);
+    } catch {}
+  }, [location.pathname, location.hash, location.search]);
+  return null;
+}
+
+function CanonicalUrlUpdater() {
+  const location = useLocation();
+  React.useEffect(() => {
+    try {
+      const { origin } = window.location;
+      let canonicalPath = location.pathname;
+
+      if (canonicalPath.length > 1 && canonicalPath.endsWith('/')) {
+        canonicalPath = canonicalPath.slice(0, -1);
+      }
+
+      const canonicalUrl = `${origin}${canonicalPath}`;
+      let link = document.querySelector('link[rel="canonical"]');
+      if (!link) {
+        link = document.createElement('link');
+        link.setAttribute('rel', 'canonical');
+        document.head.appendChild(link);
+      }
+      link.setAttribute('href', canonicalUrl);
+    } catch {}
+  }, [location.pathname]);
+  return null;
+}
 function App() {
   // Initialize Google Analytics 4 once
   React.useEffect(() => {
@@ -73,6 +94,7 @@ function App() {
     <div className='min-h-screen bg-pink-50 flex flex-col isolate'>
       <main className='flex-grow'>
         <ScrollToTop />
+        <CanonicalUrlUpdater />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/prostate-artery-embolization-pae' element={<PAE_Treatmentpage />} />
