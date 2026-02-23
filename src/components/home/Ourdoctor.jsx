@@ -145,6 +145,20 @@ const doctors = [
     city: 'Hyderabad',
     image: '/Sailesh Kumar Garge.png',
   },
+  {
+    name: 'Dr. Nishant Sunkarineni',
+    degrees: 'MBBS, DMRD, DNB',
+    specialty: 'Interventional Radiology',
+    city: 'Hyderabad',
+    image: '/Dr. Nishant Sunkarineni.png',
+  },
+  {
+    name: 'Dr Sai Teja N',
+    degrees: 'MBBS, DMRD, DNB',
+    specialty: 'Interventional Radiology',
+    city: 'Hyderabad',
+    image: '/Dr Sai Teja N.png',
+  },
 
 
   // Vijayawada Doctors
@@ -178,6 +192,20 @@ const doctors = [
     specialty: 'Interventional Radiology',
     city: 'Delhi',
     image: '/Sahil Bansal.png',
+  },
+  {
+    name: 'Dr. Abhishek Bansal',
+    degrees: 'MBBS, MD, FVIR',
+    specialty: 'Interventional Radiology',
+    city: 'Delhi',
+    image: '/Dr. Abhishek Bansal.png',
+  },
+  {
+    name: 'Dr. Minal Chaudhry',
+    degrees: 'MBBS, MD, FVIR',
+    specialty: 'Interventional Radiology',
+    city: 'Delhi',
+    image: '/Dr. Minal Chaudhry.png',
   },
   // Kolkata Doctors
   {
