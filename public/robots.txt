@@ -3,6 +3,7 @@ Disallow: /admin/
 Disallow: /api/
 Disallow: /private/
 Disallow: /tmp/
+Allow: /
 Allow: /blog/
 
 User-agent: *
@@ -10,6 +11,7 @@ Disallow: /admin/
 Disallow: /api/
 Disallow: /private/
 Disallow: /tmp/
+Allow: /
 Allow: /blog/
 
 Sitemap: https://nosurgeries.in/sitemap.xml

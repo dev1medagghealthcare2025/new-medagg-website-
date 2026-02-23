@@ -66,6 +66,20 @@ function CanonicalUrlUpdater() {
       const { origin } = window.location;
       let canonicalPath = location.pathname;
 
+      const aliasToCanonical = {
+        '/pae': '/prostate-artery-embolization-pae',
+        '/gae': '/genicular-artery-embolization-gae',
+        '/thyroid': '/thyroid-nodule-ablation',
+        '/fte': '/fallopian-tube-recanalization-ftr',
+        '/uae': '/uterine-artery-embolization-uae',
+        '/pfe': '/plantar-fascial-embolization',
+        '/privacy-policy': '/policy',
+      };
+
+      if (aliasToCanonical[canonicalPath]) {
+        canonicalPath = aliasToCanonical[canonicalPath];
+      }
+
       if (canonicalPath.length > 1 && canonicalPath.endsWith('/')) {
         canonicalPath = canonicalPath.slice(0, -1);
       }

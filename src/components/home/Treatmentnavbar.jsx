@@ -290,67 +290,73 @@ export default function Treatmentnavbar() {
 
   return (
     <nav className='sticky top-[72px] lg:top-[80px] z-40 w-full bg-white border-b border-gray-200 shadow-xl shadow-black/15 ring-1 ring-black/5 overflow-x-hidden'>
-      <div className='relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-        {showLeftArrow && (
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+        <div className='flex items-center'>
           <button
             onClick={() => scroll('left')}
-            className='absolute left-2 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-50 rounded-full shadow-md p-2 z-30 border border-gray-200'
+            className={`mr-2 bg-white hover:bg-gray-50 rounded-full shadow-md p-2 border border-gray-200 transition-opacity ${showLeftArrow ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+            aria-hidden={!showLeftArrow}
+            tabIndex={showLeftArrow ? 0 : -1}
+            type='button'
           >
             <ChevronLeft className='h-4 w-4 text-gray-700' />
           </button>
-        )}
-        <div
-          ref={scrollContainerRef}
-          className='w-full overflow-x-auto overflow-y-visible scrollbar-hide pb-2 pl-4 pr-12'
-        >
-            <ul className='flex items-center justify-start whitespace-nowrap py-2'>
-              {/* Small left spacer to keep first item clear of edge */}
-              <li className='w-6 sm:w-8 flex-shrink-0 pointer-events-none' aria-hidden='true' />
-              {orderedTreatments.map((treatment, idx) => (
-                <li
-                  key={idx}
-                  className='relative group/main flex items-center first:ml-0 last:mr-2'
-                  onMouseEnter={(e) => handleMouseEnter(idx, e.currentTarget, false)}
-                  onFocus={(e) => handleMouseEnter(idx, e.currentTarget, true)}
-                  onMouseLeave={() => {
-                    if (isMobile) return;
-                    setOpenIndex(null);
-                    if (!fixedHoverRef.current) setFixedOpen(false);
-                  }}
-                >
-                  {isMobile ? (
-                    <button
-                      type='button'
-                      aria-expanded={mobileOpenIndex === idx}
-                      onClick={() => handleMobileTabClick(idx)}
-                      className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors duration-200 ${mobileOpenIndex === idx ? 'bg-[#ff3576] text-white' : 'text-gray-700'} `}
-                    >
-                      <span>{treatment.title}</span>
-                      {treatment.subTreatments && <span className='text-xs'>{mobileOpenIndex === idx ? '▲' : '▼'}</span>}
-                    </button>
-                  ) : (
-                    <Link to={treatment.path || '#'} className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors duration-200 ${openIndex === idx ? 'bg-[#ff3576] text-white' : 'text-gray-700 hover:text-[#ff3576]'}`}>
-                      <span>{treatment.title}</span>
-                      {treatment.subTreatments && <span className='text-xs'>▼</span>}
-                    </Link>
-                  )}
-                  {idx < orderedTreatments.length - 1 && (
-                    <span className='text-gray-300'>|</span>
-                  )}
-                </li>
-              ))}
-              {/* Small right spacer to keep last item clear of edge */}
-              <li className='w-6 sm:w-8 flex-shrink-0 pointer-events-none' aria-hidden='true' />
-            </ul>
-        </div>
-        {showRightArrow && (
+
+          <div
+            ref={scrollContainerRef}
+            className='min-w-0 flex-1 overflow-x-auto overflow-y-visible scrollbar-hide pb-2'
+          >
+              <ul className='flex items-center justify-start whitespace-nowrap py-2'>
+                {/* Small left spacer to keep first item clear of edge */}
+                <li className='w-6 sm:w-8 flex-shrink-0 pointer-events-none' aria-hidden='true' />
+                {orderedTreatments.map((treatment, idx) => (
+                  <li
+                    key={idx}
+                    className='relative group/main flex items-center first:ml-0 last:mr-2'
+                    onMouseEnter={(e) => handleMouseEnter(idx, e.currentTarget, false)}
+                    onFocus={(e) => handleMouseEnter(idx, e.currentTarget, true)}
+                    onMouseLeave={() => {
+                      if (isMobile) return;
+                      setOpenIndex(null);
+                      if (!fixedHoverRef.current) setFixedOpen(false);
+                    }}
+                  >
+                    {isMobile ? (
+                      <button
+                        type='button'
+                        aria-expanded={mobileOpenIndex === idx}
+                        onClick={() => handleMobileTabClick(idx)}
+                        className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors duration-200 ${mobileOpenIndex === idx ? 'bg-[#ff3576] text-white' : 'text-gray-700'} `}
+                      >
+                        <span>{treatment.title}</span>
+                        {treatment.subTreatments && <span className='text-xs'>{mobileOpenIndex === idx ? '▲' : '▼'}</span>}
+                      </button>
+                    ) : (
+                      <Link to={treatment.path || '#'} className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors duration-200 ${openIndex === idx ? 'bg-[#ff3576] text-white' : 'text-gray-700 hover:text-[#ff3576]'}`}>
+                        <span>{treatment.title}</span>
+                        {treatment.subTreatments && <span className='text-xs'>▼</span>}
+                      </Link>
+                    )}
+                    {idx < orderedTreatments.length - 1 && (
+                      <span className='text-gray-300'>|</span>
+                    )}
+                  </li>
+                ))}
+                {/* Small right spacer to keep last item clear of edge */}
+                <li className='w-6 sm:w-8 flex-shrink-0 pointer-events-none' aria-hidden='true' />
+              </ul>
+          </div>
+
           <button
             onClick={() => scroll('right')}
-            className='absolute right-2 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-50 rounded-full shadow-md p-2 z-30 border border-gray-200'
+            className={`ml-2 bg-white hover:bg-gray-50 rounded-full shadow-md p-2 border border-gray-200 transition-opacity ${showRightArrow ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+            aria-hidden={!showRightArrow}
+            tabIndex={showRightArrow ? 0 : -1}
+            type='button'
           >
             <ChevronRight className='h-4 w-4 text-gray-700' />
           </button>
-        )}
+        </div>
       </div>
       {/* Fixed-position root dropdown (desktop only) */}
       {!isMobile && (
