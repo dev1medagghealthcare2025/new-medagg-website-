@@ -11,6 +11,7 @@ const videoUrls = [
   'https://youtu.be/9UYErUyDt3I?si=slmImFesxlCUTDcN',
   'https://youtu.be/DoWb0iGyKEU?si=Iq1KtuoMl0Si2X8M',
   'https://youtu.be/4cbPC9a_j2U?si=zPNdIAgJVaj-ru5s',
+  'https://youtube.com/shorts/GWXPxvu-b9w?si=xfuY69ps5yTNf9ty',
 ];
 
 // Extract the YouTube video ID from various URL formats
@@ -136,6 +137,8 @@ const Testiominal_main = () => {
       'Laser circumcision represents a significant advancement in treating tight foreskin. As the procedure utilizes a laser to make the incision, it involves no cuts or bleeding. The patient was highly satisfied with the outcome. For further details, consider listening to their feedback.',
     [items[9]?.id]:
       'Varicose veins are swollen, prominent veins that typically appear in the legs and often result in pain and discomfort. Laser treatments are sophisticated procedures that can effectively treat varicose veins, as evidenced by our patient’s positive feedback.',
+    [items[10]?.id]:
+      'Struggling with heavy periods, pelvic pain, or fibroids? In this video, our patient shares her real journey after undergoing Uterine Fibroid Embolization (UFE) – a safe, non-surgical treatment that helped her avoid major surgery and recover faster.',
   };
 
   const titlesById = {
@@ -146,6 +149,7 @@ const Testiominal_main = () => {
     [items[0]?.id]: '/1st_testimonial.png',
     [items[1]?.id]: '/2nd_Testimonial.png',
     [items[2]?.id]: '/3rd_testimonial.png',
+    [items[10]?.id]: '/ufe%20rashmi%20pt%20testimony%20thumbnail%20yt.jpg.jpeg',
   };
 
   return (

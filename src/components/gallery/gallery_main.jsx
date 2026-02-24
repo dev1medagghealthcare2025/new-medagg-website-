@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
 // const TABS = ['All', 'Celebrations', 'Awards', 'Reviews', 'Our Camps', 'Media', 'Conference', 'Videos'];
-const TABS = ['Conference', 'Videos'];
+const TABS = ['Videos','Conference'];
 
 // Sample items. Replace the src paths with your real images if needed.
 // These 3 images exist in your public/ folder already.
@@ -173,7 +173,7 @@ const ALL_ITEMS = [
 ];
 
 export default function GalleryMain() {
-  const [activeTab, setActiveTab] = useState('All');
+  const [activeTab, setActiveTab] = useState('Videos');
   // Language sub-tabs for Videos section
   const VIDEO_LANGUAGES = ['English', 'Hindi', 'Tamil', 'Telugu'];
   const [activeLanguage, setActiveLanguage] = useState('English');
