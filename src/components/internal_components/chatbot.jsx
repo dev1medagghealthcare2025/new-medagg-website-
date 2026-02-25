@@ -312,24 +312,208 @@ const questionnaires = {
   },
   GAE: {
     procedure: 'GAE',
-    welcomeMessage: 'Let’s get started with a quick knee pain assessment.',
+    useCoreQuestions: false,
+    welcomeMessage:
+      'Hello 👋\n\nYou\'ve reached out regarding Knee Pain / Osteoarthritis, a condition where the cartilage in the knee joint gradually wears down, causing pain, stiffness, and reduced mobility.',
     treatmentPage: '/genicular-artery-embolization-gae',
     youtubeVideo: 'https://www.youtube.com/shorts/vM5o0rX3lag',
     specificQuestions: [
       {
-        id: 'gae_diagnosis',
-        question: 'Have you been diagnosed of Osteoarthritis?',
+        id: 'gae_path_choice',
+        question: 'How would you like to proceed?',
+        options: ['Let\'s Chat', 'Book Consultation'],
+        field: 'gae_path_choice',
+      },
+      {
+        id: 'gae_symptom_gate',
+        question:
+          'Are you currently experiencing any of the following symptoms?\n• Persistent knee pain, especially during movement\n• Stiffness or reduced range of motion\n• Swelling or tenderness around the knee\n• Difficulty walking, climbing stairs, or standing for long',
         options: ['Yes', 'No'],
-        field: 'osteoarthritis_diagnosed',
-        condition: { field: 'user_intent', value: 'Seeking Treatment' },
+        field: 'gae_symptom_gate',
+        condition: { field: 'gae_path_choice', value: "Let's Chat" },
+      },
+      {
+        id: 'gae_age_group_gate',
+        question: 'May I know your age group?',
+        options: ['Above 45 years', 'Below 45 years'],
+        field: 'age_group',
+        condition: { field: 'gae_symptom_gate', value: 'Yes' },
+      },
+      {
+        id: 'gae_atypical_choice',
+        question:
+          'Thank you for sharing that.\nYour symptoms may not be typical of knee pain / osteoarthritis and could be related to another condition.\n\nWould you like our care team to guide you further?',
+        options: ['Request Call Back', 'Close Request'],
+        field: 'gae_atypical_choice',
+        condition: { field: 'age_group', value: 'Below 45 years' },
+      },
+      {
+        id: 'gae_consulted_doctor',
+        question: 'Have you already consulted a doctor for this condition?',
+        options: ['Yes', 'No'],
+        field: 'gae_consulted_doctor',
+        condition: { field: 'age_group', value: 'Above 45 years' },
+      },
+      {
+        id: 'gae_surgery_advised',
+        question: 'Has any doctor advised knee replacement surgery for your condition?',
+        options: ['Yes', 'No'],
+        field: 'gae_surgery_advised',
+        condition: { field: 'age_group', value: 'Above 45 years' },
       },
       {
         id: 'gae_reports',
-        question: 'Do you have any of these reports available?',
-        options: ['X-Ray Knee', 'MRI Knee', 'No Report'],
+        question: 'Do you have an X-ray or MRI report of your knee?',
+        options: ['Yes, I have', 'No, not yet'],
         field: 'knee_reports',
-        multiSelect: true,
-        condition: { field: 'osteoarthritis_diagnosed', value: 'Yes' },
+        condition: { field: 'age_group', value: 'Above 45 years' },
+      },
+      {
+        id: 'gae_specialist_choice',
+        question:
+          'I’d like you to know — not all knee pain / osteoarthritis needs surgery.\nMany patients can be treated with minimally invasive, non-surgical options like Genicular Artery Embolization (GAE), which can help reduce pain and improve mobility.\n\nWould you like to speak with a specialist to understand which option is suitable for you?',
+        options: ['Book consultation', 'Not right now'],
+        field: 'gae_specialist_choice',
+        condition: { field: 'age_group', value: 'Above 45 years' },
+      },
+      {
+        id: 'gae_callback_day',
+        question:
+          'When would it be convenient for our care team to contact you?\n(Office hours: Monday - Saturday 10.00AM - 6.00PM)',
+        options: ['Today', 'Tomorrow'],
+        field: 'appointment_timing',
+        condition: { field: 'gae_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'gae_callback_time',
+        question: 'What time usually works best for you?',
+        options: ['Morning', 'Afternoon', 'Evening'],
+        field: 'gae_callback_time',
+        condition: { field: 'gae_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'gae_name',
+        question: 'May I know your full name?',
+        options: [],
+        field: 'name',
+        isInput: true,
+        placeholder: 'Enter your full name',
+        condition: { field: 'gae_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'gae_city',
+        question: 'Which city are you currently located in?',
+        options: [],
+        field: 'city',
+        isInput: true,
+        placeholder: 'Enter your city',
+        condition: { field: 'gae_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'gae_language',
+        question: 'Which language would you be most comfortable speaking in during the consultation?',
+        options: ['English', 'Hindi', 'Tamil', 'Telugu', 'Kannada', 'Malayalam'],
+        field: 'preferred_language',
+        condition: { field: 'gae_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'gae_phone',
+        question: 'What is the best number to reach you on for the consultation?',
+        options: [],
+        field: 'phone',
+        isInput: true,
+        placeholder: 'Enter your phone number',
+        condition: { field: 'gae_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'gae_age_group_book',
+        question: 'May I know your age group?',
+        options: ['Above 45 years', 'Below 45 years'],
+        field: 'age_group',
+        condition: { field: 'gae_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'gae_name_book',
+        question: 'May I know your full name?',
+        options: [],
+        field: 'name',
+        isInput: true,
+        placeholder: 'Enter your full name',
+        condition: { field: 'gae_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'gae_city_book',
+        question: 'Which city are you currently located in?',
+        options: [],
+        field: 'city',
+        isInput: true,
+        placeholder: 'Enter your city',
+        condition: { field: 'gae_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'gae_language_book',
+        question: 'Which language would you be most comfortable speaking in during the consultation?',
+        options: ['English', 'Hindi', 'Tamil', 'Telugu', 'Kannada', 'Malayalam'],
+        field: 'preferred_language',
+        condition: { field: 'gae_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'gae_phone_book',
+        question: 'What is the best number to reach you on for the consultation?',
+        options: [],
+        field: 'phone',
+        isInput: true,
+        placeholder: 'Enter your phone number',
+        condition: { field: 'gae_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'gae_callback_day_book',
+        question:
+          'When would it be convenient for our care team to contact you?\n(Office hours: Monday - Saturday 10.00AM - 6.00PM)',
+        options: ['Today', 'Tomorrow'],
+        field: 'appointment_timing',
+        condition: { field: 'gae_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'gae_callback_time_book',
+        question: 'What time usually works best for you?',
+        options: ['Morning', 'Afternoon', 'Evening'],
+        field: 'gae_callback_time',
+        condition: { field: 'gae_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'gae_name_callback',
+        question: 'May I know your full name?',
+        options: [],
+        field: 'name',
+        isInput: true,
+        placeholder: 'Enter your full name',
+        condition: { field: 'gae_atypical_choice', value: 'Request Call Back' },
+      },
+      {
+        id: 'gae_city_callback',
+        question: 'Which city are you currently located in?',
+        options: [],
+        field: 'city',
+        isInput: true,
+        placeholder: 'Enter your city',
+        condition: { field: 'gae_atypical_choice', value: 'Request Call Back' },
+      },
+      {
+        id: 'gae_language_callback',
+        question: 'Which language would you be most comfortable speaking in during the consultation?',
+        options: ['English', 'Hindi', 'Tamil', 'Telugu', 'Kannada', 'Malayalam'],
+        field: 'preferred_language',
+        condition: { field: 'gae_atypical_choice', value: 'Request Call Back' },
+      },
+      {
+        id: 'gae_phone_callback',
+        question: 'What is the best number to reach you on for the consultation?',
+        options: [],
+        field: 'phone',
+        isInput: true,
+        placeholder: 'Enter your phone number',
+        condition: { field: 'gae_atypical_choice', value: 'Request Call Back' },
       },
     ],
   },
@@ -955,7 +1139,7 @@ const getProcedureInfo = (procedure) => {
       message: 'Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help related to Enlarged Prostate.',
     },
     GAE: {
-      message: 'Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help related to Knee Pain.',
+      message: 'You\'ve reached out regarding Knee Pain / Osteoarthritis, a condition where the cartilage in the knee joint gradually wears down, causing pain, stiffness, and reduced mobility.',
     },
     TNA: {
       message: 'Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help related to Thyroid Nodules.',
@@ -1393,6 +1577,7 @@ const Chatbot = () => {
             placeholder: nq.placeholder,
             multiSelect: !!nq.multiSelect,
           };
+          console.log('[Questionnaire] Next question rendered:', nextQuestion);
           setMessages(prev => [...prev, nextQuestion]);
         }, 500);
         return;
@@ -1429,6 +1614,75 @@ const Chatbot = () => {
         }, 500);
         return;
       }
+    }
+
+    // GAE: After selecting callback time
+    // - Consult path: proceed to details collection (name/city/language/phone)
+    // - Book Consultation path: details are collected earlier, so mark complete and submit.
+    if (updatedResponses.procedure === 'GAE' && (currentQuestion.id === 'gae_callback_time' || currentQuestion.id === 'gae_callback_time_book')) {
+      const isBookPath = (updatedResponses.gae_path_choice || '').toString().trim() === 'Book Consultation';
+      if (isBookPath && currentQuestion.id === 'gae_callback_time_book') {
+        setQuestionnaireStep(currentQuestionnaire.questions.length);
+        return;
+      }
+
+      const nextIndex = currentQuestionnaire.questions.findIndex((q) => q.id === 'gae_name');
+      if (nextIndex !== -1) {
+        setQuestionnaireStep(nextIndex);
+        setTimeout(() => {
+          const nq = currentQuestionnaire.questions[nextIndex];
+          const nextQuestion = {
+            text: nq.question,
+            sender: 'bot',
+            timestamp: new Date(),
+            isQuestionnaireQuestion: true,
+            questionId: nq.id,
+            options: nq.options,
+            isInput: nq.isInput,
+            field: nq.field,
+            placeholder: nq.placeholder,
+            multiSelect: !!nq.multiSelect,
+          };
+          setMessages(prev => [...prev, nextQuestion]);
+        }, 500);
+        return;
+      }
+    }
+
+    // GAE: Close Request should end the chat with resources
+    if (updatedResponses.procedure === 'GAE' && currentQuestion.field === 'gae_atypical_choice' && selectedOption === 'Close Request') {
+      const closeMsg = {
+        text: 'No worries at all. Here are some useful resources you can check out anytime. If you’d like to speak with a specialist later, just message me “Hi” — I’ll be happy to arrange it for you. Take care.',
+        sender: 'bot',
+        timestamp: new Date(),
+        aiGenerated: true,
+        recommendedTreatment: currentQuestionnaire.treatmentPage,
+        youtubeVideo: currentQuestionnaire.youtubeVideo,
+      };
+      setMessages(prev => [...prev, closeMsg]);
+      setIsQuestionnaireActive(false);
+      setQuestionnaireStep(0);
+      setQuestionnaireResponses({});
+      setCurrentQuestionnaire(null);
+      return;
+    }
+
+    // GAE: Not right now should end the chat with resources
+    if (updatedResponses.procedure === 'GAE' && currentQuestion.field === 'gae_specialist_choice' && selectedOption === 'Not right now') {
+      const closeMsg = {
+        text: 'No worries at all. Here are some useful resources you can check out anytime. If you’d like to speak with a specialist later, just message me “Hi” — I’ll be happy to arrange it for you. Take care.',
+        sender: 'bot',
+        timestamp: new Date(),
+        aiGenerated: true,
+        recommendedTreatment: currentQuestionnaire.treatmentPage,
+        youtubeVideo: currentQuestionnaire.youtubeVideo,
+      };
+      setMessages(prev => [...prev, closeMsg]);
+      setIsQuestionnaireActive(false);
+      setQuestionnaireStep(0);
+      setQuestionnaireResponses({});
+      setCurrentQuestionnaire(null);
+      return;
     }
 
     // VV: Close Request (atypical symptom path) should end the chat with resources
@@ -1666,6 +1920,15 @@ const Chatbot = () => {
             : questionnaire.procedure === 'FTR'
                 ? {
                     text: 'Thank you. Your details have been noted. A member of our care team will contact you as discussed.\n\nMeanwhile, I’ll share helpful information about Fallopian Tube Recanalization (FTR) for you to review.\n\nWishing you good health. Take care.',
+                    sender: 'bot',
+                    timestamp: new Date(),
+                    aiGenerated: true,
+                    recommendedTreatment: questionnaire.treatmentPage,
+                    youtubeVideo: questionnaire.youtubeVideo,
+                  }
+            : questionnaire.procedure === 'GAE'
+                ? {
+                    text: 'Thank you. Your details have been noted. A member of our care team will contact you as discussed.\n\nMeanwhile, I’ll share helpful information about Knee Pain / Osteoarthritis and Genicular Artery Embolization (GAE) for you to review.\n\nWishing you good health. Take care.',
                     sender: 'bot',
                     timestamp: new Date(),
                     aiGenerated: true,
