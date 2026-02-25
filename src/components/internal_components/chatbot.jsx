@@ -627,23 +627,170 @@ const questionnaires = {
   },
   FTR: {
     procedure: 'FTR',
-    welcomeMessage: 'Let’s begin a short fertility assessment.',
+    useCoreQuestions: false,
+    welcomeMessage:
+      'Hello 👋\n\nYou\'ve reached out regarding Fallopian Tube Block, where one or both fallopian tubes are blocked, which may prevent the egg and sperm from meeting and can affect fertility.',
     treatmentPage: '/fallopian-tube-recanalization-ftr',
     youtubeVideo: 'https://www.youtube.com/shorts/FstX8x8hkOE',
     specificQuestions: [
       {
-        id: 'ftr_diagnosis',
-        question: 'Have you been Diagnosed with Blocked FT?',
-        options: ['Yes', 'No'],
-        field: 'blocked_ft_diagnosed',
-        condition: { field: 'user_intent', value: 'Seeking Treatment' },
+        id: 'ftr_path_choice',
+        question: 'How would you like to proceed?',
+        options: ['Let\'s Chat', 'Book Consultation'],
+        field: 'ftr_path_choice',
       },
       {
-        id: 'ftr_reports',
-        question: 'Do you have HSG Report?',
+        id: 'ftr_symptom_gate',
+        question:
+          'Are you currently experiencing any of the following symptoms?\n• Difficulty conceiving despite trying\n• History of pelvic infection or surgery\n• Diagnosed tube block via HSG or laparoscopy',
         options: ['Yes', 'No'],
+        field: 'ftr_symptom_gate',
+        condition: { field: 'ftr_path_choice', value: "Let's Chat" },
+      },
+      {
+        id: 'ftr_consulted_doctor',
+        question: 'Have you already consulted a doctor for this condition?',
+        options: ['Yes', 'No'],
+        field: 'ftr_consulted_doctor',
+        condition: { field: 'ftr_symptom_gate', value: 'Yes' },
+      },
+      {
+        id: 'ftr_ivf_surgery_advised',
+        question: 'Has any doctor advised IVF or laparoscopic surgery for your blocked tubes?',
+        options: ['Yes', 'No'],
+        field: 'ftr_ivf_surgery_advised',
+        condition: { field: 'ftr_symptom_gate', value: 'Yes' },
+      },
+      {
+        id: 'ftr_hsg_report',
+        question: 'Do you have an HSG (Hysterosalpingography) report or any fertility test reports?',
+        options: ['Yes, I have', 'No, not yet'],
         field: 'hsg_report_available',
-        condition: { field: 'blocked_ft_diagnosed', value: 'Yes' },
+        condition: { field: 'ftr_symptom_gate', value: 'Yes' },
+      },
+      {
+        id: 'ftr_specialist_choice',
+        question:
+          'Not all fallopian tube blocks require surgery or IVF. Many women can be treated with Fallopian Tube Recanalization (FTR) — a minimally invasive, non-surgical procedure performed under imaging guidance.\nIt\'s a short outpatient procedure with minimal discomfort and faster recovery.\n\nWould you like to speak with a specialist to understand which option is suitable for you?',
+        options: ['Book consultation', 'Not right now'],
+        field: 'ftr_specialist_choice',
+        condition: { field: 'ftr_symptom_gate', value: 'Yes' },
+      },
+      {
+        id: 'ftr_callback_day',
+        question:
+          'When would it be convenient for our care team to contact you?\n(Office hours: Monday - Saturday 10.00AM - 6.00PM)',
+        options: ['Today', 'Tomorrow'],
+        field: 'appointment_timing',
+        condition: { field: 'ftr_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'ftr_callback_time',
+        question: 'What time usually works best for you?',
+        options: ['Morning', 'Afternoon', 'Evening'],
+        field: 'ftr_callback_time',
+        condition: { field: 'ftr_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'ftr_age',
+        question: 'May I know your age?',
+        options: [],
+        field: 'age_group',
+        isInput: true,
+        placeholder: 'Enter your age',
+        condition: { field: 'ftr_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'ftr_name',
+        question: 'May I know your full name?',
+        options: [],
+        field: 'name',
+        isInput: true,
+        placeholder: 'Enter your full name',
+        condition: { field: 'ftr_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'ftr_city',
+        question: 'Which city are you currently located in?',
+        options: [],
+        field: 'city',
+        isInput: true,
+        placeholder: 'Enter your city',
+        condition: { field: 'ftr_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'ftr_language',
+        question: 'Which language would you be most comfortable speaking in during the consultation?',
+        options: ['English', 'Hindi', 'Tamil', 'Telugu', 'Kannada', 'Malayalam'],
+        field: 'preferred_language',
+        condition: { field: 'ftr_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'ftr_phone',
+        question: 'What is the best number to reach you on for the consultation?',
+        options: [],
+        field: 'phone',
+        isInput: true,
+        placeholder: 'Enter your phone number',
+        condition: { field: 'ftr_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'ftr_callback_day_book',
+        question:
+          'When would it be convenient for our care team to contact you?\n(Office hours: Monday - Saturday 10.00AM - 6.00PM)',
+        options: ['Today', 'Tomorrow'],
+        field: 'appointment_timing',
+        condition: { field: 'ftr_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'ftr_callback_time_book',
+        question: 'What time usually works best for you?',
+        options: ['Morning', 'Afternoon', 'Evening'],
+        field: 'ftr_callback_time',
+        condition: { field: 'ftr_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'ftr_age_book',
+        question: 'May I know your age?',
+        options: [],
+        field: 'age_group',
+        isInput: true,
+        placeholder: 'Enter your age',
+        condition: { field: 'ftr_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'ftr_name_book',
+        question: 'May I know your full name?',
+        options: [],
+        field: 'name',
+        isInput: true,
+        placeholder: 'Enter your full name',
+        condition: { field: 'ftr_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'ftr_city_book',
+        question: 'Which city are you currently located in?',
+        options: [],
+        field: 'city',
+        isInput: true,
+        placeholder: 'Enter your city',
+        condition: { field: 'ftr_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'ftr_language_book',
+        question: 'Which language would you be most comfortable speaking in during the consultation?',
+        options: ['English', 'Hindi', 'Tamil', 'Telugu', 'Kannada', 'Malayalam'],
+        field: 'preferred_language',
+        condition: { field: 'ftr_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'ftr_phone_book',
+        question: 'What is the best number to reach you on for the consultation?',
+        options: [],
+        field: 'phone',
+        isInput: true,
+        placeholder: 'Enter your phone number',
+        condition: { field: 'ftr_path_choice', value: 'Book Consultation' },
       },
     ],
   },
@@ -820,7 +967,7 @@ const getProcedureInfo = (procedure) => {
       message: 'Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help related to Varicocele.',
     },
     FTR: {
-      message: 'Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help related to Blocked Fallopian Tubes.',
+      message: 'You’ve reached out regarding Fallopian Tube Block, where one or both fallopian tubes are blocked, which may prevent the egg and sperm from meeting and can affect fertility.',
     },
   };
 
@@ -1168,6 +1315,24 @@ const Chatbot = () => {
     const updatedResponses = { ...questionnaireResponses, [currentQuestion.field]: selectedOption };
     setQuestionnaireResponses(updatedResponses);
 
+    // FTR: Not right now should end the chat with resources
+    if (updatedResponses.procedure === 'FTR' && currentQuestion.field === 'ftr_specialist_choice' && selectedOption === 'Not right now') {
+      const closeMsg = {
+        text: 'No worries at all. Here are some useful resources you can check out anytime. If you’d like to speak with a specialist later, just message me “Hi” — I’ll be happy to arrange it for you. Take care.',
+        sender: 'bot',
+        timestamp: new Date(),
+        aiGenerated: true,
+        recommendedTreatment: currentQuestionnaire.treatmentPage,
+        youtubeVideo: currentQuestionnaire.youtubeVideo,
+      };
+      setMessages(prev => [...prev, closeMsg]);
+      setIsQuestionnaireActive(false);
+      setQuestionnaireStep(0);
+      setQuestionnaireResponses({});
+      setCurrentQuestionnaire(null);
+      return;
+    }
+
     // MAIN_MENU: route to the selected questionnaire and end menu flow
     if (updatedResponses.procedure === 'MAIN_MENU' && currentQuestion.id === 'menu_choice') {
       const norm = (selectedOption || '').toString().trim().toLowerCase();
@@ -1211,6 +1376,38 @@ const Chatbot = () => {
       // Consult path: ask age if missing, otherwise continue from name.
       const alreadyHasAge = !!(updatedResponses.age_group && updatedResponses.age_group.toString().trim());
       const targetId = alreadyHasAge ? 'vv_name_consult' : 'vv_age_group_consult';
+      const nextIndex = currentQuestionnaire.questions.findIndex((q) => q.id === targetId);
+      if (nextIndex !== -1) {
+        setQuestionnaireStep(nextIndex);
+        setTimeout(() => {
+          const nq = currentQuestionnaire.questions[nextIndex];
+          const nextQuestion = {
+            text: nq.question,
+            sender: 'bot',
+            timestamp: new Date(),
+            isQuestionnaireQuestion: true,
+            questionId: nq.id,
+            options: nq.options,
+            isInput: nq.isInput,
+            field: nq.field,
+            placeholder: nq.placeholder,
+            multiSelect: !!nq.multiSelect,
+          };
+          setMessages(prev => [...prev, nextQuestion]);
+        }, 500);
+        return;
+      }
+    }
+
+    // FTR: After selecting callback time, continue to details collection
+    if (updatedResponses.procedure === 'FTR' && (currentQuestion.id === 'ftr_callback_time' || currentQuestion.id === 'ftr_callback_time_book')) {
+      const alreadyHasAge = !!(updatedResponses.age_group && updatedResponses.age_group.toString().trim());
+      const isBookPath = (updatedResponses.ftr_path_choice || '').toString().trim() === 'Book Consultation';
+      const targetId =
+        currentQuestion.id === 'ftr_callback_time_book' || isBookPath
+          ? (alreadyHasAge ? 'ftr_name_book' : 'ftr_age_book')
+          : (alreadyHasAge ? 'ftr_name' : 'ftr_age');
+
       const nextIndex = currentQuestionnaire.questions.findIndex((q) => q.id === targetId);
       if (nextIndex !== -1) {
         setQuestionnaireStep(nextIndex);
@@ -1466,6 +1663,15 @@ const Chatbot = () => {
                 recommendedTreatment: questionnaire.treatmentPage,
                 youtubeVideo: questionnaire.youtubeVideo,
               }
+            : questionnaire.procedure === 'FTR'
+                ? {
+                    text: 'Thank you. Your details have been noted. A member of our care team will contact you as discussed.\n\nMeanwhile, I’ll share helpful information about Fallopian Tube Recanalization (FTR) for you to review.\n\nWishing you good health. Take care.',
+                    sender: 'bot',
+                    timestamp: new Date(),
+                    aiGenerated: true,
+                    recommendedTreatment: questionnaire.treatmentPage,
+                    youtubeVideo: questionnaire.youtubeVideo,
+                  }
             : {
                 text: 'Thank you. Our medical team will review your answers and contact you soon.',
                 sender: 'bot',
