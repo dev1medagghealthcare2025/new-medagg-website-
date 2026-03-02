@@ -119,6 +119,15 @@ const allServices = {
       path: '/frozen-shoulder',
     },
   ],
+  set3: [
+    {
+      title: 'Rectal Artery Embolization',
+      desc: 'Rectal Artery Embolization (also called Hemorrhoidal Artery Embolization) is an advanced, minimally invasive procedure that treats hemorrhoids at the source — by reducing the excess blood flow causing swelling and bleeding — without surgery.',
+      img: '/Hemorrhoidal_icon.png',
+      icon: '/Hemorrhoidal_icon.png',
+      path: '/hemorrhoidal',
+    },
+  ],
 };
 
 const ArrowButton = ({ highlight }) => (
@@ -138,7 +147,7 @@ const OurServiceSection = () => {
   const intervalRef = useRef(null);
 
   const services = allServices[activeSet];
-  const allMobileServices = React.useMemo(() => ([...allServices.set1, ...allServices.set2]), []);
+  const allMobileServices = React.useMemo(() => ([...allServices.set1, ...allServices.set2, ...allServices.set3]), []);
   const [mobilePage, setMobilePage] = useState(0);
   const mobilePages = React.useMemo(() => {
     const chunkSize = 8; // 8 per page like the reference (2 rows x 4 or 4 rows x 2)
@@ -159,7 +168,11 @@ const OurServiceSection = () => {
   // Auto-rotation effect
   useEffect(() => {
     intervalRef.current = setInterval(() => {
-      setActiveSet(prevSet => prevSet === 'set1' ? 'set2' : 'set1');
+      setActiveSet((prevSet) => {
+        if (prevSet === 'set1') return 'set2';
+        if (prevSet === 'set2') return 'set3';
+        return 'set1';
+      });
     }, 15000); // 15 seconds
 
     return () => {
@@ -179,10 +192,16 @@ const OurServiceSection = () => {
           Explore Safer, Scar-Free Treatments
         </p>
 
-        {/* Left Arrow - only show when on set2 */}
-        {activeSet === 'set2' && (
+        {/* Left Arrow - show when not on set1 */}
+        {activeSet !== 'set1' && (
           <button
-            onClick={() => setActiveSet('set1')}
+            onClick={() =>
+              setActiveSet((prev) => {
+                if (prev === 'set2') return 'set1';
+                if (prev === 'set3') return 'set2';
+                return 'set1';
+              })
+            }
             className='absolute -left-6 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-white text-[#1a1446] border border-gray-200 shadow-lg hover:bg-[#ff3576] hover:text-white hover:border-[#ff3576] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#ff3576] focus:ring-offset-2 z-10'
             aria-label='Show first set of services'
           >
@@ -272,10 +291,16 @@ const OurServiceSection = () => {
           ))}
         </div>
 
-        {/* Right Arrow - only show when on set1 */}
-        {activeSet === 'set1' && (
+        {/* Right Arrow - show when not on last set */}
+        {activeSet !== 'set3' && (
           <button
-            onClick={() => setActiveSet('set2')}
+            onClick={() =>
+              setActiveSet((prev) => {
+                if (prev === 'set1') return 'set2';
+                if (prev === 'set2') return 'set3';
+                return 'set3';
+              })
+            }
             className='absolute -right-6 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-white text-[#1a1446] border border-gray-200 shadow-lg hover:bg-[#ff3576] hover:text-white hover:border-[#ff3576] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#ff3576] focus:ring-offset-2 z-10'
             aria-label='Show second set of services'
           >

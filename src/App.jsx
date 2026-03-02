@@ -36,6 +36,7 @@ import PolicyPage from './pages/policy';
 import TermsConditionPage from './pages/terms_condition';
 import DiabeticFootPage from './pages/Diabetic _Foot';
 import FrozenShoulderPage from './pages/frozen_shoulder';
+import Hemorrhoidal from './pages/Hemorrhoidal';
 import Cursor from './components/ui/Cursor';
 import ImageCursorStyle from './components/ui/ImageCursorStyle';
 import { UI_ENHANCEMENTS_ENABLED, IMAGE_CURSOR_ENABLED } from './config/uiEnhancements';
@@ -147,6 +148,7 @@ function App() {
           <Route path='/testimonials' element={<Testiominal />} />
           <Route path='/diabetic-foot' element={<DiabeticFootPage />} />
           <Route path='/frozen-shoulder' element={<FrozenShoulderPage />} />
+          <Route path='/hemorrhoidal' element={<Hemorrhoidal />} />
           {/* Policy page routes */}
           <Route path='/policy' element={<PolicyPage />} />
           <Route path='/privacy-policy' element={<PolicyPage />} />
