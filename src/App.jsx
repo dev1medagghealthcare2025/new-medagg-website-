@@ -74,6 +74,7 @@ function CanonicalUrlUpdater() {
         '/fte': '/fallopian-tube-recanalization-ftr',
         '/uae': '/uterine-artery-embolization-uae',
         '/pfe': '/plantar-fascial-embolization',
+        '/hemorrhoidal': '/piles-hemorrhoids',
         '/privacy-policy': '/policy',
       };
 
@@ -148,7 +149,8 @@ function App() {
           <Route path='/testimonials' element={<Testiominal />} />
           <Route path='/diabetic-foot' element={<DiabeticFootPage />} />
           <Route path='/frozen-shoulder' element={<FrozenShoulderPage />} />
-          <Route path='/hemorrhoidal' element={<Hemorrhoidal />} />
+          <Route path='/piles-hemorrhoids' element={<Hemorrhoidal />} />
+          <Route path='/hemorrhoidal' element={<Navigate to='/piles-hemorrhoids' replace />} />
           {/* Policy page routes */}
           <Route path='/policy' element={<PolicyPage />} />
           <Route path='/privacy-policy' element={<PolicyPage />} />

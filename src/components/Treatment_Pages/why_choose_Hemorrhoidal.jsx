@@ -41,13 +41,13 @@ export default function WhyChooseHemorrhoidal() {
           {cards.map((item) => (
             <div
               key={item.title}
-              className='rounded-2xl bg-white border border-pink-200 shadow-md hover:shadow-xl transition-shadow p-6 flex flex-col items-center text-center'
+              className='group rounded-2xl bg-white border border-pink-200 shadow-md hover:shadow-xl hover:bg-[#ff3576] transition-all duration-300 p-6 flex flex-col items-center text-center'
             >
-              <div className='w-20 h-20 rounded-full bg-pink-50 flex items-center justify-center mb-4'>
+              <div className='w-20 h-20 rounded-full bg-pink-50 group-hover:bg-white flex items-center justify-center mb-4 transition-colors duration-300'>
                 <img src={item.icon} alt='' className='w-12 h-12 object-contain' aria-hidden='true' />
               </div>
-              <h3 className='text-base font-extrabold text-[#1a1446]'>{item.title}</h3>
-              <p className='mt-2 text-sm text-gray-600'>{item.desc}</p>
+              <h3 className='text-base font-extrabold text-[#1a1446] group-hover:text-white transition-colors duration-300'>{item.title}</h3>
+              <p className='mt-2 text-sm text-gray-600 group-hover:text-white transition-colors duration-300'>{item.desc}</p>
             </div>
           ))}
         </div>

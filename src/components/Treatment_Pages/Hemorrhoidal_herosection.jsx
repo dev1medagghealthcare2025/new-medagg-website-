@@ -160,7 +160,6 @@ export default function Hemorrhoidal_herosection() {
                   className='w-full bg-pink-500 hover:bg-pink-600 text-white font-bold text-sm sm:text-base py-2.5 rounded-lg transition-colors shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98] disabled:bg-gray-400 flex items-center justify-center gap-2'
                 >
                   {isSubmitting ? 'Submitting...' : 'Speak To Experts'}
-                  <img src='/form icon.png' alt='' className='w-4 h-4 object-contain' aria-hidden='true' />
                 </button>
 
                 {formStatus === 'success' && (
