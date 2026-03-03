@@ -291,7 +291,7 @@ export default function GalleryMain() {
 
   const filteredItems = useMemo(() => {
     if (activeTab === 'All') return ALL_ITEMS;
-    return ALL_ITEMS.filter(item => item.categories?.includes(activeTab));
+    return ALL_ITEMS.filter(item => (item.categories && item.categories.includes(activeTab)));
   }, [activeTab]);
 
   return (
@@ -429,7 +429,7 @@ export default function GalleryMain() {
                 <div className='w-full bg-gray-100'>
                   {item.instagramUrl ? (
                     <iframe
-                      src={`https://www.instagram.com/reel/${item.instagramUrl.split('/reel/')[1]?.split('/')[0]}/embed/`}
+                      src={"https://www.instagram.com/reel/" + (item.instagramUrl.split('/reel/')[1] && item.instagramUrl.split('/reel/')[1].split('/')[0]) + "/embed/"}
                       className='block w-full h-[400px] bg-black'
                       allow='autoplay; encrypted-media'
                       allowFullScreen

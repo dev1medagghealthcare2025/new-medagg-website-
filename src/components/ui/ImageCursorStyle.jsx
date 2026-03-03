@@ -43,8 +43,8 @@ export default function ImageCursorStyle() {
 
   if (!IMAGE_CURSOR_ENABLED) return null;
 
-  const x = CURSOR_IMAGE_HOTSPOT?.x || 0;
-  const y = CURSOR_IMAGE_HOTSPOT?.y || 0;
+  const x = (CURSOR_IMAGE_HOTSPOT && CURSOR_IMAGE_HOTSPOT.x) || 0;
+  const y = (CURSOR_IMAGE_HOTSPOT && CURSOR_IMAGE_HOTSPOT.y) || 0;
 
   return (
     <style>

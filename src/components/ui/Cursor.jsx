@@ -126,7 +126,7 @@ export default function Cursor() {
       <style>{`
         .cursor-ring[data-hover="true"] {
           border-color: ${CURSOR_THEME.hover};
-          transform: translate3d(${pos.current?.x || 0}px, ${pos.current?.y || 0}px, 0) scale(1.3);
+          transform: translate3d(${(pos.current && pos.current.x) || 0}px, ${(pos.current && pos.current.y) || 0}px, 0) scale(1.3);
         }
         @media (prefers-reduced-motion: reduce) {
           .cursor-ring { transition: none !important; }

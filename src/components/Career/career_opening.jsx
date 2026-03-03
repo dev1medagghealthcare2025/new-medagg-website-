@@ -174,7 +174,7 @@ const CareerOpening = () => {
           email: form.email,
           experience: form.experience,
           languages: form.languages.join(', '),
-          role: activeJob?.title || '',
+          role: (activeJob && activeJob.title) || '',
           resumeUrl: form.resumeUrl,
           source: 'Website - Career Apply',
         },
@@ -203,7 +203,7 @@ const CareerOpening = () => {
       setSubmitted(true);
       setStep(3);
     } catch (err) {
-      setErrorMsg(err?.message || 'Something went wrong. Please try again.');
+      setErrorMsg((err && err.message) || 'Something went wrong. Please try again.');
     } finally {
       setSubmitting(false);
     }
@@ -327,7 +327,7 @@ const CareerOpening = () => {
             <div className='w-full max-w-lg rounded-2xl bg-white shadow-2xl overflow-hidden'>
               <div className='border-b px-5 py-4'>
                 <h3 className='text-lg sm:text-xl font-extrabold text-[#2d2552]'>
-                  {submitted ? 'Thank You' : `Apply for ${activeJob?.title || ''}`}
+                  {submitted ? 'Thank You' : "Apply for " + ((activeJob && activeJob.title) || '')}
                 </h3>
                 {!submitted && (
                   <p className='text-sm text-[#4b4766]/80'>Step {step} of 3</p>
@@ -364,7 +364,7 @@ const CareerOpening = () => {
                       <div>
                         <p className='text-sm font-semibold text-[#2d2552] mb-1'>Language</p>
                         <div className='grid grid-cols-2 sm:grid-cols-3 gap-2'>
-                          {(activeJob?.languages || []).map((l) => (
+                          {((activeJob && activeJob.languages) || []).map((l) => (
                             <label key={l} className='inline-flex items-center gap-2 text-sm'>
                               <input type='checkbox' className='accent-[#ff3576]' checked={form.languages.includes(l)} onChange={() => toggleLanguage(l)} />
                               <span>{l}</span>

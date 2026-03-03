@@ -244,7 +244,7 @@ function readFrontmatterPosts(dirAbs) {
       };
       if (post.slug && post.title && post.content) posts.push(post);
     } catch (e) {
-      console.warn('Failed to parse frontmatter post', file, e?.message);
+      console.warn('Failed to parse frontmatter post', file, (e && e.message) || '');
     }
   }
   return posts;
@@ -273,7 +273,8 @@ function main() {
   function get(rowCells, name) {
     const idx = colIndex.get(name);
     if (idx == null) return '';
-    return rowCells[idx] ?? '';
+    const val = rowCells[idx];
+    return (val !== undefined && val !== null) ? val : '';
   }
 
   const postsBySlug = new Map();
@@ -307,7 +308,8 @@ function main() {
       rowsByPostId.get(post_id).push(cells);
     } else if (currentPostId) {
       // Attach subsequent rows (with empty post_id) to the current post block
-      rowsByPostId.get(currentPostId)?.push(cells);
+      const existing = rowsByPostId.get(currentPostId);
+      if (existing) existing.push(cells);
     } else {
       // Fallback: start a new group when title cell is non-empty
       const titleIdx = colIndex.get('title');
@@ -317,7 +319,8 @@ function main() {
         groupsByIndex.set(currentGroupIdx, []);
       }
       if (currentGroupIdx >= 0) {
-        groupsByIndex.get(currentGroupIdx)?.push(cells);
+        const existingGroup = groupsByIndex.get(currentGroupIdx);
+        if (existingGroup) existingGroup.push(cells);
       }
       continue;
     }
@@ -407,7 +410,7 @@ function main() {
       postsBySlug.set(p.slug, p);
     }
   } catch (e) {
-    console.warn('Frontmatter ingest skipped due to error:', e?.message);
+    console.warn('Frontmatter ingest skipped due to error:', (e && e.message) || '');
   }
 
   const posts = Array.from(postsBySlug.values())

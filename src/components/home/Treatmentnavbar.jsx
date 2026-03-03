@@ -9,6 +9,7 @@ const treatments = [
   { title: 'Varicocele', path: '/varicocele-embolization', subTreatments: [{ title: 'Varicocele Embolization', path: '/varicocele-embolization' }] },
   { title: 'Fallopian Tube Block', path: '/fallopian-tube-recanalization-ftr', subTreatments: [{ title: 'Fallopian Tube Recanalization', path: '/fallopian-tube-recanalization-ftr' }] },
   { title: 'Uterine Fibroids', path: '/uterine-artery-embolization-uae', subTreatments: [{ title: 'Uterine Artery Embolization', path: '/uterine-artery-embolization-uae' }] },
+  { title: 'Hemorrhoids', path: '/piles-hemorrhoids', subTreatments: [{ title: 'Rectal Artery Embolization', path: '/piles-hemorrhoids' }] },
   {
     title: 'Interventional',
     subTreatments: [
@@ -91,7 +92,7 @@ const DropdownMenu = ({ items, stackSubBelow = false, depth = 0 }) => {
 
 // Fixed-position root dropdown so it is always visible over hero without scrolling
 const FixedDropdown = ({ isOpen, position, items, onMouseEnter, onMouseLeave, stackSubBelow = false }) => {
-  if (!isOpen || !items?.length) return null;
+  if (!isOpen || !items || !items.length) return null;
   const { left, top } = position || { left: 0, top: 0 };
   return (
     <div
@@ -198,7 +199,7 @@ export default function Treatmentnavbar() {
     try { checkArrows(); } catch (e) { /* no-op */ }
 
     // If this item has a submenu, open fixed dropdown positioned under the tab
-    const hasSubmenu = !!orderedTreatments[idx]?.subTreatments;
+    const hasSubmenu = !!(orderedTreatments[idx] && orderedTreatments[idx].subTreatments);
     if (hasSubmenu) {
       const rect = targetEl.getBoundingClientRect();
       const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
@@ -216,7 +217,7 @@ export default function Treatmentnavbar() {
 
       setFixedItems(orderedTreatments[idx].subTreatments);
       // Enable stack-below layout only for Interventional root
-      const isInterventional = orderedTreatments[idx]?.title === 'Interventional';
+      const isInterventional = orderedTreatments[idx] && orderedTreatments[idx].title === 'Interventional';
       setFixedStackBelow(!!isInterventional);
       setFixedPos({ left, top });
       setFixedOpen(true);
@@ -268,10 +269,14 @@ export default function Treatmentnavbar() {
     const mq = window.matchMedia('(max-width: 640px)');
     const apply = () => setIsMobile(mq.matches);
     apply();
-    mq.addEventListener?.('change', apply);
+    if (mq.addEventListener) {
+      mq.addEventListener('change', apply);
+    }
     window.addEventListener('orientationchange', apply);
     return () => {
-      mq.removeEventListener?.('change', apply);
+      if (mq.removeEventListener) {
+      mq.removeEventListener('change', apply);
+    }
       window.removeEventListener('orientationchange', apply);
     };
   }, []);
@@ -374,7 +379,7 @@ export default function Treatmentnavbar() {
       {isMobile && mobileOpenIndex !== null && (
         <div className='bg-white border-t border-gray-200 shadow-inner'>
           <div className='max-w-7xl mx-auto px-4 py-2'>
-            {(orderedTreatments[mobileOpenIndex]?.subTreatments || []).map((item, i) => (
+            {((orderedTreatments[mobileOpenIndex] && orderedTreatments[mobileOpenIndex].subTreatments) || []).map((item, i) => (
               <div key={i} className='border-b last:border-b-0 border-gray-100'>
                 {item.subTreatments ? (
                   <>

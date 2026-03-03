@@ -254,7 +254,7 @@ function ReelsCarousel() {
             }}
           >
             <iframe
-              src={`https://www.instagram.com/reel/${url.split("/reel/")[1]?.split("/")[0]}/embed/`}
+              src={"https://www.instagram.com/reel/" + (url.split("/reel/")[1] && url.split("/reel/")[1].split("/")[0]) + "/embed/"}
               className="w-full h-full rounded-xl bg-black"
               allow="autoplay; encrypted-media"
               allowFullScreen

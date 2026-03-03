@@ -18,13 +18,13 @@ const videoUrls = [
 const getYouTubeId = (url) => {
   try {
     const short = url.match(/youtu\.be\/(.+?)(\?|$)/);
-    if (short?.[1]) return short[1];
+    if (short && short[1]) return short[1];
 
     const vParam = url.match(/[?&]v=([^&]+)/);
-    if (vParam?.[1]) return vParam[1];
+    if (vParam && vParam[1]) return vParam[1];
 
     const embed = url.match(/\/embed\/([^?]+)/);
-    if (embed?.[1]) return embed[1];
+    if (embed && embed[1]) return embed[1];
 
     const parts = new URL(url);
     return parts.pathname.split('/').filter(Boolean).pop();
@@ -117,39 +117,39 @@ const Testiominal_main = () => {
   // Optional titles/descriptions for specific videos (showing for one video as requested)
   const descriptionsById = {
     // First video example description (edit as desired)
-    [items[0]?.id]:
+    [(items[0] && items[0].id) || 'default0']:
       'In this heartfelt testimonial, Ms. Nivedha from Tamil Nadu shares her experience about the treatment her mother received with us. She talks about the care, guidance, and support provided by our team throughout the journey. Her story reflects our dedication to delivering compassionate healthcare and successful outcomes for every patient and their family.',
-    [items[1]?.id]:
+    [(items[1] && items[1].id) || 'default1']:
       'Mrs. Nirmala shares her experience of how non-surgical thyroid nodule treatment helped her recover safely and effectively, without the need for surgery.',
-    [items[2]?.id]:
+    [(items[2] && items[2].id) || 'default2']:
       'Mrs. Yesodha shares how uterine fibroid embolization (UFE) transformed her life—relieving years of heavy menstrual bleeding, pain, and discomfort. UFE gave her renewed vitality and freedom from debilitating symptoms.',
-    [items[3]?.id]:
+    [(items[3] && items[3].id) || 'default3']:
       'Our patient, Mrs. Radha, had been suffering from chronic knee pain for almost 6 years. Here is her story of how she got her treatment, genicular artery embolization (GAE) done through Medagg Healthcare. Have a look at her sharing the experience resolving the problem.',
-    [items[4]?.id]:
+    [(items[4] && items[4].id) || 'default4']:
       'Here is a successful story of our patient who has undergone Prostate Artery Embolization (PAE). He shares his experience with Medagg and how he has gone through the treatment with our help.',
-    [items[5]?.id]:
+    [(items[5] && items[5].id) || 'default5']:
       'Stress urinary incontinence is now readily treatable, ensuring that women no longer have to endure this silent affliction. Positive patient feedback reflects this advancement.',
-    [items[6]?.id]:
+    [(items[6] && items[6].id) || 'default6']:
       'Our satisfied patient underwent uterine fibroid embolization and was freed from fibroids without the need for surgery. Here is their feedback on the experience.',
-    [items[7]?.id]:
+    [(items[7] && items[7].id) || 'default7']:
       'Prostate Artery Embolization (PAE) represents an innovative, non-surgical treatment option with minimal side effects. A patient has expressed extreme satisfaction with our services, sharing his positive feedback.',
-    [items[8]?.id]:
+    [(items[8] && items[8].id) || 'default8']:
       'Laser circumcision represents a significant advancement in treating tight foreskin. As the procedure utilizes a laser to make the incision, it involves no cuts or bleeding. The patient was highly satisfied with the outcome. For further details, consider listening to their feedback.',
-    [items[9]?.id]:
+    [(items[9] && items[9].id) || 'default9']:
       'Varicose veins are swollen, prominent veins that typically appear in the legs and often result in pain and discomfort. Laser treatments are sophisticated procedures that can effectively treat varicose veins, as evidenced by our patient’s positive feedback.',
-    [items[10]?.id]:
+    [(items[10] && items[10].id) || 'default10']:
       'Struggling with heavy periods, pelvic pain, or fibroids? In this video, our patient shares her real journey after undergoing Uterine Fibroid Embolization (UFE) – a safe, non-surgical treatment that helped her avoid major surgery and recover faster.',
   };
 
   const titlesById = {
-    [items[0]?.id]: 'Rapid Recovery with Minimally Invasive Treatment',
+    [(items[0] && items[0].id) || 'default0']: 'Rapid Recovery with Minimally Invasive Treatment',
   };
 
   const customThumbnailsById = {
-    [items[0]?.id]: '/1st_testimonial.png',
-    [items[1]?.id]: '/2nd_Testimonial.png',
-    [items[2]?.id]: '/3rd_testimonial.png',
-    [items[10]?.id]: '/ufe%20rashmi%20pt%20testimony%20thumbnail%20yt.jpg.jpeg',
+    [(items[0] && items[0].id) || 'default0']: '/1st_testimonial.png',
+    [(items[1] && items[1].id) || 'default1']: '/2nd_Testimonial.png',
+    [(items[2] && items[2].id) || 'default2']: '/3rd_testimonial.png',
+    [(items[10] && items[10].id) || 'default10']: '/ufe%20rashmi%20pt%20testimony%20thumbnail%20yt.jpg.jpeg',
   };
 
   return (

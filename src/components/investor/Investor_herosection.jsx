@@ -2,7 +2,7 @@ import React from 'react';
 
 const InvestorHerosection = ({ scrollToInfoRef }) => {
   const handleScroll = () => {
-    scrollToInfoRef.current?.scrollIntoView({ behavior: 'smooth' });
+    scrollToInfoRef.current && scrollToInfoRef.current.scrollIntoView({ behavior: 'smooth' });
   };
   return (
     <div

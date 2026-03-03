@@ -25,7 +25,7 @@ const TOPIC_KEYWORDS = [
 ];
 
 function inferTopic(post) {
-  const hay = `${post?.title || ''} ${post?.slug || ''} ${(post?.tags || []).join(' ')}`.toLowerCase();
+    const hay = (post && post.title || '') + ' ' + (post && post.slug || '') + ' ' + ((post && post.tags) || []).join(' ').toLowerCase();
   for (const { topic, keys } of TOPIC_KEYWORDS) {
     if (keys.some(k => hay.includes(k))) return topic;
   }
@@ -184,7 +184,7 @@ const BlogList = () => {
   const matchCount = useMemo(() => {
     if (GROUPED_BLOGS_UI) {
       if (!visibleGroups) return 0;
-      return visibleGroups.reduce((sum, g) => sum + (g.items?.length || 0), 0);
+      return visibleGroups.reduce((sum, g) => sum + ((g.items && g.items.length) || 0), 0);
     }
     return (searchQuery ? filteredBySearch : posts).length;
   }, [GROUPED_BLOGS_UI, visibleGroups, filteredBySearch, posts, searchQuery]);

@@ -1009,7 +1009,7 @@ const getQuestionnaire = (procedure) => {
   // Insert the specific questions after the core questions that set their conditions
   const combinedQuestions = [...introQuestions];
   procedureData.specificQuestions.forEach(sq => {
-    const conditionOriginIndex = combinedQuestions.findIndex(q => q.field === sq.condition?.field);
+    const conditionOriginIndex = combinedQuestions.findIndex(q => q.field === (sq.condition && sq.condition.field));
     if (conditionOriginIndex !== -1) {
       combinedQuestions.splice(conditionOriginIndex + 1, 0, sq);
     } else {
@@ -1293,7 +1293,9 @@ const Chatbot = () => {
   }, [navigate]);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   useEffect(() => {
