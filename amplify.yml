@@ -8,7 +8,9 @@ frontend:
         - npm ci
     build:
       commands:
-        - npm run build
+        - npm run blog:build
+        - npm run sitemap
+        - cross-env ROLLUP_USE_NODEJS=true vite build
   artifacts:
     baseDirectory: dist
     files:
