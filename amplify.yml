@@ -5,12 +5,12 @@ frontend:
       commands:
         - nvm install 20
         - nvm use 20
-        - npm ci
+        - npm ci --include=dev
     build:
       commands:
         - npm run blog:build
         - npm run sitemap
-        - ROLLUP_USE_NODEJS=true vite build
+        - ROLLUP_USE_NODEJS=true npx vite build
   artifacts:
     baseDirectory: dist
     files:
