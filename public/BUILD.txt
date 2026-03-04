@@ -1,0 +1,77 @@
+2026-03-03T15:22:57.305Z [INFO]: # Build environment configured with Standard build compute type: 8GiB Memory, 4vCPUs, 128GB Disk Space
+2026-03-03T15:22:58.124Z [INFO]: # Cloning repository: git@github.com:dev1medagghealthcare2025/new-medagg-website-.git
+2026-03-03T15:23:10.893Z [INFO]: 
+2026-03-03T15:23:10.988Z [INFO]: Cloning into 'new-medagg-website-'...
+                                 Updating files:  59% (497/838)Updating files:  60% (503/838)Updating files:  61% (512/838)Updating files:  62% (520/838)Updating files:  63% (528/838)Updating files:  64% (537/838)Updating files:  65% (545/838)Updating files:  66% (554/838)Updating files:  67% (562/838)Updating files:  68% (570/838)Updating files:  69% (579/838)Updating files:  70% (587/838)Updating files:  71% (595/838)Updating files:  72% (604/838)Updating files:  73% (612/838)Updating files:  74% (621/838)Updating files:  75% (629/838)Updating files:  76% (637/838)Updating files:  77% (646/838)Updating files:  78% (654/838)Updating files:  79% (663/838)Updating files:  80% (671/838)Updating files:  81% (679/838)Updating files:  82% (688/838)Updating files:  83% (696/838)Updating files:  84% (704/838)Updating files:  85% (713/838)Updating files:  86% (721/838)Updating files:  87% (730/838)Updating files:  88% (738/838)Updating files:  89% (746/838)Updating files:  90% (755/838)Updating files:  91% (763/838)Updating files:  92% (771/838)Updating files:  93% (780/838)Updating files:  94% (788/838)Updating files:  95% (797/838)Updating files:  96% (805/838)Updating files:  97% (813/838)Updating files:  98% (822/838)Updating files:  99% (830/838)Updating files: 100% (838/838)Updating files: 100% (838/838), done.
+2026-03-03T15:23:10.989Z [INFO]: # Switching to commit: 8201a88da9bf5268ba854a3ca99c65236e2c4d87
+2026-03-03T15:23:11.971Z [INFO]: Note: switching to '8201a88da9bf5268ba854a3ca99c65236e2c4d87'.
+                                 You are in 'detached HEAD' state. You can look around, make experimental
+                                 changes and commit them, and you can discard any commits you make in this
+                                 state without impacting any branches by switching back to a branch.
+                                 If you want to create a new branch to retain commits you create, you may
+                                 do so (now or later) by using -c with the switch command. Example:
+                                 git switch -c <new-branch-name>
+                                 Or undo this operation with:
+                                 git switch -
+                                 Turn off this advice by setting config variable advice.detachedHead to false
+                                 HEAD is now at 8201a88 Final_Fix
+2026-03-03T15:23:12.054Z [INFO]: Successfully cleaned up Git credentials
+2026-03-03T15:23:12.055Z [INFO]: # Checking for Git submodules at: /codebuild/output/src1923951528/src/new-medagg-website-/.gitmodules
+2026-03-03T15:23:12.067Z [INFO]: # Retrieving environment cache...
+2026-03-03T15:23:12.130Z [INFO]: # Retrieved environment cache
+2026-03-03T15:23:12.131Z [INFO]: ---- Setting Up SSM Secrets ----
+2026-03-03T15:23:12.131Z [INFO]: SSM params {"Path":"/amplify/d1muegavb4rtcy/main/","WithDecryption":true}
+2026-03-03T15:23:12.189Z [WARNING]: !Failed to set up process.env.secrets
+2026-03-03T15:23:12.666Z [INFO]: # No package override configuration found.
+2026-03-03T15:23:12.671Z [INFO]: # Retrieving cache...
+2026-03-03T15:23:12.762Z [INFO]: # Extracting cache...
+2026-03-03T15:23:12.764Z [INFO]: # Extraction completed
+2026-03-03T15:23:12.764Z [INFO]: # Retrieved cache
+2026-03-03T15:23:18.350Z [INFO]: ## Starting Backend Build
+                                 ## Checking for associated backend environment...
+                                 ## No backend environment association found, continuing...
+                                 ## Completed Backend Build
+2026-03-03T15:23:18.356Z [INFO]: {"backendDuration": 0}
+                                 ## Starting Frontend Build
+                                 # Starting phase: preBuild
+                                 # Executing command: npm i
+2026-03-03T15:23:36.751Z [WARNING]: npm warn EBADENGINE Unsupported engine {
+                                    npm warn EBADENGINE   package: 'medagg-website@0.1.0',
+                                    npm warn EBADENGINE   required: { node: '20.x' },
+                                    npm warn EBADENGINE   current: { node: 'v22.18.0', npm: '10.9.3' }
+                                    npm warn EBADENGINE }
+2026-03-03T15:23:41.205Z [WARNING]: npm warn deprecated rimraf@2.7.1: Rimraf versions prior to v4 are no longer supported
+2026-03-03T15:23:41.211Z [WARNING]: npm warn deprecated rimraf@2.7.1: Rimraf versions prior to v4 are no longer supported
+2026-03-03T15:23:41.541Z [WARNING]: npm warn deprecated @babel/plugin-proposal-optional-chaining@7.21.0: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-optional-chaining instead.
+2026-03-03T15:23:41.542Z [WARNING]: npm warn deprecated @babel/plugin-proposal-nullish-coalescing-operator@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-nullish-coalescing-operator instead.
+2026-03-03T15:23:41.590Z [WARNING]: npm warn deprecated @humanwhocodes/object-schema@2.0.3: Use @eslint/object-schema instead
+2026-03-03T15:23:41.591Z [WARNING]: npm warn deprecated @humanwhocodes/config-array@0.13.0: Use @eslint/config-array instead
+2026-03-03T15:23:42.184Z [WARNING]: npm warn deprecated mkdirp@0.5.1: Legacy versions of mkdirp are no longer supported. Please update to mkdirp 1.x. (Note that the API surface has changed to use Promises in 1.x.)
+2026-03-03T15:23:42.596Z [WARNING]: npm warn deprecated node-domexception@1.0.0: Use your platform's native DOMException instead
+2026-03-03T15:23:45.550Z [WARNING]: npm warn deprecated puppeteer@1.20.0: < 24.15.0 is no longer supported
+2026-03-03T15:23:45.556Z [WARNING]: npm warn deprecated puppeteer@1.20.0: < 24.15.0 is no longer supported
+2026-03-03T15:23:48.429Z [WARNING]: npm warn deprecated eslint@8.57.1: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+2026-03-03T15:24:08.821Z [INFO]: added 687 packages, and audited 688 packages in 45s
+2026-03-03T15:24:08.826Z [INFO]: 159 packages are looking for funding
+                                 run `npm fund` for details
+2026-03-03T15:24:08.875Z [INFO]: 29 vulnerabilities (3 low, 5 moderate, 18 high, 3 critical)
+                                 To address issues that do not require attention, run:
+                                 npm audit fix
+                                 To address all issues (including breaking changes), run:
+                                 npm audit fix --force
+                                 Run `npm audit` for details.
+2026-03-03T15:24:08.902Z [INFO]: # Completed phase: preBuild
+                                 # Starting phase: build
+                                 # Executing command: npm run build
+2026-03-03T15:24:09.023Z [INFO]: > medagg-website@0.1.0 build
+                                 > npm run blog:build && npm run sitemap && cross-env ROLLUP_USE_NODEJS=true vite build && (react-snap || node -e "console.log('Static pre-rendering skipped')")
+2026-03-03T15:24:09.142Z [INFO]: > medagg-website@0.1.0 blog:build
+                                 > node scripts/parseBlogExport.js
+2026-03-03T15:24:09.261Z [INFO]: Parsed 137 posts -> /codebuild/output/src1923951528/src/new-medagg-website-/src/data/blogPosts.json
+2026-03-03T15:24:09.392Z [INFO]: > medagg-website@0.1.0 sitemap
+                                 > node scripts/generateSitemap.js
+2026-03-03T15:24:09.436Z [INFO]: Generated sitemap with 158 URLs -> /codebuild/output/src1923951528/src/new-medagg-website-/public/sitemap.xml
+2026-03-03T15:24:09.782Z [WARNING]: [33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+2026-03-03T15:24:10.165Z [INFO]: vite v5.4.19 building for production...
+2026-03-03T15:24:10.225Z [INFO]: transforming...
+2026-03-03T15:24:17.141Z [INFO]: ✓ 2295 modules transformed.
