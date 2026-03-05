@@ -30,10 +30,10 @@ export default function WhyChooseHemorrhoidal() {
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='mb-8 text-center sm:text-left'>
           <h2 className='text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#1a1446]'>
-            Why Choose <span className='text-[#ff3576]'>Rectal Artery Embolization for Hemorrhoids ?</span>
+            Why Choose <span className='text-[#ff3576]'> Piles Artery Embolization?</span>
           </h2>
           <p className='mt-4 text-base sm:text-lg text-gray-600 w-full'>
-            Rectal Artery Embolization (also called Hemorrhoidal Artery Embolization) is an advanced, minimally invasive procedure that treats hemorrhoids at the source — by reducing the excess blood flow causing swelling and bleeding — without surgery.
+            Piles Artery Embolization is an advanced, minimally invasive procedure that treats hemorrhoids at the source — by reducing the excess blood flow causing swelling and bleeding — without surgery.
           </p>
         </div>
 

@@ -11,19 +11,19 @@ const steps = [
   {
     step: 2,
     title: 'Microcatheter Navigation',
-    desc: 'A thin catheter is guided to the rectal arteries supplying the hemorrhoids using real-time imaging.',
+    desc: 'A thin catheter is guided to the rectal arteries supplying the  Piles/hemorrhoids using real-time imaging.',
     image: '/RAE_2.png',
   },
   {
     step: 3,
     title: 'Targeted Embolization',
-    desc: 'Special microscopic particles are released to block the abnormal blood flow feeding the hemorrhoids.',
+    desc: 'Special microscopic particles are released to block the abnormal blood flow feeding the Piles/hemorrhoids.',
     image: '/RAE_3.png',
   },
   {
     step: 4,
-    title: 'Shrinkage of Hemorrhoids',
-    desc: 'Reduced blood supply causes the hemorrhoids to gradually shrink and symptoms improve.',
+    title: 'Shrinkage of Piles/Hemorrhoids',
+    desc: 'Reduced blood supply causes the Piles/hemorrhoids to gradually shrink and symptoms improve.',
     image: '/RAE_4.png',
   },
   {
@@ -40,7 +40,7 @@ export default function Hemorrhoids_Work() {
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='mb-10 text-center sm:text-left'>
           <h2 className='text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#1a1446]'>
-            How <span className='text-[#ff3576]'>Rectal Artery Embolization</span> Works
+            How <span className='text-[#ff3576]'>Piles Artery Embolization</span> Works
           </h2>
           <p className='mt-3 text-base sm:text-lg text-gray-600'>
             Understanding the procedure step-by-step helps you feel confident about your treatment choice.
@@ -61,8 +61,10 @@ export default function Hemorrhoids_Work() {
                     </div>
                   </div>
 
-                  <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-start'>
-                    <div className={`${isLeft ? 'lg:pr-12' : 'lg:pl-12 lg:order-2'} flex flex-col`}> 
+                  <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-start lg:items-center'>
+                    <div
+                      className={`${isLeft ? 'lg:pr-12' : 'lg:pl-12 lg:order-2'} flex flex-col lg:min-h-[260px] lg:justify-center`}
+                    >
                       <div className='flex items-start gap-3 lg:hidden'>
                         <div className='w-9 h-9 rounded-full bg-[#ff3576] text-white font-bold text-sm flex items-center justify-center shadow-md flex-shrink-0'>
                           {s.step}
@@ -83,7 +85,7 @@ export default function Hemorrhoids_Work() {
                       </div>
                     </div>
 
-                    <div className={`${isLeft ? 'lg:pl-12 lg:order-2' : 'lg:pr-12'} w-full`}> 
+                    <div className={`${isLeft ? 'lg:pl-12 lg:order-2' : 'lg:pr-12'} w-full`}>
                       <div className='rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-white'>
                         <img src={s.image} alt='' className='w-full h-[190px] sm:h-[240px] lg:h-[260px] object-cover' aria-hidden='true' />
                       </div>

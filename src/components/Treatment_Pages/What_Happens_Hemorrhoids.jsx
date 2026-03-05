@@ -15,7 +15,7 @@ const What_Happens_Hemorrhoids = () => {
         <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
           <div>
             <h2 className="text-3xl font-extrabold leading-tight text-[#1E1B4B] sm:text-4xl">
-              What Happens in <span className="text-[#FF2D7A]">Rectal</span>
+              What Happens in <span className="text-[#FF2D7A]">Piles</span>
               <br />
               <span className="text-[#FF2D7A]">Artery Embolization?</span>
             </h2>
@@ -49,24 +49,13 @@ const What_Happens_Hemorrhoids = () => {
           </div>
 
           <div className="flex w-full justify-center lg:justify-end">
-            <div className="relative w-full max-w-xl overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5">
-              <div className="aspect-[16/9] w-full" />
-              <button
-                type="button"
-                aria-label="Play video"
-                className="absolute left-1/2 top-1/2 inline-flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#FF2D7A] text-white shadow-lg transition-transform hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#FF2D7A]"
-              >
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="translate-x-[1px]"
-                >
-                  <path d="M8 5v14l11-7L8 5z" />
-                </svg>
-              </button>
+            <div className="relative w-full max-w-3xl overflow-hidden rounded-2xl bg-white shadow-xl ring-1 ring-black/5">
+              <img
+                src="/What_happen_piles.jpeg"
+                alt="What happens in rectal artery embolization"
+                className="aspect-[16/9] w-full object-cover"
+                loading="lazy"
+              />
             </div>
           </div>
         </div>

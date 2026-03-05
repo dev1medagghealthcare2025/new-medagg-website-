@@ -69,7 +69,7 @@ export default function Thyroid_Herosection() {
         {/* Left: Text */}
         <div className='flex-1 lg:pr-8 xl:pr-12 mb-8 lg:mb-0 text-center lg:text-left'>
           <h1 className='text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-4 sm:mb-6'>
-            Thyroid Nodule Ablation?
+            Thyroid Nodule Ablation
           </h1>
           <p className='text-gray-200 text-base sm:text-lg md:text-xl font-medium mb-6 max-w-2xl mx-auto lg:mx-0'>
             Scar-free solution for thyroid nodules without surgery

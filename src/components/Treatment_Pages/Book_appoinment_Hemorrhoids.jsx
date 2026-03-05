@@ -69,10 +69,10 @@ const Book_appoinment_Hemorrhoids = () => {
             <div className='text-white space-y-5 text-center lg:text-left'>
               <h2 className='text-3xl md:text-4xl font-bold leading-tight'>
                 <span className='text-white'>Think You Might Have</span> <br />
-                <span className='text-[#ff3576]'>Hemorrhoids?</span>
+                <span className='text-[#ff3576]'>Piles/Hemorrhoids?</span>
               </h2>
               <p className='text-base sm:text-lg text-gray-200 max-w-lg mx-auto lg:mx-0'>
-                Book a consultation with our Interventional Radiology experts to understand whether Rectal Artery
+                Book a consultation with our Interventional Radiology experts to understand whether Piles Artery
                 Embolization is right for you.
               </p>
               <div className='pt-2'>

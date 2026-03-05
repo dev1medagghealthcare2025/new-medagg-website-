@@ -31,7 +31,7 @@ export default function AreYouExperiencingHemorrhoids() {
             <span className='text-[#ff3576]'>These Symptoms?</span>
           </h2>
           <p className='mt-3 text-sm sm:text-base text-gray-600'>
-            If yes, you may be a candidate for Rectal Artery Embolization.
+            If yes, you may be a candidate for Piles Artery Embolization.
           </p>
         </div>
 

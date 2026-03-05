@@ -26,13 +26,13 @@ const faqData = [
   },
   {
     id: 5,
-    question: 'Is Rectal Artery Embolization safe',
+    question: 'Is Piles Artery Embolization safe',
     answer: 'Yes. It is a well-established minimally invasive procedure performed by trained Interventional Radiologists.',
     isOpen: true,
   },
   {
     id: 6,
-    question: 'Will hemorrhoids come back?',
+    question: 'Will piles come back?',
     answer: 'Recurrence rates are low when performed appropriately. Lifestyle changes further reduce recurrence risk.',
     isOpen: true,
   },

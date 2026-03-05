@@ -9,7 +9,7 @@ const treatments = [
   { title: 'Varicocele', path: '/varicocele-embolization', subTreatments: [{ title: 'Varicocele Embolization', path: '/varicocele-embolization' }] },
   { title: 'Fallopian Tube Block', path: '/fallopian-tube-recanalization-ftr', subTreatments: [{ title: 'Fallopian Tube Recanalization', path: '/fallopian-tube-recanalization-ftr' }] },
   { title: 'Uterine Fibroids', path: '/uterine-artery-embolization-uae', subTreatments: [{ title: 'Uterine Artery Embolization', path: '/uterine-artery-embolization-uae' }] },
-  { title: 'Hemorrhoids', path: '/piles-hemorrhoids', subTreatments: [{ title: 'Rectal Artery Embolization', path: '/piles-hemorrhoids' }] },
+  { title: 'Hemorrhoids/Piles', path: '/piles-hemorrhoids', subTreatments: [{ title: 'Piles Artery Embolization', path: '/piles-hemorrhoids' }] },
   {
     title: 'Interventional',
     subTreatments: [

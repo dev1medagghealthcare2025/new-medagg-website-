@@ -3,7 +3,7 @@ import React from 'react';
 
 const optionCards = [
   {
-    title: 'Rectal Artery Embolization',
+    title: 'Piles Artery Embolization',
     desc: 'Minimally invasive, uses local anesthesia, day-care procedure with faster recovery.',
     icon: '/Compare_Hemorrhoids_1.png',
     highlight: true,
@@ -19,7 +19,7 @@ const optionCards = [
     icon: '/Compare_Hemorrhoids_3.png',
   },
   {
-    title: 'Hemorrhoid Surgery',
+    title: 'Piles/Hemorrhoid Surgery',
     desc: 'Traditional surgical removal; effective but involves pain, stitches, and longer recovery.',
     icon: '/Compare_Hemorrhoids_4.png',
   },
@@ -86,7 +86,7 @@ export default function Hemorrhoids_compare() {
             Compare Your <span className='text-[#ff3576]'>Treatment Options</span>
           </h2>
           <p className='mt-3 text-sm sm:text-base text-gray-600'>
-            See how Rectal Artery Embolization compares to commonly used treatments.
+            See how Piles Artery Embolization compares to commonly used treatments.
           </p>
         </div>
 
@@ -94,13 +94,17 @@ export default function Hemorrhoids_compare() {
           {optionCards.map((c) => (
             <div
               key={c.title}
-              className='bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-shadow p-6 text-center'
+              className='group bg-white rounded-2xl border border-gray-100 shadow-md transition-all duration-200 p-6 text-center hover:shadow-xl hover:-translate-y-0.5 hover:border-[#ff3576] hover:bg-[#ff3576]'
             >
-              <div className='w-20 h-20 rounded-full bg-pink-50 flex items-center justify-center mx-auto mb-4'>
+              <div className='w-20 h-20 rounded-full bg-pink-50 flex items-center justify-center mx-auto mb-4 transition-colors group-hover:bg-white'>
                 <img src={c.icon} alt='' className='w-12 h-12 object-contain' aria-hidden='true' />
               </div>
-              <h3 className={`text-base font-extrabold ${c.highlight ? 'text-[#ff3576]' : 'text-[#1a1446]'}`}>{c.title}</h3>
-              <p className='mt-2 text-sm text-gray-600'>{c.desc}</p>
+              <h3
+                className={`text-base font-extrabold group-hover:text-white ${c.highlight ? 'text-[#ff3576]' : 'text-[#1a1446]'}`}
+              >
+                {c.title}
+              </h3>
+              <p className='mt-2 text-sm text-gray-600 group-hover:text-white/90'>{c.desc}</p>
             </div>
           ))}
         </div>
@@ -111,7 +115,7 @@ export default function Hemorrhoids_compare() {
               <thead>
                 <tr className='bg-[#1a1446] text-white'>
                   <th className='text-left px-4 py-3 text-xs sm:text-sm font-bold tracking-wide uppercase'>Treatment</th>
-                  <th className='text-left px-4 py-3 text-xs sm:text-sm font-bold tracking-wide uppercase'>RAE</th>
+                  <th className='text-left px-4 py-3 text-xs sm:text-sm font-bold tracking-wide uppercase'>PAE</th>
                   <th className='text-left px-4 py-3 text-xs sm:text-sm font-bold tracking-wide uppercase'>Laser</th>
                   <th className='text-left px-4 py-3 text-xs sm:text-sm font-bold tracking-wide uppercase'>Medical Management</th>
                   <th className='text-left px-4 py-3 text-xs sm:text-sm font-bold tracking-wide uppercase'>Surgery</th>

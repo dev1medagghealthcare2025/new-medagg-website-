@@ -95,7 +95,7 @@ const GAEWhySurgeries = () => {
 
             <div className='mt-6 rounded-xl border border-[#ff3576]/30 bg-white px-5 py-4'>
               <p className='text-gray-700'>
-                <span className='font-semibold text-[#ff3576]'>No surgeries:</span>  for hemorrhoids through Rectal Artery Embolization — a minimally invasive, incision-free treatment that relieves pain and bleeding with faster recovery and minimal downtime.
+                <span className='font-semibold text-[#ff3576]'>No surgeries:</span>  for Piles/hemorrhoids through Piles Artery Embolization — a minimally invasive, incision-free treatment that relieves pain and bleeding with faster recovery and minimal downtime.
               </p>
             </div>
 

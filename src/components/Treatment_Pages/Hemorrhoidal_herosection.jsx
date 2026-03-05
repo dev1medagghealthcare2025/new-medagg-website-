@@ -71,12 +71,11 @@ export default function Hemorrhoidal_herosection() {
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center'>
           <div className='text-white text-center lg:text-left'>
             <h1 className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-white mb-3 sm:mb-5'>
-              Hemorrhoidal/Rectal
-              <br />
-              Artery Embolization
+              Hemorrhoidal/Piles Artery Embolization
+              
             </h1>
             <p className='text-sm sm:text-base md:text-lg text-gray-200 font-medium max-w-2xl mx-auto lg:mx-0'>
-              Hemorrhoids Treatment Without Surgery | No Cuts | No Stitches | Faster Recovery
+              Hemorrhoids/piles Treatment Without Surgery | No Cuts | No Stitches | Faster Recovery
             </p>
           </div>
 
