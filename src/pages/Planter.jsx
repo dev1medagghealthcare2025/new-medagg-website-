@@ -31,7 +31,7 @@ const Planter = () => {
       <PlanterWhySurgeries />
       <BookappoinmentPlanter />
       <CompareTreatmentPlanter />
-      <WhatHappensInPlantar />
+      {/* <WhatHappensInPlantar /> */}
       <OurDoctor />
       <OurTestimonial/>
       <Consultourdoctor />

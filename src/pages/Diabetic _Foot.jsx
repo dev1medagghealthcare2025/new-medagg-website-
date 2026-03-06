@@ -31,7 +31,7 @@ const DiabeticFootPage = () => {
       <DiabeticFootWhySurgeries />
       <BookAppointmentDiabetic />
       <CompareDiabetic />
-      <WhatHappenDiabetic />
+      {/* <WhatHappenDiabetic /> */}
       <OurDoctor />
       <OurTestimonial />
       <Consultourdoctor />

@@ -31,7 +31,7 @@ const FrozenShoulderPage = () => {
       <FrozenShoulderWhySurgeries />
       <BookAppointmentFrozen />
       <CompareFrozen />
-      <WhatHappensFrozen />
+      {/* <WhatHappensFrozen /> */}
       <OurDoctor />
       <OurTestimonial />
       <ConsultOurDoctor />
