@@ -30,7 +30,10 @@ const UAEPage = () => {
       <UAEWhySurgeries />
       <ThinkYouMightNeedUAE />
       <UAE_Compare />
-      <WhatHappenUAE videoUrl='https://youtube.com/shorts/iw5G9U2LMNI?si=ql6ur0THJoZDrlYe' />
+      <WhatHappenUAE
+        videoUrl='https://youtu.be/js7-2vuNCo4?si=eUjQWFpGPOAx0SIy'
+        orientation='portrait'
+      />
       <OurDoctor />
       <Consultourdoctor />
       <UaeFaq />
