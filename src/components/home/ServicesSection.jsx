@@ -121,11 +121,18 @@ const allServices = {
   ],
   set3: [
     {
-      title: 'Rectal Artery Embolization',
+      title: 'Hemorrhoidal/Piles',
       desc: 'Rectal Artery Embolization (also called Hemorrhoidal Artery Embolization) is an advanced, minimally invasive procedure that treats hemorrhoids at the source — by reducing the excess blood flow causing swelling and bleeding — without surgery.',
       img: '/Hemorrhoidal_icon.png',
       icon: '/Hemorrhoidal_icon.png',
       path: '/hemorrhoidal',
+    },
+    {
+      title: 'Y-90 Radioembolization ',
+      desc: 'A minimally invasive treatment that delivers targeted radiation directly to liver tumors while preserving healthy liver tissue.',
+      img: '/Y-90 Radioembolization_1.png',
+      icon: '/Y-90 Radioembolization_1.png',
+      path: '/y90-radioembolization-tare',
     },
   ],
 };

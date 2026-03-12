@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-const treatments = [
+ const treatments = [
   { title: 'Enlarged Prostate', path: '/prostate-artery-embolization-pae', subTreatments: [{ title: 'Prostate Artery Embolization', path: '/prostate-artery-embolization-pae' }] },
   { title: 'Knee Pain', path: '/genicular-artery-embolization-gae', subTreatments: [{ title: 'Genicular Artery Embolization', path: '/genicular-artery-embolization-gae' }] },
   { title: 'Thyroid Nodule', path: '/thyroid-nodule-ablation', subTreatments: [{ title: 'Thyroid Nodule Ablation', path: '/thyroid-nodule-ablation' }] },
@@ -10,6 +10,14 @@ const treatments = [
   { title: 'Fallopian Tube Block', path: '/fallopian-tube-recanalization-ftr', subTreatments: [{ title: 'Fallopian Tube Recanalization', path: '/fallopian-tube-recanalization-ftr' }] },
   { title: 'Uterine Fibroids', path: '/uterine-artery-embolization-uae', subTreatments: [{ title: 'Uterine Artery Embolization', path: '/uterine-artery-embolization-uae' }] },
   { title: 'Hemorrhoids/Piles', path: '/piles-hemorrhoids', subTreatments: [{ title: 'Piles Artery Embolization', path: '/piles-hemorrhoids' }] },
+  {
+    title: 'Y-90 Radioembolization',
+    path: '/y90-radioembolization-tare',
+    subTreatments: [
+      { title: 'TARE', path: '/y90-radioembolization-tare' },
+      { title: 'Transarterial Chemoembolization (TACE)', path: '/transarterial-chemoembolization-tace' },
+    ],
+  },
   {
     title: 'Interventional',
     subTreatments: [

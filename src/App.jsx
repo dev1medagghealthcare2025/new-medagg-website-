@@ -37,6 +37,8 @@ import TermsConditionPage from './pages/terms_condition';
 import DiabeticFootPage from './pages/Diabetic _Foot';
 import FrozenShoulderPage from './pages/frozen_shoulder';
 import Hemorrhoidal from './pages/Hemorrhoidal';
+import Y90_TAREPage from './pages/Y90_TARE';
+import Transarterial_Chemoembolization from './pages/Transarterial_Chemoembolization';
 import Cursor from './components/ui/Cursor';
 import ImageCursorStyle from './components/ui/ImageCursorStyle';
 import { UI_ENHANCEMENTS_ENABLED, IMAGE_CURSOR_ENABLED } from './config/uiEnhancements';
@@ -149,6 +151,8 @@ function App() {
           <Route path='/testimonials' element={<Testiominal />} />
           <Route path='/diabetic-foot' element={<DiabeticFootPage />} />
           <Route path='/frozen-shoulder' element={<FrozenShoulderPage />} />
+          <Route path='/y90-radioembolization-tare' element={<Y90_TAREPage />} />
+          <Route path='/transarterial-chemoembolization-tace' element={<Transarterial_Chemoembolization />} />
           <Route path='/piles-hemorrhoids' element={<Hemorrhoidal />} />
           <Route path='/hemorrhoidal' element={<Navigate to='/piles-hemorrhoids' replace />} />
           {/* Policy page routes */}
