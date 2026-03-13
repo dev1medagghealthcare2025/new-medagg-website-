@@ -12,6 +12,7 @@ import TARE_Compare from '../components/Treatment_Pages/TARE_Compare';
 import OurTestimonial from '../components/home/our_testimonial';
 import FAQ_Home from '../components/home/FAQ_Home';
 import ConsultOurDoctor from '../components/home/Consultourdoctor';
+import TARE_FAQ from '../components/Treatment_Pages/TARE_FAQ';
 
 const Y90_TAREPage = () => {
   return (
@@ -28,7 +29,7 @@ const Y90_TAREPage = () => {
       <OurTestimonial />
       <OurDoctor />
       <ConsultOurDoctor />
-      <FAQ_Home />
+      <TARE_FAQ />
     </>
   );
 };

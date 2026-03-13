@@ -8,6 +8,7 @@ import TACE_are_experience from '../components/Treatment_Pages/TACE_are_experien
 import TACE_Why_medagg from '../components/Treatment_Pages/TACE_Why_medagg';
 import TACE_Compare from '../components/Treatment_Pages/TACE_Compare';
 import BookAppointmentY90Tare from '../components/Treatment_Pages/Book_appoinment_y90_tare';
+import TACE_FAQ from '../components/Treatment_Pages/TACE_FAQ';
 import OurDoctor from '../components/home/Ourdoctor';
 import OurTestimonial from '../components/home/our_testimonial';
 import Consultourdoctor from '../components/home/Consultourdoctor';
@@ -28,7 +29,7 @@ const Transarterial_Chemoembolization = () => {
       <OurDoctor />
       <OurTestimonial />
       <Consultourdoctor />
-      <FAQ_Home />
+      <TACE_FAQ />
     </>
   );
 };
