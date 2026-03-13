@@ -1,7 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
 // const TABS = ['All', 'Celebrations', 'Awards', 'Reviews', 'Our Camps', 'Media', 'Conference', 'Videos'];
-const TABS = ['Videos','IRPreneur 25'];
+const TABS = [
+  { key: 'Videos', label: 'Videos' },
+  { key: 'Conference', label: "IRPRENEUR '25" },
+  { key: 'Founder Explains', label: 'Founder Explains' },
+];
 
 // Sample items. Replace the src paths with your real images if needed.
 // These 3 images exist in your public/ folder already.
@@ -179,6 +183,23 @@ export default function GalleryMain() {
   const [activeLanguage, setActiveLanguage] = useState('English');
   const [activeTreatment, setActiveTreatment] = useState('All');
 
+  const FOUNDER_EXPLAINS_REELS = [
+    'https://www.instagram.com/reel/DVu15TLE1pl/?igsh=MXM4MmJoYzZpeGJhbg==',
+    'https://www.instagram.com/reel/DVLRvy8k2p_/?igsh=MWVvcnhocmY0czE4eA==',
+    'https://www.instagram.com/reel/DVf-gxTEnDd/?igsh=ZnR0cG8yczZzZXlq',
+    'https://www.instagram.com/reel/DVGxe-Qk8Ge/?igsh=MWtjajcxanVudXZmMw==',
+    'https://www.instagram.com/reel/DU8KNYlEsr0/?igsh=MTZ4bXhzdjV5aHhhcQ==',
+    'https://www.instagram.com/reel/DUz9YbCknoP/?igsh=bjl6Z3htNHlsZ2pu',
+    'https://www.instagram.com/reel/DUa6QMBEst-/?igsh=bHBiY2NnZjcwb205',
+    'https://www.instagram.com/reel/DULb8qvkjeg/?igsh=MXh0b2d6bXd2YjlxMw==',
+    'https://www.instagram.com/reel/DR9mcbDk12f/?igsh=MWpvMXhkOGZzdjNveA==',
+    'https://www.instagram.com/reel/DEcqLEIzw3a/?igsh=bHg2ZDVweXM2MHcw',
+    'https://www.instagram.com/reel/DEKjPUiTmSR/?igsh=NmV5NzN5czZ3NzI2',
+    'https://www.instagram.com/reel/C9MD13yP4vk/?igsh=MXh2bXRyM3g3MmZndg==',
+    'https://www.instagram.com/reel/C7JmbUPv1Sj/?igsh=MXZ0MWRvOGwwNTNkNQ==',
+    'https://www.instagram.com/reel/C6vJvPWLpme/?igsh=MTZ0Yzh0ejR6a2pocQ==',
+  ];
+
   // YouTube videos grouped by language. Replace the placeholder IDs with your real video IDs or full URLs.
   // You can provide just the YouTube ID (e.g., "dQw4w9WgXcQ") or a full watch URL (e.g., "https://www.youtube.com/watch?v=dQw4w9WgXcQ").
   const VIDEOS = {
@@ -300,12 +321,12 @@ export default function GalleryMain() {
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6'>
         <div className='flex flex-wrap gap-3'>
           {TABS.map(tab => {
-            const isActive = tab === activeTab;
+            const isActive = tab.key === activeTab;
             return (
               <button
-                key={tab}
+                key={tab.key}
                 type='button'
-                onClick={() => setActiveTab(tab)}
+                onClick={() => setActiveTab(tab.key)}
                 className={[
                   'px-5 py-2 rounded-full text-sm font-semibold transition-colors border',
                   isActive
@@ -314,7 +335,7 @@ export default function GalleryMain() {
                 ].join(' ')}
                 aria-pressed={isActive}
               >
-                {tab}
+                {tab.label}
               </button>
             );
           })}
@@ -416,6 +437,45 @@ export default function GalleryMain() {
               </div>
             ) : (
               <div className='text-gray-600'>No videos added yet for {activeLanguage}. Share the YouTube links and I will plug them in.</div>
+            )}
+          </div>
+        ) : activeTab === 'Founder Explains' ? (
+          <div>
+            {FOUNDER_EXPLAINS_REELS.length > 0 ? (
+              <div className='columns-1 sm:columns-2 lg:columns-3 [column-gap:1.25rem]'>
+                {FOUNDER_EXPLAINS_REELS.map((url, idx) => {
+                  const reelId = getInstagramReelId(url);
+                  const instagramEmbedUrl = reelId ? `https://www.instagram.com/reel/${reelId}/embed/` : '';
+                  return (
+                    <div
+                      key={`${reelId || 'reel'}-${idx}`}
+                      className='mb-5 break-inside-avoid bg-white rounded-xl shadow-md overflow-hidden border border-gray-100'
+                      style={{ breakInside: 'avoid' }}
+                    >
+                      <div className='relative w-full pb-[177.78%] bg-black'>
+                        {instagramEmbedUrl ? (
+                          <iframe
+                            className='absolute inset-0 w-full h-full'
+                            src={instagramEmbedUrl}
+                            title='Instagram Reel'
+                            frameBorder='0'
+                            allow='autoplay; encrypted-media'
+                            allowFullScreen
+                            loading='lazy'
+                            style={{ border: 0 }}
+                          />
+                        ) : (
+                          <div className='absolute inset-0 flex items-center justify-center text-sm text-gray-500 bg-gray-100'>
+                            Invalid Instagram reel URL
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className='text-gray-600'>No reels added yet for Founder Explains. Share the Instagram reel links and I will plug them in.</div>
             )}
           </div>
         ) : (
