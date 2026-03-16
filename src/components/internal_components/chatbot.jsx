@@ -253,6 +253,7 @@ const questionnaires = {
           '1- Varicose Vein',
           '2- Fallopian Tube Recanalization',
           '3- Genicular Artery Embolization',
+          '4- Thyroid Nodule',
         ],
         field: 'menu_choice',
       },
@@ -519,23 +520,47 @@ const questionnaires = {
   },
   TNA: {
     procedure: 'TNA',
-    welcomeMessage: 'Let’s start a brief thyroid nodule assessment.',
+    useCoreQuestions: false,
+    welcomeMessage:
+      'Hello 👋\n\nYou\'ve reached out regarding Thyroid Nodules (thyroid lumps).',
     treatmentPage: '/thyroid-nodule-ablation',
     youtubeVideo: 'https://www.youtube.com/shorts/HqoeDQTqAXc',
     specificQuestions: [
       {
+        id: 'tna_path_choice',
+        question: 'How would you like to proceed?',
+        options: ['Let\'s Chat', 'Book Consultation'],
+        field: 'tna_path_choice',
+      },
+      {
+        id: 'tna_symptom_gate',
+        question:
+          'Are you currently experiencing any of the following symptoms?\n• Neck swelling / neck lump\n• Difficulty swallowing\n• Voice changes / hoarseness\n• Neck discomfort',
+        options: ['Yes', 'No'],
+        field: 'tna_symptom_gate',
+        condition: { field: 'tna_path_choice', value: "Let's Chat" },
+      },
+      {
+        id: 'tna_atypical_choice',
+        question:
+          'Thank you for sharing that.\nYour symptoms may not be typical of thyroid nodules and could be related to another condition.\n\nWould you like our care team to guide you further?',
+        options: ['Request Call Back', 'Close Request'],
+        field: 'tna_atypical_choice',
+        condition: { field: 'tna_symptom_gate', value: 'No' },
+      },
+      {
         id: 'tna_swollen_neck',
-        question: 'Do you have Swollen Neck?',
+        question: 'Do you have a visible neck swelling / lump?',
         options: ['Yes', 'No'],
         field: 'swollen_neck',
-        condition: { field: 'user_intent', value: 'Seeking Treatment' },
+        condition: { field: 'tna_symptom_gate', value: 'Yes' },
       },
       {
         id: 'tna_diagnosis',
-        question: 'Have you been diagnosed of Thyroid Nodule?',
+        question: 'Have you been diagnosed with a thyroid nodule?',
         options: ['Yes', 'No'],
         field: 'thyroid_nodule_diagnosed',
-        condition: { field: 'user_intent', value: 'Seeking Treatment' },
+        condition: { field: 'tna_symptom_gate', value: 'Yes' },
       },
       {
         id: 'tna_reports',
@@ -543,14 +568,174 @@ const questionnaires = {
         options: ['USG Neck', 'FNAC', 'No Report'],
         field: 'thyroid_reports',
         multiSelect: true,
-        condition: { field: 'thyroid_nodule_diagnosed', value: 'Yes' },
+        condition: { field: 'tna_symptom_gate', value: 'Yes' },
       },
       {
-        id: 'tna_appointment',
-        question: 'Can we fix up an appointment for you?',
-        options: ['Yes', 'No'],
-        field: 'fix_appointment',
-        condition: { field: 'non_surgical_preference', value: 'Yes' },
+        id: 'tna_specialist_choice',
+        question:
+          'I’d like you to know — not all thyroid nodules need surgery.\nMany patients can be treated with minimally invasive, non-surgical options like Thyroid Nodule Ablation.\n\nWould you like to speak with a specialist to understand which option is suitable for you?',
+        options: ['Book consultation', 'Not right now'],
+        field: 'tna_specialist_choice',
+        condition: { field: 'tna_symptom_gate', value: 'Yes' },
+      },
+      {
+        id: 'tna_callback_day',
+        question:
+          'When would it be convenient for our care team to contact you?\n(Office hours: Monday - Saturday 10.00AM - 6.00PM)',
+        options: ['Today', 'Tomorrow'],
+        field: 'appointment_timing',
+        condition: { field: 'tna_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'tna_callback_time',
+        question: 'What time usually works best for you?',
+        options: ['Morning', 'Afternoon', 'Evening'],
+        field: 'tna_callback_time',
+        condition: { field: 'tna_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'tna_age_consult',
+        question: 'May I know your age?',
+        options: [],
+        field: 'age_group',
+        isInput: true,
+        placeholder: 'Enter your age',
+        condition: { field: 'tna_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'tna_name_consult',
+        question: 'May I know your full name?',
+        options: [],
+        field: 'name',
+        isInput: true,
+        placeholder: 'Enter your full name',
+        condition: { field: 'tna_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'tna_city_consult',
+        question: 'Which city are you currently located in?',
+        options: [],
+        field: 'city',
+        isInput: true,
+        placeholder: 'Enter your city',
+        condition: { field: 'tna_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'tna_language_consult',
+        question: 'Which language would you be most comfortable speaking in during the consultation?',
+        options: ['English', 'Hindi', 'Tamil', 'Telugu', 'Kannada', 'Malayalam'],
+        field: 'preferred_language',
+        condition: { field: 'tna_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'tna_phone_consult',
+        question: 'What is the best number to reach you on for the consultation?',
+        options: [],
+        field: 'phone',
+        isInput: true,
+        placeholder: 'Enter your phone number',
+        condition: { field: 'tna_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'tna_age_book',
+        question: 'May I know your age?',
+        options: [],
+        field: 'age_group',
+        isInput: true,
+        placeholder: 'Enter your age',
+        condition: { field: 'tna_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'tna_name_book',
+        question: 'May I know your full name?',
+        options: [],
+        field: 'name',
+        isInput: true,
+        placeholder: 'Enter your full name',
+        condition: { field: 'tna_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'tna_city_book',
+        question: 'Which city are you currently located in?',
+        options: [],
+        field: 'city',
+        isInput: true,
+        placeholder: 'Enter your city',
+        condition: { field: 'tna_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'tna_language_book',
+        question: 'Which language would you be most comfortable speaking in during the consultation?',
+        options: ['English', 'Hindi', 'Tamil', 'Telugu', 'Kannada', 'Malayalam'],
+        field: 'preferred_language',
+        condition: { field: 'tna_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'tna_phone_book',
+        question: 'What is the best number to reach you on for the consultation?',
+        options: [],
+        field: 'phone',
+        isInput: true,
+        placeholder: 'Enter your phone number',
+        condition: { field: 'tna_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'tna_callback_day_book',
+        question:
+          'When would it be convenient for our care team to contact you?\n(Office hours: Monday - Saturday 10.00AM - 6.00PM)',
+        options: ['Today', 'Tomorrow'],
+        field: 'appointment_timing',
+        condition: { field: 'tna_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'tna_callback_time_book',
+        question: 'What time usually works best for you?',
+        options: ['Morning', 'Afternoon', 'Evening'],
+        field: 'tna_callback_time',
+        condition: { field: 'tna_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'tna_age_callback',
+        question: 'May I know your age?',
+        options: [],
+        field: 'age_group',
+        isInput: true,
+        placeholder: 'Enter your age',
+        condition: { field: 'tna_atypical_choice', value: 'Request Call Back' },
+      },
+      {
+        id: 'tna_name_callback',
+        question: 'May I know your full name?',
+        options: [],
+        field: 'name',
+        isInput: true,
+        placeholder: 'Enter your full name',
+        condition: { field: 'tna_atypical_choice', value: 'Request Call Back' },
+      },
+      {
+        id: 'tna_city_callback',
+        question: 'Which city are you currently located in?',
+        options: [],
+        field: 'city',
+        isInput: true,
+        placeholder: 'Enter your city',
+        condition: { field: 'tna_atypical_choice', value: 'Request Call Back' },
+      },
+      {
+        id: 'tna_language_callback',
+        question: 'Which language would you be most comfortable speaking in during the consultation?',
+        options: ['English', 'Hindi', 'Tamil', 'Telugu', 'Kannada', 'Malayalam'],
+        field: 'preferred_language',
+        condition: { field: 'tna_atypical_choice', value: 'Request Call Back' },
+      },
+      {
+        id: 'tna_phone_callback',
+        question: 'What is the best number to reach you on for the consultation?',
+        options: [],
+        field: 'phone',
+        isInput: true,
+        placeholder: 'Enter your phone number',
+        condition: { field: 'tna_atypical_choice', value: 'Request Call Back' },
       },
     ],
   },
@@ -1526,6 +1711,7 @@ const Chatbot = () => {
       if (norm === '1' || norm.startsWith('1-') || norm.includes('varicose')) nextProcedure = 'VV';
       else if (norm === '2' || norm.startsWith('2-') || norm.includes('fallopian') || norm.includes('ftr') || norm.includes('fte')) nextProcedure = 'FTR';
       else if (norm === '3' || norm.startsWith('3-') || norm.includes('genicular') || norm.includes('gae')) nextProcedure = 'GAE';
+      else if (norm === '4' || norm.startsWith('4-') || norm.includes('thyroid') || norm.includes('tna')) nextProcedure = 'TNA';
 
       if (nextProcedure) {
         setIsQuestionnaireActive(false);
@@ -1537,7 +1723,7 @@ const Chatbot = () => {
       }
 
       const retry = {
-        text: 'Please reply with 1, 2, or 3 to choose a condition.',
+        text: 'Please reply with 1, 2, 3, or 4 to choose a condition.',
         sender: 'bot',
         timestamp: new Date(),
         isQuestionnaireQuestion: true,
@@ -1580,6 +1766,41 @@ const Chatbot = () => {
             multiSelect: !!nq.multiSelect,
           };
           console.log('[Questionnaire] Next question rendered:', nextQuestion);
+          setMessages(prev => [...prev, nextQuestion]);
+        }, 500);
+        return;
+      }
+    }
+
+    // TNA: After selecting callback time
+    // - Consult path: proceed to details collection (age/name/city/language/phone)
+    // - Book Consultation path: details are collected earlier, so mark complete and submit.
+    if (updatedResponses.procedure === 'TNA' && (currentQuestion.id === 'tna_callback_time' || currentQuestion.id === 'tna_callback_time_book')) {
+      const isBookPath = (updatedResponses.tna_path_choice || '').toString().trim() === 'Book Consultation';
+      if (isBookPath && currentQuestion.id === 'tna_callback_time_book') {
+        setQuestionnaireStep(currentQuestionnaire.questions.length);
+        return;
+      }
+
+      const alreadyHasAge = !!(updatedResponses.age_group && updatedResponses.age_group.toString().trim());
+      const targetId = alreadyHasAge ? 'tna_name_consult' : 'tna_age_consult';
+      const nextIndex = currentQuestionnaire.questions.findIndex((q) => q.id === targetId);
+      if (nextIndex !== -1) {
+        setQuestionnaireStep(nextIndex);
+        setTimeout(() => {
+          const nq = currentQuestionnaire.questions[nextIndex];
+          const nextQuestion = {
+            text: nq.question,
+            sender: 'bot',
+            timestamp: new Date(),
+            isQuestionnaireQuestion: true,
+            questionId: nq.id,
+            options: nq.options,
+            isInput: nq.isInput,
+            field: nq.field,
+            placeholder: nq.placeholder,
+            multiSelect: !!nq.multiSelect,
+          };
           setMessages(prev => [...prev, nextQuestion]);
         }, 500);
         return;
@@ -1671,6 +1892,42 @@ const Chatbot = () => {
 
     // GAE: Not right now should end the chat with resources
     if (updatedResponses.procedure === 'GAE' && currentQuestion.field === 'gae_specialist_choice' && selectedOption === 'Not right now') {
+      const closeMsg = {
+        text: 'No worries at all. Here are some useful resources you can check out anytime. If you’d like to speak with a specialist later, just message me “Hi” — I’ll be happy to arrange it for you. Take care.',
+        sender: 'bot',
+        timestamp: new Date(),
+        aiGenerated: true,
+        recommendedTreatment: currentQuestionnaire.treatmentPage,
+        youtubeVideo: currentQuestionnaire.youtubeVideo,
+      };
+      setMessages(prev => [...prev, closeMsg]);
+      setIsQuestionnaireActive(false);
+      setQuestionnaireStep(0);
+      setQuestionnaireResponses({});
+      setCurrentQuestionnaire(null);
+      return;
+    }
+
+    // TNA: Close Request should end the chat with resources
+    if (updatedResponses.procedure === 'TNA' && currentQuestion.field === 'tna_atypical_choice' && selectedOption === 'Close Request') {
+      const closeMsg = {
+        text: 'No worries at all. Here are some useful resources you can check out anytime. If you’d like to speak with a specialist later, just message me “Hi” — I’ll be happy to arrange it for you. Take care.',
+        sender: 'bot',
+        timestamp: new Date(),
+        aiGenerated: true,
+        recommendedTreatment: currentQuestionnaire.treatmentPage,
+        youtubeVideo: currentQuestionnaire.youtubeVideo,
+      };
+      setMessages(prev => [...prev, closeMsg]);
+      setIsQuestionnaireActive(false);
+      setQuestionnaireStep(0);
+      setQuestionnaireResponses({});
+      setCurrentQuestionnaire(null);
+      return;
+    }
+
+    // TNA: Not right now should end the chat with resources
+    if (updatedResponses.procedure === 'TNA' && currentQuestion.field === 'tna_specialist_choice' && selectedOption === 'Not right now') {
       const closeMsg = {
         text: 'No worries at all. Here are some useful resources you can check out anytime. If you’d like to speak with a specialist later, just message me “Hi” — I’ll be happy to arrange it for you. Take care.',
         sender: 'bot',
@@ -1937,13 +2194,22 @@ const Chatbot = () => {
                     recommendedTreatment: questionnaire.treatmentPage,
                     youtubeVideo: questionnaire.youtubeVideo,
                   }
-            : {
-                text: 'Thank you. Our medical team will review your answers and contact you soon.',
-                sender: 'bot',
-                timestamp: new Date(),
-                aiGenerated: true,
-                recommendedTreatment: questionnaire.treatmentPage,
-              };
+            : questionnaire.procedure === 'TNA'
+                ? {
+                    text: 'Thank you. Your details have been noted. A member of our care team will contact you as discussed.\n\nMeanwhile, I’ll share helpful information about Thyroid Nodule Ablation (TNA) for you to review.\n\nWishing you good health. Take care.',
+                    sender: 'bot',
+                    timestamp: new Date(),
+                    aiGenerated: true,
+                    recommendedTreatment: questionnaire.treatmentPage,
+                    youtubeVideo: questionnaire.youtubeVideo,
+                  }
+                : {
+                    text: 'Thank you. Our medical team will review your answers and contact you soon.',
+                    sender: 'bot',
+                    timestamp: new Date(),
+                    aiGenerated: true,
+                    recommendedTreatment: questionnaire.treatmentPage,
+                  };
         setMessages(prev => [...prev, thankYouMessage]);
       } else {
         const errorText = await response.text();
