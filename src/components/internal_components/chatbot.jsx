@@ -254,6 +254,7 @@ const questionnaires = {
           '2- Fallopian Tube Recanalization',
           '3- Genicular Artery Embolization',
           '4- Thyroid Nodule',
+          '5- Uterine Fibroids',
         ],
         field: 'menu_choice',
       },
@@ -261,23 +262,216 @@ const questionnaires = {
   },
   UFE: {
     procedure: 'UFE',
-    welcomeMessage: 'Let’s begin a brief fibroid assessment.',
+    useCoreQuestions: false,
+    welcomeMessage:
+      'Hello 👋\n\nYou\'ve reached out regarding Uterine Fibroids, which are growths that develop in or around the uterus and may cause heavy periods, pain, bloating, or pressure symptoms.',
     treatmentPage: '/uterine-artery-embolization-uae',
     youtubeVideo: 'https://www.youtube.com/shorts/iw5G9U2LMNI',
     specificQuestions: [
       {
-        id: 'ufe_diagnosis',
-        question: 'Have you been diagnosed of Uterine fibroids?',
+        id: 'ufe_path_choice',
+        question: 'How would you like to proceed?',
+        options: ['Let\'s Chat', 'Book Consultation'],
+        field: 'ufe_path_choice',
+      },
+      {
+        id: 'ufe_symptom_gate',
+        question:
+          'Are you currently experiencing any of the following symptoms?\n• Heavy or prolonged menstrual bleeding\n• Pelvic pain or pressure / during periods\n• Abdominal bloating or fullness',
         options: ['Yes', 'No'],
-        field: 'uterine_fibroids_diagnosed',
-        condition: { field: 'user_intent', value: 'Seeking Treatment' },
+        field: 'ufe_symptom_gate',
+        condition: { field: 'ufe_path_choice', value: "Let's Chat" },
+      },
+      {
+        id: 'ufe_age_group_gate',
+        question: 'May I know your age group?',
+        options: ['Above 45 years', 'Below 45 years'],
+        field: 'age_group',
+        condition: { field: 'ufe_symptom_gate', value: 'Yes' },
+      },
+      {
+        id: 'ufe_atypical_choice',
+        question:
+          'Thank you for sharing that.\nYour symptoms may not be typical of uterine fibroids and could be related to another condition.\n\nWould you like our care team to guide you further?',
+        options: ['Request Call Back', 'Close Request'],
+        field: 'ufe_atypical_choice',
+        condition: { field: 'age_group', value: 'Below 45 years' },
+      },
+      {
+        id: 'ufe_typical_ack',
+        question:
+          'Thank you for sharing that.\nThe symptoms you\'re experiencing are commonly seen with Uterine Fibroids.',
+        options: ['Continue'],
+        field: 'ufe_typical_ack',
+        condition: { field: 'age_group', value: 'Above 45 years' },
+      },
+      {
+        id: 'ufe_consulted_doctor',
+        question: 'Have you already consulted a doctor for this condition?',
+        options: ['Yes', 'No'],
+        field: 'ufe_consulted_doctor',
+        condition: { field: 'age_group', value: 'Above 45 years' },
+      },
+      {
+        id: 'ufe_surgery_advised',
+        question: 'Has any doctor advised surgery (myomectomy or hysterectomy) for your fibroids?',
+        options: ['Yes', 'No'],
+        field: 'ufe_surgery_advised',
+        condition: { field: 'age_group', value: 'Above 45 years' },
       },
       {
         id: 'ufe_reports',
-        question: 'Do you have any of these reports available?',
-        options: ['USG Abdomen', 'MRI Abdomen', 'No Report'],
+        question: 'Do you have an ultrasound or MRI scan report of your uterus?',
+        options: ['Yes, I have', 'No, not yet'],
         field: 'fibroid_tests',
-        condition: { field: 'uterine_fibroids_diagnosed', value: 'Yes' },
+        condition: { field: 'age_group', value: 'Above 45 years' },
+      },
+      {
+        id: 'ufe_specialist_choice',
+        question:
+          'Not all uterine fibroids require surgery.\n\nMany women choose a non-surgical option called Uterine Fibroid Embolization (UFE/UAE), where fibroids are treated from inside and gradually shrink. It\'s a short day-care procedure with minimal discomfort, faster recovery, and helps preserve the uterus.\n\nWould you like to speak with a specialist to understand which option is suitable for you?',
+        options: ['Book consultation', 'Not right now'],
+        field: 'ufe_specialist_choice',
+        condition: { field: 'age_group', value: 'Above 45 years' },
+      },
+      {
+        id: 'ufe_callback_day',
+        question:
+          'When would it be convenient for our care team to contact you?\n(Office hours: Monday - Saturday 10.00AM - 6.00PM)',
+        options: ['Today', 'Tomorrow'],
+        field: 'appointment_timing',
+        condition: { field: 'ufe_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'ufe_callback_time',
+        question: 'What time usually works best for you?',
+        options: ['Morning', 'Afternoon', 'Evening'],
+        field: 'ufe_callback_time',
+        condition: { field: 'ufe_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'ufe_name_consult',
+        question: 'May I know your full name?',
+        options: [],
+        field: 'name',
+        isInput: true,
+        placeholder: 'Enter your full name',
+        condition: { field: 'ufe_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'ufe_city_consult',
+        question: 'Which city are you currently located in?',
+        options: [],
+        field: 'city',
+        isInput: true,
+        placeholder: 'Enter your city',
+        condition: { field: 'ufe_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'ufe_language_consult',
+        question: 'Which language would you be most comfortable speaking in during the consultation?',
+        options: ['English', 'Hindi', 'Tamil', 'Telugu', 'Kannada', 'Malayalam'],
+        field: 'preferred_language',
+        condition: { field: 'ufe_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'ufe_phone_consult',
+        question: 'What is the best number to reach you on for the consultation?',
+        options: [],
+        field: 'phone',
+        isInput: true,
+        placeholder: 'Enter your phone number',
+        condition: { field: 'ufe_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'ufe_age_group_book',
+        question: 'May I know your age group?',
+        options: ['Above 45 years', 'Below 45 years'],
+        field: 'age_group',
+        condition: { field: 'ufe_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'ufe_name_book',
+        question: 'May I know your full name?',
+        options: [],
+        field: 'name',
+        isInput: true,
+        placeholder: 'Enter your full name',
+        condition: { field: 'ufe_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'ufe_city_book',
+        question: 'Which city are you currently located in?',
+        options: [],
+        field: 'city',
+        isInput: true,
+        placeholder: 'Enter your city',
+        condition: { field: 'ufe_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'ufe_language_book',
+        question: 'Which language would you be most comfortable speaking in during the consultation?',
+        options: ['English', 'Hindi', 'Tamil', 'Telugu', 'Kannada', 'Malayalam'],
+        field: 'preferred_language',
+        condition: { field: 'ufe_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'ufe_phone_book',
+        question: 'What is the best number to reach you on for the consultation?',
+        options: [],
+        field: 'phone',
+        isInput: true,
+        placeholder: 'Enter your phone number',
+        condition: { field: 'ufe_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'ufe_callback_day_book',
+        question:
+          'When would it be convenient for our care team to contact you?\n(Office hours: Monday - Saturday 10.00AM - 6.00PM)',
+        options: ['Today', 'Tomorrow'],
+        field: 'appointment_timing',
+        condition: { field: 'ufe_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'ufe_callback_time_book',
+        question: 'What time usually works best for you?',
+        options: ['Morning', 'Afternoon', 'Evening'],
+        field: 'ufe_callback_time',
+        condition: { field: 'ufe_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'ufe_name_callback',
+        question: 'May I know your full name?',
+        options: [],
+        field: 'name',
+        isInput: true,
+        placeholder: 'Enter your full name',
+        condition: { field: 'ufe_atypical_choice', value: 'Request Call Back' },
+      },
+      {
+        id: 'ufe_city_callback',
+        question: 'Which city are you currently located in?',
+        options: [],
+        field: 'city',
+        isInput: true,
+        placeholder: 'Enter your city',
+        condition: { field: 'ufe_atypical_choice', value: 'Request Call Back' },
+      },
+      {
+        id: 'ufe_language_callback',
+        question: 'Which language would you be most comfortable speaking in during the consultation?',
+        options: ['English', 'Hindi', 'Tamil', 'Telugu', 'Kannada', 'Malayalam'],
+        field: 'preferred_language',
+        condition: { field: 'ufe_atypical_choice', value: 'Request Call Back' },
+      },
+      {
+        id: 'ufe_phone_callback',
+        question: 'What is the best number to reach you on for the consultation?',
+        options: [],
+        field: 'phone',
+        isInput: true,
+        placeholder: 'Enter your phone number',
+        condition: { field: 'ufe_atypical_choice', value: 'Request Call Back' },
       },
     ],
   },
@@ -1318,7 +1512,7 @@ const detectProcedureFromSymptoms = (input) => {
 const getProcedureInfo = (procedure) => {
   const procedureInfoMap = {
     UFE: {
-      message: 'Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help related to Uterine Fibroids.',
+      message: 'You\'ve reached out regarding Uterine Fibroids, which are growths that develop in or around the uterus and may cause heavy periods, pain, bloating, or pressure symptoms.',
     },
     PAE: {
       message: 'Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help related to Enlarged Prostate.',
@@ -1712,6 +1906,7 @@ const Chatbot = () => {
       else if (norm === '2' || norm.startsWith('2-') || norm.includes('fallopian') || norm.includes('ftr') || norm.includes('fte')) nextProcedure = 'FTR';
       else if (norm === '3' || norm.startsWith('3-') || norm.includes('genicular') || norm.includes('gae')) nextProcedure = 'GAE';
       else if (norm === '4' || norm.startsWith('4-') || norm.includes('thyroid') || norm.includes('tna')) nextProcedure = 'TNA';
+      else if (norm === '5' || norm.startsWith('5-') || norm.includes('uterine') || norm.includes('fibroid') || norm.includes('ufe') || norm.includes('uae')) nextProcedure = 'UFE';
 
       if (nextProcedure) {
         setIsQuestionnaireActive(false);
@@ -1723,7 +1918,7 @@ const Chatbot = () => {
       }
 
       const retry = {
-        text: 'Please reply with 1, 2, 3, or 4 to choose a condition.',
+        text: 'Please reply with 1, 2, 3, 4, or 5 to choose a condition.',
         sender: 'bot',
         timestamp: new Date(),
         isQuestionnaireQuestion: true,
@@ -1766,6 +1961,39 @@ const Chatbot = () => {
             multiSelect: !!nq.multiSelect,
           };
           console.log('[Questionnaire] Next question rendered:', nextQuestion);
+          setMessages(prev => [...prev, nextQuestion]);
+        }, 500);
+        return;
+      }
+    }
+
+    // UFE: After selecting callback time
+    // - Consult path: proceed to details collection (name/city/language/phone)
+    // - Book Consultation path: details are collected earlier, so mark complete and submit.
+    if (updatedResponses.procedure === 'UFE' && (currentQuestion.id === 'ufe_callback_time' || currentQuestion.id === 'ufe_callback_time_book')) {
+      const isBookPath = (updatedResponses.ufe_path_choice || '').toString().trim() === 'Book Consultation';
+      if (isBookPath && currentQuestion.id === 'ufe_callback_time_book') {
+        setQuestionnaireStep(currentQuestionnaire.questions.length);
+        return;
+      }
+
+      const nextIndex = currentQuestionnaire.questions.findIndex((q) => q.id === 'ufe_name_consult');
+      if (nextIndex !== -1) {
+        setQuestionnaireStep(nextIndex);
+        setTimeout(() => {
+          const nq = currentQuestionnaire.questions[nextIndex];
+          const nextQuestion = {
+            text: nq.question,
+            sender: 'bot',
+            timestamp: new Date(),
+            isQuestionnaireQuestion: true,
+            questionId: nq.id,
+            options: nq.options,
+            isInput: nq.isInput,
+            field: nq.field,
+            placeholder: nq.placeholder,
+            multiSelect: !!nq.multiSelect,
+          };
           setMessages(prev => [...prev, nextQuestion]);
         }, 500);
         return;
@@ -1928,6 +2156,42 @@ const Chatbot = () => {
 
     // TNA: Not right now should end the chat with resources
     if (updatedResponses.procedure === 'TNA' && currentQuestion.field === 'tna_specialist_choice' && selectedOption === 'Not right now') {
+      const closeMsg = {
+        text: 'No worries at all. Here are some useful resources you can check out anytime. If you’d like to speak with a specialist later, just message me “Hi” — I’ll be happy to arrange it for you. Take care.',
+        sender: 'bot',
+        timestamp: new Date(),
+        aiGenerated: true,
+        recommendedTreatment: currentQuestionnaire.treatmentPage,
+        youtubeVideo: currentQuestionnaire.youtubeVideo,
+      };
+      setMessages(prev => [...prev, closeMsg]);
+      setIsQuestionnaireActive(false);
+      setQuestionnaireStep(0);
+      setQuestionnaireResponses({});
+      setCurrentQuestionnaire(null);
+      return;
+    }
+
+    // UFE: Close Request should end the chat with resources
+    if (updatedResponses.procedure === 'UFE' && currentQuestion.field === 'ufe_atypical_choice' && selectedOption === 'Close Request') {
+      const closeMsg = {
+        text: 'No worries at all. Here are some useful resources you can check out anytime. If you’d like to speak with a specialist later, just message me “Hi” — I’ll be happy to arrange it for you. Take care.',
+        sender: 'bot',
+        timestamp: new Date(),
+        aiGenerated: true,
+        recommendedTreatment: currentQuestionnaire.treatmentPage,
+        youtubeVideo: currentQuestionnaire.youtubeVideo,
+      };
+      setMessages(prev => [...prev, closeMsg]);
+      setIsQuestionnaireActive(false);
+      setQuestionnaireStep(0);
+      setQuestionnaireResponses({});
+      setCurrentQuestionnaire(null);
+      return;
+    }
+
+    // UFE: Not right now should end the chat with resources
+    if (updatedResponses.procedure === 'UFE' && currentQuestion.field === 'ufe_specialist_choice' && selectedOption === 'Not right now') {
       const closeMsg = {
         text: 'No worries at all. Here are some useful resources you can check out anytime. If you’d like to speak with a specialist later, just message me “Hi” — I’ll be happy to arrange it for you. Take care.',
         sender: 'bot',
@@ -2197,6 +2461,15 @@ const Chatbot = () => {
             : questionnaire.procedure === 'TNA'
                 ? {
                     text: 'Thank you. Your details have been noted. A member of our care team will contact you as discussed.\n\nMeanwhile, I’ll share helpful information about Thyroid Nodule Ablation (TNA) for you to review.\n\nWishing you good health. Take care.',
+                    sender: 'bot',
+                    timestamp: new Date(),
+                    aiGenerated: true,
+                    recommendedTreatment: questionnaire.treatmentPage,
+                    youtubeVideo: questionnaire.youtubeVideo,
+                  }
+            : questionnaire.procedure === 'UFE'
+                ? {
+                    text: 'Thank you. Your details have been noted. A member of our care team will contact you as discussed.\n\nMeanwhile, I’ll share helpful information about Uterine Fibroids and Uterine Fibroid Embolization (UFE/UAE) for you to review.\n\nWishing you good health. Take care.',
                     sender: 'bot',
                     timestamp: new Date(),
                     aiGenerated: true,
