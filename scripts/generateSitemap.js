@@ -12,6 +12,7 @@ const BASE_URL = 'https://nosurgeries.in';
 const PUBLIC_DIR = path.resolve(__dirname, '..', 'public');
 const DATA_BLOG_JSON = path.resolve(__dirname, '..', 'src', 'data', 'blogPosts.json');
 const OUTPUT_SITEMAP = path.join(PUBLIC_DIR, 'sitemap.xml');
+const OUTPUT_SITEMAP_ROOT = path.resolve(__dirname, '..', 'sitemap.xml');
 
 const DEFAULT_LASTMOD = '2026-02-12';
 
@@ -104,7 +105,9 @@ function main() {
     fs.mkdirSync(PUBLIC_DIR, { recursive: true });
   }
   fs.writeFileSync(OUTPUT_SITEMAP, xml, 'utf8');
+  fs.writeFileSync(OUTPUT_SITEMAP_ROOT, xml, 'utf8');
   console.log(`Generated sitemap with ${urls.length} URLs -> ${OUTPUT_SITEMAP}`);
+  console.log(`Generated sitemap with ${urls.length} URLs -> ${OUTPUT_SITEMAP_ROOT}`);
 }
 
 main();
