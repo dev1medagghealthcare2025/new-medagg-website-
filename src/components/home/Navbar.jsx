@@ -20,15 +20,19 @@ export default function Navbar() {
   return (
     <nav className='w-full bg-[#392C5C] sticky top-0 z-50'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-0'>
-        <div className='flex items-center justify-between h-[72px] lg:h-[80px]'>
+        <div className='flex items-center justify-between h-[100px] lg:h-[110px]'>
           {/* Logo */}
-          <div className='flex-shrink-0'>
-            <Link to='/' className='flex items-center'>
-              <img
-                src='/New_medagg_logo.png'
-                alt='Medagg Healthcare'
-                className='block w-[120px] h-[64px] lg:w-[140px] lg:h-[72px]'
-              />
+          <div className='min-w-0'>
+            <Link to='/' className='flex items-center -ml-2 max-w-[520px] xl:max-w-[600px]'>
+              <div className='h-[100px] lg:h-[110px] flex items-center'>
+                <img
+                  src='/new_part2.png'
+                  alt='Medagg Healthcare'
+                  className='block h-[94px] sm:h-[98px] lg:h-[104px] w-auto max-w-full object-contain drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]'
+                  loading='eager'
+                  decoding='async'
+                />
+              </div>
             </Link>
           </div>
 
@@ -113,7 +117,7 @@ export default function Navbar() {
               onClick={toggleMenu}
             />
             {/* Menu Panel */}
-            <div id='mobile-menu' className='lg:hidden fixed top-[84px] lg:top-[92px] left-0 right-0 z-50 animate-slide-down'>
+            <div id='mobile-menu' className='lg:hidden fixed top-[100px] lg:top-[110px] left-0 right-0 z-50 animate-slide-down'>
               <div className='px-2 pt-2 pb-3 space-y-1 bg-[#392C5C] border-t border-pink-400/20 shadow-xl'>
                 <Link to='/about' onClick={() => setIsMenuOpen(false)} className='block px-3 py-2 text-white hover:text-pink-400 transition-colors text-base font-semibold'>About</Link>
                 <Link to='/blog' onClick={() => setIsMenuOpen(false)} className='block px-3 py-2 text-white hover:text-pink-400 transition-colors text-base font-semibold'>Blog</Link>

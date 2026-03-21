@@ -255,6 +255,7 @@ const questionnaires = {
           '3- Genicular Artery Embolization',
           '4- Thyroid Nodule',
           '5- Uterine Fibroids',
+          '6- Breast Nodule',
         ],
         field: 'menu_choice',
       },
@@ -933,6 +934,207 @@ const questionnaires = {
       },
     ],
   },
+  VAE: {
+    procedure: 'VAE',
+    useCoreQuestions: false,
+    welcomeMessage:
+      'Hello 👋\n\nYou\'ve reached out regarding Breast Nodules, which are lumps or masses in the breast tissue.\nMost breast nodules are benign (non-cancerous), but they may cause discomfort, cosmetic concerns, or anxiety.',
+    treatmentPage: '/breast-nodule-vae',
+    youtubeVideo: null,
+    specificQuestions: [
+      {
+        id: 'vae_path_choice',
+        question: 'How would you like to proceed?',
+        options: ['Let\'s Chat', 'Book Consultation'],
+        field: 'vae_path_choice',
+      },
+      {
+        id: 'vae_symptom_gate',
+        question:
+          'Are you currently experiencing any of the following symptoms?\n• Palpable lump or mass in the breast\n• Breast discomfort or tenderness\n• Cosmetic concerns or asymmetry\n• Anxiety about the lump',
+        options: ['Yes', 'No'],
+        field: 'vae_symptom_gate',
+        condition: { field: 'vae_path_choice', value: "Let's Chat" },
+      },
+      {
+        id: 'vae_atypical_choice',
+        question:
+          'Thank you for sharing that.\nYour symptoms may not be typical of breast nodules and could be related to another condition.\n\nWould you like our care team to guide you further?',
+        options: ['Request Call Back', 'Close Request'],
+        field: 'vae_atypical_choice',
+        condition: { field: 'vae_symptom_gate', value: 'No' },
+      },
+      {
+        id: 'vae_typical_ack',
+        question:
+          'Thank you for sharing that.\nThe symptoms you\'re experiencing are commonly seen with Breast Nodules.',
+        options: ['Continue'],
+        field: 'vae_typical_ack',
+        condition: { field: 'vae_symptom_gate', value: 'Yes' },
+      },
+      {
+        id: 'vae_consulted_doctor',
+        question: 'Have you already consulted a doctor for this condition?',
+        options: ['Yes', 'No'],
+        field: 'vae_consulted_doctor',
+        condition: { field: 'vae_symptom_gate', value: 'Yes' },
+      },
+      {
+        id: 'vae_surgery_advised',
+        question: 'Has any doctor advised surgical removal of the breast nodule?',
+        options: ['Yes', 'No'],
+        field: 'vae_surgery_advised',
+        condition: { field: 'vae_symptom_gate', value: 'Yes' },
+      },
+      {
+        id: 'vae_reports',
+        question: 'Do you have a mammogram, ultrasound, or biopsy report?',
+        options: ['Yes, I have', 'No, not yet'],
+        field: 'breast_reports',
+        condition: { field: 'vae_symptom_gate', value: 'Yes' },
+      },
+      {
+        id: 'vae_specialist_choice',
+        question:
+          'Not all breast nodules require open surgery.\n\nMany patients can be treated with minimally invasive options like Vacuum-Assisted Excision, Cryoablation, or Radiofrequency Ablation — performed under imaging guidance. These are day-care procedures with minimal scarring, less discomfort, and faster recovery.\n\nWould you like to speak with a specialist to understand which option is suitable for you?',
+        options: ['Book consultation', 'Not right now'],
+        field: 'vae_specialist_choice',
+        condition: { field: 'vae_symptom_gate', value: 'Yes' },
+      },
+      {
+        id: 'vae_callback_day',
+        question:
+          'When would it be convenient for our care team to contact you?\n(Office hours: Monday - Saturday 10.00AM - 6.00PM)',
+        options: ['Today', 'Tomorrow'],
+        field: 'appointment_timing',
+        condition: { field: 'vae_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'vae_callback_time',
+        question: 'What time usually works best for you?',
+        options: ['Morning', 'Afternoon', 'Evening'],
+        field: 'vae_callback_time',
+        condition: { field: 'vae_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'vae_name',
+        question: 'May I know your full name?',
+        options: [],
+        field: 'name',
+        isInput: true,
+        placeholder: 'Enter your full name',
+        condition: { field: 'vae_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'vae_city',
+        question: 'Which city are you currently located in?',
+        options: [],
+        field: 'city',
+        isInput: true,
+        placeholder: 'Enter your city',
+        condition: { field: 'vae_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'vae_language',
+        question: 'Which language would you be most comfortable speaking in during the consultation?',
+        options: ['English', 'Hindi', 'Tamil', 'Telugu', 'Kannada', 'Malayalam'],
+        field: 'preferred_language',
+        condition: { field: 'vae_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'vae_phone',
+        question: 'What is the best number to reach you on for the consultation?',
+        options: [],
+        field: 'phone',
+        isInput: true,
+        placeholder: 'Enter your phone number',
+        condition: { field: 'vae_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'vae_name_book',
+        question: 'May I know your full name?',
+        options: [],
+        field: 'name',
+        isInput: true,
+        placeholder: 'Enter your full name',
+        condition: { field: 'vae_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'vae_city_book',
+        question: 'Which city are you currently located in?',
+        options: [],
+        field: 'city',
+        isInput: true,
+        placeholder: 'Enter your city',
+        condition: { field: 'vae_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'vae_language_book',
+        question: 'Which language would you be most comfortable speaking in during the consultation?',
+        options: ['English', 'Hindi', 'Tamil', 'Telugu', 'Kannada', 'Malayalam'],
+        field: 'preferred_language',
+        condition: { field: 'vae_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'vae_phone_book',
+        question: 'What is the best number to reach you on for the consultation?',
+        options: [],
+        field: 'phone',
+        isInput: true,
+        placeholder: 'Enter your phone number',
+        condition: { field: 'vae_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'vae_callback_day_book',
+        question:
+          'When would it be convenient for our care team to contact you?\n(Office hours: Monday - Saturday 10.00AM - 6.00PM)',
+        options: ['Today', 'Tomorrow'],
+        field: 'appointment_timing',
+        condition: { field: 'vae_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'vae_callback_time_book',
+        question: 'What time usually works best for you?',
+        options: ['Morning', 'Afternoon', 'Evening'],
+        field: 'vae_callback_time',
+        condition: { field: 'vae_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'vae_name_callback',
+        question: 'May I know your full name?',
+        options: [],
+        field: 'name',
+        isInput: true,
+        placeholder: 'Enter your full name',
+        condition: { field: 'vae_atypical_choice', value: 'Request Call Back' },
+      },
+      {
+        id: 'vae_city_callback',
+        question: 'Which city are you currently located in?',
+        options: [],
+        field: 'city',
+        isInput: true,
+        placeholder: 'Enter your city',
+        condition: { field: 'vae_atypical_choice', value: 'Request Call Back' },
+      },
+      {
+        id: 'vae_language_callback',
+        question: 'Which language would you be most comfortable speaking in during the consultation?',
+        options: ['English', 'Hindi', 'Tamil', 'Telugu', 'Kannada', 'Malayalam'],
+        field: 'preferred_language',
+        condition: { field: 'vae_atypical_choice', value: 'Request Call Back' },
+      },
+      {
+        id: 'vae_phone_callback',
+        question: 'What is the best number to reach you on for the consultation?',
+        options: [],
+        field: 'phone',
+        isInput: true,
+        placeholder: 'Enter your phone number',
+        condition: { field: 'vae_atypical_choice', value: 'Request Call Back' },
+      },
+    ],
+  },
   VV: {
     procedure: 'VV',
     useCoreQuestions: false,
@@ -1479,6 +1681,7 @@ const detectProcedureFromSymptoms = (input) => {
         '/uae': 'UFE',
         '/plantar-fascial-embolization': 'PFE',
         '/pfe': 'PFE',
+        '/breast-nodule-vae': 'VAE',
       };
       const inferred = res.procedureCode || routeToProcedure[res.path] || null;
       return {
@@ -1522,6 +1725,9 @@ const getProcedureInfo = (procedure) => {
     },
     TNA: {
       message: 'Thanks for sharing that.\nBased on what you’ve mentioned, it looks like you may be looking for help related to Thyroid Nodules.',
+    },
+    VAE: {
+      message: 'You\'ve reached out regarding Breast Nodules, which are lumps or masses in the breast tissue. Most breast nodules are benign (non-cancerous).',
     },
     VV: {
       message: 'You’ve reached out regarding Varicose Veins, which are enlarged, twisted, blue or purple veins usually appearing in the legs due to damaged, one-way valves that allow blood to pool.',
@@ -1907,6 +2113,7 @@ const Chatbot = () => {
       else if (norm === '3' || norm.startsWith('3-') || norm.includes('genicular') || norm.includes('gae')) nextProcedure = 'GAE';
       else if (norm === '4' || norm.startsWith('4-') || norm.includes('thyroid') || norm.includes('tna')) nextProcedure = 'TNA';
       else if (norm === '5' || norm.startsWith('5-') || norm.includes('uterine') || norm.includes('fibroid') || norm.includes('ufe') || norm.includes('uae')) nextProcedure = 'UFE';
+      else if (norm === '6' || norm.startsWith('6-') || norm.includes('breast') || norm.includes('vae')) nextProcedure = 'VAE';
 
       if (nextProcedure) {
         setIsQuestionnaireActive(false);
@@ -1918,7 +2125,7 @@ const Chatbot = () => {
       }
 
       const retry = {
-        text: 'Please reply with 1, 2, 3, 4, or 5 to choose a condition.',
+        text: 'Please reply with 1, 2, 3, 4, 5, or 6 to choose a condition.',
         sender: 'bot',
         timestamp: new Date(),
         isQuestionnaireQuestion: true,
@@ -1961,6 +2168,39 @@ const Chatbot = () => {
             multiSelect: !!nq.multiSelect,
           };
           console.log('[Questionnaire] Next question rendered:', nextQuestion);
+          setMessages(prev => [...prev, nextQuestion]);
+        }, 500);
+        return;
+      }
+    }
+
+    // VAE: After selecting callback time
+    // - Consult path: proceed to details collection (name/city/language/phone)
+    // - Book Consultation path: details are collected earlier, so mark complete and submit.
+    if (updatedResponses.procedure === 'VAE' && (currentQuestion.id === 'vae_callback_time' || currentQuestion.id === 'vae_callback_time_book')) {
+      const isBookPath = (updatedResponses.vae_path_choice || '').toString().trim() === 'Book Consultation';
+      if (isBookPath && currentQuestion.id === 'vae_callback_time_book') {
+        setQuestionnaireStep(currentQuestionnaire.questions.length);
+        return;
+      }
+
+      const nextIndex = currentQuestionnaire.questions.findIndex((q) => q.id === 'vae_name');
+      if (nextIndex !== -1) {
+        setQuestionnaireStep(nextIndex);
+        setTimeout(() => {
+          const nq = currentQuestionnaire.questions[nextIndex];
+          const nextQuestion = {
+            text: nq.question,
+            sender: 'bot',
+            timestamp: new Date(),
+            isQuestionnaireQuestion: true,
+            questionId: nq.id,
+            options: nq.options,
+            isInput: nq.isInput,
+            field: nq.field,
+            placeholder: nq.placeholder,
+            multiSelect: !!nq.multiSelect,
+          };
           setMessages(prev => [...prev, nextQuestion]);
         }, 500);
         return;
@@ -2192,6 +2432,42 @@ const Chatbot = () => {
 
     // UFE: Not right now should end the chat with resources
     if (updatedResponses.procedure === 'UFE' && currentQuestion.field === 'ufe_specialist_choice' && selectedOption === 'Not right now') {
+      const closeMsg = {
+        text: 'No worries at all. Here are some useful resources you can check out anytime. If you’d like to speak with a specialist later, just message me “Hi” — I’ll be happy to arrange it for you. Take care.',
+        sender: 'bot',
+        timestamp: new Date(),
+        aiGenerated: true,
+        recommendedTreatment: currentQuestionnaire.treatmentPage,
+        youtubeVideo: currentQuestionnaire.youtubeVideo,
+      };
+      setMessages(prev => [...prev, closeMsg]);
+      setIsQuestionnaireActive(false);
+      setQuestionnaireStep(0);
+      setQuestionnaireResponses({});
+      setCurrentQuestionnaire(null);
+      return;
+    }
+
+    // VAE: Close Request should end the chat with resources
+    if (updatedResponses.procedure === 'VAE' && currentQuestion.field === 'vae_atypical_choice' && selectedOption === 'Close Request') {
+      const closeMsg = {
+        text: 'No worries at all. Here are some useful resources you can check out anytime. If you’d like to speak with a specialist later, just message me “Hi” — I’ll be happy to arrange it for you. Take care.',
+        sender: 'bot',
+        timestamp: new Date(),
+        aiGenerated: true,
+        recommendedTreatment: currentQuestionnaire.treatmentPage,
+        youtubeVideo: currentQuestionnaire.youtubeVideo,
+      };
+      setMessages(prev => [...prev, closeMsg]);
+      setIsQuestionnaireActive(false);
+      setQuestionnaireStep(0);
+      setQuestionnaireResponses({});
+      setCurrentQuestionnaire(null);
+      return;
+    }
+
+    // VAE: Not right now should end the chat with resources
+    if (updatedResponses.procedure === 'VAE' && currentQuestion.field === 'vae_specialist_choice' && selectedOption === 'Not right now') {
       const closeMsg = {
         text: 'No worries at all. Here are some useful resources you can check out anytime. If you’d like to speak with a specialist later, just message me “Hi” — I’ll be happy to arrange it for you. Take care.',
         sender: 'bot',
@@ -2470,6 +2746,15 @@ const Chatbot = () => {
             : questionnaire.procedure === 'UFE'
                 ? {
                     text: 'Thank you. Your details have been noted. A member of our care team will contact you as discussed.\n\nMeanwhile, I’ll share helpful information about Uterine Fibroids and Uterine Fibroid Embolization (UFE/UAE) for you to review.\n\nWishing you good health. Take care.',
+                    sender: 'bot',
+                    timestamp: new Date(),
+                    aiGenerated: true,
+                    recommendedTreatment: questionnaire.treatmentPage,
+                    youtubeVideo: questionnaire.youtubeVideo,
+                  }
+            : questionnaire.procedure === 'VAE'
+                ? {
+                    text: 'Thank you. Your details have been noted. A member of our care team will contact you as discussed.\n\nMeanwhile, I’ll share helpful information about Breast Nodules and minimally invasive treatment options like Vacuum-Assisted Excision (VAE) for you to review.\n\nWishing you good health. Take care.',
                     sender: 'bot',
                     timestamp: new Date(),
                     aiGenerated: true,
