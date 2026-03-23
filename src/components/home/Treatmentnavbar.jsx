@@ -302,7 +302,7 @@ export default function Treatmentnavbar() {
   };
 
   return (
-    <nav className='sticky top-[72px] lg:top-[80px] z-40 w-full bg-white border-b border-gray-200 shadow-xl shadow-black/15 ring-1 ring-black/5 overflow-x-hidden'>
+    <nav className='sticky top-[100px] lg:top-[110px] z-40 w-full bg-white border-b border-gray-200 shadow-xl shadow-black/15 ring-1 ring-black/5 overflow-x-hidden'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='flex items-center'>
           <button
