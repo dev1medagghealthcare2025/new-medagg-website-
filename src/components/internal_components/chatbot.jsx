@@ -256,6 +256,7 @@ const questionnaires = {
           '4- Thyroid Nodule',
           '5- Uterine Fibroids',
           '6- Breast Nodule',
+          '7- Plantar Fasciitis',
         ],
         field: 'menu_choice',
       },
@@ -1135,6 +1136,207 @@ const questionnaires = {
       },
     ],
   },
+  PFE: {
+    procedure: 'PFE',
+    useCoreQuestions: false,
+    welcomeMessage:
+      'Hello 👋\n\nYou\'ve reached out regarding Plantar Fasciitis, a condition that causes heel pain due to inflammation of the plantar fascia — a thick band of tissue running along the bottom of your foot.',
+    treatmentPage: '/plantar-fascial-embolization',
+    youtubeVideo: null,
+    specificQuestions: [
+      {
+        id: 'pfe_path_choice',
+        question: 'How would you like to proceed?',
+        options: ['Let\'s Chat', 'Book Consultation'],
+        field: 'pfe_path_choice',
+      },
+      {
+        id: 'pfe_symptom_gate',
+        question:
+          'Are you currently experiencing any of the following symptoms?\n• Sharp or stabbing heel pain, especially in the morning\n• Pain after standing or walking for long periods\n• Tenderness at the bottom of the heel\n• Stiffness in the foot',
+        options: ['Yes', 'No'],
+        field: 'pfe_symptom_gate',
+        condition: { field: 'pfe_path_choice', value: "Let's Chat" },
+      },
+      {
+        id: 'pfe_atypical_choice',
+        question:
+          'Thank you for sharing that.\nYour symptoms may not be typical of plantar fasciitis and could be related to another condition.\n\nWould you like our care team to guide you further?',
+        options: ['Request Call Back', 'Close Request'],
+        field: 'pfe_atypical_choice',
+        condition: { field: 'pfe_symptom_gate', value: 'No' },
+      },
+      {
+        id: 'pfe_typical_ack',
+        question:
+          'Thank you for sharing that.\nThe symptoms you\'re experiencing are commonly seen with Plantar Fasciitis.',
+        options: ['Continue'],
+        field: 'pfe_typical_ack',
+        condition: { field: 'pfe_symptom_gate', value: 'Yes' },
+      },
+      {
+        id: 'pfe_consulted_doctor',
+        question: 'Have you already consulted a doctor for this condition?',
+        options: ['Yes', 'No'],
+        field: 'pfe_consulted_doctor',
+        condition: { field: 'pfe_symptom_gate', value: 'Yes' },
+      },
+      {
+        id: 'pfe_surgery_advised',
+        question: 'Has any doctor advised surgery for your plantar fasciitis?',
+        options: ['Yes', 'No'],
+        field: 'pfe_surgery_advised',
+        condition: { field: 'pfe_symptom_gate', value: 'Yes' },
+      },
+      {
+        id: 'pfe_reports',
+        question: 'Do you have an X-ray, ultrasound, or MRI report of your foot?',
+        options: ['Yes, I have', 'No, not yet'],
+        field: 'pfe_reports',
+        condition: { field: 'pfe_symptom_gate', value: 'Yes' },
+      },
+      {
+        id: 'pfe_specialist_choice',
+        question:
+          'Not all plantar fasciitis requires surgery.\n\nMany patients can be treated with Plantar Fasciitis Embolization — a minimally invasive, non-surgical procedure that reduces inflammation and pain. It\'s a day-care procedure with minimal discomfort and faster recovery.\n\nWould you like to speak with a specialist to understand which option is suitable for you?',
+        options: ['Book consultation', 'Not right now'],
+        field: 'pfe_specialist_choice',
+        condition: { field: 'pfe_symptom_gate', value: 'Yes' },
+      },
+      {
+        id: 'pfe_callback_day',
+        question:
+          'When would it be convenient for our care team to contact you?\n(Office hours: Monday - Saturday 10.00AM - 6.00PM)',
+        options: ['Today', 'Tomorrow'],
+        field: 'appointment_timing',
+        condition: { field: 'pfe_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'pfe_callback_time',
+        question: 'What time usually works best for you?',
+        options: ['Morning', 'Afternoon', 'Evening'],
+        field: 'pfe_callback_time',
+        condition: { field: 'pfe_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'pfe_name',
+        question: 'May I know your full name?',
+        options: [],
+        field: 'name',
+        isInput: true,
+        placeholder: 'Enter your full name',
+        condition: { field: 'pfe_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'pfe_city',
+        question: 'Which city are you currently located in?',
+        options: [],
+        field: 'city',
+        isInput: true,
+        placeholder: 'Enter your city',
+        condition: { field: 'pfe_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'pfe_language',
+        question: 'Which language would you be most comfortable speaking in during the consultation?',
+        options: ['English', 'Hindi', 'Tamil', 'Telugu', 'Kannada', 'Malayalam'],
+        field: 'preferred_language',
+        condition: { field: 'pfe_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'pfe_phone',
+        question: 'What is the best number to reach you on for the consultation?',
+        options: [],
+        field: 'phone',
+        isInput: true,
+        placeholder: 'Enter your phone number',
+        condition: { field: 'pfe_specialist_choice', value: 'Book consultation' },
+      },
+      {
+        id: 'pfe_name_book',
+        question: 'May I know your full name?',
+        options: [],
+        field: 'name',
+        isInput: true,
+        placeholder: 'Enter your full name',
+        condition: { field: 'pfe_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'pfe_city_book',
+        question: 'Which city are you currently located in?',
+        options: [],
+        field: 'city',
+        isInput: true,
+        placeholder: 'Enter your city',
+        condition: { field: 'pfe_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'pfe_language_book',
+        question: 'Which language would you be most comfortable speaking in during the consultation?',
+        options: ['English', 'Hindi', 'Tamil', 'Telugu', 'Kannada', 'Malayalam'],
+        field: 'preferred_language',
+        condition: { field: 'pfe_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'pfe_phone_book',
+        question: 'What is the best number to reach you on for the consultation?',
+        options: [],
+        field: 'phone',
+        isInput: true,
+        placeholder: 'Enter your phone number',
+        condition: { field: 'pfe_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'pfe_callback_day_book',
+        question:
+          'When would it be convenient for our care team to contact you?\n(Office hours: Monday - Saturday 10.00AM - 6.00PM)',
+        options: ['Today', 'Tomorrow'],
+        field: 'appointment_timing',
+        condition: { field: 'pfe_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'pfe_callback_time_book',
+        question: 'What time usually works best for you?',
+        options: ['Morning', 'Afternoon', 'Evening'],
+        field: 'pfe_callback_time',
+        condition: { field: 'pfe_path_choice', value: 'Book Consultation' },
+      },
+      {
+        id: 'pfe_name_callback',
+        question: 'May I know your full name?',
+        options: [],
+        field: 'name',
+        isInput: true,
+        placeholder: 'Enter your full name',
+        condition: { field: 'pfe_atypical_choice', value: 'Request Call Back' },
+      },
+      {
+        id: 'pfe_city_callback',
+        question: 'Which city are you currently located in?',
+        options: [],
+        field: 'city',
+        isInput: true,
+        placeholder: 'Enter your city',
+        condition: { field: 'pfe_atypical_choice', value: 'Request Call Back' },
+      },
+      {
+        id: 'pfe_language_callback',
+        question: 'Which language would you be most comfortable speaking in during the consultation?',
+        options: ['English', 'Hindi', 'Tamil', 'Telugu', 'Kannada', 'Malayalam'],
+        field: 'preferred_language',
+        condition: { field: 'pfe_atypical_choice', value: 'Request Call Back' },
+      },
+      {
+        id: 'pfe_phone_callback',
+        question: 'What is the best number to reach you on for the consultation?',
+        options: [],
+        field: 'phone',
+        isInput: true,
+        placeholder: 'Enter your phone number',
+        condition: { field: 'pfe_atypical_choice', value: 'Request Call Back' },
+      },
+    ],
+  },
   VV: {
     procedure: 'VV',
     useCoreQuestions: false,
@@ -1738,6 +1940,9 @@ const getProcedureInfo = (procedure) => {
     FTR: {
       message: 'You’ve reached out regarding Fallopian Tube Block, where one or both fallopian tubes are blocked, which may prevent the egg and sperm from meeting and can affect fertility.',
     },
+    PFE: {
+      message: 'You\'ve reached out regarding Plantar Fasciitis, a condition that causes heel pain due to inflammation of the plantar fascia — a thick band of tissue running along the bottom of your foot.',
+    },
   };
 
 
@@ -2114,6 +2319,7 @@ const Chatbot = () => {
       else if (norm === '4' || norm.startsWith('4-') || norm.includes('thyroid') || norm.includes('tna')) nextProcedure = 'TNA';
       else if (norm === '5' || norm.startsWith('5-') || norm.includes('uterine') || norm.includes('fibroid') || norm.includes('ufe') || norm.includes('uae')) nextProcedure = 'UFE';
       else if (norm === '6' || norm.startsWith('6-') || norm.includes('breast') || norm.includes('vae')) nextProcedure = 'VAE';
+      else if (norm === '7' || norm.startsWith('7-') || norm.includes('plantar') || norm.includes('pfe') || norm.includes('heel')) nextProcedure = 'PFE';
 
       if (nextProcedure) {
         setIsQuestionnaireActive(false);
@@ -2125,7 +2331,7 @@ const Chatbot = () => {
       }
 
       const retry = {
-        text: 'Please reply with 1, 2, 3, 4, 5, or 6 to choose a condition.',
+        text: 'Please reply with 1, 2, 3, 4, 5, 6, or 7 to choose a condition.',
         sender: 'bot',
         timestamp: new Date(),
         isQuestionnaireQuestion: true,
@@ -2168,6 +2374,39 @@ const Chatbot = () => {
             multiSelect: !!nq.multiSelect,
           };
           console.log('[Questionnaire] Next question rendered:', nextQuestion);
+          setMessages(prev => [...prev, nextQuestion]);
+        }, 500);
+        return;
+      }
+    }
+
+    // PFE: After selecting callback time
+    // - Consult path: proceed to details collection (name/city/language/phone)
+    // - Book Consultation path: details are collected earlier, so mark complete and submit.
+    if (updatedResponses.procedure === 'PFE' && (currentQuestion.id === 'pfe_callback_time' || currentQuestion.id === 'pfe_callback_time_book')) {
+      const isBookPath = (updatedResponses.pfe_path_choice || '').toString().trim() === 'Book Consultation';
+      if (isBookPath && currentQuestion.id === 'pfe_callback_time_book') {
+        setQuestionnaireStep(currentQuestionnaire.questions.length);
+        return;
+      }
+
+      const nextIndex = currentQuestionnaire.questions.findIndex((q) => q.id === 'pfe_name');
+      if (nextIndex !== -1) {
+        setQuestionnaireStep(nextIndex);
+        setTimeout(() => {
+          const nq = currentQuestionnaire.questions[nextIndex];
+          const nextQuestion = {
+            text: nq.question,
+            sender: 'bot',
+            timestamp: new Date(),
+            isQuestionnaireQuestion: true,
+            questionId: nq.id,
+            options: nq.options,
+            isInput: nq.isInput,
+            field: nq.field,
+            placeholder: nq.placeholder,
+            multiSelect: !!nq.multiSelect,
+          };
           setMessages(prev => [...prev, nextQuestion]);
         }, 500);
         return;
@@ -2484,6 +2723,42 @@ const Chatbot = () => {
       return;
     }
 
+    // PFE: Close Request should end the chat with resources
+    if (updatedResponses.procedure === 'PFE' && currentQuestion.field === 'pfe_atypical_choice' && selectedOption === 'Close Request') {
+      const closeMsg = {
+        text: 'No worries at all. Here are some useful resources you can check out anytime. If you’d like to speak with a specialist later, just message me “Hi” — I’ll be happy to arrange it for you. Take care.',
+        sender: 'bot',
+        timestamp: new Date(),
+        aiGenerated: true,
+        recommendedTreatment: currentQuestionnaire.treatmentPage,
+        youtubeVideo: currentQuestionnaire.youtubeVideo,
+      };
+      setMessages(prev => [...prev, closeMsg]);
+      setIsQuestionnaireActive(false);
+      setQuestionnaireStep(0);
+      setQuestionnaireResponses({});
+      setCurrentQuestionnaire(null);
+      return;
+    }
+
+    // PFE: Not right now should end the chat with resources
+    if (updatedResponses.procedure === 'PFE' && currentQuestion.field === 'pfe_specialist_choice' && selectedOption === 'Not right now') {
+      const closeMsg = {
+        text: 'No worries at all. Here are some useful resources you can check out anytime. If you’d like to speak with a specialist later, just message me “Hi” — I’ll be happy to arrange it for you. Take care.',
+        sender: 'bot',
+        timestamp: new Date(),
+        aiGenerated: true,
+        recommendedTreatment: currentQuestionnaire.treatmentPage,
+        youtubeVideo: currentQuestionnaire.youtubeVideo,
+      };
+      setMessages(prev => [...prev, closeMsg]);
+      setIsQuestionnaireActive(false);
+      setQuestionnaireStep(0);
+      setQuestionnaireResponses({});
+      setCurrentQuestionnaire(null);
+      return;
+    }
+
     // VV: Close Request (atypical symptom path) should end the chat with resources
     if (updatedResponses.procedure === 'VV' && currentQuestion.field === 'vv_atypical_choice' && selectedOption === 'Close Request') {
       const closeMsg = {
@@ -2755,6 +3030,15 @@ const Chatbot = () => {
             : questionnaire.procedure === 'VAE'
                 ? {
                     text: 'Thank you. Your details have been noted. A member of our care team will contact you as discussed.\n\nMeanwhile, I’ll share helpful information about Breast Nodules and minimally invasive treatment options like Vacuum-Assisted Excision (VAE) for you to review.\n\nWishing you good health. Take care.',
+                    sender: 'bot',
+                    timestamp: new Date(),
+                    aiGenerated: true,
+                    recommendedTreatment: questionnaire.treatmentPage,
+                    youtubeVideo: questionnaire.youtubeVideo,
+                  }
+            : questionnaire.procedure === 'PFE'
+                ? {
+                    text: 'Thank you. Your details have been noted. A member of our care team will contact you as discussed.\n\nMeanwhile, I’ll share helpful information about Plantar Fasciitis and Plantar Fasciitis Embolization (PFE) for you to review.\n\nWishing you good health. Take care.',
                     sender: 'bot',
                     timestamp: new Date(),
                     aiGenerated: true,

@@ -35,31 +35,30 @@ export default function Footer() {
         {/* Main content grid */}
         <div className='grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 mb-6 items-start'>
           {/* Left section - Logo and description */}
-          <div className='lg:col-span-7 flex flex-col justify-start'>
+          <div className='lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left'>
             {/* Logo */}
-            <div className='mb-4 sm:mb-5'>
-              <img src='/Medagg logo(1).png' alt='Medagg Healthcare' className='h-9 sm:h-11 lg:h-14 w-auto drop-shadow' />
+            <div className='mb-2 lg:mb-0'>
+              <img src='/new_part2.png' alt='Medagg Healthcare' className='h-16 sm:h-22 lg:h-28 w-auto drop-shadow-lg' />
             </div>
 
             {/* Description */}
-            <p className='text-gray-300 leading-relaxed mb-4 max-w-2xl text-sm sm:text-sm lg:text-base'>
+            <p className='text-gray-300 leading-relaxed mt-0 lg:mt-[-16px] mb-6 lg:mb-4 max-w-2xl text-sm sm:text-base lg:text-[15px] opacity-90'>
             Medagg Healthcare, established in 2021, is a pioneering force in promoting advanced non-surgical treatments across India. With a mission to bridge the gap in healthcare knowledge, we began as a discovery platform focused on connecting patients to hospitals. Today, we specialize in Interventional Radiology and advocate for non-surgical procedures as the future of healthcare.
           </p>
 
             {/* Know More and Gallery buttons */}
-            <div className='flex flex-col sm:flex-row gap-3'>
-              <Link to='/about' className='inline-block text-center bg-pink-500 hover:bg-pink-600 text-white font-medium text-sm px-6 sm:px-8 py-3 rounded-md transition-colors duration-200 max-w-[150px] w-full sm:w-auto shadow-md'>
+            <div className='flex flex-col sm:flex-row gap-3 w-full sm:w-auto justify-center lg:justify-start'>
+              <Link to='/about' className='inline-block text-center bg-pink-500 hover:bg-pink-600 text-white font-medium text-sm px-6 sm:px-8 py-3 rounded-md transition-colors duration-200 w-full sm:w-auto shadow-md'>
                 Know More
               </Link>
-
             </div>
           </div>
 
           {/* Right section - Quick Links (as in reference) */}
-          <div className='lg:col-span-5 w-full flex justify-start lg:justify-end self-start lg:pl-0 mr-0 lg:mr-32 mt-6 lg:mt-0'>
-            <div className='flex flex-col items-start text-left w-full'>
-              <h3 className='text-pink-400 font-bold text-base mb-1'>Quick Links</h3>
-              <ul className='grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 lg:grid-rows-2 gap-x-8 gap-y-2'>
+          <div className='lg:col-span-5 w-full flex justify-center lg:justify-end self-start lg:pl-0 mt-8 lg:mt-0'>
+            <div className='flex flex-col items-center lg:items-start text-center lg:text-left w-full'>
+              <h3 className='text-pink-400 font-bold text-base mb-3 lg:mb-1'>Quick Links</h3>
+              <ul className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 lg:grid-rows-2 gap-x-8 gap-y-3 lg:gap-y-2'>
                 {quickLinks.map((link, index) => (
                   <li
                     key={index}
