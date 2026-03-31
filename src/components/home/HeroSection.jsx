@@ -693,7 +693,7 @@ const HeroSection = () => {
         <FloatingBadgeCTA
           imgSrc='/irpreneur.png'
           alt='IR preneur 2025'
-          href='https://medagghealthcare.com/IRPreneur-conference/index.php#home'
+          href='/irpreneur2025'
           size={120}
           mobileSize={120}
           topOffset={24}

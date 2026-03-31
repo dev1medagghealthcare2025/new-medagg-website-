@@ -18,7 +18,7 @@ const MobileHeroSection = ({ query, setQuery, handleSearch, results = [], isLoad
         {/* Top Banner */}
         <div className='flex items-center justify-start space-x-2 sm:space-x-3 mb-3 sm:mb-5'>
           <div className='w-16 h-16 sm:w-20 sm:h-20 bg-transparent flex items-center justify-center'>
-            <a href='https://medagghealthcare.com/IRPreneur-conference/index.php#home' target='_blank' rel='noopener noreferrer'>
+            <a href='/irpreneur2025'>
               <img src='/irpreneur.png' alt='IR preneur' className='w-16 h-16 sm:w-20 sm:h-20' />
             </a>
           </div>

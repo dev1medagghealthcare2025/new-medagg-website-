@@ -3,6 +3,8 @@ module.exports = {
   content: [
     './index.html',
     './src/**/*.{js,ts,jsx,tsx}',
+    './medagg-landing-page/index.html',
+    './medagg-landing-page/src/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {
