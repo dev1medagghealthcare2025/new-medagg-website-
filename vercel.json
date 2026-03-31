@@ -11,6 +11,7 @@
   ],
   "routes": [
     { "handle": "filesystem" },
+    { "src": "/irpreneur2025(?:/(.*))?$", "dest": "/irpreneur2025/index.html" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
 }

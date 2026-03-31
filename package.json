@@ -46,7 +46,7 @@
     "start": "npx vite",
     "dev": "npx vite --force",
     "sitemap": "node scripts/generateSitemap.js",
-    "build": "npm run blog:build && npm run sitemap && cross-env ROLLUP_USE_NODEJS=true vite build && (react-snap || node -e \"console.log('Static pre-rendering skipped')\")",
+    "build": "npm run blog:build && npm run sitemap && cross-env ROLLUP_USE_NODEJS=true vite build && node scripts/buildIrpreneur2025.js && (react-snap || node -e \"console.log('Static pre-rendering skipped')\")",
     "postbuild": "node -v",
     "serve": "npx vite preview",
     "build:css": "npx tailwindcss -i ./src/index.css -o ./src/tailwind.output.css",
