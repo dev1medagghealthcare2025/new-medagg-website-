@@ -100,6 +100,18 @@ function CanonicalUrlUpdater() {
   }, [location.pathname]);
   return null;
 }
+
+function Irpreneur2025Page() {
+  return (
+    <div className='w-full' style={{ height: '100vh' }}>
+      <iframe
+        src='/irpreneur2025/index.html'
+        title='IRpreneur 2025'
+        style={{ width: '100%', height: '100%', border: 0, display: 'block' }}
+      />
+    </div>
+  );
+}
 function App() {
   // Initialize Google Analytics 4 once
   React.useEffect(() => {
@@ -108,6 +120,8 @@ function App() {
       if (gaId) initGA(gaId);
     } catch {}
   }, []);
+  const location = useLocation();
+  const isIrpreneur2025 = (location.pathname || '').startsWith('/irpreneur2025');
   return (
     <div className='min-h-screen bg-pink-50 flex flex-col isolate'>
       <main className='flex-grow'>
@@ -115,6 +129,7 @@ function App() {
         <CanonicalUrlUpdater />
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/irpreneur2025/*' element={<Irpreneur2025Page />} />
           <Route path='/prostate-artery-embolization-pae' element={<PAE_Treatmentpage />} />
           <Route path='/pae' element={<Navigate to='/prostate-artery-embolization-pae' replace />} />
           <Route path='/genicular-artery-embolization-gae' element={<GAE_Treatmentpage />} />
@@ -164,17 +179,21 @@ function App() {
           <Route path='*' element={<Home />} />
         </Routes>
       </main>
-      <Footer />
-      <Chatbot />
-      <BackToTop />
-      <CallFab position='right' phone='+919363656010' />
-      <FloatingWhatsApp phone='+918925928840' position='left' />
-      {IMAGE_CURSOR_ENABLED && <ImageCursorStyle />}
-      <ButtonInteractions />
-      {UI_ENHANCEMENTS_ENABLED && (
+      {!isIrpreneur2025 && (
         <>
-          <Cursor />
-          <style>{`@media (pointer: fine) { body { cursor: none; } a,button,[role="button"], input, textarea, select { cursor: none; } }`}</style>
+          <Footer />
+          <Chatbot />
+          <BackToTop />
+          <CallFab position='right' phone='+919363656010' />
+          <FloatingWhatsApp phone='+918925928840' position='left' />
+          {IMAGE_CURSOR_ENABLED && <ImageCursorStyle />}
+          <ButtonInteractions />
+          {UI_ENHANCEMENTS_ENABLED && (
+            <>
+              <Cursor />
+              <style>{`@media (pointer: fine) { body { cursor: none; } a,button,[role="button"], input, textarea, select { cursor: none; } }`}</style>
+            </>
+          )}
         </>
       )}
     </div>
