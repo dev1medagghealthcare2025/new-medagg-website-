@@ -11,6 +11,7 @@ frontend:
         - npm run blog:build
         - npm run sitemap
         - ROLLUP_USE_NODEJS=true npx vite build
+        - node scripts/buildIrpreneur2025.js
   artifacts:
     baseDirectory: dist
     files:
