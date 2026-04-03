@@ -28,7 +28,14 @@ function navigate(to) {
 	window.dispatchEvent(new PopStateEvent('popstate'))
 }
 
-const LOGO_PUBLIC = '/medagg-logo.png'
+const withBase = (p = '') => {
+	const base = (import.meta?.env?.BASE_URL || '/');
+	const cleanBase = base.endsWith('/') ? base : `${base}/`;
+	const cleanPath = String(p).replace(/^\/+/, '');
+	return `${cleanBase}${cleanPath}`;
+}
+
+const LOGO_PUBLIC = withBase('medagg-logo.png')
 const LOGO_FALLBACK = 'https://medagg.com/wp-content/uploads/2023/12/MEDAGG-NEW-LOGO.png'
 
 function Logo({ className = 'h-12' }) {
@@ -57,7 +64,8 @@ function Navbar() {
 		return () => window.removeEventListener('scroll', onScroll)
 	}, [])
 
-	const isGallery = pathname === '/gallery'
+	const normalizePath = (p = '') => String(p).replace(/\/+$/, '')
+	const isGallery = normalizePath(pathname) === normalizePath(withBase('gallery'))
 	const onNavClick = (e, to) => {
 		if (e?.metaKey || e?.ctrlKey || e?.shiftKey || e?.altKey) return
 		if (typeof to === 'string' && to.startsWith('http')) return
@@ -77,9 +85,9 @@ function Navbar() {
 					{!isGallery && navItems.map((n) => (
 						<a key={n.id} href={`#${n.id}`} className="text-slate-700 hover:text-brand-600 font-medium">{n.label}</a>
 					))}
-					<a href="/gallery" onClick={(e) => onNavClick(e, '/gallery')} className={galleryActiveClass}>Gallery</a>
+					<a href={withBase('gallery')} onClick={(e) => onNavClick(e, withBase('gallery'))} className={galleryActiveClass}>Gallery</a>
 					{isGallery && (
-						<a href="/" onClick={(e) => onNavClick(e, '/')} className="text-slate-700 hover:text-brand-600 font-medium">Back</a>
+						<a href={withBase('')} onClick={(e) => onNavClick(e, withBase(''))} className="text-slate-700 hover:text-brand-600 font-medium">Back</a>
 					)}
 				</nav>
 				<button onClick={() => setOpen(!open)} className="md:hidden inline-flex items-center justify-center rounded-md p-2 text-slate-700 hover:bg-slate-100">
@@ -92,9 +100,9 @@ function Navbar() {
 						{!isGallery && navItems.map((n) => (
 							<a key={n.id} href={`#${n.id}`} onClick={() => setOpen(false)} className="text-slate-700 hover:text-brand-600 font-medium">{n.label}</a>
 						))}
-						<a href="/gallery" onClick={(e) => onNavClick(e, '/gallery')} className={isGallery ? 'text-brand-600 font-semibold' : 'text-slate-700 hover:text-brand-600 font-medium'}>Gallery</a>
+						<a href={withBase('gallery')} onClick={(e) => onNavClick(e, withBase('gallery'))} className={isGallery ? 'text-brand-600 font-semibold' : 'text-slate-700 hover:text-brand-600 font-medium'}>Gallery</a>
 						{isGallery && (
-							<a href="/" onClick={(e) => onNavClick(e, '/')} className="text-slate-700 hover:text-brand-600 font-medium">Back</a>
+							<a href={withBase('')} onClick={(e) => onNavClick(e, withBase(''))} className="text-slate-700 hover:text-brand-600 font-medium">Back</a>
 						)}
 					</div>
 				</div>
@@ -122,7 +130,7 @@ function Gallery() {
 	return (
 		<div>
 			<section className="relative min-h-[75vh] lg:min-h-[92vh] flex items-center justify-center overflow-hidden">
-				<div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/conf_13.JPG')" }} />
+				<div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${withBase('/conf_13.JPG')})` }} />
 				<div className="absolute inset-0 [background:radial-gradient(800px_200px_at_50%_-40px,rgba(99,102,241,0.18),transparent_70%)]" />
 			</section>
 
@@ -133,7 +141,7 @@ function Gallery() {
 						{images.map((img) => (
 							<div key={img.src} className="mb-4 break-inside-avoid">
 								<img
-									src={img.src}
+									src={withBase(img.src)}
 									alt={img.alt}
 									loading="lazy"
 									className="block w-full h-auto"
@@ -197,7 +205,7 @@ function Hero() {
 	return (
 		<section id="home" className="relative overflow-hidden">
 			<div className="absolute inset-0">
-				<div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/hero_bg.jpg')" }}></div>
+				<div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${withBase('/hero_bg.jpg')})` }}></div>
 				<div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/70"></div>
 			</div>
 				<div className="container-lg relative py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 min-h-[calc(100vh-80px)] flex items-center justify-center text-white px-4 sm:px-6">
@@ -309,7 +317,7 @@ function About() {
                 <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                     {whoCards.map((c, i) => (
                         <div key={i} className="border border-slate-200 rounded-xl overflow-hidden text-center shadow hover:shadow-lg transition flex flex-col">
-                            <img src={c.img} alt={c.text} className="w-full h-[150px] object-cover" />
+                            <img src={withBase(c.img)} alt={c.text} className="w-full h-[150px] object-cover" />
                             <p className="p-4 text-lg text-slate-800 font-black">{c.text}</p>
                         </div>
                     ))}
@@ -323,7 +331,7 @@ function Venue() {
   return (
     <section id="venue" className="relative py-20 overflow-hidden">
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/venue.jpg')" }}></div>
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${withBase('/venue.jpg')})` }}></div>
         <div className="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
       </div>
       <div className="container-lg px-4 sm:px-6 lg:px-8 relative z-10">
@@ -421,10 +429,10 @@ function AgendaItem({ time, title, meta, type, panelMembers }) {
                 {meta && <p className="text-sm text-slate-600 bg-slate-50/80 rounded-lg px-3 py-1.5 whitespace-pre-line">{meta}</p>}
                 
                 {(type === 'break') && (
-                    <img src="/Tea_break.png" alt="Tea Break" className="max-w-[180px] w-full h-auto mt-4 mx-auto" />
+                    <img src={withBase('/Tea_break.png')} alt="Tea Break" className="max-w-[180px] w-full h-auto mt-4 mx-auto" />
                 )}
                 {(type === 'lunch') && (
-                    <img src="/Lunch_break.png" alt="Lunch Break" className="max-w-[180px] w-full h-auto mt-4 mx-auto" />
+                    <img src={withBase('/Lunch_break.png')} alt="Lunch Break" className="max-w-[180px] w-full h-auto mt-4 mx-auto" />
                 )}
                 
                 {panelMembers && panelMembers.length > 0 && (
@@ -539,46 +547,46 @@ function Agenda() {
 function Speakers() {
     const speakers = [
        // { name: 'Prof. Mohamed Rela', role: 'Chairman & MD, Rela Institute', topic: 'Inauguration', image: '/Prof. Mohamed Rela.png' },
-        { name: 'Dr. Anandh Balaji', role: 'Urologist, Robotic Surgeon', topic: 'Panel Member - 2', image: '/Dr. Anand balaji.png' },
-        { name: 'Prof. Dr. Anil Vaidya', role: 'Multi-Organ Transplant Surgeon Chairman and Director – Institute of Multi-Visceral and Abdominal Organ Transplant', topic: 'Panel Member - 5', image: '/anil vaidya.png', linkedin: 'https://www.linkedin.com/in/prof-anil-vaidya-143302148/?originalSubdomain=in' },
-        { name: 'Dr. Arjun Somireddy', role: 'Founding Director RIVEA Vascular', topic: 'Been There Done That - 1', image: '/Dr. Arjun Somireddy.png' },
-        { name: 'Dr. Arul Arokia Sensan Babu', role: ' Neuro and Vascular Interventional Radiologist', topic: 'Panel Member - 4', image: '/dr. arul.png', linkedin: 'https://www.linkedin.com/in/arul-babu-869298a8/' },
-        { name: 'Dr. Ashok Reddy Somu', role: ' Consultant Interventional Radiologist', topic: 'Panel Member - 4', image: '/ashok reddy somu.png', linkedin: 'https://www.linkedin.com/in/dr-ashok-reddy-somu-665613130/?originalSubdomain=in' },
-        { name: 'Dr. Balaji Patel Kola', role: 'Consultant Endo Vascular and Interventional Radiologist', topic: 'Panel 6 Moderator, Member - 3', image: '/Balaji_Patel_Kola_new.png', linkedin: 'https://www.linkedin.com/in/prof-dr-balaji-patel-kola' },
-        { name: 'Dr. T. Deepashree', role: 'HOD IR,Rela Hospital,\n Vice President ISVIRIndia', topic: 'Panel 2 Moderator, Member - 3', image: '/Dr. T. Deepashree.png', linkedin: 'https://www.linkedin.com/in/dr-deepa-shree-mrcp-frcr-ebir-cct-uk-5aa54a64' },
-        { name: 'Dr. Dhivya Sharona', role: 'Gynaecologist', topic: 'Panel Member - 2', image: '/Dhivya sharona.png', linkedin: 'https://www.linkedin.com/in/dhivya-sharona-d-56b78048/' },
-        { name: 'Dr. Gaurav Gangwani', role: 'Consultant IR (Vascular Specialist)', topic: 'Been There Done That - 2', image: '/Gaurav_new.png', linkedin: 'https://www.linkedin.com/in/dr-gaurav-gangwani' },
-        { name: 'Dr. Karthikeyan Damodaran', role: 'Director of Vascular and IR at MIOT International Hospital, Chennai', topic: 'Panel Member - 1', image: '/Karthikeyan Damodaran.png', linkedin: 'https://www.linkedin.com/in/dr-karthikeyan-damodharan-mrcp-frcr-ebir-fcirse-fams-14496699/' },
-        { name: 'Dr.S.Kiran Kumar', role: 'Interventional Radiologist', topic: 'Panel Member - 4', image: '/Dr. Kiran.png' },
-        { name: 'Dr. Minal Chaudhry', role: 'Director - Radiodiagnosis and Intervention Radiology,  Aakash Healthcare Super Speciality Hospital', topic: 'Panel 4 Moderator', image: '/Dr Minal.jpg', linkedin: 'https://www.linkedin.com/in/drminalchaudhry?utm_source=share_via&utm_content=profile&utm_medium=member_ios' },
-        { name: 'Mr. Moorthy LG', role: 'CEO, SaaSvat Tech Labs and Former CFO and Partner,\n TVS capital funds and former CFO of Navi Finserv', topic: 'IR for Wealth Smart Investment Strategies', image: '/Mr. Moorthy LG.png', linkedin: 'https://www.linkedin.com/in/moorthy-lg-resultlane' },
-        { name: 'Dr. Murali Krishnaswami', role: 'Interventional Neuro and EndoVascular Specialist Sims Hospital, Chennai.', topic: 'Panel Member - 6', image: '/Dr Murali.png', linkedin: 'https://www.linkedin.com/in/murali-krishnaswami-b90848192/?originalSubdomain=in' },
-        { name: 'Dr. Muralidharan Vetrivel', role: 'Consultant Neurosurgeon : Cerebrovascular & Neuro-oncology, Rela Hospital', topic: 'Panel Member - 5', image: '/Vetrivel.png', linkedin: 'https://www.linkedin.com/in/muralidharan-vetrivel-4616bbb9/?originalSubdomain=in' },
-        { name: 'Dr. Prakash Ayyadurai', role: 'Orthopedic Surgeon & Specialist In Arthroscopy', topic: 'Panel Member - 2', image: '/Prakash Ayyadurai.png', linkedin: 'https://www.linkedin.com/in/prakashayyadurai/' },
-        { name: 'Dr. Pushparajan Sundarrajan', role: ' Endovascular and Interventional Radiologist', topic: 'Panel Member - 4', image: '/pushparajan.png', linkedin: 'https://www.linkedin.com/in/pushparajan-sundarrajan-37b3707a/' },
-        { name: 'Dr. MC Uthappa', role: 'Director of GIRI,Bengaluru,\n Consultant Interventional Radiology', topic: 'Panel 1 Moderator, Member - 3 ', image: '/new_mc_utthpa.jpeg', linkedin: 'https://www.linkedin.com/in/mc-uthappa-56178a4b' },
-        { name: 'Dr. Ram Kishore Gurajala ', role: 'Interventional Radiologist at MGM Healtcare, Chennai', topic: 'Panel Member - 5', image: '/Ram Kishore Gurajala.png', linkedin: 'https://www.linkedin.com/in/ram-kishore-gurajala-3b9010290/' },
-        { name: 'Dr. Rohit P V Nair', role: 'Senior Consultant - Vascular and IR, Aster Medcity, Kochi', topic: 'Panel 5 Moderator, Member - 1', image: '/Rohit nair.png', linkedin: 'https://www.linkedin.com/in/rohit-nair-5a658b41/' },
-        { name: 'Dr. Sanjeeva Kalva ', role: 'Professor of Radiology and Vice-Chair of Image-Guided Interventions, University of Texas Southwestern Medical Center, Dallas, TX', topic: 'Panel Member - 6', image: '/Dr Kalwa_new.png', linkedin: 'https://www.linkedin.com/in/sanjeeva-kalva-55a815234/' },
-        { name: 'Dr. Sankesh Mehta', role: ' Consultant IR, MGM Healthcare, Chennai', topic: 'Panel Member - 1', image: '/Sankesh.png', linkedin: 'https://www.linkedin.com/in/sankesh-mehta-803064292/' },
-        { name: 'Dr. A. Shabnam Fathima', role: 'Vascular Surgeon', topic: 'Panel Member - 2', image: '/Shabnam Fathima.png' },
-        { name: 'Dr. Shankar Balakrishnan', role: 'Clinical Lead, Department of Interventional neurology and Neuromodulation, Rela Hospital', topic: 'Panel Member - 2', image: '/Shankar.png', linkedin: 'https://www.linkedin.com/in/dr-shankar-balakrishnan/?originalSubdomain=in' },
-        { name: 'Dr Sreenivasa Narayana Raju', role: 'Vascular Interventional Radiologist', topic: 'Panel Member - 5', image: '/SRINIVASA NARAYANA.png', linkedin: 'https://www.linkedin.com/in/dr-sreenivasa-narayana-raju-md-dm-aiims-new-delhi-ebir-fvir-234840234/?originalSubdomain=in' },
-        { name: 'Dr. Sumati Sundaraiya', role: 'Clinical Lead - Diagnostic Oncology & Theronostics (Nuclear Medicine) at MIOT International, Chennai', topic: 'Panel Member - 5', image: '/Dr. Sumathy.png', linkedin: 'https://www.linkedin.com/in/sumati-sundaraiya-a290242b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app' },
-        { name: 'Dr. Thoufiq Ali M', role: 'Interventional Radiologist, KIMS Al Shifa, Super Specialty Hospital', topic: 'Panel Member - 1', image: '/Thoufiq.png' },
-        { name: 'Dr. Tejeshwar Singh Jugpal', role: 'Director, Imperial Radiology & Healthsolutions', topic: 'Panel Member - 3', image: '/Dr. Tejeshwar Singh Jugpal.png', linkedin: 'https://www.linkedin.com/in/tejeshwarsjugpal/?originalSubdomain=in' },
-        { name: 'Dr. Vinayagamani S', role: 'Consultant & In-charge - Interventional Neuroradiology & Peripheral Vascular Interventions', topic: 'Panel Member - 4', image: '/Vinayagamani S.png', linkedin: 'https://www.linkedin.com/in/vinayagamani2017inr/?originalSubdomain=in' },
-        { name: 'Mr. VT Shreeram', role: 'Founder & CEO Patient Lens AI', topic: ' Discharge in <10 mins: Speed Up Documentation, Power Up Claims', image: '/VT_Sreeram.png', linkedin: 'https://www.linkedin.com/in/vtshreeram/?originalSubdomain=in' },
-        { name: 'Ramesh Krishnan', role: 'Founder & CEO, Medagg Healthcare,\n Executive Director of Rela Institute', topic: 'From Scrubs to Startups, Panel 3 Moderator', image: '/Ramesh Krishnan.png', linkedin: 'https://www.linkedin.com/in/ramesh-krishnan-522b477' },
-        { name: 'Sumitha Karthik', role: 'Co-Founder & COO, Medagg Healthcare', topic: 'Vote of Thanks, Panel Member - 1', image: '/sk_new.jpeg', linkedin: 'https://www.linkedin.com/in/sumitha-karthik-b5a4344b' },
+        { name: 'Dr. Anandh Balaji', role: 'Urologist, Robotic Surgeon', topic: 'Panel Member - 2', image: withBase('/Dr. Anand balaji.png') },
+        { name: 'Prof. Dr. Anil Vaidya', role: 'Multi-Organ Transplant Surgeon Chairman and Director – Institute of Multi-Visceral and Abdominal Organ Transplant', topic: 'Panel Member - 5', image: withBase('/anil vaidya.png'), linkedin: 'https://www.linkedin.com/in/prof-anil-vaidya-143302148/?originalSubdomain=in' },
+        { name: 'Dr. Arjun Somireddy', role: 'Founding Director RIVEA Vascular', topic: 'Been There Done That - 1', image: withBase('/Dr. Arjun Somireddy.png') },
+        { name: 'Dr. Arul Arokia Sensan Babu', role: ' Neuro and Vascular Interventional Radiologist', topic: 'Panel Member - 4', image: withBase('/dr. arul.png'), linkedin: 'https://www.linkedin.com/in/arul-babu-869298a8/' },
+        { name: 'Dr. Ashok Reddy Somu', role: ' Consultant Interventional Radiologist', topic: 'Panel Member - 4', image: withBase('/ashok reddy somu.png'), linkedin: 'https://www.linkedin.com/in/dr-ashok-reddy-somu-665613130/?originalSubdomain=in' },
+        { name: 'Dr. Balaji Patel Kola', role: 'Consultant Endo Vascular and Interventional Radiologist', topic: 'Panel 6 Moderator, Member - 3', image: withBase('/Balaji_Patel_Kola_new.png'), linkedin: 'https://www.linkedin.com/in/prof-dr-balaji-patel-kola' },
+        { name: 'Dr. T. Deepashree', role: 'HOD IR,Rela Hospital,\n Vice President ISVIRIndia', topic: 'Panel 2 Moderator, Member - 3', image: withBase('/Dr. T. Deepashree.png'), linkedin: 'https://www.linkedin.com/in/dr-deepa-shree-mrcp-frcr-ebir-cct-uk-5aa54a64' },
+        { name: 'Dr. Dhivya Sharona', role: 'Gynaecologist', topic: 'Panel Member - 2', image: withBase('/Dhivya sharona.png'), linkedin: 'https://www.linkedin.com/in/dhivya-sharona-d-56b78048/' },
+        { name: 'Dr. Gaurav Gangwani', role: 'Consultant IR (Vascular Specialist)', topic: 'Been There Done That - 2', image: withBase('/Gaurav_new.png'), linkedin: 'https://www.linkedin.com/in/dr-gaurav-gangwani' },
+        { name: 'Dr. Karthikeyan Damodaran', role: 'Director of Vascular and IR at MIOT International Hospital, Chennai', topic: 'Panel Member - 1', image: withBase('/Karthikeyan Damodaran.png'), linkedin: 'https://www.linkedin.com/in/dr-karthikeyan-damodharan-mrcp-frcr-ebir-fcirse-fams-14496699/' },
+        { name: 'Dr.S.Kiran Kumar', role: 'Interventional Radiologist', topic: 'Panel Member - 4', image: withBase('/Dr. Kiran.png') },
+        { name: 'Dr. Minal Chaudhry', role: 'Director - Radiodiagnosis and Intervention Radiology,  Aakash Healthcare Super Speciality Hospital', topic: 'Panel 4 Moderator', image: withBase('/Dr Minal.jpg'), linkedin: 'https://www.linkedin.com/in/drminalchaudhry?utm_source=share_via&utm_content=profile&utm_medium=member_ios' },
+        { name: 'Mr. Moorthy LG', role: 'CEO, SaaSvat Tech Labs and Former CFO and Partner,\n TVS capital funds and former CFO of Navi Finserv', topic: 'IR for Wealth Smart Investment Strategies', image: withBase('/Mr. Moorthy LG.png'), linkedin: 'https://www.linkedin.com/in/moorthy-lg-resultlane' },
+        { name: 'Dr. Murali Krishnaswami', role: 'Interventional Neuro and EndoVascular Specialist Sims Hospital, Chennai.', topic: 'Panel Member - 6', image: withBase('/Dr Murali.png'), linkedin: 'https://www.linkedin.com/in/murali-krishnaswami-b90848192/?originalSubdomain=in' },
+        { name: 'Dr. Muralidharan Vetrivel', role: 'Consultant Neurosurgeon : Cerebrovascular & Neuro-oncology, Rela Hospital', topic: 'Panel Member - 5', image: withBase('/Vetrivel.png'), linkedin: 'https://www.linkedin.com/in/muralidharan-vetrivel-4616bbb9/?originalSubdomain=in' },
+        { name: 'Dr. Prakash Ayyadurai', role: 'Orthopedic Surgeon & Specialist In Arthroscopy', topic: 'Panel Member - 2', image: withBase('/Prakash Ayyadurai.png'), linkedin: 'https://www.linkedin.com/in/prakashayyadurai/' },
+        { name: 'Dr. Pushparajan Sundarrajan', role: ' Endovascular and Interventional Radiologist', topic: 'Panel Member - 4', image: withBase('/pushparajan.png'), linkedin: 'https://www.linkedin.com/in/pushparajan-sundarrajan-37b3707a/' },
+        { name: 'Dr. MC Uthappa', role: 'Director of GIRI,Bengaluru,\n Consultant Interventional Radiology', topic: 'Panel 1 Moderator, Member - 3 ', image: withBase('/new_mc_utthpa.jpeg'), linkedin: 'https://www.linkedin.com/in/mc-uthappa-56178a4b' },
+        { name: 'Dr. Ram Kishore Gurajala ', role: 'Interventional Radiologist at MGM Healtcare, Chennai', topic: 'Panel Member - 5', image: withBase('/Ram Kishore Gurajala.png'), linkedin: 'https://www.linkedin.com/in/ram-kishore-gurajala-3b9010290/' },
+        { name: 'Dr. Rohit P V Nair', role: 'Senior Consultant - Vascular and IR, Aster Medcity, Kochi', topic: 'Panel 5 Moderator, Member - 1', image: withBase('/Rohit nair.png'), linkedin: 'https://www.linkedin.com/in/rohit-nair-5a658b41/' },
+        { name: 'Dr. Sanjeeva Kalva ', role: 'Professor of Radiology and Vice-Chair of Image-Guided Interventions, University of Texas Southwestern Medical Center, Dallas, TX', topic: 'Panel Member - 6', image: withBase('/Dr Kalwa_new.png'), linkedin: 'https://www.linkedin.com/in/sanjeeva-kalva-55a815234/' },
+        { name: 'Dr. Sankesh Mehta', role: ' Consultant IR, MGM Healthcare, Chennai', topic: 'Panel Member - 1', image: withBase('/Sankesh.png'), linkedin: 'https://www.linkedin.com/in/sankesh-mehta-803064292/' },
+        { name: 'Dr. A. Shabnam Fathima', role: 'Vascular Surgeon', topic: 'Panel Member - 2', image: withBase('/Shabnam Fathima.png') },
+        { name: 'Dr. Shankar Balakrishnan', role: 'Clinical Lead, Department of Interventional neurology and Neuromodulation, Rela Hospital', topic: 'Panel Member - 2', image: withBase('/Shankar.png'), linkedin: 'https://www.linkedin.com/in/dr-shankar-balakrishnan/?originalSubdomain=in' },
+        { name: 'Dr Sreenivasa Narayana Raju', role: 'Vascular Interventional Radiologist', topic: 'Panel Member - 5', image: withBase('/SRINIVASA NARAYANA.png'), linkedin: 'https://www.linkedin.com/in/dr-sreenivasa-narayana-raju-md-dm-aiims-new-delhi-ebir-fvir-234840234/?originalSubdomain=in' },
+        { name: 'Dr. Sumati Sundaraiya', role: 'Clinical Lead - Diagnostic Oncology & Theronostics (Nuclear Medicine) at MIOT International, Chennai', topic: 'Panel Member - 5', image: withBase('/Dr. Sumathy.png'), linkedin: 'https://www.linkedin.com/in/sumati-sundaraiya-a290242b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app' },
+        { name: 'Dr. Thoufiq Ali M', role: 'Interventional Radiologist, KIMS Al Shifa, Super Specialty Hospital', topic: 'Panel Member - 1', image: withBase('/Thoufiq.png') },
+        { name: 'Dr. Tejeshwar Singh Jugpal', role: 'Director, Imperial Radiology & Healthsolutions', topic: 'Panel Member - 3', image: withBase('/Dr. Tejeshwar Singh Jugpal.png'), linkedin: 'https://www.linkedin.com/in/tejeshwarsjugpal/?originalSubdomain=in' },
+        { name: 'Dr. Vinayagamani S', role: 'Consultant & In-charge - Interventional Neuroradiology & Peripheral Vascular Interventions', topic: 'Panel Member - 4', image: withBase('/Vinayagamani S.png'), linkedin: 'https://www.linkedin.com/in/vinayagamani2017inr/?originalSubdomain=in' },
+        { name: 'Mr. VT Shreeram', role: 'Founder & CEO Patient Lens AI', topic: ' Discharge in <10 mins: Speed Up Documentation, Power Up Claims', image: withBase('/VT_Sreeram.png'), linkedin: 'https://www.linkedin.com/in/vtshreeram/?originalSubdomain=in' },
+        { name: 'Ramesh Krishnan', role: 'Founder & CEO, Medagg Healthcare,\n Executive Director of Rela Institute', topic: 'From Scrubs to Startups, Panel 3 Moderator', image: withBase('/Ramesh Krishnan.png'), linkedin: 'https://www.linkedin.com/in/ramesh-krishnan-522b477' },
+        { name: 'Sumitha Karthik', role: 'Co-Founder & COO, Medagg Healthcare', topic: 'Vote of Thanks, Panel Member - 1', image: withBase('/sk_new.jpeg'), linkedin: 'https://www.linkedin.com/in/sumitha-karthik-b5a4344b' },
     ]
     return (
         <section id="speakers" className="py-16" style={{ backgroundColor: '#E6E6E6' }}>
             <div className="container-lg">
                 <h2 className="section-title">Speakers</h2>
                 <div className="text-left mt-8 mb-8 space-y-8">
-                    <img src="/MR. Balachandar R.jpg" alt="MR. Balachandar R" className="max-w-full h-auto" />
-                    <img src="/Dr. prakash.jpg" alt="Dr. S Prakash" className="max-w-full h-auto" />
+                    <img src={withBase('/MR. Balachandar R.jpg')} alt="MR. Balachandar R" className="max-w-full h-auto" />
+                    <img src={withBase('/Dr. prakash.jpg')} alt="Dr. S Prakash" className="max-w-full h-auto" />
                 </div>
                 <div className="mt-6 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
                     {speakers.map((s, i) => (
@@ -587,7 +595,8 @@ function Speakers() {
                                 className="h-28 w-28 rounded-full mx-auto object-cover object-top"
                                 src={s.image}
                                 alt={s.name}
-                                onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = '/medagg-logo.png' }}
+                                loading="lazy"
+                                onError={(e) => { e.currentTarget.src = LOGO_PUBLIC; }}
                             />
                             <h3 className="mt-4 font-semibold text-slate-900">{s.name}</h3>
                             <p className="text-sm text-slate-600 whitespace-pre-line">{s.role}</p>
