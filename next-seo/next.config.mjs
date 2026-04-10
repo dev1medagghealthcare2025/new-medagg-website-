@@ -34,6 +34,7 @@ const nextConfig = {
     );
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
+      'framer-motion': path.resolve('./node_modules/framer-motion'),
       'lucide-react': path.resolve('./node_modules/lucide-react'),
       'react-router-dom': path.resolve('./shims/react-router-dom.js'),
       [blogCssAbs]: path.resolve('./shims/empty-style.js'),
