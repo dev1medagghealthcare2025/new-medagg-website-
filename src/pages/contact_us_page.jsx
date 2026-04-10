@@ -30,10 +30,11 @@ const ContactUsPage = () => {
     setFormStatus('');
 
     try {
-      const response = await fetch('/api/telecrm', {
+      const response = await fetch('https://api.telecrm.in/enterprise/658abddbf911ed2d692b0cf5/autoupdatelead', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${import.meta.env.VITE_TELECRM_API_KEY}`,
         },
         body: JSON.stringify({
           fields: {

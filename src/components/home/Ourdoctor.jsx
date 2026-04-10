@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback, useEffect } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const doctors = [
@@ -306,52 +306,25 @@ const shuffleArray = (array) => {
   return shuffled;
 };
 
-const mulberry32 = (a) => {
-  return () => {
-    let t = (a += 0x6d2b79f5);
-    t = Math.imul(t ^ (t >>> 15), t | 1);
-    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-};
-
-const seededShuffleArray = (array, seed) => {
-  const shuffled = [...array];
-  const rand = mulberry32(seed);
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(rand() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
-};
-
 const OurDoctor = ({ randomize = false, initialShowCount = 4 }) => {
   const location = useLocation();
-  const [stablePathname, setStablePathname] = useState('');
   const [filters, setFilters] = useState({ name: '', city: 'All' });
   const [showAll, setShowAll] = useState(false);
   const [imageErrors, setImageErrors] = useState({});
   const [showAllMobile, setShowAllMobile] = useState(false);
   const [isFilterActive, setIsFilterActive] = useState(false);
 
-  useEffect(() => {
-    if (location?.pathname && typeof location.pathname === 'string') {
-      setStablePathname(location.pathname);
-    }
-  }, [location?.pathname]);
-
   const doctorList = useMemo(() => {
-    const pathname = stablePathname || '';
     if (randomize) {
-      // Deterministic shuffle based on pathname (avoids SSR/client mismatch)
-      const seed = Array.from(pathname).reduce((acc, ch) => acc + ch.charCodeAt(0), 0) || 1;
-      return seededShuffleArray(doctors, seed);
+      // Fully shuffle when randomize is requested
+      return shuffleArray(doctors);
     }
-    // Deterministic rotation based on pathname.
-    const offset = (Array.from(pathname).reduce((acc, ch) => acc + ch.charCodeAt(0), 0) || 0) % doctors.length;
+    // Otherwise, vary the ordering per-page so the first N differ across routes
+    // Create a small rotation offset from the pathname characters
+    const offset = Array.from(location.pathname).reduce((acc, ch) => acc + ch.charCodeAt(0), 0) % doctors.length;
     const rotated = [...doctors.slice(offset), ...doctors.slice(0, offset)];
     return rotated;
-  }, [randomize, stablePathname]);
+  }, [randomize, location.pathname]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -470,7 +443,7 @@ const OurDoctor = ({ randomize = false, initialShowCount = 4 }) => {
                   Book Appointment
                 </Link>
                 <div className='text-center'>
-                  <div className='font-bold text-base lg:text-lg !text-black'>{doc.name}</div>
+                  <div className='font-bold text-base lg:text-lg'>{doc.name}</div>
                   <div className='text-gray-700 text-xs lg:text-sm'>{doc.degrees}</div>
                   <div className='text-gray-500 text-xs'>{doc.specialty}</div>
                   <div className='text-gray-400 text-xs mt-1'>{doc.city}</div>
@@ -528,7 +501,7 @@ const OurDoctor = ({ randomize = false, initialShowCount = 4 }) => {
                   Book Appointment
                 </Link>
                 <div className='text-center'>
-                  <div className='font-bold text-base lg:text-lg !text-black'>{doc.name}</div>
+                  <div className='font-bold text-base lg:text-lg'>{doc.name}</div>
                   <div className='text-gray-700 text-xs lg:text-sm'>{doc.degrees}</div>
                   <div className='text-gray-500 text-xs'>{doc.specialty}</div>
                   <div className='text-gray-400 text-xs mt-1'>{doc.city}</div>
