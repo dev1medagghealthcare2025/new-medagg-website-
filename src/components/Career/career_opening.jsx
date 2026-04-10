@@ -1,12 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
 
-// Resolve TeleCRM API key once at module load with safe fallbacks
-const TELECRM_API_KEY = (import.meta && import.meta.env && (
-  import.meta.env.VITE_TELECRM_API_KEY ||
-  import.meta.env.VITE_TELECRM_TOKEN
-)) || (typeof window !== 'undefined' && (window.VITE_TELECRM_API_KEY || window.VITE_TELECRM_TOKEN)) || '';
-
 const openings = [
   {
     id: 1,
@@ -160,13 +154,6 @@ const CareerOpening = () => {
         throw new Error('Please provide a valid public resume URL (starting with http or https).');
       }
 
-      const endpoint = 'https://api.telecrm.in/enterprise/658abddbf911ed2d692b0cf5/autoupdatelead';
-      const apiKey = TELECRM_API_KEY;
-
-      if (!apiKey) {
-        throw new Error('Missing TeleCRM API key (VITE_TELECRM_API_KEY)');
-      }
-
       const payload = {
         fields: {
           name: form.name,
@@ -180,11 +167,10 @@ const CareerOpening = () => {
         },
       };
 
-      const res = await fetch(endpoint, {
+      const res = await fetch('/api/telecrm', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${apiKey}`,
         },
         body: JSON.stringify(payload),
       });

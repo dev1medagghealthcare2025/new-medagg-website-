@@ -1,22 +1,21 @@
 version: 1
-frontend:
-  phases:
-    preBuild:
-      commands:
-        - nvm install 20
-        - nvm use 20
-        - npm ci --include=dev
-    build:
-      commands:
-        - npm run blog:build
-        - npm run sitemap
-        - ROLLUP_USE_NODEJS=true npx vite build
-        - node scripts/buildIrpreneur2025.js
-  artifacts:
-    baseDirectory: dist
-    files:
-      - '**/*'
-  cache:
-    paths:
-      - node_modules/***
-      - .npm/***
+applications:
+  - appRoot: next-seo
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - nvm install 20
+            - nvm use 20
+            - npm ci --include=dev
+        build:
+          commands:
+            - npm run build
+      artifacts:
+        baseDirectory: .next
+        files:
+          - '**/*'
+      cache:
+        paths:
+          - node_modules/***
+          - .npm/***

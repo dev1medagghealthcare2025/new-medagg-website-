@@ -1,0 +1,17 @@
+/* Blog content spacing and readability tweaks */
+.blog-content p { margin-top: 1.25rem; line-height: 1.8; }
+.blog-content h2 { margin-top: 2.5rem; }
+.blog-content h3 { margin-top: 2rem; }
+.blog-content h4 { margin-top: 1.5rem; }
+.blog-content ul, .blog-content ol { margin-top: 1.25rem; padding-left: 2rem; }
+.blog-content ul { list-style-type: disc; }
+.blog-content ol { list-style-type: decimal; }
+.blog-content li { margin-top: 0.5rem; padding-left: 0.125rem; color: #111827; }
+.blog-content li * { color: inherit; }
+.blog-content li::marker { color: #111827; font-weight: 600; }
+.blog-content table { margin-top: 1.5rem; margin-bottom: 1.5rem; border-collapse: collapse; width: 100%; }
+.blog-content table th, .blog-content table td { border: 1px solid #e5e7eb; padding: 0.75rem; }
+.blog-content img { margin-top: 1.5rem; margin-bottom: 1.5rem; display: block; border-radius: 0.5rem; box-shadow: 0 1px 10px rgba(0,0,0,0.06); }
+.blog-content blockquote { margin-top: 1.5rem; padding-left: 1rem; border-left: 4px solid #f472b6; color: #374151; }
+.blog-content a { color: #db2777; text-decoration: none; }
+.blog-content a:hover { text-decoration: underline; }
