@@ -131,20 +131,8 @@ const doctors = [
  // },
 
   // Hyderabad Doctors
-  {
-    name: 'Dr. Balaji Patel Kola',
-    degrees: 'MBBS, DMRD, DNB',
-    specialty: 'Interventional Radiology',
-    city: 'Hyderabad',
-    image: '/Dr. Balaji Patel Kola.png',
-  },
-  {
-    name: 'Dr. Sailesh Kumar Garge',
-    degrees: 'MBBS, DMRD, DNB',
-    specialty: 'Interventional Radiology',
-    city: 'Hyderabad',
-    image: '/Sailesh Kumar Garge.png',
-  },
+ 
+  
   {
     name: 'Dr. Nishant Sunkarineni',
     degrees: 'MBBS, DMRD, DNB',
@@ -158,6 +146,13 @@ const doctors = [
     specialty: 'Interventional Radiology',
     city: 'Hyderabad',
     image: '/Dr Sai Teja N.png',
+  },
+   {
+    name: 'Dr. Sailesh Kumar Garge',
+    degrees: 'MBBS, DMRD, DNB',
+    specialty: 'Interventional Radiology',
+    city: 'Hyderabad',
+    image: '/Sailesh Kumar Garge.png',
   },
 
 
