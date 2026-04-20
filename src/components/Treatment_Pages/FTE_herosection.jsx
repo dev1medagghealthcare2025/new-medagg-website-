@@ -1,10 +1,32 @@
 import React, { useState } from 'react';
 import { Globe } from 'lucide-react';
 
-const FTE_HeroSection = () => {
+const FTE_HeroSection = ({ city = '', variant = '' }) => {
+  const cityLower = (city || '').toLowerCase();
+  const variantLower = (variant || '').toLowerCase();
+  const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
+  const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
+  const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
+
+  const getCityName = () => {
+    if (isChennai) return 'Chennai';
+    if (isMadurai) return 'Madurai';
+    if (isCoimbatore) return 'Coimbatore';
+    return '';
+  };
+
+  // City-specific background image or default
+  const bgImage = isCitySpecific
+    ? `/hero_varicocele_${isChennai ? 'chennai' : isMadurai ? 'madhuri' : 'coimbatore'}.png`
+    : '/FTE_Herosection_bg.jpg';
+
+  // Keep existing overlay for default page; remove overlay for city-specific pages
+  const overlayOpacity = isCitySpecific ? 'opacity-0' : 'opacity-60';
+
   const [formData, setFormData] = useState({
     concern: '',
-    city: '',
+    city: getCityName(),
     fullName: '',
     phone: '',
     preferredLanguage: '',
@@ -60,18 +82,32 @@ const FTE_HeroSection = () => {
   return (
     <section
       className='relative bg-cover bg-center text-white py-8 sm:py-10 lg:py-14 px-4 sm:px-6 lg:px-8'
-      style={{ backgroundImage: 'url(\'/FTE_Herosection_bg.jpg\')', minHeight: '460px' }}
+      style={{ backgroundImage: `url('${bgImage}')`, minHeight: '460px' }}
     >
-            <div className='absolute inset-0 bg-[#2D2552] opacity-60'></div>
+            <div className={`absolute inset-0 bg-[#2D2552] ${overlayOpacity}`}></div>
       <div className='relative max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center'>
         {/* Left Side: Content */}
         <div className='text-center md:text-left'>
-          <h1 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-3 sm:mb-5 text-white'>
-            Fallopian Tube Recanalization
-          </h1>
-          <p className='text-base sm:text-lg md:text-xl text-gray-200 font-medium'>
-            Safe, scar-free solution to open blocked fallopian tubes.
-          </p>
+          {isCitySpecific ? (
+            <>
+              <h1 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-3 sm:mb-5 text-white'>
+                <div>No-Surgery Fallopian</div>
+                <div>Tube Treatment in {getCityName()}</div>
+              </h1>
+              <p className='text-base sm:text-lg md:text-xl text-gray-200 font-medium'>
+                Advanced Non-Surgical Treatment for Fallopian Tube Blockage by Interventional Radiology Specialists | NoSurgeries by Medagg
+              </p>
+            </>
+          ) : (
+            <>
+              <h1 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-3 sm:mb-5 text-white'>
+                Fallopian Tube Recanalization
+              </h1>
+              <p className='text-base sm:text-lg md:text-xl text-gray-200 font-medium'>
+                Safe, scar-free solution to open blocked fallopian tubes.
+              </p>
+            </>
+          )}
         </div>
 
         {/* Right Side: Form */}

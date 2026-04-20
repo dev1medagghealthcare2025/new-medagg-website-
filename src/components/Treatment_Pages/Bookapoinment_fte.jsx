@@ -1,10 +1,18 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const BookAppointmentFTE = () => {
+const BookAppointmentFTE = ({ city = '', variant = '' }) => {
+  const cityLower = (city || '').toLowerCase();
+  const variantLower = (variant || '').toLowerCase();
+  const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
+  const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
+  const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
+  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : '';
+
   const [formData, setFormData] = useState({
     healthConcern: '',
-    city: '',
+    city: cityName,
     fullName: '',
     phoneNumber: '',
     preferredLanguage: '',
@@ -67,14 +75,29 @@ const BookAppointmentFTE = () => {
           <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full p-12'>
             {/* Left Side: Text Content */}
             <div className='text-center lg:text-left'>
-              <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold text-white'>
-                Think You Might Have A
-                <br />
-                <span className='text-[#ff3576]'>Tubal Blockage?</span>
-              </h2>
-              <p className='mt-4 text-lg text-gray-300'>
-                You don’t need IVF first—non-surgical restoration may be effective.
-              </p>
+              {isCitySpecific ? (
+                <>
+                  <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold text-white'>
+                    Having <span className='text-[#ff3576]'>Trouble Conceiving?</span>
+                    <br />
+                    Get Checked In {cityName}
+                  </h2>
+                  <p className='mt-4 text-lg text-gray-300'>
+                    You don’t need IVF first—non-surgical restoration may be effective.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold text-white'>
+                    Think You Might Have A
+                    <br />
+                    <span className='text-[#ff3576]'>Tubal Blockage?</span>
+                  </h2>
+                  <p className='mt-4 text-lg text-gray-300'>
+                    You don’t need IVF first—non-surgical restoration may be effective.
+                  </p>
+                </>
+              )}
               <Link to='/contact-us'>
                 <button className='mt-8 bg-[#ff3576] text-white font-bold py-3 px-8 rounded-lg hover:bg-pink-700 transition duration-300'>
                   Book Appointment

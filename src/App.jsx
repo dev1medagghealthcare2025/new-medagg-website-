@@ -9,14 +9,29 @@ import BackToTop from './components/BackToTop';
 import CallFab from './components/common/CallFab';
 import FloatingWhatsApp from './components/internal_components/FloatingWhatsApp';
 import PAE_Treatmentpage from './pages/PAE_Treatmentpage';
+import PAE_Treatmentpage_chennai from './pages/PAE_Treatmentpage_chennai';
+import PAE_Treatmentpage_madurai from './pages/PAE_Treatmentpage_madurai';
+import PAE_Treatmentpage_coimbatore from './pages/PAE_Treatmentpage_coimbatore';
 import GAE_Treatmentpage from './pages/GAE_Treatmentpage';
+import GAE_Treatmentpage_chennai from './pages/GAE_Treatmentpage_chennai';
+import GAE_Treatmentpage_madurai from './pages/GAE_Treatmentpage_madurai';
+import GAE_Treatmentpage_coimbatore from './pages/GAE_Treatmentpage_coimbatore';
 import Thyroid_Nodule_Ablation_Treatmentpage from './pages/Thyroid_Nodule_Ablation_Treatmentpage';
+import Thyroid_Nodule_Ablation_Treatmentpage_chennai from './pages/Thyroid_Nodule_Ablation_Treatmentpage_chennai';
+import Thyroid_Nodule_Ablation_Treatmentpage_madurai from './pages/Thyroid_Nodule_Ablation_Treatmentpage_madurai';
+import Thyroid_Nodule_Ablation_Treatmentpage_coimbatore from './pages/Thyroid_Nodule_Ablation_Treatmentpage_coimbatore';
 import About from './pages/About';
 import Varicocele_embolization from './pages/Varicocele_embolization';
+import Varicocele_embolization_chennai from './pages/Varicocele_embolization_chennai';
+import Varicocele_embolization_madurai from './pages/Varicocele_embolization_madurai';
+import Varicocele_embolization_coimbatore from './pages/Varicocele_embolization_coimbatore';
 import VaricoseVeinPage from './pages/varicosevein';
 import Blog from './pages/Blog';
 import BlogPost from './components/blog/BlogPost';
 import FTE from './pages/FTE';
+import FTE_chennai from './pages/FTE_chennai';
+import FTE_madurai from './pages/FTE_madurai';
+import FTE_coimbatore from './pages/FTE_coimbatore';
 import ContactUsPage from './pages/contact_us_page';
 import UAEPage from './pages/UAE';
 import CareerPage from './pages/career';
@@ -131,16 +146,31 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/irpreneur2025/*' element={<Irpreneur2025Page />} />
           <Route path='/prostate-artery-embolization-pae' element={<PAE_Treatmentpage />} />
+          <Route path='/prostate-artery-embolization-pae-chennai' element={<PAE_Treatmentpage_chennai />} />
+          <Route path='/prostate-artery-embolization-pae-madurai' element={<PAE_Treatmentpage_madurai />} />
+          <Route path='/prostate-artery-embolization-pae-coimbatore' element={<PAE_Treatmentpage_coimbatore />} />
           <Route path='/pae' element={<Navigate to='/prostate-artery-embolization-pae' replace />} />
           <Route path='/genicular-artery-embolization-gae' element={<GAE_Treatmentpage />} />
+          <Route path='/genicular-artery-embolization-gae-chennai' element={<GAE_Treatmentpage_chennai />} />
+          <Route path='/genicular-artery-embolization-gae-madurai' element={<GAE_Treatmentpage_madurai />} />
+          <Route path='/genicular-artery-embolization-gae-coimbatore' element={<GAE_Treatmentpage_coimbatore />} />
           <Route path='/gae' element={<Navigate to='/genicular-artery-embolization-gae' replace />} />
           <Route path='/thyroid-nodule-ablation' element={<Thyroid_Nodule_Ablation_Treatmentpage />} />
+          <Route path='/thyroid-nodule-ablation-chennai' element={<Thyroid_Nodule_Ablation_Treatmentpage_chennai />} />
+          <Route path='/thyroid-nodule-ablation-madurai' element={<Thyroid_Nodule_Ablation_Treatmentpage_madurai />} />
+          <Route path='/thyroid-nodule-ablation-coimbatore' element={<Thyroid_Nodule_Ablation_Treatmentpage_coimbatore />} />
           <Route path='/thyroid' element={<Navigate to='/thyroid-nodule-ablation' replace />} />
           <Route path='/about' element={<About />} />
           <Route path='/varicocele-embolization' element={<Varicocele_embolization />} />
+          <Route path='/varicocele-embolization-chennai' element={<Varicocele_embolization_chennai />} />
+          <Route path='/varicocele-embolization-madurai' element={<Varicocele_embolization_madurai />} />
+          <Route path='/varicocele-embolization-coimbatore' element={<Varicocele_embolization_coimbatore />} />
           <Route path='/varicose-vein' element={<VaricoseVeinPage />} />
           <Route path='/blog' element={<Blog />} />
           <Route path='/fallopian-tube-recanalization-ftr' element={<FTE />} />
+          <Route path='/fallopian-tube-recanalization-ftr-chennai' element={<FTE_chennai />} />
+          <Route path='/fallopian-tube-recanalization-ftr-madurai' element={<FTE_madurai />} />
+          <Route path='/fallopian-tube-recanalization-ftr-coimbatore' element={<FTE_coimbatore />} />
           <Route path='/fte' element={<Navigate to='/fallopian-tube-recanalization-ftr' replace />} />
           <Route path='/blog/:slug' element={<BlogPost />} />
           <Route path='/gallery' element={<Gallery />} />

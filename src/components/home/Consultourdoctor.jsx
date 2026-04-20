@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { User, Calendar, CheckCircle2, ThumbsUp } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
+import { Phone, ClipboardCheck, CheckCircle2, ThumbsUp, Calendar } from 'lucide-react';
 
 const steps = [
   {
-    icon: <User size={32} color='white' />,
+    icon: <Phone size={32} color='white' />,
     text: 'Our Care Custodian Will Call You Once You Share Your Details',
   },
   {
@@ -20,7 +21,30 @@ const steps = [
   },
 ];
 
-export default function Consultourdoctor() {
+export default function Consultourdoctor({ city = '', variant = '' }) {
+  const location = useLocation();
+  const path = location.pathname.toLowerCase();
+  const isGAE = path.includes('genicular') || path.includes('gae');
+  const isPAE = path.includes('prostate') || path.includes('pae');
+  const isThyroid = path.includes('thyroid');
+  const isFTR = path.includes('fallopian') || path.includes('ftr') || path.includes('fte');
+
+  const cityLower = (city || '').toLowerCase();
+  const variantLower = (variant || '').toLowerCase();
+  const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
+  const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
+  const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
+  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : '';
+
+  // Treatment-specific heading
+  const getTreatmentHeading = () => {
+    if (isFTR) return 'Fertility';
+    if (isThyroid) return 'Thyroid Nodule';
+    if (isGAE) return 'Knee Pain';
+    if (isPAE) return 'Enlarged Prostate';
+    return '';
+  };
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -84,12 +108,27 @@ export default function Consultourdoctor() {
         {/* Left: Steps */}
         <div className='flex flex-col justify-center'>
           <div className='text-center lg:text-left mb-6'>
-            <h2 className='text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#2D224C] mb-3 leading-tight'>
-              Consult With Our <span className='text-[#F7266B]'>Experts</span>
-            </h2>
-            <p className='text-sm sm:text-base text-gray-600 max-w-xl mx-auto lg:mx-0'>
-              Get Expert Guidance And Clarity On The Best Non-Surgical Treatments Tailored To You.
-            </p>
+            {isCitySpecific ? (
+              <>
+                <h2 className='text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#2D224C] mb-3 leading-tight'>
+                  Consult Our <span className='text-[#F7266B]'>{getTreatmentHeading()}</span>
+                  <br />
+                  Experts In {cityName} Today
+                </h2>
+                <p className='text-sm sm:text-base text-gray-600 max-w-xl mx-auto lg:mx-0'>
+                  Get Expert Guidance And Clarity On The Best Non-Surgical Treatments Tailored To You.
+                </p>
+              </>
+            ) : (
+              <>
+                <h2 className='text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#2D224C] mb-3 leading-tight'>
+                  Consult With Our <span className='text-[#F7266B]'>Experts</span>
+                </h2>
+                <p className='text-sm sm:text-base text-gray-600 max-w-xl mx-auto lg:mx-0'>
+                  Get Expert Guidance And Clarity On The Best Non-Surgical Treatments Tailored To You.
+                </p>
+              </>
+            )}
           </div>
           <div className='relative pl-8'>
             {steps.map((step, idx) => (

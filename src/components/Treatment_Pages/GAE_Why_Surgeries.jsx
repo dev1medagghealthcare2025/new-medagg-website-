@@ -40,7 +40,13 @@ const features = [
   },
 ];
 
-const GAEWhySurgeries = () => {
+const GAEWhySurgeries = ({ city = '', variant = '' }) => {
+  const cityLower = (city || '').toLowerCase();
+  const variantLower = (variant || '').toLowerCase();
+  const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
+  const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
+  const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
   const gridRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -75,11 +81,22 @@ const GAEWhySurgeries = () => {
               <div className='h-px flex-1 bg-[#e9d8dd]' />
             </div>
 
-            <h2 className='text-4xl sm:text-5xl font-extrabold text-[#2d2552] leading-tight'>
-              Surgery Isn’t
-              <br />
-              the Only Option
-            </h2>
+            {isCitySpecific ? (
+              <>
+                <p className='text-lg font-semibold tracking-wide text-[#2d2552] mb-3'>
+                  Why Choose NoSurgeries / MEDAGG?
+                </p>
+                <h2 className='text-3xl sm:text-4xl font-extrabold text-[#ff3576] leading-tight'>
+                  In {isChennai ? 'Chennai' : isMadurai ? 'Madurai' : 'Coimbatore'}, No-Surgery Option is Available for Knee Pain (GAE)
+                </h2>
+              </>
+            ) : (
+              <h2 className='text-4xl sm:text-5xl font-extrabold text-[#2d2552] leading-tight'>
+                Surgery Isn't
+                <br />
+                the Only Option
+              </h2>
+            )}
 
             <div className='mt-6 space-y-4 text-gray-600 leading-relaxed'>
               <p>

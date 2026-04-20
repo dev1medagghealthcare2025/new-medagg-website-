@@ -1,12 +1,32 @@
 import React, { useState } from 'react';
 import { Globe } from 'lucide-react';
 
-const bgImage = '/PAE_PAGE_Background.jpg';
+export default function PAE_Herosection({ city = '', variant = '' }) {
+  const cityLower = (city || '').toLowerCase();
+  const variantLower = (variant || '').toLowerCase();
+  const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
+  const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
+  const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
+  
+  // City-specific background image or default (using varicocele hero images)
+  const bgImage = isCitySpecific 
+    ? `/hero_varicocele_${isChennai ? 'chennai' : isMadurai ? 'madhuri' : 'coimbatore'}.png` 
+    : '/PAE_PAGE_Background.jpg';
+  
+  // Remove blue overlay for city-specific pages
+  const overlayOpacity = isCitySpecific ? 'opacity-0' : 'bg-opacity-60';
+  
+  const getCityName = () => {
+    if (isChennai) return 'Chennai';
+    if (isMadurai) return 'Madurai';
+    if (isCoimbatore) return 'Coimbatore';
+    return '';
+  };
 
-export default function PAE_Herosection() {
   const [formData, setFormData] = useState({
     healthConcern: '',
-    city: '',
+    city: getCityName(),
     fullName: '',
     phoneNumber: '',
     preferredLanguage: '',
@@ -65,17 +85,34 @@ export default function PAE_Herosection() {
         minHeight: '460px',
       }}
     >
-      <div className='absolute inset-0 bg-[#2d2552] bg-opacity-60'></div>
+      <div className={`absolute inset-0 bg-[#2d2552] ${overlayOpacity}`}></div>
       <div className='relative max-w-7xl mx-auto'>
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 items-center'>
           {/* Left Content */}
           <div className='text-white text-center lg:text-left'>
-            <h1 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight text-white mb-3 sm:mb-5'>
-              Prostate Artery Embolization (PAE)
-            </h1>
-            <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 font-medium max-w-2xl mx-auto lg:mx-0'>
-              A safe, non-surgical solution to enlarged prostate with faster recovery and no cuts.
-            </p>
+            {isCitySpecific ? (
+              <>
+                <h1 className='text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight text-white mb-3 sm:mb-5'>
+                  No-Surgery
+                  <br />
+                  Enlarged Prostate
+                  <br />
+                  Treatment In {isChennai ? 'Chennai' : isMadurai ? 'Madurai' : 'Coimbatore'}
+                </h1>
+                <p className='text-sm sm:text-base md:text-lg text-gray-200 font-medium max-w-2xl mx-auto lg:mx-0'>
+                  Advanced Non-Surgical Treatment for Enlarged Prostate by Interventional Radiology Specialists | NoSurgeries by Medagg
+                </p>
+              </>
+            ) : (
+              <>
+                <h1 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight text-white mb-3 sm:mb-5'>
+                  Prostate Artery Embolization (PAE)
+                </h1>
+                <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 font-medium max-w-2xl mx-auto lg:mx-0'>
+                  A safe, non-surgical solution to enlarged prostate with faster recovery and no cuts.
+                </p>
+              </>
+            )}
           </div>
           {/* Right Side: Form */}
           <div className='w-full max-w-md mx-auto'>

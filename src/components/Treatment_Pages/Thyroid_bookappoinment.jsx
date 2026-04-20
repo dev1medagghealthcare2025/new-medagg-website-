@@ -1,10 +1,18 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const Thyroid_bookappoinment = () => {
+const Thyroid_bookappoinment = ({ city = '', variant = '' }) => {
+  const cityLower = (city || '').toLowerCase();
+  const variantLower = (variant || '').toLowerCase();
+  const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
+  const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
+  const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
+  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : '';
+
   const [formData, setFormData] = useState({
     healthConcern: '',
-    city: '',
+    city: cityName,
     fullName: '',
     phoneNumber: '',
     preferredLanguage: '',
@@ -66,10 +74,18 @@ const Thyroid_bookappoinment = () => {
         <div className='relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-center h-full'>
           {/* Left Content */}
           <div className='text-white space-y-5 text-center md:text-left max-w-xl mx-auto md:mx-0'>
-            <h2 className='text-3xl md:text-4xl font-bold leading-tight'>
-              <span className='text-white'>Think You Might Have A</span> <br />
-              <span className='text-[#ff3576]'>Thyroid Nodule?</span>
-            </h2>
+            {isCitySpecific ? (
+              <h2 className='text-3xl md:text-4xl font-bold leading-tight'>
+                <span className='text-white'>Think You Might Have</span> <br />
+                <span className='text-[#ff3576]'>Thyroid Nodules?</span> <br />
+                <span className='text-white'>Get Checked in {cityName}</span>
+              </h2>
+            ) : (
+              <h2 className='text-3xl md:text-4xl font-bold leading-tight'>
+                <span className='text-white'>Think You Might Have A</span> <br />
+                <span className='text-[#ff3576]'>Thyroid Nodule?</span>
+              </h2>
+            )}
             <p className='text-base md:text-lg text-gray-200 max-w-md mx-auto md:mx-0'>
               Book your scan review and get expert advice from our IR specialists.
             </p>

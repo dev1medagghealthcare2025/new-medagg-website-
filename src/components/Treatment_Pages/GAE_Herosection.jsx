@@ -1,12 +1,32 @@
 import React, { useState } from 'react';
 import { Globe } from 'lucide-react';
 
-const bgImage = '/GAE_PAGE_BACKGROUND.jpg';
+export default function GAE_Herosection({ city = '', variant = '' }) {
+  const cityLower = (city || '').toLowerCase();
+  const variantLower = (variant || '').toLowerCase();
+  const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
+  const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
+  const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
 
-export default function GAE_Herosection() {
+  // City-specific background image or default (using varicocele hero images)
+  const bgImage = isCitySpecific
+    ? `/hero_varicocele_${isChennai ? 'chennai' : isMadurai ? 'madhuri' : 'coimbatore'}.png`
+    : '/GAE_PAGE_BACKGROUND.jpg';
+
+  // Remove blue overlay for city-specific pages
+  const overlayOpacity = isCitySpecific ? 'opacity-0' : 'bg-opacity-60';
+
+  const getCityName = () => {
+    if (isChennai) return 'Chennai';
+    if (isMadurai) return 'Madurai';
+    if (isCoimbatore) return 'Coimbatore';
+    return '';
+  };
+
   const [formData, setFormData] = useState({
     healthConcern: '',
-    city: '',
+    city: getCityName(),
     fullName: '',
     phoneNumber: '',
     preferredLanguage: '',
@@ -65,20 +85,35 @@ export default function GAE_Herosection() {
         minHeight: '400px',
       }}
     >
-      <div className='absolute inset-0 bg-[#2d2552] bg-opacity-60 z-0' />
+      <div className={`absolute inset-0 bg-[#2d2552] ${overlayOpacity} z-0`} />
       <div
         className='relative z-10 w-full max-w-7xl min-h-[400px] mx-auto flex flex-col lg:flex-row items-center justify-between'
         style={{ borderRadius: '24px', overflow: 'hidden' }}
       >
         {/* Left: Text */}
         <div className='flex-1 flex flex-col justify-center lg:pr-8 xl:pr-12 mb-8 lg:mb-0 text-center lg:text-left'>
-          <h1 className='text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-4 sm:mb-6'>
-            <div>Genicular Artery</div>
-            <div className='mt-1'>Embolization (GAE)</div>
-          </h1>
-          <p className='text-gray-200 text-base sm:text-lg md:text-xl lg:text-2xl font-medium mb-6 max-w-2xl mx-auto lg:mx-0'>
-            A non-surgical option to relieve chronic knee pain.
-          </p>
+          {isCitySpecific ? (
+            <>
+              <h1 className='text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-4 sm:mb-6'>
+                <div>No-Surgery Knee Pain</div>
+                <div className='mt-1'>(GAE) Treatment</div>
+                <div className='mt-1'>in {getCityName()}</div>
+              </h1>
+              <p className='text-gray-200 text-base sm:text-lg md:text-xl lg:text-2xl font-medium mb-6 max-w-2xl mx-auto lg:mx-0'>
+                Advanced Non-Surgical Treatment for Knee Pain by Interventional Radiology Specialists | NoSurgeries by Medagg
+              </p>
+            </>
+          ) : (
+            <>
+              <h1 className='text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-4 sm:mb-6'>
+                <div>Genicular Artery</div>
+                <div className='mt-1'>Embolization (GAE)</div>
+              </h1>
+              <p className='text-gray-200 text-base sm:text-lg md:text-xl lg:text-2xl font-medium mb-6 max-w-2xl mx-auto lg:mx-0'>
+                A non-surgical option to relieve chronic knee pain.
+              </p>
+            </>
+          )}
         </div>
         {/* Right: Form and Pills */}
         <div className='flex-1 flex flex-col items-center lg:items-end w-full max-w-md lg:max-w-none'>

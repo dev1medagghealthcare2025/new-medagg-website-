@@ -92,4 +92,10 @@ export default defineConfig({
   },
   // Ensure assets are referenced from the root in production
   base: '/',
+  server: {
+    headers: {
+      // Empty Permissions-Policy to suppress experimental feature warnings
+      'Permissions-Policy': '',
+    },
+  },
 });

@@ -1,6 +1,13 @@
 import React from 'react';
 
-const Have_Postate = () => {
+const Have_Postate = ({ city = '', variant = '' }) => {
+  const cityLower = (city || '').toLowerCase();
+  const variantLower = (variant || '').toLowerCase();
+  const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
+  const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
+  const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
+  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : '';
   return (
     <section className='py-16 sm:py-24 flex items-center justify-center bg-white'>
       <div
@@ -16,10 +23,19 @@ const Have_Postate = () => {
           <div className='grid grid-cols-1 md:grid-cols-2 gap-8 items-center h-full'>
             {/* Left Side */}
             <div className='text-center md:text-left py-8 md:py-0'>
-              <h2 className='text-2xl sm:text-3xl lg:text-4xl font-extrabold mb-4'>
-                <span className='text-white'>Think You Might </span>
-                <span className='text-[#ff3576]'>Have Prostate?</span>
-              </h2>
+              {isCitySpecific ? (
+                <h2 className='text-2xl sm:text-3xl lg:text-4xl font-extrabold mb-4'>
+                  <span className='text-white'>Think You Might </span>
+                  <span className='text-[#ff3576]'>Have Prostate?</span>
+                  <br />
+                  <span className='text-white'>Get Checked in {cityName}</span>
+                </h2>
+              ) : (
+                <h2 className='text-2xl sm:text-3xl lg:text-4xl font-extrabold mb-4'>
+                  <span className='text-white'>Think You Might </span>
+                  <span className='text-[#ff3576]'>Have Prostate?</span>
+                </h2>
+              )}
               <p className='text-white text-base md:text-lg font-medium mb-8 max-w-md mx-auto md:mx-0'>
                 Enter your symptoms and get expert guidance from our specialists.
               </p>
@@ -40,6 +56,7 @@ const Have_Postate = () => {
                 <input
                   type='text'
                   placeholder='City'
+                  defaultValue={cityName}
                   className='w-full px-3 py-2 text-sm border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-[#ff3576] transition'
                 />
                 <select

@@ -1,12 +1,32 @@
 import React, { useState } from 'react';
 import { Globe } from 'lucide-react';
 
-const bgImage = '/Thyroid_background.jpg';
+export default function Thyroid_Herosection({ city = '', variant = '' }) {
+  const cityLower = (city || '').toLowerCase();
+  const variantLower = (variant || '').toLowerCase();
+  const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
+  const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
+  const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
 
-export default function Thyroid_Herosection() {
+  // City-specific background image or default (using varicocele hero images)
+  const bgImage = isCitySpecific
+    ? `/hero_varicocele_${isChennai ? 'chennai' : isMadurai ? 'madhuri' : 'coimbatore'}.png`
+    : '/Thyroid_background.jpg';
+
+  // Remove blue overlay for city-specific pages
+  const overlayOpacity = isCitySpecific ? 'opacity-0' : 'bg-opacity-60';
+
+  const getCityName = () => {
+    if (isChennai) return 'Chennai';
+    if (isMadurai) return 'Madurai';
+    if (isCoimbatore) return 'Coimbatore';
+    return '';
+  };
+
   const [formData, setFormData] = useState({
     healthConcern: '',
-    city: '',
+    city: getCityName(),
     fullName: '',
     phoneNumber: '',
     preferredLanguage: '',
@@ -64,16 +84,31 @@ export default function Thyroid_Herosection() {
         minHeight: '400px',
       }}
     >
-      <div className='absolute inset-0 bg-[#2d2552] bg-opacity-60'></div>
+      <div className={`absolute inset-0 bg-[#2d2552] ${overlayOpacity}`}></div>
       <div className='relative max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between min-h-[400px]'>
         {/* Left: Text */}
         <div className='flex-1 lg:pr-8 xl:pr-12 mb-8 lg:mb-0 text-center lg:text-left'>
-          <h1 className='text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-4 sm:mb-6'>
-            Thyroid Nodule Ablation
-          </h1>
-          <p className='text-gray-200 text-base sm:text-lg md:text-xl font-medium mb-6 max-w-2xl mx-auto lg:mx-0'>
-            Scar-free solution for thyroid nodules without surgery
-          </p>
+          {isCitySpecific ? (
+            <>
+              <h1 className='text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-4 sm:mb-6'>
+                <div>No-Surgery Thyroid</div>
+                <div>Nodule Treatment</div>
+                <div>in {getCityName()}</div>
+              </h1>
+              <p className='text-gray-200 text-base sm:text-lg md:text-xl font-medium mb-6 max-w-2xl mx-auto lg:mx-0'>
+                Advanced Non-Surgical Treatment for Thyroid Nodules by Interventional Radiology Specialists | NoSurgeries by Medagg
+              </p>
+            </>
+          ) : (
+            <>
+              <h1 className='text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-4 sm:mb-6'>
+                Thyroid Nodule Ablation
+              </h1>
+              <p className='text-gray-200 text-base sm:text-lg md:text-xl font-medium mb-6 max-w-2xl mx-auto lg:mx-0'>
+                Scar-free solution for thyroid nodules without surgery
+              </p>
+            </>
+          )}
         </div>
         {/* Right: Form and Pills */}
         <div className='flex-1 flex flex-col items-center lg:items-end w-full max-w-md lg:max-w-none'>

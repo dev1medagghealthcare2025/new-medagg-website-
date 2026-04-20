@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 
  const treatments = [
   { title: 'Enlarged Prostate', path: '/prostate-artery-embolization-pae', subTreatments: [{ title: 'Prostate Artery Embolization', path: '/prostate-artery-embolization-pae' }] },
@@ -142,6 +142,45 @@ const FixedDropdown = ({ isOpen, position, items, onMouseEnter, onMouseLeave, st
   );
 };
 
+const TreatmentsMegaMenu = ({ isOpen, position, columns, onMouseEnter, onMouseLeave }) => {
+  if (!isOpen) return null;
+  const { left, top } = position || { left: 0, top: 0 };
+  return (
+    <div
+      className='fixed z-50'
+      style={{ left, top }}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
+      <div className='bg-white border border-gray-200 shadow-xl rounded-b-md ring-1 ring-black/5 overflow-hidden'>
+        <div className='grid grid-cols-5 gap-10 px-10 py-8' style={{ minWidth: '1040px' }}>
+          {columns.map((col, colIdx) => (
+            <div key={colIdx} className='min-w-0'>
+              {col.sections.map((section) => (
+                <div key={section.title} className='mb-6 last:mb-0'>
+                  <div className='text-[12px] font-bold text-gray-900 mb-3'>{section.title}</div>
+                  <ul className='space-y-3'>
+                    {section.items.map((item) => (
+                      <li key={item.title}>
+                        <Link to={item.path || '#'} className='flex items-center gap-3 text-[13px] text-gray-700 hover:text-pink-600'>
+                          <span className='w-9 h-9 rounded-md bg-gray-100 border border-gray-200 flex items-center justify-center text-[11px] font-semibold text-gray-600 shrink-0'>
+                            {item.badge || item.title.slice(0, 2).toUpperCase()}
+                          </span>
+                          <span className='leading-snug'>{item.title}</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default function Treatmentnavbar() {
   const [openIndex, setOpenIndex] = useState(null);
   const scrollContainerRef = useRef(null);
@@ -151,10 +190,41 @@ export default function Treatmentnavbar() {
   const [fixedItems, setFixedItems] = useState([]);
   const [fixedPos, setFixedPos] = useState({ left: 0, top: 0 });
   const [fixedStackBelow, setFixedStackBelow] = useState(false);
+  const [fixedVariant, setFixedVariant] = useState(null); // 'treatments' | 'cities'
   const fixedHoverRef = useRef(false);
   const [isMobile, setIsMobile] = useState(false);
   const [mobileOpenIndex, setMobileOpenIndex] = useState(null); // top-level tab index
   const [mobileOpenSubIndex, setMobileOpenSubIndex] = useState(null); // sub item index within dropdown
+  const desktopHoverCloseTimer = useRef(null);
+
+  const cities = useMemo(
+    () => [
+      'Ahmedabad',
+      'Bangalore',
+      'Bhubaneswar',
+      'Calicut',
+      'Chennai',
+      'Coimbatore',
+      'Delhi',
+      'Goa',
+      'Hyderabad',
+      'Jaipur',
+      'Kolkata',
+      'Madurai',
+      'Perinthalmanna',
+      'Salem',
+      'Surat',
+      'Trivandrum',
+      'Vijayawada',
+      'Vizag',
+    ],
+    [],
+  );
+
+  const cityItems = useMemo(
+    () => cities.map((city) => ({ title: city, path: '/contact-us' })),
+    [cities],
+  );
 
   // Ensure 'Interventional' appears last without mutating original data
   const orderedTreatments = useMemo(() => {
@@ -166,6 +236,85 @@ export default function Treatmentnavbar() {
     }
     return arr;
   }, []);
+
+  const megaMenuColumns = useMemo(() => {
+    const byTitle = new Map(orderedTreatments.map((t) => [t.title, t]));
+    const breast = byTitle.get('Breast Nodules');
+    const interventional = byTitle.get('Interventional');
+    const interNeurology = (interventional && interventional.subTreatments || []).find((x) => x.title === 'Interventional Neurology');
+    const interCardiology = (interventional && interventional.subTreatments || []).find((x) => x.title === 'Interventional Cardiology');
+
+    const womensHealth = [
+      { title: 'Uterine Fibroids', path: byTitle.get('Uterine Fibroids')?.path || '/uterine-artery-embolization-uae' },
+      { title: 'Fallopian Tube Block', path: byTitle.get('Fallopian Tube Block')?.path || '/fallopian-tube-recanalization-ftr' },
+      ...(breast?.subTreatments || []).map((b) => ({ title: b.title, path: b.path })),
+    ].filter((x) => x && x.path);
+
+    const mensHealth = [
+      { title: 'Enlarged Prostate', path: byTitle.get('Enlarged Prostate')?.path || '/prostate-artery-embolization-pae' },
+      { title: 'Varicocele', path: byTitle.get('Varicocele')?.path || '/varicocele-embolization' },
+    ].filter((x) => x && x.path);
+
+    const painJoint = [
+      { title: 'Knee Pain', path: byTitle.get('Knee Pain')?.path || '/genicular-artery-embolization-gae' },
+      { title: 'Frozen Shoulder', path: byTitle.get('Frozen Shoulder')?.path || '/frozen-shoulder' },
+      { title: 'Plantar Fascitis', path: byTitle.get('Plantar Fascitis')?.path || '/plantar-fascial-embolization' },
+    ].filter((x) => x && x.path);
+
+    const commonHealth = [
+      { title: 'Hemorrhoids', path: byTitle.get('Hemorrhoids/Piles')?.path || '/piles-hemorrhoids' },
+      { title: 'Diabetic Foot', path: byTitle.get('Diabetic Foot')?.path || '/diabetic-foot' },
+      { title: 'Thyroid Nodule', path: byTitle.get('Thyroid Nodule')?.path || '/thyroid-nodule-ablation' },
+      { title: 'Varicose Veins', path: byTitle.get('Varicose Veins')?.path || '/varicose-vein' },
+      { title: 'Y-90 Radioembolization', path: byTitle.get('Y-90 Radioembolization')?.path || '/y90-radioembolization-tare' },
+    ].filter((x) => x && x.path);
+
+    const interventionalNeurology = (interNeurology?.subTreatments || [])
+      .map((x) => ({ title: x.title, path: x.path }))
+      .filter((x) => x && x.path);
+
+    const interventionalCardiology = (interCardiology?.subTreatments || [])
+      .map((x) => ({ title: x.title, path: x.path }))
+      .filter((x) => x && x.path);
+
+    const shown = new Set([
+      ...womensHealth,
+      ...mensHealth,
+      ...painJoint,
+      ...commonHealth,
+      ...interventionalNeurology,
+      ...interventionalCardiology,
+    ].map((x) => x.path));
+
+    const extras = [];
+    for (const t of orderedTreatments) {
+      if (t.title === 'Interventional' || t.title === 'Breast Nodules') continue;
+      if (t.path && !shown.has(t.path)) {
+        extras.push({ title: t.title, path: t.path });
+        shown.add(t.path);
+      }
+      for (const sub of t.subTreatments || []) {
+        if (sub.path && !shown.has(sub.path)) {
+          extras.push({ title: sub.title, path: sub.path });
+          shown.add(sub.path);
+        }
+        for (const sub2 of sub.subTreatments || []) {
+          if (sub2.path && !shown.has(sub2.path)) {
+            extras.push({ title: sub2.title, path: sub2.path });
+            shown.add(sub2.path);
+          }
+        }
+      }
+    }
+
+    const col1 = { sections: [{ title: "Women's Health", items: womensHealth }] };
+    const col2 = { sections: [{ title: 'Mens Health', items: mensHealth }, { title: 'Pain & Joint', items: painJoint }] };
+    const col3 = { sections: [{ title: 'Common Health', items: commonHealth }, ...(extras.length ? [{ title: 'More Treatments', items: extras }] : [])] };
+    const col4 = { sections: [{ title: 'Interventional Neurology', items: interventionalNeurology }] };
+    const col5 = { sections: [{ title: 'Interventional Cardiology', items: interventionalCardiology }] };
+
+    return [col1, col2, col3, col4, col5];
+  }, [orderedTreatments]);
 
   // Ensure hovered item + its submenu are fully visible without manual scrolling
   const handleMouseEnter = (idx, targetEl, doScroll = true) => {
@@ -274,7 +423,7 @@ export default function Treatmentnavbar() {
 
   // Detect mobile viewport once and on resize
   useEffect(() => {
-    const mq = window.matchMedia('(max-width: 640px)');
+    const mq = window.matchMedia('(max-width: 1023px)');
     const apply = () => setIsMobile(mq.matches);
     apply();
     if (mq.addEventListener) {
@@ -301,10 +450,120 @@ export default function Treatmentnavbar() {
     }
   };
 
+  const openFixedDropdownForItems = (items, targetEl, stackBelow = false, variant = null) => {
+    if (isMobile) return;
+    if (!targetEl || !items || !items.length) return;
+    const rect = targetEl.getBoundingClientRect();
+    const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+    const dropdownWidth = 360;
+    let left = rect.left;
+    if (left + dropdownWidth > viewportWidth - 8) {
+      left = Math.max(8, viewportWidth - dropdownWidth - 8);
+    }
+    left = Math.max(8, left);
+    const top = rect.bottom;
+    setFixedItems(items);
+    setFixedStackBelow(!!stackBelow);
+    setFixedPos({ left, top });
+    setFixedVariant(variant);
+    setFixedOpen(true);
+  };
+
+  const scheduleDesktopClose = () => {
+    if (desktopHoverCloseTimer.current) {
+      clearTimeout(desktopHoverCloseTimer.current);
+    }
+    desktopHoverCloseTimer.current = setTimeout(() => {
+      fixedHoverRef.current = false;
+      setFixedVariant(null);
+      setFixedOpen(false);
+    }, 120);
+  };
+
+  const cancelDesktopClose = () => {
+    if (desktopHoverCloseTimer.current) {
+      clearTimeout(desktopHoverCloseTimer.current);
+      desktopHoverCloseTimer.current = null;
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      if (desktopHoverCloseTimer.current) {
+        clearTimeout(desktopHoverCloseTimer.current);
+      }
+    };
+  }, []);
+
   return (
-    <nav className='sticky top-[100px] lg:top-[110px] z-40 w-full bg-white border-b border-gray-200 shadow-xl shadow-black/15 ring-1 ring-black/5 overflow-x-hidden'>
+    <nav className='sticky top-[64px] lg:top-[78px] z-40 w-full bg-white border-b border-gray-200 shadow-sm ring-1 ring-black/5 overflow-x-hidden'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-        <div className='flex items-center'>
+        {/* Desktop layout */}
+        <div className='hidden lg:flex items-center justify-between h-[68px]'>
+          <Link to='/' className='flex items-center gap-2 shrink-0'>
+            <img
+              src='/new_version_logo_medagg.png'
+              alt='No Surgeries'
+              className='h-10 w-auto object-contain'
+              loading='eager'
+              decoding='async'
+            />
+          </Link>
+
+          <div className='flex items-center gap-5'>
+            <button
+              type='button'
+              className='inline-flex items-center gap-1.5 text-sm font-semibold text-[#392C5C] hover:text-pink-500 transition-colors'
+              onMouseEnter={(e) => {
+                cancelDesktopClose();
+                openFixedDropdownForItems(orderedTreatments, e.currentTarget, false, 'treatments');
+              }}
+              onMouseLeave={scheduleDesktopClose}
+              onFocus={(e) => {
+                cancelDesktopClose();
+                openFixedDropdownForItems(orderedTreatments, e.currentTarget, false, 'treatments');
+              }}
+              aria-haspopup='menu'
+              aria-expanded={fixedOpen}
+            >
+              <span>Treatments</span>
+              <ChevronDown size={16} />
+            </button>
+
+            <button
+              type='button'
+              className='inline-flex items-center gap-1.5 text-sm font-semibold text-[#392C5C] hover:text-pink-500 transition-colors'
+              onMouseEnter={(e) => {
+                cancelDesktopClose();
+                openFixedDropdownForItems(cityItems, e.currentTarget, false, 'cities');
+              }}
+              onMouseLeave={scheduleDesktopClose}
+              onFocus={(e) => {
+                cancelDesktopClose();
+                openFixedDropdownForItems(cityItems, e.currentTarget, false, 'cities');
+              }}
+              aria-haspopup='menu'
+              aria-expanded={fixedOpen}
+            >
+              <span>Cities</span>
+              <ChevronDown size={16} />
+            </button>
+
+            <Link to='/about' className='text-sm font-semibold text-[#392C5C] hover:text-pink-500 transition-colors'>About</Link>
+            <Link to='/blog' className='text-sm font-semibold text-[#392C5C] hover:text-pink-500 transition-colors'>Blogs</Link>
+            <Link to='/contact-us' className='text-sm font-semibold text-[#392C5C] hover:text-pink-500 transition-colors'>Contact Us</Link>
+          </div>
+
+          <Link
+            to='/contact-us'
+            className='hover-stable inline-flex h-11 px-6 mr-6 bg-pink-500 text-white text-sm rounded-md font-semibold hover:bg-pink-600 transition-colors items-center justify-center whitespace-nowrap'
+          >
+            Book Appointment
+          </Link>
+        </div>
+
+        {/* Mobile layout (keep existing scrollable tabs) */}
+        <div className='lg:hidden flex items-center'>
           <button
             onClick={() => scroll('left')}
             className={`mr-2 bg-white hover:bg-gray-50 rounded-full shadow-md p-2 border border-gray-200 transition-opacity ${showLeftArrow ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
@@ -319,45 +578,36 @@ export default function Treatmentnavbar() {
             ref={scrollContainerRef}
             className='min-w-0 flex-1 overflow-x-auto overflow-y-visible scrollbar-hide pb-2'
           >
-              <ul className='flex items-center justify-start whitespace-nowrap py-2'>
-                {/* Small left spacer to keep first item clear of edge */}
-                <li className='w-6 sm:w-8 flex-shrink-0 pointer-events-none' aria-hidden='true' />
-                {orderedTreatments.map((treatment, idx) => (
-                  <li
-                    key={idx}
-                    className='relative group/main flex items-center first:ml-0 last:mr-2'
-                    onMouseEnter={(e) => handleMouseEnter(idx, e.currentTarget, false)}
-                    onFocus={(e) => handleMouseEnter(idx, e.currentTarget, true)}
-                    onMouseLeave={() => {
-                      if (isMobile) return;
-                      setOpenIndex(null);
-                      if (!fixedHoverRef.current) setFixedOpen(false);
-                    }}
+            <ul className='flex items-center justify-start whitespace-nowrap py-2'>
+              <li className='w-6 sm:w-8 flex-shrink-0 pointer-events-none' aria-hidden='true' />
+              {orderedTreatments.map((treatment, idx) => (
+                <li
+                  key={idx}
+                  className='relative group/main flex items-center first:ml-0 last:mr-2'
+                  onMouseEnter={(e) => handleMouseEnter(idx, e.currentTarget, false)}
+                  onFocus={(e) => handleMouseEnter(idx, e.currentTarget, true)}
+                  onMouseLeave={() => {
+                    if (isMobile) return;
+                    setOpenIndex(null);
+                    if (!fixedHoverRef.current) setFixedOpen(false);
+                  }}
+                >
+                  <button
+                    type='button'
+                    aria-expanded={mobileOpenIndex === idx}
+                    onClick={() => handleMobileTabClick(idx)}
+                    className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors duration-200 ${mobileOpenIndex === idx ? 'bg-[#ff3576] text-white' : 'text-gray-700'} `}
                   >
-                    {isMobile ? (
-                      <button
-                        type='button'
-                        aria-expanded={mobileOpenIndex === idx}
-                        onClick={() => handleMobileTabClick(idx)}
-                        className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors duration-200 ${mobileOpenIndex === idx ? 'bg-[#ff3576] text-white' : 'text-gray-700'} `}
-                      >
-                        <span>{treatment.title}</span>
-                        {treatment.subTreatments && <span className='text-xs'>{mobileOpenIndex === idx ? '▲' : '▼'}</span>}
-                      </button>
-                    ) : (
-                      <Link to={treatment.path || '#'} className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors duration-200 ${openIndex === idx ? 'bg-[#ff3576] text-white' : 'text-gray-700 hover:text-[#ff3576]'}`}>
-                        <span>{treatment.title}</span>
-                        {treatment.subTreatments && <span className='text-xs'>▼</span>}
-                      </Link>
-                    )}
-                    {idx < orderedTreatments.length - 1 && (
-                      <span className='text-gray-300'>|</span>
-                    )}
-                  </li>
-                ))}
-                {/* Small right spacer to keep last item clear of edge */}
-                <li className='w-6 sm:w-8 flex-shrink-0 pointer-events-none' aria-hidden='true' />
-              </ul>
+                    <span>{treatment.title}</span>
+                    {treatment.subTreatments && <span className='text-xs'>{mobileOpenIndex === idx ? '▲' : '▼'}</span>}
+                  </button>
+                  {idx < orderedTreatments.length - 1 && (
+                    <span className='text-gray-300'>|</span>
+                  )}
+                </li>
+              ))}
+              <li className='w-6 sm:w-8 flex-shrink-0 pointer-events-none' aria-hidden='true' />
+            </ul>
           </div>
 
           <button
@@ -373,14 +623,35 @@ export default function Treatmentnavbar() {
       </div>
       {/* Fixed-position root dropdown (desktop only) */}
       {!isMobile && (
-        <FixedDropdown
-          isOpen={fixedOpen}
-          position={fixedPos}
-          items={fixedItems}
-          stackSubBelow={fixedStackBelow}
-          onMouseEnter={() => { fixedHoverRef.current = true; }}
-          onMouseLeave={() => { fixedHoverRef.current = false; setFixedOpen(false); }}
-        />
+        <>
+          <TreatmentsMegaMenu
+            isOpen={fixedOpen && fixedVariant === 'treatments'}
+            position={fixedPos}
+            columns={megaMenuColumns}
+            onMouseEnter={() => {
+              cancelDesktopClose();
+              fixedHoverRef.current = true;
+            }}
+            onMouseLeave={() => {
+              fixedHoverRef.current = false;
+              scheduleDesktopClose();
+            }}
+          />
+          <FixedDropdown
+            isOpen={fixedOpen && fixedVariant === 'cities'}
+            position={fixedPos}
+            items={fixedItems}
+            stackSubBelow={fixedStackBelow}
+            onMouseEnter={() => {
+              cancelDesktopClose();
+              fixedHoverRef.current = true;
+            }}
+            onMouseLeave={() => {
+              fixedHoverRef.current = false;
+              scheduleDesktopClose();
+            }}
+          />
+        </>
       )}
 
       {/* Mobile dropdown panel */}

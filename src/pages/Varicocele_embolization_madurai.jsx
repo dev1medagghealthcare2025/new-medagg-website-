@@ -15,30 +15,29 @@ import VaricoceleFaq from '../components/Treatment_Pages/Varicocele.faq';
 import PageMeta from '../components/PageMeta';
 import VaricoceleWhySurgeries from '../components/Treatment_Pages/varicocele_why_surgeries';
 
-const Varicocele_embolization = () => {
+const Varicocele_embolization_madurai = () => {
   return (
     <>
       <PageMeta
-        title='Best Specialists for Varicocele Embolization | Non-surgical Varicocele Treatment'
-        description='Seek expert non-surgical varicocele treatment. Our embolization procedure offers quick recovery and solves infertility or pain issues.'
+        title='Best Specialists for Varicocele Embolization | Non-surgical Varicocele Treatment in Madurai'
+        description='Seek expert non-surgical varicocele treatment in Madurai. Our embolization procedure offers quick recovery and solves infertility or pain issues.'
       />
       <Navbar />
       <Treatmentnavbar />
-      <Varicocele_herosection />
+      <Varicocele_herosection city='Madurai' variant='madurai' />
       <WhyChooseVaricocele />
       <HowVaricoceleEmbolizationWork />
       <AreYouExperiencingVaricocele />
-       <VaricoceleWhySurgeries />
-      <BookAppointmentVaricocele />
+      <VaricoceleWhySurgeries city='Madurai' variant='madurai' />
+      <BookAppointmentVaricocele city='Madurai' variant='madurai' />
       <CompareTreatmentOptionVaricocele />
       <WhatHappensInVaricoceleEmbolization videoUrl='https://youtube.com/shorts/3U_LMSCCdWI?si=PRGrCs4TpUB9gdXw' />
       <OurDoctor />
       <OurTestimonial />
       <Consultourdoctor />
       <VaricoceleFaq />
-      {/* Other components for the Varicocele Embolization page can be added here */}
     </>
   );
 };
 
-export default Varicocele_embolization;
+export default Varicocele_embolization_madurai;
