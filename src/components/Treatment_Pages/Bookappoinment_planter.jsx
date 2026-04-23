@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const BookappoinmentPlanter = () => {
+const BookappoinmentPlanter = ({ city = '', variant = '' }) => {
+  const cityLower = (city || '').toLowerCase();
+  const variantLower = (variant || '').toLowerCase();
+  const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
+  const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
+  const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
+  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : '';
+
   const [formData, setFormData] = useState({
     healthConcern: '',
-    city: '',
+    city: cityName || '',
     fullName: '',
     phone: '',
     preferredLanguage: '',
@@ -16,6 +24,11 @@ const BookappoinmentPlanter = () => {
     const { name, value } = e.target;
     setFormData(prevState => ({ ...prevState, [name]: value }));
   };
+
+  useEffect(() => {
+    if (!isCitySpecific) return;
+    setFormData((prev) => ({ ...prev, city: cityName }));
+  }, [isCitySpecific, cityName]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -63,13 +76,34 @@ const BookappoinmentPlanter = () => {
         <div className='relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-16'>
           <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 items-center'>
             <div className='text-white space-y-6 text-center lg:text-left'>
-              <h2 className='text-3xl md:text-4xl font-bold leading-tight'>
-                <span className='text-white'>Think You Might Need</span> <br />
-                <span className='text-[#ff3576]'>Plantar Fascia Relief?</span>
-              </h2>
-              <p className='text-lg text-gray-200 max-w-lg mx-auto lg:mx-0'>
-                Book your consultation to review your case and see if you qualify for PFE.
-              </p>
+              {isCitySpecific ? (
+                <>
+                  <h2 className='text-3xl md:text-4xl font-bold leading-tight'>
+                    <span className='text-white'>Suffering From </span>
+                    <span className='text-[#ff3576]'>Heel Pain</span>
+                    <br />
+                    <span className='text-white'>Symptoms? Get Checked</span>
+                    <br />
+                    <span className='text-white'>In </span>
+                    <span className='text-[#ff3576]'>{cityName}</span>
+                  </h2>
+                  <p className='text-lg text-gray-200 max-w-lg mx-auto lg:mx-0'>
+                    Non-surgical, heel pain-relieving treatment
+                    <br />
+                    available now
+                  </p>
+                </>
+              ) : (
+                <>
+                  <h2 className='text-3xl md:text-4xl font-bold leading-tight'>
+                    <span className='text-white'>Think You Might Need</span> <br />
+                    <span className='text-[#ff3576]'>Plantar Fascia Relief?</span>
+                  </h2>
+                  <p className='text-lg text-gray-200 max-w-lg mx-auto lg:mx-0'>
+                    Book your consultation to review your case and see if you qualify for PFE.
+                  </p>
+                </>
+              )}
               <Link to='/contact-us'>
                 <button className='bg-[#ff3576] text-white px-8 py-3 rounded-lg font-semibold hover:bg-pink-700 transition-colors duration-300 text-lg'>
                   Book Appointment

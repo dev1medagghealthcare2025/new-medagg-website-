@@ -1,11 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const BookAppointmentDiabetic = () => {
+const BookAppointmentDiabetic = ({ city = '', variant = '' }) => {
+  const cityLower = (city || '').toLowerCase();
+  const variantLower = (variant || '').toLowerCase();
+  const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
+  const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
+  const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
+  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : '';
+
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     concern: '',
-    city: '',
+    city: cityName || '',
     name: '',
     phone: '',
     preferredLanguage: '',
@@ -17,6 +25,11 @@ const BookAppointmentDiabetic = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
+  useEffect(() => {
+    if (!isCitySpecific) return;
+    setFormData((prev) => ({ ...prev, city: cityName }));
+  }, [isCitySpecific, cityName]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -67,12 +80,33 @@ const BookAppointmentDiabetic = () => {
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             {/* Left Content */}
             <div className="text-white text-center lg:text-left">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight text-white">
-                Worried About a <span className="text-pink-500">Diabetic Foot Wound or Blackened Toe?</span>
-              </h2>
-              <p className="mt-4 text-white text-base sm:text-lg">
-                Talk to our interventional radiology team to find out if endovascular treatment is an option for you.
-              </p>
+              {isCitySpecific ? (
+                <>
+                  <h2 className='text-3xl md:text-4xl font-bold leading-tight'>
+                    <span className='text-white'>Suffering From </span>
+                    <span className='text-[#ff3576]'>Diabetic</span>
+                    <br />
+                    <span className='text-white'>Foot Symptoms? Get</span>
+                    <br />
+                    <span className='text-white'>Checked In </span>
+                    <span className='text-[#ff3576]'>{cityName}</span>
+                  </h2>
+                  <p className='mt-4 text-lg text-gray-200 max-w-lg mx-auto lg:mx-0'>
+                    Non-surgical, limb-preserving treatment
+                    <br />
+                    available now
+                  </p>
+                </>
+              ) : (
+                <>
+                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight text-white">
+                    Worried About a <span className="text-pink-500">Diabetic Foot Wound or Blackened Toe?</span>
+                  </h2>
+                  <p className="mt-4 text-white text-base sm:text-lg">
+                    Talk to our interventional radiology team to find out if endovascular treatment is an option for you.
+                  </p>
+                </>
+              )}
               <button
                 onClick={() => navigate('/contact-us')}
                 className="mt-6 bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-lg transition-colors shadow-lg hover:shadow-xl transform hover:scale-105"

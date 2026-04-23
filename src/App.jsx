@@ -26,6 +26,9 @@ import Varicocele_embolization_chennai from './pages/Varicocele_embolization_che
 import Varicocele_embolization_madurai from './pages/Varicocele_embolization_madurai';
 import Varicocele_embolization_coimbatore from './pages/Varicocele_embolization_coimbatore';
 import VaricoseVeinPage from './pages/varicosevein';
+import VaricoseVeinChennai from './pages/varicose_vein_chennai';
+import VaricoseVeinMadurai from './pages/varicose_vein_madurai';
+import VaricoseVeinCoimbatore from './pages/varicose_vein_coimbatore';
 import Blog from './pages/Blog';
 import BlogPost from './components/blog/BlogPost';
 import FTE from './pages/FTE';
@@ -34,10 +37,16 @@ import FTE_madurai from './pages/FTE_madurai';
 import FTE_coimbatore from './pages/FTE_coimbatore';
 import ContactUsPage from './pages/contact_us_page';
 import UAEPage from './pages/UAE';
+import UAE_chennai from './pages/UAE_chennai';
+import UAE_madurai from './pages/UAE_madurai';
+import UAE_coimbatore from './pages/UAE_coimbatore';
 import CareerPage from './pages/career';
 import BreastNoduleVAEPage from './pages/Breast_Nodule_VAE';
 import BreastNoduleCryoablationPage from './pages/Breast_nodule_cryoablation';
 import Planter from './pages/Planter';
+import Planter_chennai from './pages/Planter_chennai';
+import Planter_madurai from './pages/Planter_madurai';
+import Planter_coimbatore from './pages/Planter_coimbatore';
 import Transcatheter_aortic_valve_implantation from './pages/Transcatheter_aortic_valve_implantation';
 import CTO_treatmentpage from './pages/CTO_treatmentpage';
 import RFA_treatmentpage from './pages/RFA_treatmentpage';
@@ -50,7 +59,13 @@ import Testiominal from './pages/Testiominal';
 import PolicyPage from './pages/policy';
 import TermsConditionPage from './pages/terms_condition';
 import DiabeticFootPage from './pages/Diabetic _Foot';
+import DiabeticFootChennai from './pages/Diabetic_Foot_chennai';
+import DiabeticFootMadurai from './pages/Diabetic_Foot_madurai';
+import DiabeticFootCoimbatore from './pages/Diabetic_Foot_coimbatore';
 import FrozenShoulderPage from './pages/frozen_shoulder';
+import FrozenShoulderChennai from './pages/frozen_shoulder_chennai';
+import FrozenShoulderMadurai from './pages/frozen_shoulder_madurai';
+import FrozenShoulderCoimbatore from './pages/frozen_shoulder_coimbatore';
 import Hemorrhoidal from './pages/Hemorrhoidal';
 import Y90_TAREPage from './pages/Y90_TARE';
 import Transarterial_Chemoembolization from './pages/Transarterial_Chemoembolization';
@@ -58,6 +73,18 @@ import Cursor from './components/ui/Cursor';
 import ImageCursorStyle from './components/ui/ImageCursorStyle';
 import { UI_ENHANCEMENTS_ENABLED, IMAGE_CURSOR_ENABLED } from './config/uiEnhancements';
 import ButtonInteractions from './components/ui/ButtonInteractions';
+import TaviChennai from './pages/tavi_chennai';
+import TaviMadurai from './pages/tavi_madurai';
+import TaviCoimbatore from './pages/tavi_coimbatore';
+import CTOChennai from './pages/cto_chennai';
+import CTOMadurai from './pages/cto_madurai';
+import CTOCoimbatore from './pages/cto_coimbatore';
+import PilesChennai from './pages/piles_chennai';
+import PilesMadurai from './pages/piles_madurai';
+import PilesCoimbatore from './pages/piles_coimbatore';
+import Y90Chennai from './pages/y90_chennai';
+import Y90Madurai from './pages/y90_madurai';
+import Y90Coimbatore from './pages/y90_coimbatore';
 
 function ScrollToTop() {
   const location = useLocation();
@@ -166,6 +193,9 @@ function App() {
           <Route path='/varicocele-embolization-madurai' element={<Varicocele_embolization_madurai />} />
           <Route path='/varicocele-embolization-coimbatore' element={<Varicocele_embolization_coimbatore />} />
           <Route path='/varicose-vein' element={<VaricoseVeinPage />} />
+          <Route path='/varicose-vein-chennai' element={<VaricoseVeinChennai />} />
+          <Route path='/varicose-vein-madurai' element={<VaricoseVeinMadurai />} />
+          <Route path='/varicose-vein-coimbatore' element={<VaricoseVeinCoimbatore />} />
           <Route path='/blog' element={<Blog />} />
           <Route path='/fallopian-tube-recanalization-ftr' element={<FTE />} />
           <Route path='/fallopian-tube-recanalization-ftr-chennai' element={<FTE_chennai />} />
@@ -180,13 +210,25 @@ function App() {
           <Route path='/book-an-appointment' element={<ContactUsPage />} />
           <Route path='/book-appointment' element={<ContactUsPage />} />
           <Route path='/uterine-artery-embolization-uae' element={<UAEPage />} />
+          <Route path='/uterine-artery-embolization-uae-chennai' element={<UAE_chennai />} />
+          <Route path='/uterine-artery-embolization-uae-madurai' element={<UAE_madurai />} />
+          <Route path='/uterine-artery-embolization-uae-coimbatore' element={<UAE_coimbatore />} />
           <Route path='/uae' element={<Navigate to='/uterine-artery-embolization-uae' replace />} />
           <Route path='/breast-nodule-vae' element={<BreastNoduleVAEPage />} />
           <Route path='/breast-nodule-cryoablation' element={<BreastNoduleCryoablationPage />} />
           <Route path='/plantar-fascial-embolization' element={<Planter />} />
+          <Route path='/plantar-fascial-embolization-chennai' element={<Planter_chennai />} />
+          <Route path='/plantar-fascial-embolization-madurai' element={<Planter_madurai />} />
+          <Route path='/plantar-fascial-embolization-coimbatore' element={<Planter_coimbatore />} />
           <Route path='/pfe' element={<Navigate to='/plantar-fascial-embolization' replace />} />
           <Route path='/transcatheter-aortic-valve-replacement' element={<Transcatheter_aortic_valve_implantation />} />
+          <Route path='/transcatheter-aortic-valve-replacement-chennai' element={<TaviChennai />} />
+          <Route path='/transcatheter-aortic-valve-replacement-madurai' element={<TaviMadurai />} />
+          <Route path='/transcatheter-aortic-valve-replacement-coimbatore' element={<TaviCoimbatore />} />
           <Route path='/cto' element={<CTO_treatmentpage />} />
+          <Route path='/cto-chennai' element={<CTOChennai />} />
+          <Route path='/cto-madurai' element={<CTOMadurai />} />
+          <Route path='/cto-coimbatore' element={<CTOCoimbatore />} />
           <Route path='/rfa' element={<RFA_treatmentpage />} />
           <Route path='/endovascular-coiling' element={<Endovascular_Coiling_treatment />} />
           <Route path='/radiofrequency-ablation-for-avm' element={<RadiofrequencyAblationAVM />} />
@@ -195,10 +237,22 @@ function App() {
           <Route path='/join-with-us' element={<JoinWithUs />} />
           <Route path='/testimonials' element={<Testiominal />} />
           <Route path='/diabetic-foot' element={<DiabeticFootPage />} />
+          <Route path='/diabetic-foot-chennai' element={<DiabeticFootChennai />} />
+          <Route path='/diabetic-foot-madurai' element={<DiabeticFootMadurai />} />
+          <Route path='/diabetic-foot-coimbatore' element={<DiabeticFootCoimbatore />} />
           <Route path='/frozen-shoulder' element={<FrozenShoulderPage />} />
+          <Route path='/frozen-shoulder-chennai' element={<FrozenShoulderChennai />} />
+          <Route path='/frozen-shoulder-madurai' element={<FrozenShoulderMadurai />} />
+          <Route path='/frozen-shoulder-coimbatore' element={<FrozenShoulderCoimbatore />} />
           <Route path='/y90-radioembolization-tare' element={<Y90_TAREPage />} />
+          <Route path='/y90-radioembolization-tare-chennai' element={<Y90Chennai />} />
+          <Route path='/y90-radioembolization-tare-madurai' element={<Y90Madurai />} />
+          <Route path='/y90-radioembolization-tare-coimbatore' element={<Y90Coimbatore />} />
           <Route path='/transarterial-chemoembolization-tace' element={<Transarterial_Chemoembolization />} />
           <Route path='/piles-hemorrhoids' element={<Hemorrhoidal />} />
+          <Route path='/piles-hemorrhoids-chennai' element={<PilesChennai />} />
+          <Route path='/piles-hemorrhoids-madurai' element={<PilesMadurai />} />
+          <Route path='/piles-hemorrhoids-coimbatore' element={<PilesCoimbatore />} />
           <Route path='/hemorrhoidal' element={<Navigate to='/piles-hemorrhoids' replace />} />
           {/* Policy page routes */}
           <Route path='/policy' element={<PolicyPage />} />

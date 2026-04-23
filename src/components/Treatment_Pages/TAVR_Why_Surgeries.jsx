@@ -40,7 +40,15 @@ const features = [
   },
 ];
 
-const TAVRWhySurgeries = () => {
+const TAVRWhySurgeries = ({ city = '', variant = '' }) => {
+  const cityLower = (city || '').toLowerCase();
+  const variantLower = (variant || '').toLowerCase();
+  const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
+  const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
+  const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
+  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : '';
+
   const gridRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -76,9 +84,9 @@ const TAVRWhySurgeries = () => {
             </div>
 
             <h2 className='text-4xl sm:text-5xl font-extrabold text-[#2d2552] leading-tight'>
-              Surgery Isn’t
-              <br />
-              the Only Option
+              {isCitySpecific
+                ? `In ${cityName}, No-Surgery Treatment for Aortic Valve Disease is Available`
+                : <>Surgery Isn’t<br />the Only Option</>}
             </h2>
 
             <div className='mt-6 space-y-4 text-gray-600 leading-relaxed'>

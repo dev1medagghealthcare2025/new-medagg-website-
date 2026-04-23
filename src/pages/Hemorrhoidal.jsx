@@ -15,22 +15,22 @@ import OurTestimonial from '../components/home/our_testimonial';
 import Consultourdoctor from '../components/home/Consultourdoctor';
 import Hemorrhoids_faq from '../components/Treatment_Pages/Hemorrhoids_faq';
 
-const Hemorrhoidal = () => (
+const Hemorrhoidal = ({ city = '', variant = '' }) => (
   <>
     <Navbar />
     <Treatmentnavbar />
-    <Hemorrhoidal_herosection />
+    <Hemorrhoidal_herosection city={city} variant={variant} />
     <WhyChooseHemorrhoidal />
     <Hemorrhoids_Work />
     <AreYouExperiencingHemorrhoids />
-    <GAEWhySurgeries />
-    <Book_appoinment_Hemorrhoids />
+    <GAEWhySurgeries city={city} variant={variant} />
+    <Book_appoinment_Hemorrhoids city={city} variant={variant} />
     <Hemorrhoids_compare />
     <What_Happens_Hemorrhoids />
     <OurDoctor />
     <OurTestimonial />
-    <Consultourdoctor />
-    <Hemorrhoids_faq />
+    <Consultourdoctor city={city} variant={variant} />
+    <Hemorrhoids_faq city={city} variant={variant} />
   </>
 );
 

@@ -15,7 +15,7 @@ import OurTestimonial from '../components/home/our_testimonial';
 import VvFaq from '../components/Treatment_Pages/vv_faq';
 import PageMeta from '../components/PageMeta';
 
-const VaricoseVeinPage = () => {
+const VaricoseVeinPage = ({ city = '', variant = '' }) => {
   return (
     <div className='bg-white'>
       <PageMeta
@@ -24,18 +24,18 @@ const VaricoseVeinPage = () => {
       />
       <Navbar />
       <Treatmentnavbar />
-      <VaricoseVeinHeroSection />
+      <VaricoseVeinHeroSection city={city} variant={variant} />
       <WhyChooseEndovenousAblation />
       <VaricoseVeinWork />
       <AreYouExperiencingVaricocele />
-      <VvWhySurgeries />
-      <VV_BookAnAppointment />
+      <VvWhySurgeries city={city} variant={variant} />
+      <VV_BookAnAppointment city={city} variant={variant} />
       <CompareTreatmentOptions />
       <WhatHappensInEndovenousAblation videoUrl='https://youtube.com/shorts/HKUDEpX8MPw?si=QhzEi3qij_1r_mcU' />
       <Ourdoctor />
       <OurTestimonial/>
-      <ConsultOurDoctor />
-      <VvFaq />
+      <ConsultOurDoctor city={city} variant={variant} />
+      <VvFaq city={city} variant={variant} />
 
     </div>
   );

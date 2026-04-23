@@ -1,16 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Globe } from 'lucide-react';
 
-const TaviHeroSection = () => {
+const TaviHeroSection = ({ city = '', variant = '' }) => {
+  const cityLower = (city || '').toLowerCase();
+  const variantLower = (variant || '').toLowerCase();
+  const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
+  const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
+  const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
+  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : '';
+
+  const backgroundImage = isCitySpecific
+    ? `/hero_varicocele_${isChennai ? 'chennai' : isMadurai ? 'madhuri' : 'coimbatore'}.png`
+    : '/TAVI_bg_image.jpg';
+
   const [formData, setFormData] = useState({
     concern: '',
     fullName: '',
     phone: '',
-    city: '',
+    city: cityName || '',
     preferredLanguage: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formStatus, setFormStatus] = useState(''); // success, error, or ''
+
+  useEffect(() => {
+    if (!isCitySpecific) return;
+    setFormData((prev) => ({ ...prev, city: cityName }));
+  }, [isCitySpecific, cityName]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -59,19 +76,26 @@ const TaviHeroSection = () => {
     <section
       className='relative w-full bg-cover bg-center py-8 sm:py-10 lg:py-14 px-4 sm:px-6 lg:px-8'
       style={{
-        backgroundImage: 'url(\'/TAVI_bg_image.jpg\')',
+        backgroundImage: `url('${backgroundImage}')`,
         minHeight: '460px',
       }}
     >
-      <div className='absolute inset-0 bg-[#2d2552] bg-opacity-60'></div>
+      <div className={`absolute inset-0 bg-[#2d2552] ${isCitySpecific ? 'opacity-0' : 'bg-opacity-60'}`}></div>
+      {isCitySpecific && (
+        <div className='absolute inset-y-0 left-0 w-full md:w-[55%] bg-gradient-to-r from-black/65 via-black/25 to-transparent pointer-events-none'></div>
+      )}
       <div className='relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center'>
         {/* Left Content */}
         <div className='text-white text-center lg:text-left'>
           <h1 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-3 sm:mb-5 text-white'>
-            Transcatheter Aortic Valve Implantation
+            {isCitySpecific
+              ? `No-Surgery Aortic Valve Replacement (TAVI) in ${cityName}`
+              : 'Transcatheter Aortic Valve Implantation'}
           </h1>
           <p className='text-base sm:text-lg md:text-xl text-gray-200 font-medium max-w-2xl mx-auto lg:mx-0'>
-            A minimally invasive procedure to replace a narrowed aortic valve that fails to open properly.
+            {isCitySpecific
+              ? 'Advanced Minimally Invasive Aortic Valve Replacement (TAVI) by Interventional Cardiology Specialists | NoSurgeries by Medagg'
+              : 'A minimally invasive procedure to replace a narrowed aortic valve that fails to open properly.'}
           </p>
         </div>
 

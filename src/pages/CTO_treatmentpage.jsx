@@ -15,7 +15,7 @@ import OurTestimonial from '../components/home/our_testimonial';
 import CtoFaq from '../components/Treatment_Pages/CTO_FAQ.jsx';
 import PageMeta from '../components/PageMeta';
 
-const CTO_treatmentpage = () => {
+const CTO_treatmentpage = ({ city = '', variant = '' }) => {
   return (
     <div>
       <PageMeta
@@ -24,18 +24,18 @@ const CTO_treatmentpage = () => {
       />
       <Navbar />
       <Treatmentnavbar />
-      <CTO_Herosection />
+      <CTO_Herosection city={city} variant={variant} />
       <Why_choose_CTO />
       <How_CTO_works />
       <Are_You_Experiencing_CTO />
-      <CTOWhySurgeries />
-      <Bookanappoinment_cto />
+      <CTOWhySurgeries city={city} variant={variant} />
+      <Bookanappoinment_cto city={city} variant={variant} />
       <Compare_treatment_cto />
       <What_Happens_in_CTO_treatment />
       <Ourdoctor />
       <OurTestimonial/>
-      <Consultourdoctor />
-      <CtoFaq />
+      <Consultourdoctor city={city} variant={variant} />
+      <CtoFaq city={city} variant={variant} />
       
     </div>
   );

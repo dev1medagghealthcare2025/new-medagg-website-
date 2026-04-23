@@ -15,7 +15,7 @@ import FrozenShoulderWhySurgeries from '../components/Treatment_Pages/frozen sho
 import FrozenFaq from '../components/Treatment_Pages/frzon_faq.jsx';
 import PageMeta from '../components/PageMeta';
 
-const FrozenShoulderPage = () => {
+const FrozenShoulderPage = ({ city = '', variant = '' }) => {
   return (
     <>
       <PageMeta
@@ -24,18 +24,18 @@ const FrozenShoulderPage = () => {
       />
       <Navbar />
       <Treatmentnavbar />
-      <FrozenShoulderHero />
+      <FrozenShoulderHero city={city} variant={variant} />
       <WhyChooseFrozenShoulder />
       <HowWorkFrozen />
       <AreYouExperiencingFrozen />
-      <FrozenShoulderWhySurgeries />
-      <BookAppointmentFrozen />
+      <FrozenShoulderWhySurgeries city={city} variant={variant} />
+      <BookAppointmentFrozen city={city} variant={variant} />
       <CompareFrozen />
       {/* <WhatHappensFrozen /> */}
       <OurDoctor />
       <OurTestimonial />
-      <ConsultOurDoctor />
-      <FrozenFaq />
+      <ConsultOurDoctor city={city} variant={variant} />
+      <FrozenFaq city={city} variant={variant} />
 
     </>
   );

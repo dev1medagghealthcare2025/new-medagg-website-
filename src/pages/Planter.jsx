@@ -15,7 +15,7 @@ import OurTestimonial from '../components/home/our_testimonial.jsx';
 import PlantarFaq from '../components/Treatment_Pages/Planter-faq.jsx';
 import PageMeta from '../components/PageMeta';
 
-const Planter = () => {
+const Planter = ({ city = '', variant = '' }) => {
   return (
     <>
       <PageMeta
@@ -24,18 +24,18 @@ const Planter = () => {
       />
       <Navbar />
       <Treatmentnavbar />
-      <PlanterHeroSection />
+      <PlanterHeroSection city={city} variant={variant} />
       <WhyChoosePlantar />
       <HowPlantarWork />
       <AreYouExperiencingPlanter />
-      <PlanterWhySurgeries />
-      <BookappoinmentPlanter />
+      <PlanterWhySurgeries city={city} variant={variant} />
+      <BookappoinmentPlanter city={city} variant={variant} />
       <CompareTreatmentPlanter />
       {/* <WhatHappensInPlantar /> */}
       <OurDoctor />
       <OurTestimonial/>
-      <Consultourdoctor />
-      <PlantarFaq />
+      <Consultourdoctor city={city} variant={variant} />
+      <PlantarFaq city={city} variant={variant} />
       {/* You can add other components for the Planter page here */}
     </>
   );

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { Link, useNavigate } from 'react-router-dom';
 
-import { MapPin, Menu, Search, X, ChevronDown } from 'lucide-react';
+import { MapPin, Menu, Search, X, ChevronDown, PhoneCall } from 'lucide-react';
 
 import { filterTreatments, treatmentCategories } from './searchTreatments';
 
@@ -59,11 +59,11 @@ const OTHER_CITIES = DEFAULT_CITIES.filter(
 
 const MOBILE_CITY_GROUPS = [
 
-  { title: 'TAMIL NADU', cities: ['Chennai', 'Coimbatore', 'Madurai', 'Salem'] },
+  { title: 'TAMIL NADU', cities: ['Chennai', 'Coimbatore', 'Madurai'] },
 
-  { title: 'KERALA', cities: ['Calicut', 'Perinthalmanna', 'Trivandrum'] },
+  { title: 'KERALA', cities: ['Calicut', 'Kochi', 'Kollam', 'Trivandrum'] },
 
-  { title: 'KARNATAKA', cities: ['Bangalore'] },
+  { title: 'KARNATAKA', cities: ['Bangalore', 'Mangalore'] },
 
   { title: 'TELANGANA', cities: ['Hyderabad'] },
 
@@ -77,7 +77,7 @@ const MOBILE_CITY_GROUPS = [
 
   { title: 'WEST BENGAL', cities: ['Kolkata'] },
 
-  { title: 'UTTAR PRADESH', cities: ['Lucknow'] },
+  { title: 'UTTAR PRADESH', cities: ['Agra', 'Greater Noida', 'Lucknow', 'Noida'] },
 
   { title: 'ODISHA', cities: ['Bhubaneswar'] },
 
@@ -447,6 +447,15 @@ export default function Navbar() {
         '/thyroid-nodule-ablation': '/thyroid-nodule-ablation-chennai',
 
         '/fallopian-tube-recanalization-ftr': '/fallopian-tube-recanalization-ftr-chennai',
+        '/uterine-artery-embolization-uae': '/uterine-artery-embolization-uae-chennai',
+        '/varicose-vein': '/varicose-vein-chennai',
+        '/plantar-fascial-embolization': '/plantar-fascial-embolization-chennai',
+        '/diabetic-foot': '/diabetic-foot-chennai',
+        '/frozen-shoulder': '/frozen-shoulder-chennai',
+        '/transcatheter-aortic-valve-replacement': '/transcatheter-aortic-valve-replacement-chennai',
+        '/cto': '/cto-chennai',
+        '/piles-hemorrhoids': '/piles-hemorrhoids-chennai',
+        '/y90-radioembolization-tare': '/y90-radioembolization-tare-chennai',
 
       },
 
@@ -461,6 +470,15 @@ export default function Navbar() {
         '/thyroid-nodule-ablation': '/thyroid-nodule-ablation-madurai',
 
         '/fallopian-tube-recanalization-ftr': '/fallopian-tube-recanalization-ftr-madurai',
+        '/uterine-artery-embolization-uae': '/uterine-artery-embolization-uae-madurai',
+        '/varicose-vein': '/varicose-vein-madurai',
+        '/plantar-fascial-embolization': '/plantar-fascial-embolization-madurai',
+        '/diabetic-foot': '/diabetic-foot-madurai',
+        '/frozen-shoulder': '/frozen-shoulder-madurai',
+        '/transcatheter-aortic-valve-replacement': '/transcatheter-aortic-valve-replacement-madurai',
+        '/cto': '/cto-madurai',
+        '/piles-hemorrhoids': '/piles-hemorrhoids-madurai',
+        '/y90-radioembolization-tare': '/y90-radioembolization-tare-madurai',
 
       },
 
@@ -475,6 +493,15 @@ export default function Navbar() {
         '/thyroid-nodule-ablation': '/thyroid-nodule-ablation-coimbatore',
 
         '/fallopian-tube-recanalization-ftr': '/fallopian-tube-recanalization-ftr-coimbatore',
+        '/uterine-artery-embolization-uae': '/uterine-artery-embolization-uae-coimbatore',
+        '/varicose-vein': '/varicose-vein-coimbatore',
+        '/plantar-fascial-embolization': '/plantar-fascial-embolization-coimbatore',
+        '/diabetic-foot': '/diabetic-foot-coimbatore',
+        '/frozen-shoulder': '/frozen-shoulder-coimbatore',
+        '/transcatheter-aortic-valve-replacement': '/transcatheter-aortic-valve-replacement-coimbatore',
+        '/cto': '/cto-coimbatore',
+        '/piles-hemorrhoids': '/piles-hemorrhoids-coimbatore',
+        '/y90-radioembolization-tare': '/y90-radioembolization-tare-coimbatore',
 
       },
 
@@ -1090,7 +1117,7 @@ export default function Navbar() {
 
                   alt='Medagg Healthcare'
 
-                  className='h-16 w-auto max-w-[260px] object-contain'
+                  className='h-16 w-auto max-w-[340px] object-contain scale-[1.06] origin-center'
 
                   loading='eager'
 
@@ -1108,17 +1135,13 @@ export default function Navbar() {
 
                 href='tel:+919363656010'
 
-                className='text-[#392C5C] hover:text-pink-500 transition-colors p-2'
+                className='h-10 w-10 rounded-full bg-[#392C5C] text-white shadow-sm flex items-center justify-center hover:bg-pink-500 transition-colors'
 
                 aria-label='Call'
 
               >
 
-                <svg xmlns='http://www.w3.org/2000/svg' className='h-5 w-5' fill='none' viewBox='0 0 24 24' stroke='currentColor' strokeWidth={2}>
-
-                  <path strokeLinecap='round' strokeLinejoin='round' d='M3 5a2 2 0 012-2h2.28a2 2 0 011.94 1.515l.3 1.2a2 2 0 01-.45 1.95l-.7.7a16.001 16.001 0 006.36 6.36l.7-.7a2 2 0 011.95-.45l1.2.3A2 2 0 0121 16.72V19a2 2 0 01-2 2h-1C7.82 21 3 16.18 3 10V5z' />
-
-                </svg>
+                <PhoneCall size={18} />
 
               </a>
 
@@ -1172,19 +1195,23 @@ export default function Navbar() {
 
                   <div className='flex items-center justify-center'>
 
-                    <img src='/new_part2.png' alt='Medagg Healthcare' className='h-16 w-auto max-w-[260px] object-contain' />
+                    <img src='/new_part2.png' alt='Medagg Healthcare' className='h-16 w-auto max-w-[340px] object-contain scale-[1.06] origin-center' />
 
                   </div>
 
                   <div className='flex items-center justify-end'>
 
-                    <a href='tel:+919363656010' className='p-2 text-[#392C5C]' aria-label='Call'>
+                    <a
 
-                      <svg xmlns='http://www.w3.org/2000/svg' className='h-5 w-5' fill='none' viewBox='0 0 24 24' stroke='currentColor' strokeWidth={2}>
+                      href='tel:+919363656010'
 
-                        <path strokeLinecap='round' strokeLinejoin='round' d='M3 5a2 2 0 012-2h2.28a2 2 0 011.94 1.515l.3 1.2a2 2 0 01-.45 1.95l-.7.7a16.001 16.001 0 006.36 6.36l.7-.7a2 2 0 011.95-.45l1.2.3A2 2 0 0121 16.72V19a2 2 0 01-2 2h-1C7.82 21 3 16.18 3 10V5z' />
+                      className='h-10 w-10 rounded-full bg-[#392C5C] text-white shadow-sm flex items-center justify-center hover:bg-pink-500 transition-colors'
 
-                      </svg>
+                      aria-label='Call'
+
+                    >
+
+                      <PhoneCall size={18} />
 
                     </a>
 

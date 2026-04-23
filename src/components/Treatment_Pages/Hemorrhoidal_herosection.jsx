@@ -1,12 +1,23 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const bgImage = '/Hemorrhoidal_bg.png';
 
-export default function Hemorrhoidal_herosection() {
+export default function Hemorrhoidal_herosection({ city = '', variant = '' }) {
+  const cityLower = (city || '').toLowerCase();
+  const variantLower = (variant || '').toLowerCase();
+  const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
+  const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
+  const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
+  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : '';
+
+  const backgroundImage = isCitySpecific
+    ? `/hero_varicocele_${isChennai ? 'chennai' : isMadurai ? 'madhuri' : 'coimbatore'}.png`
+    : bgImage;
+
   const [formData, setFormData] = useState({
     healthConcern: '',
-    location: '',
+    location: cityName || '',
     fullName: '',
     phoneNumber: '',
     preferredLanguage: '',
@@ -18,6 +29,11 @@ export default function Hemorrhoidal_herosection() {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
+   useEffect(() => {
+     if (!isCitySpecific) return;
+     setFormData((prev) => ({ ...prev, location: cityName }));
+   }, [isCitySpecific, cityName]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -61,21 +77,28 @@ export default function Hemorrhoidal_herosection() {
     <section
       className='relative bg-cover bg-center text-white py-8 sm:py-10 lg:py-14 px-4 sm:px-6 lg:px-8'
       style={{
-        backgroundImage: `url('${bgImage}')`,
+        backgroundImage: `url('${backgroundImage}')`,
         minHeight: '460px',
       }}
     >
-      <div className='absolute inset-0 bg-[#2d2552] bg-opacity-15' />
+      <div className={`absolute inset-0 bg-[#2d2552] ${isCitySpecific ? 'opacity-0' : 'bg-opacity-15'}`} />
+      {isCitySpecific && (
+        <div className='absolute inset-y-0 left-0 w-full md:w-[55%] bg-gradient-to-r from-black/65 via-black/25 to-transparent pointer-events-none' />
+      )}
 
       <div className='relative max-w-7xl mx-auto'>
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center'>
           <div className='text-white text-center lg:text-left'>
             <h1 className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-white mb-3 sm:mb-5'>
-              Hemorrhoidal/Piles Artery Embolization
+              {isCitySpecific
+                ? `No-Surgery Piles/Hemorrhoids Treatment in ${cityName}`
+                : 'Hemorrhoidal/Piles Artery Embolization'}
               
             </h1>
             <p className='text-sm sm:text-base md:text-lg text-gray-200 font-medium max-w-2xl mx-auto lg:mx-0'>
-              Hemorrhoids/piles Treatment Without Surgery | No Cuts | No Stitches | Faster Recovery
+              {isCitySpecific
+                ? 'Advanced Non-Surgical Treatment for Piles/Hemorrhoids by Interventional Radiology Specialists | NoSurgeries by Medagg'
+                : 'Hemorrhoids/piles Treatment Without Surgery | No Cuts | No Stitches | Faster Recovery'}
             </p>
           </div>
 

@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const BookAppointmentY90Tare = () => {
+const BookAppointmentY90Tare = ({ city = '', variant = '' }) => {
+  const cityLower = (city || '').toLowerCase();
+  const variantLower = (variant || '').toLowerCase();
+  const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
+  const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
+  const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
+  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : '';
+
   const [formData, setFormData] = useState({
     healthConcern: '',
-    city: '',
+    city: cityName || '',
     fullName: '',
     phone: '',
     preferredLanguage: '',
@@ -16,6 +24,11 @@ const BookAppointmentY90Tare = () => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
+
+  useEffect(() => {
+    if (!isCitySpecific) return;
+    setFormData((prev) => ({ ...prev, city: cityName }));
+  }, [isCitySpecific, cityName]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -72,13 +85,17 @@ const BookAppointmentY90Tare = () => {
           <div className='relative grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-center w-full z-10'>
             <div className='text-white text-center lg:text-left'>
               <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight'>
-                <span className='text-white'>Think You Might Have</span>
-                <br />
-                <span className='text-[#ff3576]'>Liver Tumors?</span>
+                {isCitySpecific ? (
+                  <>Concerned About <span className='text-[#ff3576]'>Liver Tumors</span>? Get Checked In <span className='text-[#ff3576]'>{cityName}</span></>
+                ) : (
+                  <><span className='text-white'>Think You Might Have</span><br /><span className='text-[#ff3576]'>Liver Tumors?</span></>
+                )}
               </h2>
 
               <p className='mt-4 text-sm sm:text-base text-gray-200 leading-relaxed max-w-md mx-auto lg:mx-0'>
-                If you have abnormal liver imaging or symptoms related to liver disease, consulting a specialist can help determine the best treatment approach.
+                {isCitySpecific
+                  ? 'Non-surgical, targeted radiation treatment available now'
+                  : 'If you have abnormal liver imaging or symptoms related to liver disease, consulting a specialist can help determine the best treatment approach.'}
               </p>
 
               <Link to='/contact-us'>

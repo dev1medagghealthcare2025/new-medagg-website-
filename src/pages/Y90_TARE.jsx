@@ -14,22 +14,22 @@ import FAQ_Home from '../components/home/FAQ_Home';
 import ConsultOurDoctor from '../components/home/Consultourdoctor';
 import TARE_FAQ from '../components/Treatment_Pages/TARE_FAQ';
 
-const Y90_TAREPage = () => {
+const Y90_TAREPage = ({ city = '', variant = '' }) => {
   return (
     <>
       <Navbar />
       <Treatmentnavbar />
-      <Y90_TARE_HEROSECTION />
+      <Y90_TARE_HEROSECTION city={city} variant={variant} />
       <WhyChooseY90 />
       <HowY90Works />
       <AreYouExperiencingY90Tare />
       <Y90_TARE_MEDAGG />
-      <BookAppointmentY90Tare />
+      <BookAppointmentY90Tare city={city} variant={variant} />
       <TARE_Compare />
       <OurTestimonial />
       <OurDoctor />
-      <ConsultOurDoctor />
-      <TARE_FAQ />
+      <ConsultOurDoctor city={city} variant={variant} />
+      <TARE_FAQ city={city} variant={variant} />
     </>
   );
 };

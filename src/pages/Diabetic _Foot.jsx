@@ -15,7 +15,7 @@ import Consultourdoctor from '../components/home/Consultourdoctor';
 import DiabeticFootFaq from '../components/Treatment_Pages/Diabetic_foot_faq.jsx';
 import PageMeta from '../components/PageMeta';
 
-const DiabeticFootPage = () => {
+const DiabeticFootPage = ({ city = '', variant = '' }) => {
   return (
     <>
       <PageMeta
@@ -24,18 +24,18 @@ const DiabeticFootPage = () => {
       />
       <Navbar />
       <Treatmentnavbar />
-      <DiabeticHeroSection />
+      <DiabeticHeroSection city={city} variant={variant} />
       <WhyChooseDiabeticFoot />
       <HowWorkDiabetic />
       <AreYouExperiencingDiabetic />
-      <DiabeticFootWhySurgeries />
-      <BookAppointmentDiabetic />
+      <DiabeticFootWhySurgeries city={city} variant={variant} />
+      <BookAppointmentDiabetic city={city} variant={variant} />
       <CompareDiabetic />
       <WhatHappenDiabetic /> 
       <OurDoctor />
       <OurTestimonial />
-      <Consultourdoctor />
-      <DiabeticFootFaq />
+      <Consultourdoctor city={city} variant={variant} />
+      <DiabeticFootFaq city={city} variant={variant} />
       {/* Add additional sections for the Diabetic Foot page here */}
     </>
   );

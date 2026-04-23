@@ -28,6 +28,15 @@ export default function Consultourdoctor({ city = '', variant = '' }) {
   const isPAE = path.includes('prostate') || path.includes('pae');
   const isThyroid = path.includes('thyroid');
   const isFTR = path.includes('fallopian') || path.includes('ftr') || path.includes('fte');
+  const isUAE = path.includes('uterine-artery-embolization') || path.includes('uae');
+  const isVV = path.includes('varicose-vein') || path.includes('varicose');
+  const isPFE = path.includes('plantar') || path.includes('pfe') || path.includes('planter');
+  const isDiabeticFoot = path.includes('diabetic');
+  const isFrozenShoulder = path.includes('frozen');
+  const isTAVI = path.includes('transcatheter-aortic-valve-replacement') || path.includes('tavi') || path.includes('tavr');
+  const isCTO = path.includes('/cto') || path.includes('chronic-total-occlusion') || path.includes('cto-');
+  const isHemorrhoids = path.includes('piles-hemorrhoids') || path.includes('hemorrhoid') || path.includes('hemorrhoidal') || path.includes('piles');
+  const isY90 = path.includes('y90') || path.includes('radioembolization') || path.includes('tare');
 
   const cityLower = (city || '').toLowerCase();
   const variantLower = (variant || '').toLowerCase();
@@ -43,6 +52,15 @@ export default function Consultourdoctor({ city = '', variant = '' }) {
     if (isThyroid) return 'Thyroid Nodule';
     if (isGAE) return 'Knee Pain';
     if (isPAE) return 'Enlarged Prostate';
+    if (isUAE) return 'Fibroid';
+    if (isVV) return 'Varicose Veins';
+    if (isPFE) return 'Heel Pain';
+    if (isDiabeticFoot) return 'Diabetic Foot';
+    if (isFrozenShoulder) return 'Frozen Shoulder';
+    if (isTAVI) return 'Aortic Valve';
+    if (isCTO) return 'Blocked Artery';
+    if (isHemorrhoids) return 'Piles';
+    if (isY90) return 'Liver Tumor';
     return '';
   };
   const [formData, setFormData] = useState({

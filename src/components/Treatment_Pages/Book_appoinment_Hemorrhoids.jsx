@@ -1,11 +1,18 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const Book_appoinment_Hemorrhoids = () => {
+const Book_appoinment_Hemorrhoids = ({ city = '', variant = '' }) => {
+  const cityLower = (city || '').toLowerCase();
+  const variantLower = (variant || '').toLowerCase();
+  const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
+  const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
+  const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
+  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : '';
+
   const [formData, setFormData] = useState({
     healthConcern: '',
-    city: '',
+    city: cityName || '',
     fullName: '',
     phone: '',
     preferredLanguage: '',
@@ -17,6 +24,11 @@ const Book_appoinment_Hemorrhoids = () => {
     const { name, value } = e.target;
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
+
+   useEffect(() => {
+     if (!isCitySpecific) return;
+     setFormData((prev) => ({ ...prev, city: cityName }));
+   }, [isCitySpecific, cityName]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -68,12 +80,18 @@ const Book_appoinment_Hemorrhoids = () => {
           <div className='grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center'>
             <div className='text-white space-y-5 text-center lg:text-left'>
               <h2 className='text-3xl md:text-4xl font-bold leading-tight'>
-                <span className='text-white'>Think You Might Have</span> <br />
-                <span className='text-[#ff3576]'>Piles/Hemorrhoids?</span>
+                {isCitySpecific ? (
+                  <>Suffering From <span className='text-[#ff3576]'>Piles/Hemorrhoids</span> Symptoms? Get Checked In <span className='text-[#ff3576]'>{cityName}</span></>
+                ) : (
+                  <><span className='text-white'>Think You Might Have</span> <br />
+                  <span className='text-[#ff3576]'>Piles/Hemorrhoids?</span></>
+                )}
               </h2>
               <p className='text-base sm:text-lg text-gray-200 max-w-lg mx-auto lg:mx-0'>
-                Book a consultation with our Interventional Radiology experts to understand whether Piles Artery
-                Embolization is right for you.
+                {isCitySpecific
+                  ? 'Non-surgical, no-cuts treatment available now'
+                  : <>Book a consultation with our Interventional Radiology experts to understand whether Piles Artery
+                Embolization is right for you.</>}
               </p>
               <div className='pt-2'>
                 <Link to='/contact-us'>

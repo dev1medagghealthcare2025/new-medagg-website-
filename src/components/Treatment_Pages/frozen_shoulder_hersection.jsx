@@ -1,9 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const FrozenShoulderHero = () => {
+const FrozenShoulderHero = ({ city = '', variant = '' }) => {
+  const cityLower = (city || '').toLowerCase();
+  const variantLower = (variant || '').toLowerCase();
+  const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
+  const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
+  const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
+  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : '';
+
+  const backgroundImage = isCitySpecific
+    ? `/hero_varicocele_${isChennai ? 'chennai' : isMadurai ? 'madhuri' : 'coimbatore'}.png`
+    : '/Diabetic.png';
+
   const [formData, setFormData] = useState({
     concern: '',
-    city: '',
+    city: cityName || '',
     name: '',
     phone: '',
     preferredLanguage: '',
@@ -15,6 +27,11 @@ const FrozenShoulderHero = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
+  useEffect(() => {
+    if (!isCitySpecific) return;
+    setFormData((prev) => ({ ...prev, city: cityName }));
+  }, [isCitySpecific, cityName]);
 
   // If you want this to submit to your CRM, plug the API here (same as other pages).
   const handleSubmit = async (e) => {
@@ -36,23 +53,29 @@ const FrozenShoulderHero = () => {
   };
 
   return (
-    <section className="w-full relative">
-      {/* Background */}
-      <div
-        className="relative bg-cover bg-center"
-        style={{ backgroundImage: "url('/Diabetic.png')" }}
-      >
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-[#1a1446] bg-opacity-20" />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
+    <section
+      className="relative w-full bg-cover bg-center py-8 sm:py-10 lg:py-14 px-4 sm:px-6 lg:px-8"
+      style={{ backgroundImage: `url('${backgroundImage}')`, minHeight: '460px' }}
+    >
+      {/* Overlay */}
+      <div className={`absolute inset-0 bg-[#2d2552] ${isCitySpecific ? 'opacity-0' : 'bg-opacity-30'}`} />
+      {isCitySpecific && (
+        <div className='absolute inset-y-0 left-0 w-full md:w-[55%] bg-gradient-to-r from-black/65 via-black/25 to-transparent pointer-events-none'></div>
+      )}
+
+      <div className="relative z-10 max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Left copy */}
             <div className="lg:col-span-7 text-white">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-white">
-                Adhesive Capsulitis Embolization (ACE)
+                {isCitySpecific
+                  ? `No-Surgery Frozen Shoulder Treatment (ACE) in ${cityName}`
+                  : 'Adhesive Capsulitis Embolization (ACE)'}
               </h1>
               <p className="mt-4 text-white text-base sm:text-lg max-w-2xl">
-                A breakthrough non-surgical option to relieve frozen shoulder pain and stiffness.
+                {isCitySpecific
+                  ? `Advanced Non-Surgical Treatment for Frozen Shoulder by Interventional Radiology Specialists | NoSurgeries by Medagg`
+                  : 'A breakthrough non-surgical option to relieve frozen shoulder pain and stiffness.'}
               </p>
             </div>
 
@@ -140,7 +163,6 @@ const FrozenShoulderHero = () => {
             </div>
           </div>
         </div>
-      </div>
     </section>
   );
 };

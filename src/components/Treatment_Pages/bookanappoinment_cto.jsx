@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const Bookanappoinment_cto = () => {
+const Bookanappoinment_cto = ({ city = '', variant = '' }) => {
+  const cityLower = (city || '').toLowerCase();
+  const variantLower = (variant || '').toLowerCase();
+  const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
+  const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
+  const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
+  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : '';
+
   const [formData, setFormData] = useState({
     concern: '',
-    city: '',
+    city: cityName || '',
     fullName: '',
     phone: '',
     preferredLanguage: '',
@@ -16,6 +24,11 @@ const Bookanappoinment_cto = () => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
+
+   useEffect(() => {
+     if (!isCitySpecific) return;
+     setFormData((prev) => ({ ...prev, city: cityName }));
+   }, [isCitySpecific, cityName]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -68,11 +81,17 @@ const Bookanappoinment_cto = () => {
           <div className='relative grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center w-full z-10'>
             <div className='text-white text-center lg:text-left'>
               <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight'>
-                <span className='text-white'>Think You Might Have</span><br />
-                <span className='text-[#ff3576]'>Chronic Artery Blockage?</span>
+                {isCitySpecific ? (
+                  <>Suffering From <span className='text-[#ff3576]'>Blocked Artery</span> Symptoms? Get Checked In <span className='text-[#ff3576]'>{cityName}</span></>
+                ) : (
+                  <><span className='text-white'>Think You Might Have</span><br />
+                  <span className='text-[#ff3576]'>Chronic Artery Blockage?</span></>
+                )}
               </h2>
               <p className='mt-4 text-base text-gray-200 leading-relaxed'>
-                Book your consultation today and explore a safer alternative to bypass surgery.
+                {isCitySpecific
+                  ? 'Non-surgical, artery-opening treatment available now'
+                  : 'Book your consultation today and explore a safer alternative to bypass surgery.'}
               </p>
               <Link to='/contact-us'>
                 <button className='mt-6 bg-[#ff3576] text-white font-bold py-2 px-6 rounded-lg hover:bg-pink-700 transition duration-300 text-sm'>

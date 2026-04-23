@@ -15,7 +15,7 @@ import OurTestimonial from '../components/home/our_testimonial';
 import TavrFaq from '../components/Treatment_Pages/TAVR_FAQ.jsx';
 import PageMeta from '../components/PageMeta';
 
-const TranscatheterAorticValveImplantation = () => {
+const TranscatheterAorticValveImplantation = ({ city = '', variant = '' }) => {
   return (
     <>
       <PageMeta
@@ -24,18 +24,18 @@ const TranscatheterAorticValveImplantation = () => {
       />
       <Navbar />
       <Treatmentnavbar />
-      <TaviHeroSection />
+      <TaviHeroSection city={city} variant={variant} />
       <WhyChooseTAVI />
       <HowTaviWorks />
       <AreYouExperiencingTAVI />
-      <TAVRWhySurgeries />
-      <BookAnAppointmentTAVI />
+      <TAVRWhySurgeries city={city} variant={variant} />
+      <BookAnAppointmentTAVI city={city} variant={variant} />
       <CompareTAVITreatments />
       <WhatHappensInTAVI />
       <OurDoctor />
       <OurTestimonial/>
-      <Consultourdoctor />
-      <TavrFaq />
+      <Consultourdoctor city={city} variant={variant} />
+      <TavrFaq city={city} variant={variant} />
       
       {/* Other components for the TAVI page can be added here */}
     </>

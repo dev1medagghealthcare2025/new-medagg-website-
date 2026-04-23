@@ -1,10 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const Y90_TARE_HEROSECTION = () => {
+const Y90_TARE_HEROSECTION = ({ city = '', variant = '' }) => {
+  const cityLower = (city || '').toLowerCase();
+  const variantLower = (variant || '').toLowerCase();
+  const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
+  const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
+  const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
+  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : '';
+
+  // City-specific background images using varicocele hero images
+  const backgroundImage = isCitySpecific
+    ? `/hero_varicocele_${isChennai ? 'chennai' : isMadurai ? 'madhuri' : 'coimbatore'}.png`
+    : '/y90_herosection.png';
+
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    location: '',
+    location: cityName || '',
     preferredLanguage: '',
     healthConcern: '',
   });
@@ -15,6 +28,11 @@ const Y90_TARE_HEROSECTION = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
+  useEffect(() => {
+    if (!isCitySpecific) return;
+    setFormData((prev) => ({ ...prev, location: cityName }));
+  }, [isCitySpecific, cityName]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -58,12 +76,16 @@ const Y90_TARE_HEROSECTION = () => {
     <section
       className='relative text-white px-4 sm:px-6 lg:px-8 py-10 lg:py-14 overflow-hidden'
       style={{
-        backgroundImage: "linear-gradient(rgba(45,37,82,0.35), rgba(45,37,82,0.35)), url('/y90_herosection.png')",
+        backgroundImage: `url('${backgroundImage}')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         minHeight: '440px',
       }}
     >
+      <div className={`absolute inset-0 bg-[#2d2552] ${isCitySpecific ? 'opacity-0' : 'opacity-35'}`} />
+      {isCitySpecific && (
+        <div className='absolute inset-y-0 left-0 w-full md:w-[55%] bg-gradient-to-r from-black/65 via-black/25 to-transparent pointer-events-none' />
+      )}
       <style>{`
         .y90-form-input::placeholder {
           color: white !important;
@@ -94,13 +116,17 @@ const Y90_TARE_HEROSECTION = () => {
       <div className='max-w-7xl mx-auto'>
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center'>
           <div className='text-center lg:text-left'>
-            <h1 className='text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight'>
-              <span className='text-white'>Y-90 Radioembolization</span>
-              <br />
-              <span className='text-[#ff3576]'>(TARE)</span>
+            <h1 className='text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-white'>
+              {isCitySpecific ? (
+                <>No-Surgery Liver Tumor Treatment in {cityName}</>
+              ) : (
+                <><span className='text-white'>Y-90 Radioembolization</span><br /><span className='text-[#ff3576]'>(TARE)</span></>
+              )}
             </h1>
             <p className='mt-4 text-sm sm:text-base lg:text-lg text-white/85 max-w-2xl mx-auto lg:mx-0'>
-              A minimally invasive treatment that delivers targeted radiation directly to liver tumors while preserving healthy liver tissue.
+              {isCitySpecific
+                ? 'Advanced non-surgical treatment by Interventional Radiology specialists | NoSurgeries by Medagg'
+                : 'A minimally invasive treatment that delivers targeted radiation directly to liver tumors while preserving healthy liver tissue.'}
             </p>
           </div>
 

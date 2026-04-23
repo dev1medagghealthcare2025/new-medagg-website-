@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
 
-const ThinkYouMightNeedUAE = () => {
+const ThinkYouMightNeedUAE = ({ city = '', variant = '' }) => {
   const [formData, setFormData] = useState({
     healthConcern: '',
-    city: '',
+    city: city || '',
     fullName: '',
     phone: '',
     preferredLanguage: '',
   });
+
+  const cityLower = (city || '').toLowerCase();
+  const variantLower = (variant || '').toLowerCase();
+  const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
+  const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
+  const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
+  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : '';
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,6 +48,11 @@ const ThinkYouMightNeedUAE = () => {
                 Think You Might Need <br />
                 <span className='text-[#ff3576]'>Fibroid Treatment?</span>
               </h2>
+              {isCitySpecific && (
+                <p className='mt-2 text-base sm:text-lg text-gray-200 font-semibold'>
+                  In {cityName}
+                </p>
+              )}
               <p className='mt-4 text-lg sm:text-xl text-gray-200'>
                 Non-surgical, uterus-preserving solution available now
               </p>

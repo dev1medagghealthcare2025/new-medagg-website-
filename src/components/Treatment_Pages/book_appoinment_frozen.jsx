@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const BookAppointmentFrozen = () => {
+const BookAppointmentFrozen = ({ city = '', variant = '' }) => {
+  const cityLower = (city || '').toLowerCase();
+  const variantLower = (variant || '').toLowerCase();
+  const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
+  const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
+  const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
+  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : '';
+
   const [formData, setFormData] = useState({
     concern: '',
-    city: '',
+    city: cityName || '',
     name: '',
     phone: '',
     preferredLanguage: '',
@@ -17,6 +25,11 @@ const BookAppointmentFrozen = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  useEffect(() => {
+    if (!isCitySpecific) return;
+    setFormData((prev) => ({ ...prev, city: cityName }));
+  }, [isCitySpecific, cityName]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -25,7 +38,7 @@ const BookAppointmentFrozen = () => {
       // Replace with your actual API endpoint if needed
       await new Promise((r) => setTimeout(r, 600));
       setFormStatus('success');
-      setFormData({ concern: '', city: '', name: '', phone: '', preferredLanguage: '' });
+      setFormData({ concern: '', city: cityName || '', name: '', phone: '', preferredLanguage: '' });
     } catch (err) {
       console.error(err);
       setFormStatus('error');
@@ -48,10 +61,16 @@ const BookAppointmentFrozen = () => {
             {/* Left Content */}
             <div className="text-white">
               <h2 className="text-3xl md:text-4xl font-extrabold text-white">
-                Think You Might Have <span className="text-pink-500">Frozen Shoulder?</span>
+                {isCitySpecific ? (
+                  <>Suffering From <span className="text-pink-500">Frozen Shoulder</span> Symptoms? Get Checked In <span className="text-pink-500">{cityName}</span></>
+                ) : (
+                  <>Think You Might Have <span className="text-pink-500">Frozen Shoulder?</span></>
+                )}
               </h2>
               <p className="mt-4 text-gray-200">
-                Talk to our interventional radiologists and find out if ACE is right for you.
+                {isCitySpecific
+                  ? 'Non-surgical, mobility-restoring treatment available now'
+                  : 'Talk to our interventional radiologists and find out if ACE is right for you.'}
               </p>
               <Link to="/contact-us">
                 <button className="mt-6 bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-8 rounded-lg transition-colors">
