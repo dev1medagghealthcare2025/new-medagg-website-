@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { MapPin, Menu, Search, X, ChevronDown, PhoneCall } from 'lucide-react';
 
 import { filterTreatments, treatmentCategories } from './searchTreatments';
-
+ 
 import {
 
   DEFAULT_CITIES,
@@ -456,7 +456,19 @@ export default function Navbar() {
         '/cto': '/cto-chennai',
         '/piles-hemorrhoids': '/piles-hemorrhoids-chennai',
         '/y90-radioembolization-tare': '/y90-radioembolization-tare-chennai',
+        '/transarterial-chemoembolization-tace': '/transarterial-chemoembolization-tace-chennai',
+        '/endovascular-coiling': '/endovascular-coiling-chennai',
 
+      },
+
+      'bangalore': {
+        '/prostate-artery-embolization-pae': '/prostate-artery-embolization-pae-bangalore',
+        '/genicular-artery-embolization-gae': '/genicular-artery-embolization-gae-bangalore',
+      },
+
+      'mangalore': {
+        '/prostate-artery-embolization-pae': '/prostate-artery-embolization-pae-mangalore',
+        '/genicular-artery-embolization-gae': '/genicular-artery-embolization-gae-mangalore',
       },
 
       'madurai': {
@@ -479,6 +491,8 @@ export default function Navbar() {
         '/cto': '/cto-madurai',
         '/piles-hemorrhoids': '/piles-hemorrhoids-madurai',
         '/y90-radioembolization-tare': '/y90-radioembolization-tare-madurai',
+        '/transarterial-chemoembolization-tace': '/transarterial-chemoembolization-tace-madurai',
+        '/endovascular-coiling': '/endovascular-coiling-madurai',
 
       },
 
@@ -502,6 +516,8 @@ export default function Navbar() {
         '/cto': '/cto-coimbatore',
         '/piles-hemorrhoids': '/piles-hemorrhoids-coimbatore',
         '/y90-radioembolization-tare': '/y90-radioembolization-tare-coimbatore',
+        '/transarterial-chemoembolization-tace': '/transarterial-chemoembolization-tace-coimbatore',
+        '/endovascular-coiling': '/endovascular-coiling-coimbatore',
 
       },
 

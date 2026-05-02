@@ -12,10 +12,14 @@ import PAE_Treatmentpage from './pages/PAE_Treatmentpage';
 import PAE_Treatmentpage_chennai from './pages/PAE_Treatmentpage_chennai';
 import PAE_Treatmentpage_madurai from './pages/PAE_Treatmentpage_madurai';
 import PAE_Treatmentpage_coimbatore from './pages/PAE_Treatmentpage_coimbatore';
+import PAE_Treatmentpage_bangalore from './pages/PAE_Treatmentpage_bangalore';
+import PAE_Treatmentpage_mangalore from './pages/PAE_Treatmentpage_mangalore';
 import GAE_Treatmentpage from './pages/GAE_Treatmentpage';
 import GAE_Treatmentpage_chennai from './pages/GAE_Treatmentpage_chennai';
 import GAE_Treatmentpage_madurai from './pages/GAE_Treatmentpage_madurai';
 import GAE_Treatmentpage_coimbatore from './pages/GAE_Treatmentpage_coimbatore';
+import GAE_Treatmentpage_bangalore from './pages/GAE_Treatmentpage_bangalore';
+import GAE_Treatmentpage_mangalore from './pages/GAE_Treatmentpage_mangalore';
 import Thyroid_Nodule_Ablation_Treatmentpage from './pages/Thyroid_Nodule_Ablation_Treatmentpage';
 import Thyroid_Nodule_Ablation_Treatmentpage_chennai from './pages/Thyroid_Nodule_Ablation_Treatmentpage_chennai';
 import Thyroid_Nodule_Ablation_Treatmentpage_madurai from './pages/Thyroid_Nodule_Ablation_Treatmentpage_madurai';
@@ -85,6 +89,12 @@ import PilesCoimbatore from './pages/piles_coimbatore';
 import Y90Chennai from './pages/y90_chennai';
 import Y90Madurai from './pages/y90_madurai';
 import Y90Coimbatore from './pages/y90_coimbatore';
+import TACEChennai from './pages/tace_chennai';
+import TACEMadurai from './pages/tace_madurai';
+import TACECoimbatore from './pages/tace_coimbatore';
+import EndovascularCoilingChennai from './pages/endovascular_coiling_chennai';
+import EndovascularCoilingMadurai from './pages/endovascular_coiling_madurai';
+import EndovascularCoilingCoimbatore from './pages/endovascular_coiling_coimbatore';
 
 function ScrollToTop() {
   const location = useLocation();
@@ -176,11 +186,15 @@ function App() {
           <Route path='/prostate-artery-embolization-pae-chennai' element={<PAE_Treatmentpage_chennai />} />
           <Route path='/prostate-artery-embolization-pae-madurai' element={<PAE_Treatmentpage_madurai />} />
           <Route path='/prostate-artery-embolization-pae-coimbatore' element={<PAE_Treatmentpage_coimbatore />} />
+          <Route path='/prostate-artery-embolization-pae-bangalore' element={<PAE_Treatmentpage_bangalore />} />
+          <Route path='/prostate-artery-embolization-pae-mangalore' element={<PAE_Treatmentpage_mangalore />} />
           <Route path='/pae' element={<Navigate to='/prostate-artery-embolization-pae' replace />} />
           <Route path='/genicular-artery-embolization-gae' element={<GAE_Treatmentpage />} />
           <Route path='/genicular-artery-embolization-gae-chennai' element={<GAE_Treatmentpage_chennai />} />
           <Route path='/genicular-artery-embolization-gae-madurai' element={<GAE_Treatmentpage_madurai />} />
           <Route path='/genicular-artery-embolization-gae-coimbatore' element={<GAE_Treatmentpage_coimbatore />} />
+          <Route path='/genicular-artery-embolization-gae-bangalore' element={<GAE_Treatmentpage_bangalore />} />
+          <Route path='/genicular-artery-embolization-gae-mangalore' element={<GAE_Treatmentpage_mangalore />} />
           <Route path='/gae' element={<Navigate to='/genicular-artery-embolization-gae' replace />} />
           <Route path='/thyroid-nodule-ablation' element={<Thyroid_Nodule_Ablation_Treatmentpage />} />
           <Route path='/thyroid-nodule-ablation-chennai' element={<Thyroid_Nodule_Ablation_Treatmentpage_chennai />} />
@@ -231,6 +245,9 @@ function App() {
           <Route path='/cto-coimbatore' element={<CTOCoimbatore />} />
           <Route path='/rfa' element={<RFA_treatmentpage />} />
           <Route path='/endovascular-coiling' element={<Endovascular_Coiling_treatment />} />
+          <Route path='/endovascular-coiling-chennai' element={<EndovascularCoilingChennai />} />
+          <Route path='/endovascular-coiling-madurai' element={<EndovascularCoilingMadurai />} />
+          <Route path='/endovascular-coiling-coimbatore' element={<EndovascularCoilingCoimbatore />} />
           <Route path='/radiofrequency-ablation-for-avm' element={<RadiofrequencyAblationAVM />} />
           <Route path='/investor' element={<Become_an_investor />} />
           <Route path='/breast-nodule-rfa' element={<BreastNoduleRadiofrequencyAblation />} />
@@ -249,6 +266,9 @@ function App() {
           <Route path='/y90-radioembolization-tare-madurai' element={<Y90Madurai />} />
           <Route path='/y90-radioembolization-tare-coimbatore' element={<Y90Coimbatore />} />
           <Route path='/transarterial-chemoembolization-tace' element={<Transarterial_Chemoembolization />} />
+          <Route path='/transarterial-chemoembolization-tace-chennai' element={<TACEChennai />} />
+          <Route path='/transarterial-chemoembolization-tace-madurai' element={<TACEMadurai />} />
+          <Route path='/transarterial-chemoembolization-tace-coimbatore' element={<TACECoimbatore />} />
           <Route path='/piles-hemorrhoids' element={<Hemorrhoidal />} />
           <Route path='/piles-hemorrhoids-chennai' element={<PilesChennai />} />
           <Route path='/piles-hemorrhoids-madurai' element={<PilesMadurai />} />

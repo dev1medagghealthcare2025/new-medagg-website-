@@ -12,10 +12,10 @@ import WhatHappensInEndovascularCoiling from '../components/Treatment_Pages/What
 import Ourdoctor from '../components/home/Ourdoctor';
 import Consultourdoctor from '../components/home/Consultourdoctor';
 import OurTestimonial from '../components/home/our_testimonial';
-import FAQ_Home from '../components/home/FAQ_Home';
+import EC_FAQ from '../components/Treatment_Pages/EC_FAQ';
 import PageMeta from '../components/PageMeta';
 
-const Endovascular_Coiling_treatment = () => {
+const Endovascular_Coiling_treatment = ({ city = '', variant = '' }) => {
   return (
     <div>
       <PageMeta
@@ -24,18 +24,18 @@ const Endovascular_Coiling_treatment = () => {
       />
       <Navbar />
       <Treatmentnavbar />
-      <EndovascularCoilingHeroSection />
+      <EndovascularCoilingHeroSection city={city} variant={variant} />
       <WhyChooseEndovascularCoiling />
       <HowECWorks />
       <AreYouExperiencingEC />
       <ECWhySurgeries />
-      <EC_Book_Appointment />
+      <EC_Book_Appointment city={city} variant={variant} />
       <TreatmentCompareEC />
       <WhatHappensInEndovascularCoiling />
       <Ourdoctor />
       <OurTestimonial/>
-      <Consultourdoctor />
-      <FAQ_Home/>
+      <Consultourdoctor city={city} variant={variant} />
+      <EC_FAQ city={city} variant={variant} />
     </div>
   );
 };

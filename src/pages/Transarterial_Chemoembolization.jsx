@@ -14,22 +14,22 @@ import OurTestimonial from '../components/home/our_testimonial';
 import Consultourdoctor from '../components/home/Consultourdoctor';
 import FAQ_Home from '../components/home/FAQ_Home';
 
-const Transarterial_Chemoembolization = () => {
+const Transarterial_Chemoembolization = ({ city = '', variant = '' }) => {
   return (
     <>
       <Navbar />
       <Treatmentnavbar />
-      <TACE_Herosection />
+      <TACE_Herosection city={city} variant={variant} />
       <WhyChooseTACE />
       <HowTACEWorks />
       <TACE_are_experience />
       <TACE_Why_medagg />
-      <BookAppointmentY90Tare />
+      <BookAppointmentY90Tare city={city} variant={variant} />
       <TACE_Compare />
       <OurDoctor />
       <OurTestimonial />
-      <Consultourdoctor />
-      <TACE_FAQ />
+      <Consultourdoctor city={city} variant={variant} />
+      <TACE_FAQ city={city} variant={variant} />
     </>
   );
 };

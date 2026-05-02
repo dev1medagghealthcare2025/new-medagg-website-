@@ -1,16 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Globe } from 'lucide-react';
 
-const EndovascularCoilingHeroSection = () => {
+const EndovascularCoilingHeroSection = ({ city = '', variant = '' }) => {
+  const cityLower = (city || '').toLowerCase();
+  const variantLower = (variant || '').toLowerCase();
+  const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
+  const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
+  const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
+  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : '';
+
+  // City-specific background images using varicocele hero images
+  const backgroundImage = isCitySpecific
+    ? `/hero_varicocele_${isChennai ? 'chennai' : isMadurai ? 'madhuri' : 'coimbatore'}.png`
+    : '/Endo_co_herosection_bg.jpg';
+
   const [formData, setFormData] = useState({
     concern: '',
-    city: '',
+    city: cityName || '',
     fullName: '',
     phone: '',
     preferredLanguage: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formStatus, setFormStatus] = useState(''); // success, error, or ''
+
+  useEffect(() => {
+    if (!isCitySpecific) return;
+    setFormData((prev) => ({ ...prev, city: cityName }));
+  }, [isCitySpecific, cityName]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -58,17 +76,26 @@ const EndovascularCoilingHeroSection = () => {
   return (
     <div
       className='relative bg-cover bg-center text-white py-8 sm:py-10 lg:py-14 px-4 sm:px-6 lg:px-8'
-      style={{ backgroundImage: 'url(\'/Endo_co_herosection_bg.jpg\')', minHeight: '460px' }}
+      style={{ backgroundImage: `url('${backgroundImage}')`, minHeight: '460px' }}
     >
-      <div className='absolute inset-0 bg-[#2d2552] bg-opacity-60'></div>
+      <div className={`absolute inset-0 bg-[#2d2552] ${isCitySpecific ? 'opacity-0' : 'opacity-60'}`} />
+      {isCitySpecific && (
+        <div className='absolute inset-y-0 left-0 w-full md:w-[55%] bg-gradient-to-r from-black/65 via-black/25 to-transparent pointer-events-none' />
+      )}
       <div className='relative container mx-auto grid lg:grid-cols-2 gap-12 items-center'>
         {/* Left Side: Content */}
         <div className='flex flex-col text-center lg:text-left'>
           <h1 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight text-white mb-3 sm:mb-5'>
-            Endovascular Coiling
+            {isCitySpecific ? (
+              <>No-Surgery Brain Aneurysm Treatment (Endovascular Coiling) in {cityName}</>
+            ) : (
+              'Endovascular Coiling'
+            )}
           </h1>
           <p className='text-base sm:text-lg md:text-xl text-gray-200 font-medium max-w-2xl mx-auto lg:mx-0'>
-            Minimally invasive, image-guided treatment to secure brain aneurysms without open surgery.
+            {isCitySpecific
+              ? 'Advanced Minimally Invasive Treatment for Brain Aneurysms by Neuro Interventional Specialists | NoSurgeries by Medagg'
+              : 'Minimally invasive, image-guided treatment to secure brain aneurysms without open surgery.'}
           </p>
         </div>
 

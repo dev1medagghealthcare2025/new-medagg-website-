@@ -46,7 +46,9 @@ const GAEWhySurgeries = ({ city = '', variant = '' }) => {
   const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
   const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
   const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
-  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
+  const isBangalore = variantLower === 'bangalore' || cityLower === 'bangalore' || cityLower === 'bengaluru';
+  const isMangalore = variantLower === 'mangalore' || cityLower === 'mangalore' || cityLower === 'mangaluru';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore || isBangalore || isMangalore;
   const gridRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -87,7 +89,7 @@ const GAEWhySurgeries = ({ city = '', variant = '' }) => {
                   Why Choose NoSurgeries / MEDAGG?
                 </p>
                 <h2 className='text-3xl sm:text-4xl font-extrabold text-[#ff3576] leading-tight'>
-                  In {isChennai ? 'Chennai' : isMadurai ? 'Madurai' : 'Coimbatore'}, No-Surgery Option is Available for Knee Pain (GAE)
+                  In {isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : isBangalore ? 'Bangalore' : 'Mangalore'}, No-Surgery Option is Available for Knee Pain (GAE)
                 </h2>
               </>
             ) : (

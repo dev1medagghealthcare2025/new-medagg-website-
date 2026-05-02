@@ -1,13 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const EC_Book_Appointment = () => {
+const EC_Book_Appointment = ({ city = '', variant = '' }) => {
+  const cityLower = (city || '').toLowerCase();
+  const variantLower = (variant || '').toLowerCase();
+  const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
+  const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
+  const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
+  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : '';
+
   const [formData, setFormData] = useState({
     concern: '',
-    city: '',
+    city: cityName || '',
     name: '',
     phone: '',
     preferredLanguage: '',
   });
+
+  useEffect(() => {
+    if (!isCitySpecific) return;
+    setFormData((prev) => ({ ...prev, city: cityName }));
+  }, [isCitySpecific, cityName]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -67,11 +80,16 @@ const EC_Book_Appointment = () => {
         {/* Left Side: Content */}
         <div className='text-white text-center lg:text-left'>
           <h2 className='text-2xl sm:text-3xl md:text-4xl font-bold text-white'>
-            Think You Might Have An <br />
-            <span className='text-[#ff3576]'>Aneurysm?</span>
+            {isCitySpecific ? (
+              <>Experiencing <span className='text-[#ff3576]'>Severe Headaches</span><br />Or <span className='text-[#ff3576]'>Warning Signs</span>? Get Checked<br />In <span className='text-[#ff3576]'>{cityName}</span></>
+            ) : (
+              <>Think You Might Have An <br /><span className='text-[#ff3576]'>Aneurysm?</span></>
+            )}
           </h2>
           <p className='text-base md:text-lg mt-3 md:mt-4 mb-6 md:mb-8 text-white'>
-            Don't wait—headaches, vision changes, or neurological symptoms need expert evaluation.
+            {isCitySpecific
+              ? 'Non-surgical, heart rhythm-restoring treatment available now'
+              : "Don't wait—headaches, vision changes, or neurological symptoms need expert evaluation."}
           </p>
           <button className='w-full sm:w-auto bg-[#ff3576] text-white font-bold py-3 px-8 rounded-lg hover:bg-pink-700 transition-colors duration-300 text-base md:text-lg'>
             Book Appointment

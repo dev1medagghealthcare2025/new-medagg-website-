@@ -1,17 +1,23 @@
 import React, { useState } from 'react';
 import { Globe } from 'lucide-react';
 
-export default function PAE_Herosection({ city = '', variant = '' }) {
+ export default function PAE_Herosection({ city = '', variant = '' }) {
   const cityLower = (city || '').toLowerCase();
   const variantLower = (variant || '').toLowerCase();
   const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
   const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
   const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
-  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
+  const isBangalore = variantLower === 'bangalore' || cityLower === 'bangalore' || cityLower === 'bengaluru';
+  const isMangalore = variantLower === 'mangalore' || cityLower === 'mangalore' || cityLower === 'mangaluru';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore || isBangalore || isMangalore;
   
   // City-specific background image or default (using varicocele hero images)
-  const bgImage = isCitySpecific 
-    ? `/hero_varicocele_${isChennai ? 'chennai' : isMadurai ? 'madhuri' : 'coimbatore'}.png` 
+  const bgImage = isCitySpecific
+    ? isBangalore
+      ? '/hero_section_Bangalore.png'
+      : isMangalore
+        ? '/hero_section_Mangalore.png'
+        : `/hero_varicocele_${isChennai ? 'chennai' : isMadurai ? 'madhuri' : 'coimbatore'}.png`
     : '/PAE_PAGE_Background.jpg';
   
   // Remove blue overlay for city-specific pages
@@ -21,6 +27,8 @@ export default function PAE_Herosection({ city = '', variant = '' }) {
     if (isChennai) return 'Chennai';
     if (isMadurai) return 'Madurai';
     if (isCoimbatore) return 'Coimbatore';
+    if (isBangalore) return 'Bangalore';
+    if (isMangalore) return 'Mangalore';
     return '';
   };
 
@@ -97,7 +105,7 @@ export default function PAE_Herosection({ city = '', variant = '' }) {
                   <br />
                   Enlarged Prostate
                   <br />
-                  Treatment In {isChennai ? 'Chennai' : isMadurai ? 'Madurai' : 'Coimbatore'}
+                  Treatment In {isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : isBangalore ? 'Bangalore' : 'Mangalore'}
                 </h1>
                 <p className='text-sm sm:text-base md:text-lg text-gray-200 font-medium max-w-2xl mx-auto lg:mx-0'>
                   Advanced Non-Surgical Treatment for Enlarged Prostate by Interventional Radiology Specialists | NoSurgeries by Medagg

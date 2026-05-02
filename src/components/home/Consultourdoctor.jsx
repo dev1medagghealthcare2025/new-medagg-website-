@@ -37,6 +37,8 @@ export default function Consultourdoctor({ city = '', variant = '' }) {
   const isCTO = path.includes('/cto') || path.includes('chronic-total-occlusion') || path.includes('cto-');
   const isHemorrhoids = path.includes('piles-hemorrhoids') || path.includes('hemorrhoid') || path.includes('hemorrhoidal') || path.includes('piles');
   const isY90 = path.includes('y90') || path.includes('radioembolization') || path.includes('tare');
+  const isTACE = path.includes('tace') || path.includes('chemoembolization') || path.includes('transarterial-chemoembolization');
+  const isEndovascularCoiling = path.includes('endovascular-coiling') || path.includes('coiling') || path.includes('aneurysm');
 
   const cityLower = (city || '').toLowerCase();
   const variantLower = (variant || '').toLowerCase();
@@ -61,6 +63,8 @@ export default function Consultourdoctor({ city = '', variant = '' }) {
     if (isCTO) return 'Blocked Artery';
     if (isHemorrhoids) return 'Piles';
     if (isY90) return 'Liver Tumor';
+    if (isTACE) return 'Liver Tumor';
+    if (isEndovascularCoiling) return 'Brain Aneurysm';
     return '';
   };
   const [formData, setFormData] = useState({
