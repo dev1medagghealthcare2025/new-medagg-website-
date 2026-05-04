@@ -77,6 +77,7 @@ import Cursor from './components/ui/Cursor';
 import ImageCursorStyle from './components/ui/ImageCursorStyle';
 import { UI_ENHANCEMENTS_ENABLED, IMAGE_CURSOR_ENABLED } from './config/uiEnhancements';
 import ButtonInteractions from './components/ui/ButtonInteractions';
+import ThankYouModalHost from './components/common/ThankYouModalHost';
 import TaviChennai from './pages/tavi_chennai';
 import TaviMadurai from './pages/tavi_madurai';
 import TaviCoimbatore from './pages/tavi_coimbatore';
@@ -181,6 +182,7 @@ function App() {
         <CanonicalUrlUpdater />
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/thank-you' element={<Home />} />
           <Route path='/irpreneur2025/*' element={<Irpreneur2025Page />} />
           <Route path='/prostate-artery-embolization-pae' element={<PAE_Treatmentpage />} />
           <Route path='/prostate-artery-embolization-pae-chennai' element={<PAE_Treatmentpage_chennai />} />
@@ -287,6 +289,7 @@ function App() {
         <>
           <Footer />
           <Chatbot />
+          <ThankYouModalHost />
           <BackToTop />
           <CallFab position='right' phone='+919363656010' />
           <FloatingWhatsApp phone='+918925928840' position='left' />
