@@ -458,17 +458,25 @@ export default function Navbar() {
         '/y90-radioembolization-tare': '/y90-radioembolization-tare-chennai',
         '/transarterial-chemoembolization-tace': '/transarterial-chemoembolization-tace-chennai',
         '/endovascular-coiling': '/endovascular-coiling-chennai',
+        '/breast-nodule-vae': '/breast-nodule-vae-chennai',
+        '/pelvic-vein-embolization': '/pelvic-vein-embolization-chennai',
 
       },
 
       'bangalore': {
         '/prostate-artery-embolization-pae': '/prostate-artery-embolization-pae-bangalore',
         '/genicular-artery-embolization-gae': '/genicular-artery-embolization-gae-bangalore',
+        '/thyroid-nodule-ablation': '/thyroid-nodule-ablation-bangalore',
+        '/varicocele-embolization': '/varicocele-embolization-bangalore',
+        '/fallopian-tube-recanalization-ftr': '/fallopian-tube-recanalization-ftr-bangalore',
       },
 
       'mangalore': {
         '/prostate-artery-embolization-pae': '/prostate-artery-embolization-pae-mangalore',
         '/genicular-artery-embolization-gae': '/genicular-artery-embolization-gae-mangalore',
+        '/thyroid-nodule-ablation': '/thyroid-nodule-ablation-mangalore',
+        '/varicocele-embolization': '/varicocele-embolization-mangalore',
+        '/fallopian-tube-recanalization-ftr': '/fallopian-tube-recanalization-ftr-mangalore',
       },
 
       'madurai': {
@@ -493,6 +501,8 @@ export default function Navbar() {
         '/y90-radioembolization-tare': '/y90-radioembolization-tare-madurai',
         '/transarterial-chemoembolization-tace': '/transarterial-chemoembolization-tace-madurai',
         '/endovascular-coiling': '/endovascular-coiling-madurai',
+        '/breast-nodule-vae': '/breast-nodule-vae-madurai',
+        '/pelvic-vein-embolization': '/pelvic-vein-embolization-madurai',
 
       },
 
@@ -518,6 +528,8 @@ export default function Navbar() {
         '/y90-radioembolization-tare': '/y90-radioembolization-tare-coimbatore',
         '/transarterial-chemoembolization-tace': '/transarterial-chemoembolization-tace-coimbatore',
         '/endovascular-coiling': '/endovascular-coiling-coimbatore',
+        '/breast-nodule-vae': '/breast-nodule-vae-coimbatore',
+        '/pelvic-vein-embolization': '/pelvic-vein-embolization-coimbatore',
 
       },
 
