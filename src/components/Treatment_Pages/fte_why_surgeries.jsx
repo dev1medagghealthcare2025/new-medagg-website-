@@ -94,13 +94,9 @@ const FTEWhySurgeries = ({ city = '', variant = '' }) => {
 
   const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
 
-  const isBangalore = variantLower === 'bangalore' || cityLower === 'bangalore' || cityLower === 'bengaluru';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
 
-  const isMangalore = variantLower === 'mangalore' || cityLower === 'mangalore' || cityLower === 'mangaluru';
-
-  const isCitySpecific = isChennai || isMadurai || isCoimbatore || isBangalore || isMangalore;
-
-  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : isBangalore ? 'Bangalore' : isMangalore ? 'Mangalore' : '';
+  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : '';
 
   const gridRef = useRef(null);
 

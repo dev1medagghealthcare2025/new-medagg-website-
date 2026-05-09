@@ -11,7 +11,6 @@ export const treatmentCategories = [
       { title: 'Breast Nodule VAE', path: '/breast-nodule-vae', keywords: ['breast', 'vae', 'nodule'] },
       { title: 'Breast Nodule Cryoablation', path: '/breast-nodule-cryoablation', keywords: ['breast', 'cryoablation', 'cryo'] },
       { title: 'Breast Nodule RFA', path: '/breast-nodule-rfa', keywords: ['breast', 'rfa', 'radiofrequency'] },
-      { title: 'Pelvic Vein Embolization', path: '/pelvic-vein-embolization', keywords: ['pelvic', 'vein', 'embolization', 'pvc'] },
     ],
   },
   {

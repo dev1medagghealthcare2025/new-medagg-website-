@@ -39,19 +39,14 @@ export default function Consultourdoctor({ city = '', variant = '' }) {
   const isY90 = path.includes('y90') || path.includes('radioembolization') || path.includes('tare');
   const isTACE = path.includes('tace') || path.includes('chemoembolization') || path.includes('transarterial-chemoembolization');
   const isEndovascularCoiling = path.includes('endovascular-coiling') || path.includes('coiling') || path.includes('aneurysm');
-  const isVaricocele = path.includes('varicocele');
-  const isBreastNodule = path.includes('breast-nodule') || path.includes('breast-nodule-vae') || path.includes('vae');
-  const isPVC = path.includes('pelvic-vein') || path.includes('pvc') || path.includes('pelvic');
 
   const cityLower = (city || '').toLowerCase();
   const variantLower = (variant || '').toLowerCase();
   const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
   const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
   const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
-  const isBangalore = variantLower === 'bangalore' || cityLower === 'bangalore' || cityLower === 'bengaluru';
-  const isMangalore = variantLower === 'mangalore' || cityLower === 'mangalore' || cityLower === 'mangaluru';
-  const isCitySpecific = isChennai || isMadurai || isCoimbatore || isBangalore || isMangalore;
-  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : isBangalore ? 'Bangalore' : isMangalore ? 'Mangalore' : '';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
+  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : '';
 
   // Treatment-specific heading
   const getTreatmentHeading = () => {
@@ -60,9 +55,6 @@ export default function Consultourdoctor({ city = '', variant = '' }) {
     if (isGAE) return 'Knee Pain';
     if (isPAE) return 'Enlarged Prostate';
     if (isUAE) return 'Fibroid';
-    if (isVaricocele) return 'Varicocele';
-    if (isBreastNodule) return 'Breast Nodule';
-    if (isPVC) return 'Pelvic Vein';
     if (isVV) return 'Varicose Veins';
     if (isPFE) return 'Heel Pain';
     if (isDiabeticFoot) return 'Diabetic Foot';

@@ -1,17 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const BookAnAppointmentVAE = ({ city = '', variant = '' }) => {
-  const cityLower = (city || '').toLowerCase();
-  const variantLower = (variant || '').toLowerCase();
-  const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
-  const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
-  const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
-  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
-  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : '';
+const BookAnAppointmentVAE = () => {
   const [formData, setFormData] = useState({
     healthConcern: '',
-    city: cityName,
+    city: '',
     fullName: '',
     phone: '',
     preferredLanguage: '',
@@ -74,27 +67,13 @@ const BookAnAppointmentVAE = ({ city = '', variant = '' }) => {
           <div className='absolute inset-0 bg-[#2d2552] bg-opacity-10 rounded-3xl'></div>
           <div className='relative grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center w-full z-10'>
             <div className='text-white text-center lg:text-left'>
-              {isCitySpecific ? (
-                <>
-                  <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight'>
-                    <span className='text-white'>Concerned About A</span><br />
-                    <span className='text-[#ff3576]'>Breast Nodule In {cityName}?</span>
-                  </h2>
-                  <p className='mt-4 text-base text-gray-200 leading-relaxed'>
-                    Scar-free removal of benign breast nodules through minimally invasive VAE technology.
-                  </p>
-                </>
-              ) : (
-                <>
-                  <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight'>
-                    <span className='text-white'>Think You Might Have</span><br />
-                    <span className='text-[#ff3576]'>Breast Nodule?</span>
-                  </h2>
-                  <p className='mt-4 text-base text-gray-200 leading-relaxed'>
-                    Scar-free removal of benign breast nodules through minimally invasive technology.
-                  </p>
-                </>
-              )}
+              <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight'>
+                <span className='text-white'>Think You Might Have</span><br />
+                <span className='text-[#ff3576]'>Breast Nodule?</span>
+              </h2>
+              <p className='mt-4 text-base text-gray-200 leading-relaxed'>
+              Scar-free removal of benign breast nodules through minimally invasive technology.
+              </p>
               <Link to='/contact-us'>
                 <button className='mt-6 bg-[#ff3576] text-white font-bold py-2 px-6 rounded-lg hover:bg-pink-700 transition duration-300 text-sm'>
                   Book Appointment
