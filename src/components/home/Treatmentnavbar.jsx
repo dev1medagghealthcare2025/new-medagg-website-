@@ -62,6 +62,11 @@ import { ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
     { title: 'Adhesive Capsulitis Embolization', path: '/frozen-shoulder' }
   ] },
 
+  // Pelvic Vein Embolization
+  { title: 'Pelvic Vein Embolization', path: '/pelvic-vein-embolization', subTreatments: [
+    { title: 'Pelvic Vein Embolization', path: '/pelvic-vein-embolization' }
+  ] },
+
 ];
 
 const DropdownMenu = ({ items, stackSubBelow = false, depth = 0 }) => {
@@ -162,11 +167,49 @@ const TreatmentsMegaMenu = ({ isOpen, position, columns, onMouseEnter, onMouseLe
                   <ul className='space-y-3'>
                     {section.items.map((item) => (
                       <li key={item.title}>
-                        <Link to={item.path || '#'} className='flex items-center gap-3 text-[13px] text-gray-700 hover:text-pink-600'>
-                          <span className='w-9 h-9 rounded-md bg-gray-100 border border-gray-200 flex items-center justify-center text-[11px] font-semibold text-gray-600 shrink-0'>
-                            {item.badge || item.title.slice(0, 2).toUpperCase()}
+                        <Link to={item.path || '#'} className='flex items-center gap-3 text-[13px] text-gray-800 hover:text-pink-600'>
+                          <span className='w-9 h-9 rounded-md bg-gray-100 border border-gray-200 flex items-center justify-center text-[11px] font-semibold text-gray-600 shrink-0 overflow-hidden'>
+                            {(() => {
+                              const iconByTitle = {
+                                'Uterine Fibroids': 'Uterine Fibroid Embolization.jpg',
+                                'Fallopian Tube Block': 'Fallopian Tube Recanalization.jpg',
+                                'Breast Nodule VAE': 'Breast_nodule_icon.svg',
+                                'Breast Nodule Cryoablation': 'Breast_nodule_icon.svg',
+                                'Breast Nodule Radiofrequency Ablation': 'Breast_nodule_icon.svg',
+                                'Enlarged Prostate': 'PAE.jpg',
+                                'Varicocele': 'Varicocele Embolization.jpg',
+                                'Knee Pain': 'GAE_Compare2.jpg',
+                                'Frozen Shoulder': 'frozen shouder.png',
+                                'Plantar Fascitis': 'planter_icon.jpg',
+                                'Hemorrhoids': 'Hemorrhoidal_icon.png',
+                                'Diabetic Foot': 'diabetic_png3.png',
+                                'Thyroid Nodule': 'Thyroid Nodul Ablation.jpg',
+                                'Varicose Veins': 'Varicose Veins.jpg',
+                                'Y-90 Radioembolization': 'Y-90 Radioembolization_1.png',
+                                'TARE': 'Y-90 Radioembolization_1.png',
+                                'Transarterial Chemoembolization (TACE)': 'TACE_Compare3.png',
+                                'Endovascular Coiling': 'Endovascular coiling.svg',
+                                'RFA Treatment For AVM': 'avm.svg',
+                                'Transcatheter Aortic Valve Implantation': 'Transcatheter Aortic Valve Replacement.jpg',
+                                'Chronic Total Occlusion': 'chronic.svg',
+                                'Radiofrequency Ablation For Arrhythmia': 'rfa for Ar.svg',
+                                'Pelvic Vein Embolization': 'Pelvic.png',
+                              };
+
+                              const iconFile = iconByTitle[item.title];
+                              if (!iconFile) return item.badge || item.title.slice(0, 2).toUpperCase();
+                              return (
+                                <img
+                                  src={`/${iconFile}`}
+                                  alt={item.title}
+                                  className='w-6 h-6 object-contain'
+                                  loading='lazy'
+                                  decoding='async'
+                                />
+                              );
+                            })()}
                           </span>
-                          <span className='leading-snug'>{item.title}</span>
+                          <span className='leading-snug font-semibold'>{item.title}</span>
                         </Link>
                       </li>
                     ))}

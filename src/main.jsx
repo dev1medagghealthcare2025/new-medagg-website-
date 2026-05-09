@@ -7,10 +7,11 @@ import { openThankYouModal } from './lib/thankYouModal';
 
 const originalFetch = window.fetch.bind(window);
 window.fetch = async (...args) => {
+  const url = typeof args[0] === 'string' ? args[0] : args[0]?.url;
+  const isTeleCRM = typeof url === 'string' && url.includes('api.telecrm.in') && url.includes('/autoupdatelead');
+
   const response = await originalFetch(...args);
   try {
-    const url = typeof args[0] === 'string' ? args[0] : args[0]?.url;
-    const isTeleCRM = typeof url === 'string' && url.includes('api.telecrm.in') && url.includes('/autoupdatelead');
     if (isTeleCRM && response.ok) {
       openThankYouModal();
     }

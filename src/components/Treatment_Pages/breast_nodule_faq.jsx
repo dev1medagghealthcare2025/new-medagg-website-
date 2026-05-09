@@ -44,7 +44,14 @@ const faqData = [
   },
 ];
 
-const BreastNoduleFaq = () => {
+const BreastNoduleFaq = ({ city = '', variant = '' }) => {
+  const cityLower = (city || '').toLowerCase();
+  const variantLower = (variant || '').toLowerCase();
+  const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
+  const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
+  const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
+  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : '';
   const [faqs, setFaqs] = useState(faqData);
   const [question, setQuestion] = useState('');
   const [showFullLongAnswer, setShowFullLongAnswer] = useState(false); // only for id: 8
@@ -75,15 +82,31 @@ const BreastNoduleFaq = () => {
           <div className='flex flex-col justify-center'>
             {/* Header section using flexbox */}
             <div className='flex flex-col mb-6'>
-              <h2 className='text-3xl md:text-4xl lg:text-5xl font-bold text-[#2d2552] mb-2'>
-                Frequently Asked
-              </h2>
-              <h2 className='text-3xl md:text-4xl lg:text-5xl font-bold text-[#ff3576] mb-4'>
-                Questions
-              </h2>
-              <p className='text-gray-600 text-lg'>
-                Got Questions? Find Quick Answers About Our Treatments And Patient Support.
-              </p>
+              {isCitySpecific ? (
+                <>
+                  <h2 className='text-3xl md:text-4xl lg:text-5xl font-bold text-[#2d2552] mb-2'>
+                    Frequently Asked Questions
+                  </h2>
+                  <h2 className='text-3xl md:text-4xl lg:text-5xl font-bold text-[#ff3576] mb-4'>
+                    About Breast Nodule Treatment in {cityName}
+                  </h2>
+                  <p className='text-gray-600 text-lg'>
+                    Got Questions? Find Quick Answers About Our Treatments And Patient Support.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <h2 className='text-3xl md:text-4xl lg:text-5xl font-bold text-[#2d2552] mb-2'>
+                    Frequently Asked
+                  </h2>
+                  <h2 className='text-3xl md:text-4xl lg:text-5xl font-bold text-[#ff3576] mb-4'>
+                    Questions
+                  </h2>
+                  <p className='text-gray-600 text-lg'>
+                    Got Questions? Find Quick Answers About Our Treatments And Patient Support.
+                  </p>
+                </>
+              )}
             </div>
 
             {/* Can't Locate Answer section */}

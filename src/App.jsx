@@ -24,11 +24,15 @@ import Thyroid_Nodule_Ablation_Treatmentpage from './pages/Thyroid_Nodule_Ablati
 import Thyroid_Nodule_Ablation_Treatmentpage_chennai from './pages/Thyroid_Nodule_Ablation_Treatmentpage_chennai';
 import Thyroid_Nodule_Ablation_Treatmentpage_madurai from './pages/Thyroid_Nodule_Ablation_Treatmentpage_madurai';
 import Thyroid_Nodule_Ablation_Treatmentpage_coimbatore from './pages/Thyroid_Nodule_Ablation_Treatmentpage_coimbatore';
+import Thyroid_Nodule_Ablation_Treatmentpage_bangalore from './pages/Thyroid_Nodule_Ablation_Treatmentpage_bangalore';
+import Thyroid_Nodule_Ablation_Treatmentpage_mangalore from './pages/Thyroid_Nodule_Ablation_Treatmentpage_mangalore';
 import About from './pages/About';
 import Varicocele_embolization from './pages/Varicocele_embolization';
 import Varicocele_embolization_chennai from './pages/Varicocele_embolization_chennai';
 import Varicocele_embolization_madurai from './pages/Varicocele_embolization_madurai';
 import Varicocele_embolization_coimbatore from './pages/Varicocele_embolization_coimbatore';
+import Varicocele_embolization_bangalore from './pages/Varicocele_embolization_bangalore';
+import Varicocele_embolization_mangalore from './pages/Varicocele_embolization_mangalore';
 import VaricoseVeinPage from './pages/varicosevein';
 import VaricoseVeinChennai from './pages/varicose_vein_chennai';
 import VaricoseVeinMadurai from './pages/varicose_vein_madurai';
@@ -39,6 +43,8 @@ import FTE from './pages/FTE';
 import FTE_chennai from './pages/FTE_chennai';
 import FTE_madurai from './pages/FTE_madurai';
 import FTE_coimbatore from './pages/FTE_coimbatore';
+import FTE_bangalore from './pages/FTE_bangalore';
+import FTE_mangalore from './pages/FTE_mangalore';
 import ContactUsPage from './pages/contact_us_page';
 import UAEPage from './pages/UAE';
 import UAE_chennai from './pages/UAE_chennai';
@@ -46,6 +52,9 @@ import UAE_madurai from './pages/UAE_madurai';
 import UAE_coimbatore from './pages/UAE_coimbatore';
 import CareerPage from './pages/career';
 import BreastNoduleVAEPage from './pages/Breast_Nodule_VAE';
+import BreastNoduleVAEChennai from './pages/Breast_Nodule_VAE_chennai';
+import BreastNoduleVAEMadurai from './pages/Breast_Nodule_VAE_madurai';
+import BreastNoduleVAECoimbatore from './pages/Breast_Nodule_VAE_coimbatore';
 import BreastNoduleCryoablationPage from './pages/Breast_nodule_cryoablation';
 import Planter from './pages/Planter';
 import Planter_chennai from './pages/Planter_chennai';
@@ -78,6 +87,8 @@ import ImageCursorStyle from './components/ui/ImageCursorStyle';
 import { UI_ENHANCEMENTS_ENABLED, IMAGE_CURSOR_ENABLED } from './config/uiEnhancements';
 import ButtonInteractions from './components/ui/ButtonInteractions';
 import ThankYouModalHost from './components/common/ThankYouModalHost';
+import TelecrmOtpGateHost from './components/common/TelecrmOtpGateHost';
+// import { TelecrmOtpGateProvider } from './lib/telecrmOtpGate';
 import TaviChennai from './pages/tavi_chennai';
 import TaviMadurai from './pages/tavi_madurai';
 import TaviCoimbatore from './pages/tavi_coimbatore';
@@ -96,6 +107,10 @@ import TACECoimbatore from './pages/tace_coimbatore';
 import EndovascularCoilingChennai from './pages/endovascular_coiling_chennai';
 import EndovascularCoilingMadurai from './pages/endovascular_coiling_madurai';
 import EndovascularCoilingCoimbatore from './pages/endovascular_coiling_coimbatore';
+import PVCPage from './pages/pvc';
+import PVCChennai from './pages/pvc_chennai';
+import PVCMadurai from './pages/pvc_madurai';
+import PVCCoimbatore from './pages/pvc_coimbatore';
 
 function ScrollToTop() {
   const location = useLocation();
@@ -131,6 +146,7 @@ function CanonicalUrlUpdater() {
         '/pfe': '/plantar-fascial-embolization',
         '/hemorrhoidal': '/piles-hemorrhoids',
         '/privacy-policy': '/policy',
+        '/pvc': '/pelvic-vein-embolization',
       };
 
       if (aliasToCanonical[canonicalPath]) {
@@ -202,12 +218,16 @@ function App() {
           <Route path='/thyroid-nodule-ablation-chennai' element={<Thyroid_Nodule_Ablation_Treatmentpage_chennai />} />
           <Route path='/thyroid-nodule-ablation-madurai' element={<Thyroid_Nodule_Ablation_Treatmentpage_madurai />} />
           <Route path='/thyroid-nodule-ablation-coimbatore' element={<Thyroid_Nodule_Ablation_Treatmentpage_coimbatore />} />
+          <Route path='/thyroid-nodule-ablation-bangalore' element={<Thyroid_Nodule_Ablation_Treatmentpage_bangalore />} />
+          <Route path='/thyroid-nodule-ablation-mangalore' element={<Thyroid_Nodule_Ablation_Treatmentpage_mangalore />} />
           <Route path='/thyroid' element={<Navigate to='/thyroid-nodule-ablation' replace />} />
           <Route path='/about' element={<About />} />
           <Route path='/varicocele-embolization' element={<Varicocele_embolization />} />
           <Route path='/varicocele-embolization-chennai' element={<Varicocele_embolization_chennai />} />
           <Route path='/varicocele-embolization-madurai' element={<Varicocele_embolization_madurai />} />
           <Route path='/varicocele-embolization-coimbatore' element={<Varicocele_embolization_coimbatore />} />
+          <Route path='/varicocele-embolization-bangalore' element={<Varicocele_embolization_bangalore />} />
+          <Route path='/varicocele-embolization-mangalore' element={<Varicocele_embolization_mangalore />} />
           <Route path='/varicose-vein' element={<VaricoseVeinPage />} />
           <Route path='/varicose-vein-chennai' element={<VaricoseVeinChennai />} />
           <Route path='/varicose-vein-madurai' element={<VaricoseVeinMadurai />} />
@@ -217,6 +237,8 @@ function App() {
           <Route path='/fallopian-tube-recanalization-ftr-chennai' element={<FTE_chennai />} />
           <Route path='/fallopian-tube-recanalization-ftr-madurai' element={<FTE_madurai />} />
           <Route path='/fallopian-tube-recanalization-ftr-coimbatore' element={<FTE_coimbatore />} />
+          <Route path='/fallopian-tube-recanalization-ftr-bangalore' element={<FTE_bangalore />} />
+          <Route path='/fallopian-tube-recanalization-ftr-mangalore' element={<FTE_mangalore />} />
           <Route path='/fte' element={<Navigate to='/fallopian-tube-recanalization-ftr' replace />} />
           <Route path='/blog/:slug' element={<BlogPost />} />
           <Route path='/gallery' element={<Gallery />} />
@@ -231,6 +253,9 @@ function App() {
           <Route path='/uterine-artery-embolization-uae-coimbatore' element={<UAE_coimbatore />} />
           <Route path='/uae' element={<Navigate to='/uterine-artery-embolization-uae' replace />} />
           <Route path='/breast-nodule-vae' element={<BreastNoduleVAEPage />} />
+          <Route path='/breast-nodule-vae-chennai' element={<BreastNoduleVAEChennai />} />
+          <Route path='/breast-nodule-vae-madurai' element={<BreastNoduleVAEMadurai />} />
+          <Route path='/breast-nodule-vae-coimbatore' element={<BreastNoduleVAECoimbatore />} />
           <Route path='/breast-nodule-cryoablation' element={<BreastNoduleCryoablationPage />} />
           <Route path='/plantar-fascial-embolization' element={<Planter />} />
           <Route path='/plantar-fascial-embolization-chennai' element={<Planter_chennai />} />
@@ -276,6 +301,11 @@ function App() {
           <Route path='/piles-hemorrhoids-madurai' element={<PilesMadurai />} />
           <Route path='/piles-hemorrhoids-coimbatore' element={<PilesCoimbatore />} />
           <Route path='/hemorrhoidal' element={<Navigate to='/piles-hemorrhoids' replace />} />
+          <Route path='/pelvic-vein-embolization' element={<PVCPage />} />
+          <Route path='/pelvic-vein-embolization-chennai' element={<PVCChennai />} />
+          <Route path='/pelvic-vein-embolization-madurai' element={<PVCMadurai />} />
+          <Route path='/pelvic-vein-embolization-coimbatore' element={<PVCCoimbatore />} />
+          <Route path='/pvc' element={<Navigate to='/pelvic-vein-embolization' replace />} />
           {/* Policy page routes */}
           <Route path='/policy' element={<PolicyPage />} />
           <Route path='/privacy-policy' element={<PolicyPage />} />
@@ -283,27 +313,28 @@ function App() {
           <Route path='/terms' element={<TermsConditionPage />} />
           {/* Catch-all route for 404 - must be last */}
           <Route path='*' element={<Home />} />
-        </Routes>
-      </main>
-      {!isIrpreneur2025 && (
-        <>
-          <Footer />
-          <Chatbot />
-          <ThankYouModalHost />
-          <BackToTop />
-          <CallFab position='right' phone='+919363656010' />
-          <FloatingWhatsApp phone='+918925928840' position='left' />
-          {IMAGE_CURSOR_ENABLED && <ImageCursorStyle />}
-          <ButtonInteractions />
-          {UI_ENHANCEMENTS_ENABLED && (
-            <>
-              <Cursor />
-              <style>{`@media (pointer: fine) { body { cursor: none; } a,button,[role="button"], input, textarea, select { cursor: none; } }`}</style>
-            </>
-          )}
-        </>
-      )}
-    </div>
+          </Routes>
+        </main>
+        {!isIrpreneur2025 && (
+          <>
+            <Footer />
+            <Chatbot />
+            <ThankYouModalHost />
+            {/* <TelecrmOtpGateHost /> */}
+            <BackToTop />
+            <CallFab position='right' phone='+919363656010' />
+            <FloatingWhatsApp phone='+918925928840' position='left' />
+            {IMAGE_CURSOR_ENABLED && <ImageCursorStyle />}
+            <ButtonInteractions />
+            {UI_ENHANCEMENTS_ENABLED && (
+              <>
+                <Cursor />
+                <style>{`@media (pointer: fine) { body { cursor: none; } a,button,[role="button"], input, textarea, select { cursor: none; } }`}</style>
+              </>
+            )}
+          </>
+        )}
+      </div>
   );
 }
 

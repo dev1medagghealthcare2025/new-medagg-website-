@@ -59,8 +59,16 @@ const Varicocele_herosection = ({ city = '', variant = '' }) => {
   const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
   const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
   const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
-  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
-  const backgroundImage = isCitySpecific ? `/hero_varicocele_${isChennai ? 'chennai' : isMadurai ? 'madhuri' : 'coimbatore'}.png` : "/PAE_PAGE_Background.jpg";
+  const isBangalore = variantLower === 'bangalore' || cityLower === 'bangalore' || cityLower === 'bengaluru';
+  const isMangalore = variantLower === 'mangalore' || cityLower === 'mangalore' || cityLower === 'mangaluru';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore || isBangalore || isMangalore;
+  const backgroundImage = isCitySpecific
+    ? isBangalore
+      ? '/hero_section_Bangalore.png'
+      : isMangalore
+        ? '/hero_section_Mangalore.png'
+        : `/hero_varicocele_${isChennai ? 'chennai' : isMadurai ? 'madhuri' : 'coimbatore'}.png`
+    : "/PAE_PAGE_Background.jpg";
   const overlayOpacity = isCitySpecific ? 'opacity-0' : 'opacity-60';
 
   return (
@@ -83,7 +91,7 @@ const Varicocele_herosection = ({ city = '', variant = '' }) => {
                 <br />
                 Varicocele Treatment
                 <br />
-                in {isChennai ? 'Chennai' : isMadurai ? 'Madurai' : 'Coimbatore'}
+                in {isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : isBangalore ? 'Bangalore' : 'Mangalore'}
               </h1>
               <p className='text-sm sm:text-base md:text-lg text-gray-200 font-medium max-w-2xl mx-auto md:mx-0 drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)]'>
                 Advanced Non-Surgical Treatment for Varicocele by Interventional Radiology Specialists | NoSurgeries by Medagg

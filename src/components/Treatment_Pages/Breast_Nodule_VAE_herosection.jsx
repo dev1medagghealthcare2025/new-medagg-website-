@@ -2,10 +2,32 @@ import React, { useState } from 'react';
 import { Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const BreastNoduleVAEHeroSection = () => {
+const BreastNoduleVAEHeroSection = ({ city = '', variant = '' }) => {
+  const cityLower = (city || '').toLowerCase();
+  const variantLower = (variant || '').toLowerCase();
+  const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
+  const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
+  const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
+
+  const getCityName = () => {
+    if (isChennai) return 'Chennai';
+    if (isMadurai) return 'Madurai';
+    if (isCoimbatore) return 'Coimbatore';
+    return '';
+  };
+
+  // City-specific background image or default
+  const getCityImage = () => {
+    if (isChennai) return '/hero_varicocele_chennai.png';
+    if (isMadurai) return '/hero_varicocele_madhuri.png';
+    if (isCoimbatore) return '/hero_varicocele_coimbatore.png';
+    return '/Breast_Nodule_VAE.jpg';
+  };
+  const bgImage = getCityImage();
   const [formData, setFormData] = useState({
     concern: '',
-    city: '',
+    city: getCityName(),
     name: '',
     phone: '',
     preferredLanguage: '',
@@ -62,19 +84,34 @@ const BreastNoduleVAEHeroSection = () => {
   return (
     <div
       className='relative bg-cover bg-center h-auto text-white py-8 sm:py-10 lg:py-14 px-4 sm:px-6 lg:px-8'
-      style={{ backgroundImage: 'url(\'/Breast_Nodule_VAE.jpg\')', minHeight: '460px' }}
+      style={{ backgroundImage: `url('${bgImage}')`, minHeight: '460px' }}
     >
       <div className='absolute inset-0 bg-[#2d2552] opacity-[.55]'></div>
       <div className='relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center'>
         {/* Left Content */}
         <div className='text-center lg:text-left'>
-          <h1 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-3 sm:mb-5'>
-            <span className='text-white'>Breast Nodule Treatment</span>
-            <span className='block text-[#ff3576] mt-1 text-lg sm:text-xl md:text-2xl'>(Vacuum-Assisted Excision)</span>
-          </h1>
-          <p className='text-base sm:text-lg md:text-xl max-w-2xl mx-auto lg:mx-0 text-gray-200 font-medium'>
-            Scar-free removal of benign breast nodules through minimally invasive technology
-          </p>
+          {isCitySpecific ? (
+            <>
+              <h1 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-3 sm:mb-5'>
+                <span className='text-white'>No-Surgery Breast Nodule Treatment </span>
+                <span className='text-[#ff3576]'>(Vacuum-Assisted Excision)</span>
+                <span className='text-white'> in {getCityName()}</span>
+              </h1>
+              <p className='text-base sm:text-lg md:text-xl max-w-2xl mx-auto lg:mx-0 text-gray-200 font-medium'>
+                Advanced Non-Surgical Treatment for Breast Nodules by Interventional Radiology Specialists | NoSurgeries by Medagg
+              </p>
+            </>
+          ) : (
+            <>
+              <h1 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-3 sm:mb-5'>
+                <span className='text-white'>Breast Nodule Treatment</span>
+                <span className='block text-[#ff3576] mt-1 text-lg sm:text-xl md:text-2xl'>(Vacuum-Assisted Excision)</span>
+              </h1>
+              <p className='text-base sm:text-lg md:text-xl max-w-2xl mx-auto lg:mx-0 text-gray-200 font-medium'>
+                Scar-free removal of benign breast nodules through minimally invasive technology
+              </p>
+            </>
+          )}
         </div>
 
         {/* Right Content (Form) */}
