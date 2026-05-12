@@ -1,10 +1,30 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const BookAnAppointmentVAE = () => {
+const BookAnAppointmentVAE = ({ city = '', variant = '' }) => {
+  const cityLower = (city || '').toLowerCase();
+  const variantLower = (variant || '').toLowerCase();
+  const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
+  const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
+  const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
+  const isBangalore = variantLower === 'bangalore' || cityLower === 'bangalore' || cityLower === 'bengaluru';
+  const isMangalore = variantLower === 'mangalore' || cityLower === 'mangalore' || cityLower === 'mangaluru';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore || isBangalore || isMangalore;
+  const cityName = isChennai
+    ? 'Chennai'
+    : isMadurai
+      ? 'Madurai'
+      : isCoimbatore
+        ? 'Coimbatore'
+        : isBangalore
+          ? 'Bangalore'
+          : isMangalore
+            ? 'Mangalore'
+            : '';
+
   const [formData, setFormData] = useState({
     healthConcern: '',
-    city: '',
+    city: cityName,
     fullName: '',
     phone: '',
     preferredLanguage: '',
@@ -67,10 +87,21 @@ const BookAnAppointmentVAE = () => {
           <div className='absolute inset-0 bg-[#2d2552] bg-opacity-10 rounded-3xl'></div>
           <div className='relative grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center w-full z-10'>
             <div className='text-white text-center lg:text-left'>
-              <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight'>
-                <span className='text-white'>Think You Might Have</span><br />
-                <span className='text-[#ff3576]'>Breast Nodule?</span>
-              </h2>
+              {isCitySpecific ? (
+                <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight'>
+                  <span className='text-white'>Think You Might Have</span>
+                  <br />
+                  <span className='text-[#ff3576]'>Breast Nodule?</span>
+                  <br />
+                  <span className='text-white'>Get Checked in {cityName}</span>
+                </h2>
+              ) : (
+                <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight'>
+                  <span className='text-white'>Think You Might Have</span>
+                  <br />
+                  <span className='text-[#ff3576]'>Breast Nodule?</span>
+                </h2>
+              )}
               <p className='mt-4 text-base text-gray-200 leading-relaxed'>
               Scar-free removal of benign breast nodules through minimally invasive technology.
               </p>

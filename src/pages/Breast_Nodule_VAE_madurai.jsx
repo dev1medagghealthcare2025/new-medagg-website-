@@ -19,8 +19,8 @@ const BreastNoduleVAEMadurai = () => {
   return (
     <div className='bg-white'>
       <PageMeta
-        title='Breast Nodule Treatment in Madurai | VAE - NoSurgeries'
-        description='Advanced non-surgical Breast Nodule treatment in Madurai using Vacuum-Assisted Excision (VAE). Scar-free removal of benign breast lumps by Interventional Radiology specialists.'
+        title='Breast Nodule Treatment in Madurai | Vacuum Assisted Excision (VAE)'
+        description='Scar-free Vacuum Assisted Excision (VAE) for benign breast lumps in Madurai. Consult experts and get minimally invasive breast nodule treatment.'
       />
       <Navbar />
       <Treatmentnavbar />

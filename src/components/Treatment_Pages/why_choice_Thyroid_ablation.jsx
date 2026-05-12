@@ -26,7 +26,26 @@ const features = [
   },
 ];
 
-const WhyChooseThyroidAblation = () => {
+const WhyChooseThyroidAblation = ({ city = '', variant = '' }) => {
+  const cityLower = (city || '').toLowerCase();
+  const variantLower = (variant || '').toLowerCase();
+  const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
+  const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
+  const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
+  const isBangalore = variantLower === 'bangalore' || cityLower === 'bangalore' || cityLower === 'bengaluru';
+  const isMangalore = variantLower === 'mangalore' || cityLower === 'mangalore' || cityLower === 'mangaluru';
+  const cityName = isChennai
+    ? 'Chennai'
+    : isMadurai
+      ? 'Madurai'
+      : isCoimbatore
+        ? 'Coimbatore'
+        : isBangalore
+          ? 'Bangalore'
+          : isMangalore
+            ? 'Mangalore'
+            : '';
+
   return (
     <div className='py-8 sm:py-12 lg:py-16 bg-white'>
       <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
@@ -38,7 +57,7 @@ const WhyChooseThyroidAblation = () => {
             <span className='text-pink-500'>Thyroid Nodule Ablation?</span>
           </h2>
           <p className='mt-4 text-lg text-gray-600 w-full mb-8 sm:mb-10 lg:mb-12'>
-            Thyroid nodule ablation is a proven, minimally invasive option for treating selected thyroid nodules without open surgery. It uses targeted energy to shrink the nodule, helping relieve symptoms while preserving normal thyroid function. With no large incision and minimal scarring, most patients experience a faster recovery and return to routine activities sooner. If you are looking for thyroid nodule treatment without surgery in Chennai, thyroid ablation offers an effective, scar-minimizing alternative to traditional surgery.
+            Thyroid nodule ablation is a proven, minimally invasive option for treating selected thyroid nodules without open surgery. It uses targeted energy to shrink the nodule, helping relieve symptoms while preserving normal thyroid function. With no large incision and minimal scarring, most patients experience a faster recovery and return to routine activities sooner. If you are looking for thyroid nodule treatment without surgery in {cityName || 'Chennai'}, thyroid ablation offers an effective, scar-minimizing alternative to traditional surgery.
           </p>
         </div>
 

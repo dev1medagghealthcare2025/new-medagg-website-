@@ -23,7 +23,7 @@ const Thyroid_Nodule_Ablation_Treatmentpage_chennai = () => (
     <Navbar />
     <Treatmentnavbar />
     <ThyroidHerosection city='Chennai' variant='chennai' />
-    <WhyChooseThyroid />
+    <WhyChooseThyroid city='Chennai' variant='chennai' />
     <HowThyroidWork />
     <ThyroidWhySurgeries city='Chennai' variant='chennai' />
     <ThyroidBookAppointment city='Chennai' variant='chennai' />

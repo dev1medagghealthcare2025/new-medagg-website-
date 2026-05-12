@@ -25,7 +25,7 @@ const Varicocele_embolization_mangalore = () => {
       <Navbar />
       <Treatmentnavbar />
       <Varicocele_herosection city='Mangalore' variant='mangalore' />
-      <WhyChooseVaricocele />
+      <WhyChooseVaricocele city='Mangalore' variant='mangalore' />
       <HowVaricoceleEmbolizationWork />
       <AreYouExperiencingVaricocele />
       <VaricoceleWhySurgeries city='Mangalore' variant='mangalore' />

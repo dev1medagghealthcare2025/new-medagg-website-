@@ -7,11 +7,15 @@ const BookAppointmentVaricocele = ({ city = '', variant = '' }) => {
   const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
   const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
   const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
-  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
+  const isBangalore = variantLower === 'bangalore' || cityLower === 'bangalore' || cityLower === 'bengaluru';
+  const isMangalore = variantLower === 'mangalore' || cityLower === 'mangalore' || cityLower === 'mangaluru';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore || isBangalore || isMangalore;
   const getCityName = () => {
     if (isChennai) return 'Chennai';
     if (isMadurai) return 'Madurai';
     if (isCoimbatore) return 'Coimbatore';
+    if (isBangalore) return 'Bangalore';
+    if (isMangalore) return 'Mangalore';
     return '';
   };
   const [formData, setFormData] = useState({
@@ -88,7 +92,7 @@ const BookAppointmentVaricocele = ({ city = '', variant = '' }) => {
             <div className='text-center md:text-left py-8 md:py-0'>
               {isCitySpecific ? (
                 <h2 className='text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-4 text-white'>
-                  Noticing <span className='text-[#ff3576]'>Testicular Pain Or Swelling?</span> Get Checked In <span className='text-[#ff3576]'>{isChennai ? 'Chennai' : isMadurai ? 'Madurai' : 'Coimbatore'}</span>
+                  Noticing <span className='text-[#ff3576]'>Testicular Pain Or Swelling?</span> Get Checked In <span className='text-[#ff3576]'>{getCityName()}</span>
                 </h2>
               ) : (
                 <h2 className='text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-4 text-white'>

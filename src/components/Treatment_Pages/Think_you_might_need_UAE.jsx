@@ -14,8 +14,10 @@ const ThinkYouMightNeedUAE = ({ city = '', variant = '' }) => {
   const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
   const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
   const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
-  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
-  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : '';
+  const isBangalore = variantLower === 'bangalore' || cityLower === 'bangalore' || cityLower === 'bengaluru';
+  const isMangalore = variantLower === 'mangalore' || cityLower === 'mangalore' || cityLower === 'mangaluru';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore || isBangalore || isMangalore;
+  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : isBangalore ? 'Bangalore' : isMangalore ? 'Mangalore' : '';
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -44,18 +46,30 @@ const ThinkYouMightNeedUAE = ({ city = '', variant = '' }) => {
           <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full p-12'>
             {/* Left Side: Text Content */}
             <div className='text-white text-center md:text-left'>
-              <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight text-white'>
-                Think You Might Need <br />
-                <span className='text-[#ff3576]'>Fibroid Treatment?</span>
-              </h2>
-              {isCitySpecific && (
-                <p className='mt-2 text-base sm:text-lg text-gray-200 font-semibold'>
-                  In {cityName}
-                </p>
+              {isCitySpecific ? (
+                <>
+                  <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight text-white'>
+                    Suffering From <span className='text-[#ff3576]'>Fibroid</span><br />
+                    Symptoms? Get Checked
+                  </h2>
+                  <p className='mt-2 text-base sm:text-lg text-gray-200 font-semibold'>
+                    In {cityName}
+                  </p>
+                  <p className='mt-4 text-lg sm:text-xl text-gray-200'>
+                    Non-surgical, uterus-preserving solution available now
+                  </p>
+                </>
+              ) : (
+                <>
+                  <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight text-white'>
+                    Think You Might Need <br />
+                    <span className='text-[#ff3576]'>Fibroid Treatment?</span>
+                  </h2>
+                  <p className='mt-4 text-lg sm:text-xl text-gray-200'>
+                    Non-surgical, uterus-preserving solution available now
+                  </p>
+                </>
               )}
-              <p className='mt-4 text-lg sm:text-xl text-gray-200'>
-                Non-surgical, uterus-preserving solution available now
-              </p>
               <button
                 className='mt-8 bg-[#ff3576] text-white font-bold py-3 px-8 rounded-lg hover:bg-pink-700 transition duration-300 ease-in-out transform hover:scale-105'
               >

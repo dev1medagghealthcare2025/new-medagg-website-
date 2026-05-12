@@ -24,7 +24,26 @@ const features = [
   },
 ];
 
-const WhyChooseVaricocele = () => {
+const WhyChooseVaricocele = ({ city = '', variant = '' }) => {
+  const cityLower = (city || '').toLowerCase();
+  const variantLower = (variant || '').toLowerCase();
+  const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
+  const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
+  const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
+  const isBangalore = variantLower === 'bangalore' || cityLower === 'bangalore' || cityLower === 'bengaluru';
+  const isMangalore = variantLower === 'mangalore' || cityLower === 'mangalore' || cityLower === 'mangaluru';
+  const cityName = isChennai
+    ? 'Chennai'
+    : isMadurai
+      ? 'Madurai'
+      : isCoimbatore
+        ? 'Coimbatore'
+        : isBangalore
+          ? 'Bangalore'
+          : isMangalore
+            ? 'Mangalore'
+            : '';
+
   return (
     <section className='py-12 sm:py-16 lg:py-20 bg-white'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
@@ -39,7 +58,7 @@ const WhyChooseVaricocele = () => {
             Why Choose <span className='text-[#ff3576]'>Varicocele Embolization?</span>
           </h2>
           <p className='mt-4 text-lg text-gray-600 w-full'>
-            Varicocele embolization is a minimally invasive, non-surgical treatment that blocks the abnormal veins causing a varicocele and helps restore healthier blood flow. It can reduce pain and heaviness and may support improved semen parameters and fertility in selected patients. The procedure is performed through a tiny puncture with minimal scarring and typically allows a quick return to normal activities. If you are looking for varicocele embolization in Chennai, this approach offers effective relief without open surgery.
+            Varicocele embolization is a minimally invasive, non-surgical treatment that blocks the abnormal veins causing a varicocele and helps restore healthier blood flow. It can reduce pain and heaviness and may support improved semen parameters and fertility in selected patients. The procedure is performed through a tiny puncture with minimal scarring and typically allows a quick return to normal activities. If you are looking for varicocele embolization in {cityName || 'Chennai'}, this approach offers effective relief without open surgery.
           </p>
         </div>
 

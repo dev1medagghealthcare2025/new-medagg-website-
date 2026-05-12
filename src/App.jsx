@@ -50,6 +50,8 @@ import UAEPage from './pages/UAE';
 import UAE_chennai from './pages/UAE_chennai';
 import UAE_madurai from './pages/UAE_madurai';
 import UAE_coimbatore from './pages/UAE_coimbatore';
+import UAE_bangalore from './pages/UAE_bangalore';
+import UAE_mangalore from './pages/UAE_mangalore';
 import CareerPage from './pages/career';
 import BreastNoduleVAEPage from './pages/Breast_Nodule_VAE';
 import BreastNoduleVAEChennai from './pages/Breast_Nodule_VAE_chennai';
@@ -249,6 +251,8 @@ function App() {
           <Route path='/uterine-artery-embolization-uae-chennai' element={<UAE_chennai />} />
           <Route path='/uterine-artery-embolization-uae-madurai' element={<UAE_madurai />} />
           <Route path='/uterine-artery-embolization-uae-coimbatore' element={<UAE_coimbatore />} />
+          <Route path='/uterine-artery-embolization-uae-bangalore' element={<UAE_bangalore />} />
+          <Route path='/uterine-artery-embolization-uae-mangalore' element={<UAE_mangalore />} />
           <Route path='/uae' element={<Navigate to='/uterine-artery-embolization-uae' replace />} />
           <Route path='/breast-nodule-vae' element={<BreastNoduleVAEPage />} />
           <Route path='/breast-nodule-vae-chennai' element={<BreastNoduleVAEChennai />} />

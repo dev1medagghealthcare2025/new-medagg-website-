@@ -469,6 +469,7 @@ export default function Navbar() {
         '/thyroid-nodule-ablation': '/thyroid-nodule-ablation-bangalore',
         '/varicocele-embolization': '/varicocele-embolization-bangalore',
         '/fallopian-tube-recanalization-ftr': '/fallopian-tube-recanalization-ftr-bangalore',
+        '/uterine-artery-embolization-uae': '/uterine-artery-embolization-uae-bangalore',
       },
 
       'mangalore': {
@@ -477,6 +478,7 @@ export default function Navbar() {
         '/thyroid-nodule-ablation': '/thyroid-nodule-ablation-mangalore',
         '/varicocele-embolization': '/varicocele-embolization-mangalore',
         '/fallopian-tube-recanalization-ftr': '/fallopian-tube-recanalization-ftr-mangalore',
+        '/uterine-artery-embolization-uae': '/uterine-artery-embolization-uae-mangalore',
       },
 
       'madurai': {

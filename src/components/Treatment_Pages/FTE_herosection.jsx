@@ -7,18 +7,26 @@ const FTE_HeroSection = ({ city = '', variant = '' }) => {
   const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
   const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
   const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
-  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
+  const isBangalore = variantLower === 'bangalore' || cityLower === 'bangalore' || cityLower === 'bengaluru';
+  const isMangalore = variantLower === 'mangalore' || cityLower === 'mangalore' || cityLower === 'mangaluru';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore || isBangalore || isMangalore;
 
   const getCityName = () => {
     if (isChennai) return 'Chennai';
     if (isMadurai) return 'Madurai';
     if (isCoimbatore) return 'Coimbatore';
+    if (isBangalore) return 'Bangalore';
+    if (isMangalore) return 'Mangalore';
     return '';
   };
 
   // City-specific background image or default
   const bgImage = isCitySpecific
-    ? `/hero_varicocele_${isChennai ? 'chennai' : isMadurai ? 'madhuri' : 'coimbatore'}.png`
+    ? isBangalore
+      ? '/hero_section_Bangalore.png'
+      : isMangalore
+        ? '/hero_section_Mangalore.png'
+        : `/hero_varicocele_${isChennai ? 'chennai' : isMadurai ? 'madhuri' : 'coimbatore'}.png`
     : '/FTE_Herosection_bg.jpg';
 
   // Keep existing overlay for default page; remove overlay for city-specific pages

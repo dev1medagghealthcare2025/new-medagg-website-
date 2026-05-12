@@ -2,10 +2,29 @@ import React, { useState } from 'react';
 import { Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const BreastNoduleVAEHeroSection = () => {
+const BreastNoduleVAEHeroSection = ({ city = '', variant = '' }) => {
+  const cityLower = (city || '').toLowerCase();
+  const variantLower = (variant || '').toLowerCase();
+  const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
+  const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
+  const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
+  const isBangalore = variantLower === 'bangalore' || cityLower === 'bangalore' || cityLower === 'bengaluru';
+  const isMangalore = variantLower === 'mangalore' || cityLower === 'mangalore' || cityLower === 'mangaluru';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore || isBangalore || isMangalore;
+  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : isBangalore ? 'Bangalore' : isMangalore ? 'Mangalore' : '';
+
+  const backgroundImage = isCitySpecific
+    ? isBangalore
+      ? '/hero_section_Bangalore.png'
+      : isMangalore
+        ? '/hero_section_Mangalore.png'
+        : `/hero_varicocele_${isChennai ? 'chennai' : isMadurai ? 'madhuri' : 'coimbatore'}.png`
+    : '/Breast_Nodule_VAE.jpg';
+  const overlayOpacity = isCitySpecific ? 'opacity-0' : 'opacity-[.55]';
+
   const [formData, setFormData] = useState({
     concern: '',
-    city: '',
+    city: cityName,
     name: '',
     phone: '',
     preferredLanguage: '',
@@ -62,19 +81,33 @@ const BreastNoduleVAEHeroSection = () => {
   return (
     <div
       className='relative bg-cover bg-center h-auto text-white py-8 sm:py-10 lg:py-14 px-4 sm:px-6 lg:px-8'
-      style={{ backgroundImage: 'url(\'/Breast_Nodule_VAE.jpg\')', minHeight: '460px' }}
+      style={{ backgroundImage: `url('${backgroundImage}')`, minHeight: '460px' }}
     >
-      <div className='absolute inset-0 bg-[#2d2552] opacity-[.55]'></div>
+      <div className={`absolute inset-0 bg-[#2d2552] ${overlayOpacity}`}></div>
       <div className='relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center'>
         {/* Left Content */}
         <div className='text-center lg:text-left'>
-          <h1 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-3 sm:mb-5'>
-            <span className='text-white'>Breast Nodule Treatment</span>
-            <span className='block text-[#ff3576] mt-1 text-lg sm:text-xl md:text-2xl'>(Vacuum-Assisted Excision)</span>
-          </h1>
-          <p className='text-base sm:text-lg md:text-xl max-w-2xl mx-auto lg:mx-0 text-gray-200 font-medium'>
-            Scar-free removal of benign breast nodules through minimally invasive technology
-          </p>
+          {isCitySpecific ? (
+            <>
+              <h1 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-3 sm:mb-5'>
+                <span className='text-white'>No-Surgery Breast Nodule Treatment</span>
+                <span className='block text-[#ff3576] mt-1 text-lg sm:text-xl md:text-2xl'>in {cityName}</span>
+              </h1>
+              <p className='text-base sm:text-lg md:text-xl max-w-2xl mx-auto lg:mx-0 text-gray-200 font-medium'>
+                Vacuum-Assisted Excision (VAE) by Interventional Radiology specialists | NoSurgeries by Medagg
+              </p>
+            </>
+          ) : (
+            <>
+              <h1 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-3 sm:mb-5'>
+                <span className='text-white'>Breast Nodule Treatment</span>
+                <span className='block text-[#ff3576] mt-1 text-lg sm:text-xl md:text-2xl'>(Vacuum-Assisted Excision)</span>
+              </h1>
+              <p className='text-base sm:text-lg md:text-xl max-w-2xl mx-auto lg:mx-0 text-gray-200 font-medium'>
+                Scar-free removal of benign breast nodules through minimally invasive technology
+              </p>
+            </>
+          )}
         </div>
 
         {/* Right Content (Form) */}

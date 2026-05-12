@@ -19,8 +19,8 @@ const BreastNoduleVAECoimbatore = () => {
   return (
     <div className='bg-white'>
       <PageMeta
-        title='Breast Nodule Treatment in Coimbatore | VAE - NoSurgeries'
-        description='Advanced non-surgical Breast Nodule treatment in Coimbatore using Vacuum-Assisted Excision (VAE). Scar-free removal of benign breast lumps by Interventional Radiology specialists.'
+        title='Breast Nodule Treatment in Coimbatore | Vacuum Assisted Excision (VAE)'
+        description='Scar-free Vacuum Assisted Excision (VAE) for benign breast lumps in Coimbatore. Consult experts and get minimally invasive breast nodule treatment.'
       />
       <Navbar />
       <Treatmentnavbar />

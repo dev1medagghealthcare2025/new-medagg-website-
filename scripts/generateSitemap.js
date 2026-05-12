@@ -48,6 +48,8 @@ const STATIC_ROUTES = [
   '/pelvic-vein-embolization-madurai',
   '/pelvic-vein-embolization-coimbatore',
   '/uterine-artery-embolization-uae',
+  '/uterine-artery-embolization-uae-bangalore',
+  '/uterine-artery-embolization-uae-mangalore',
   '/plantar-fascial-embolization',
   '/plantar-fascial-embolization-chennai',
   '/plantar-fascial-embolization-madurai',

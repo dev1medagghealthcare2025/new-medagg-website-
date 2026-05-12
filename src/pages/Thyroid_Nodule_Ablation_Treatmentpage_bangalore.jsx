@@ -23,7 +23,7 @@ const Thyroid_Nodule_Ablation_Treatmentpage_bangalore = () => (
     <Navbar />
     <Treatmentnavbar />
     <ThyroidHerosection city='Bangalore' variant='bangalore' />
-    <WhyChooseThyroid />
+    <WhyChooseThyroid city='Bangalore' variant='bangalore' />
     <HowThyroidWork />
     <ThyroidWhySurgeries city='Bangalore' variant='bangalore' />
     <ThyroidBookAppointment city='Bangalore' variant='bangalore' />
