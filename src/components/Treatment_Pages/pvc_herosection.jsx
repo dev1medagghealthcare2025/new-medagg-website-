@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { UserRound } from 'lucide-react';
 
 const PVCHeroSection = ({ city = '', variant = '' }) => {
@@ -7,17 +7,25 @@ const PVCHeroSection = ({ city = '', variant = '' }) => {
   const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
   const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
   const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
-  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
+  const isBangalore = variantLower === 'bangalore' || cityLower === 'bangalore' || cityLower === 'bengaluru';
+  const isMangalore = variantLower === 'mangalore' || cityLower === 'mangalore' || cityLower === 'mangaluru';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore || isBangalore || isMangalore;
 
   const getCityName = () => {
     if (isChennai) return 'Chennai';
     if (isMadurai) return 'Madurai';
     if (isCoimbatore) return 'Coimbatore';
+    if (isBangalore) return 'Bangalore';
+    if (isMangalore) return 'Mangalore';
     return '';
   };
 
+  const cityName = getCityName();
+
   // City-specific background image or default
   const getCityImage = () => {
+    if (isBangalore) return '/hero_section_Bangalore.png';
+    if (isMangalore) return '/hero_section_Mangalore.png';
     if (isChennai) return '/hero_varicocele_chennai.png';
     if (isMadurai) return '/hero_varicocele_madhuri.png';
     if (isCoimbatore) return '/hero_varicocele_coimbatore.png';
@@ -27,12 +35,17 @@ const PVCHeroSection = ({ city = '', variant = '' }) => {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    location: getCityName(),
+    location: cityName,
     preferredLanguage: '',
     concern: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formStatus, setFormStatus] = useState('');
+
+  useEffect(() => {
+    if (!isCitySpecific) return;
+    setFormData((prev) => ({ ...prev, location: cityName }));
+  }, [isCitySpecific, cityName]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -92,7 +105,7 @@ const PVCHeroSection = ({ city = '', variant = '' }) => {
           {isCitySpecific ? (
             <>
               <h1 className='text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-white'>
-                No-Surgery Pelvic Vein congestion Treatment in {getCityName()}
+                No-Surgery Pelvic Vein congestion Treatment in {cityName}
               </h1>
               <p className='mt-4 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 text-white/90'>
                 Advanced Non-Surgical Treatment for Pelvic Pain by Interventional Radiology Specialists | NoSurgeries by Medagg

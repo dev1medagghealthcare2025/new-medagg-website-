@@ -9,15 +9,18 @@ export default function Thyroid_Herosection({ city = '', variant = '' }) {
   const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
   const isBangalore = variantLower === 'bangalore' || cityLower === 'bangalore' || cityLower === 'bengaluru';
   const isMangalore = variantLower === 'mangalore' || cityLower === 'mangalore' || cityLower === 'mangaluru';
-  const isCitySpecific = isChennai || isMadurai || isCoimbatore || isBangalore || isMangalore;
+  const isDelhi = variantLower === 'delhi' || cityLower === 'delhi';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore || isBangalore || isMangalore || isDelhi;
 
   // City-specific background image or default (using varicocele hero images)
   const bgImage = isCitySpecific
-    ? isBangalore
-      ? '/hero_section_Bangalore.png'
-      : isMangalore
-        ? '/hero_section_Mangalore.png'
-        : `/hero_varicocele_${isChennai ? 'chennai' : isMadurai ? 'madhuri' : 'coimbatore'}.png`
+    ? isDelhi
+      ? '/Delhi_herosection_bg.png'
+      : isBangalore
+        ? '/hero_section_Bangalore.png'
+        : isMangalore
+          ? '/hero_section_Mangalore.png'
+          : `/hero_varicocele_${isChennai ? 'chennai' : isMadurai ? 'madhuri' : 'coimbatore'}.png`
     : '/Thyroid_background.jpg';
 
   // Remove blue overlay for city-specific pages
@@ -29,6 +32,7 @@ export default function Thyroid_Herosection({ city = '', variant = '' }) {
     if (isCoimbatore) return 'Coimbatore';
     if (isBangalore) return 'Bangalore';
     if (isMangalore) return 'Mangalore';
+    if (isDelhi) return 'Delhi';
     return '';
   };
 

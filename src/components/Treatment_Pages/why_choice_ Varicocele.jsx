@@ -32,6 +32,7 @@ const WhyChooseVaricocele = ({ city = '', variant = '' }) => {
   const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
   const isBangalore = variantLower === 'bangalore' || cityLower === 'bangalore' || cityLower === 'bengaluru';
   const isMangalore = variantLower === 'mangalore' || cityLower === 'mangalore' || cityLower === 'mangaluru';
+  const isDelhi = variantLower === 'delhi' || cityLower === 'delhi' || cityLower === 'new delhi';
   const cityName = isChennai
     ? 'Chennai'
     : isMadurai
@@ -42,7 +43,9 @@ const WhyChooseVaricocele = ({ city = '', variant = '' }) => {
           ? 'Bangalore'
           : isMangalore
             ? 'Mangalore'
-            : '';
+            : isDelhi
+              ? 'Delhi'
+              : '';
 
   return (
     <section className='py-12 sm:py-16 lg:py-20 bg-white'>

@@ -34,6 +34,7 @@ const WhyChooseThyroidAblation = ({ city = '', variant = '' }) => {
   const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
   const isBangalore = variantLower === 'bangalore' || cityLower === 'bangalore' || cityLower === 'bengaluru';
   const isMangalore = variantLower === 'mangalore' || cityLower === 'mangalore' || cityLower === 'mangaluru';
+  const isDelhi = variantLower === 'delhi' || cityLower === 'delhi';
   const cityName = isChennai
     ? 'Chennai'
     : isMadurai
@@ -44,7 +45,9 @@ const WhyChooseThyroidAblation = ({ city = '', variant = '' }) => {
           ? 'Bangalore'
           : isMangalore
             ? 'Mangalore'
-            : '';
+            : isDelhi
+              ? 'Delhi'
+              : '';
 
   return (
     <div className='py-8 sm:py-12 lg:py-16 bg-white'>

@@ -7,8 +7,20 @@ const BookAppointmentY90Tare = ({ city = '', variant = '' }) => {
   const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
   const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
   const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
-  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
-  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : '';
+  const isBangalore = variantLower === 'bangalore' || cityLower === 'bangalore' || cityLower === 'bengaluru';
+  const isMangalore = variantLower === 'mangalore' || cityLower === 'mangalore' || cityLower === 'mangaluru';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore || isBangalore || isMangalore;
+  const cityName = isChennai
+    ? 'Chennai'
+    : isMadurai
+      ? 'Madurai'
+      : isCoimbatore
+        ? 'Coimbatore'
+        : isBangalore
+          ? 'Bangalore'
+          : isMangalore
+            ? 'Mangalore'
+            : '';
 
   const [formData, setFormData] = useState({
     healthConcern: '',
@@ -86,7 +98,7 @@ const BookAppointmentY90Tare = ({ city = '', variant = '' }) => {
             <div className='text-white text-center lg:text-left'>
               <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight'>
                 {isCitySpecific ? (
-                  <>Concerned About <span className='text-[#ff3576]'>Liver Tumors</span>? Get Checked In <span className='text-[#ff3576]'>{cityName}</span></>
+                  <>Experiencing <span className='text-[#ff3576]'>Liver-Related Symptoms</span>? Get Checked In <span className='text-[#ff3576]'>{cityName}</span></>
                 ) : (
                   <><span className='text-white'>Think You Might Have</span><br /><span className='text-[#ff3576]'>Liver Tumors?</span></>
                 )}

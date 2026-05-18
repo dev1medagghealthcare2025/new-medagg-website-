@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -10,15 +10,18 @@ const BreastNoduleVAEHeroSection = ({ city = '', variant = '' }) => {
   const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
   const isBangalore = variantLower === 'bangalore' || cityLower === 'bangalore' || cityLower === 'bengaluru';
   const isMangalore = variantLower === 'mangalore' || cityLower === 'mangalore' || cityLower === 'mangaluru';
-  const isCitySpecific = isChennai || isMadurai || isCoimbatore || isBangalore || isMangalore;
-  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : isBangalore ? 'Bangalore' : isMangalore ? 'Mangalore' : '';
+  const isDelhi = variantLower === 'delhi' || cityLower === 'delhi' || cityLower === 'new delhi';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore || isBangalore || isMangalore || isDelhi;
+  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : isBangalore ? 'Bangalore' : isMangalore ? 'Mangalore' : isDelhi ? 'Delhi' : '';
 
   const backgroundImage = isCitySpecific
-    ? isBangalore
-      ? '/hero_section_Bangalore.png'
-      : isMangalore
-        ? '/hero_section_Mangalore.png'
-        : `/hero_varicocele_${isChennai ? 'chennai' : isMadurai ? 'madhuri' : 'coimbatore'}.png`
+    ? isDelhi
+      ? '/Delhi_herosection_bg.png'
+      : isBangalore
+        ? '/hero_section_Bangalore.png'
+        : isMangalore
+          ? '/hero_section_Mangalore.png'
+          : `/hero_varicocele_${isChennai ? 'chennai' : isMadurai ? 'madhuri' : 'coimbatore'}.png`
     : '/Breast_Nodule_VAE.jpg';
   const overlayOpacity = isCitySpecific ? 'opacity-0' : 'opacity-[.55]';
 
@@ -31,6 +34,11 @@ const BreastNoduleVAEHeroSection = ({ city = '', variant = '' }) => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formStatus, setFormStatus] = useState(''); // success, error, or ''
+
+  useEffect(() => {
+    if (!isCitySpecific) return;
+    setFormData((prev) => ({ ...prev, city: cityName }));
+  }, [isCitySpecific, cityName]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -84,16 +92,30 @@ const BreastNoduleVAEHeroSection = ({ city = '', variant = '' }) => {
       style={{ backgroundImage: `url('${backgroundImage}')`, minHeight: '460px' }}
     >
       <div className={`absolute inset-0 bg-[#2d2552] ${overlayOpacity}`}></div>
+      {isCitySpecific && (
+        <div className='absolute inset-y-0 left-0 w-full md:w-[55%] bg-gradient-to-r from-black/65 via-black/25 to-transparent pointer-events-none'></div>
+      )}
       <div className='relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center'>
         {/* Left Content */}
         <div className='text-center lg:text-left'>
-          {isCitySpecific ? (
+          {isDelhi ? (
             <>
-              <h1 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-3 sm:mb-5'>
+              <h1 className='text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight text-white mb-3 sm:mb-5 drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)]'>
+                <span className='text-white'>No-Surgery Breast Nodule Treatment </span>
+                <span className='text-[#ff3576]'>(Vacuum-Assisted Excision)</span>
+                <span className='text-white'> in Delhi</span>
+              </h1>
+              <p className='text-sm sm:text-base md:text-lg text-gray-200 font-medium max-w-2xl mx-auto lg:mx-0 drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)]'>
+                Vacuum-Assisted Excision (VAE) by Interventional Radiology specialists | NoSurgeries by Medagg
+              </p>
+            </>
+          ) : isCitySpecific ? (
+            <>
+              <h1 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-3 sm:mb-5 drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)]'>
                 <span className='text-white'>No-Surgery Breast Nodule Treatment</span>
                 <span className='block text-[#ff3576] mt-1 text-lg sm:text-xl md:text-2xl'>in {cityName}</span>
               </h1>
-              <p className='text-base sm:text-lg md:text-xl max-w-2xl mx-auto lg:mx-0 text-gray-200 font-medium'>
+              <p className='text-base sm:text-lg md:text-xl max-w-2xl mx-auto lg:mx-0 text-gray-200 font-medium drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)]'>
                 Vacuum-Assisted Excision (VAE) by Interventional Radiology specialists | NoSurgeries by Medagg
               </p>
             </>

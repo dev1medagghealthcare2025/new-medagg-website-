@@ -6,12 +6,27 @@ const Y90_TARE_HEROSECTION = ({ city = '', variant = '' }) => {
   const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
   const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
   const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
-  const isCitySpecific = isChennai || isMadurai || isCoimbatore;
-  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : '';
+  const isBangalore = variantLower === 'bangalore' || cityLower === 'bangalore' || cityLower === 'bengaluru';
+  const isMangalore = variantLower === 'mangalore' || cityLower === 'mangalore' || cityLower === 'mangaluru';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore || isBangalore || isMangalore;
+  const cityName = isChennai
+    ? 'Chennai'
+    : isMadurai
+      ? 'Madurai'
+      : isCoimbatore
+        ? 'Coimbatore'
+        : isBangalore
+          ? 'Bangalore'
+          : isMangalore
+            ? 'Mangalore'
+            : '';
 
-  // City-specific background images using varicocele hero images
   const backgroundImage = isCitySpecific
-    ? `/hero_varicocele_${isChennai ? 'chennai' : isMadurai ? 'madhuri' : 'coimbatore'}.png`
+    ? isBangalore
+      ? '/hero_section_Bangalore.png'
+      : isMangalore
+        ? '/hero_section_Mangalore.png'
+        : `/hero_varicocele_${isChennai ? 'chennai' : isMadurai ? 'madhuri' : 'coimbatore'}.png`
     : '/y90_herosection.png';
 
   const [formData, setFormData] = useState({
@@ -118,7 +133,7 @@ const Y90_TARE_HEROSECTION = ({ city = '', variant = '' }) => {
           <div className='text-center lg:text-left'>
             <h1 className='text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-white'>
               {isCitySpecific ? (
-                <>No-Surgery Liver Tumor Treatment in {cityName}</>
+                <>No-Surgery Liver Tumor Treatment (Y-90 Radioembolization) in {cityName}</>
               ) : (
                 <><span className='text-white'>Y-90 Radioembolization</span><br /><span className='text-[#ff3576]'>(TARE)</span></>
               )}

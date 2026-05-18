@@ -28,7 +28,7 @@ const Endovascular_Coiling_treatment = ({ city = '', variant = '' }) => {
       <WhyChooseEndovascularCoiling />
       <HowECWorks />
       <AreYouExperiencingEC />
-      <ECWhySurgeries />
+      <ECWhySurgeries city={city} variant={variant} />
       <EC_Book_Appointment city={city} variant={variant} />
       <TreatmentCompareEC />
       <WhatHappensInEndovascularCoiling />

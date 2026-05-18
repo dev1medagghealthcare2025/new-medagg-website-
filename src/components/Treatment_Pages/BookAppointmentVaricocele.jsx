@@ -9,13 +9,15 @@ const BookAppointmentVaricocele = ({ city = '', variant = '' }) => {
   const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
   const isBangalore = variantLower === 'bangalore' || cityLower === 'bangalore' || cityLower === 'bengaluru';
   const isMangalore = variantLower === 'mangalore' || cityLower === 'mangalore' || cityLower === 'mangaluru';
-  const isCitySpecific = isChennai || isMadurai || isCoimbatore || isBangalore || isMangalore;
+  const isDelhi = variantLower === 'delhi' || cityLower === 'delhi' || cityLower === 'new delhi';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore || isBangalore || isMangalore || isDelhi;
   const getCityName = () => {
     if (isChennai) return 'Chennai';
     if (isMadurai) return 'Madurai';
     if (isCoimbatore) return 'Coimbatore';
     if (isBangalore) return 'Bangalore';
     if (isMangalore) return 'Mangalore';
+    if (isDelhi) return 'Delhi';
     return '';
   };
   const [formData, setFormData] = useState({

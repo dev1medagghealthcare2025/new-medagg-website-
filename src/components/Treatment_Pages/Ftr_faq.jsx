@@ -106,7 +106,9 @@ const FtrFaq = ({ city = '', variant = '' }) => {
 
   const isMangalore = variantLower === 'mangalore' || cityLower === 'mangalore' || cityLower === 'mangaluru';
 
-  const isCitySpecific = isChennai || isMadurai || isCoimbatore || isBangalore || isMangalore;
+  const isDelhi = variantLower === 'delhi' || cityLower === 'delhi' || cityLower === 'new delhi';
+
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore || isBangalore || isMangalore || isDelhi;
 
   const cityName = isChennai
     ? 'Chennai'
@@ -118,7 +120,9 @@ const FtrFaq = ({ city = '', variant = '' }) => {
           ? 'Bangalore'
           : isMangalore
             ? 'Mangalore'
-            : '';
+            : isDelhi
+              ? 'Delhi'
+              : '';
 
   const [faqs, setFaqs] = useState(faqData);
 

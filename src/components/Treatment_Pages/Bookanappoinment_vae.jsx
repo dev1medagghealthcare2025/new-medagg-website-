@@ -9,7 +9,8 @@ const BookAnAppointmentVAE = ({ city = '', variant = '' }) => {
   const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
   const isBangalore = variantLower === 'bangalore' || cityLower === 'bangalore' || cityLower === 'bengaluru';
   const isMangalore = variantLower === 'mangalore' || cityLower === 'mangalore' || cityLower === 'mangaluru';
-  const isCitySpecific = isChennai || isMadurai || isCoimbatore || isBangalore || isMangalore;
+  const isDelhi = variantLower === 'delhi' || cityLower === 'delhi' || cityLower === 'new delhi';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore || isBangalore || isMangalore || isDelhi;
   const cityName = isChennai
     ? 'Chennai'
     : isMadurai
@@ -20,7 +21,9 @@ const BookAnAppointmentVAE = ({ city = '', variant = '' }) => {
           ? 'Bangalore'
           : isMangalore
             ? 'Mangalore'
-            : '';
+            : isDelhi
+              ? 'Delhi'
+              : '';
 
   const [formData, setFormData] = useState({
     healthConcern: '',
@@ -87,7 +90,14 @@ const BookAnAppointmentVAE = ({ city = '', variant = '' }) => {
           <div className='absolute inset-0 bg-[#2d2552] bg-opacity-10 rounded-3xl'></div>
           <div className='relative grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center w-full z-10'>
             <div className='text-white text-center lg:text-left'>
-              {isCitySpecific ? (
+              {isDelhi ? (
+                <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight'>
+                  <span className='text-white'>Noticed A </span>
+                  <span className='text-[#ff3576]'>Breast Lump</span>
+                  <span className='text-white'>? Get Checked In </span>
+                  <span className='text-[#ff3576]'>Delhi</span>
+                </h2>
+              ) : isCitySpecific ? (
                 <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight'>
                   <span className='text-white'>Think You Might Have</span>
                   <br />

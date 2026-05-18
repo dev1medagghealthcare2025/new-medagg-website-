@@ -61,14 +61,17 @@ const UAE_Herosection = ({ city = '', variant = '' }) => {
   const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
   const isBangalore = variantLower === 'bangalore' || cityLower === 'bangalore' || cityLower === 'bengaluru';
   const isMangalore = variantLower === 'mangalore' || cityLower === 'mangalore' || cityLower === 'mangaluru';
-  const isCitySpecific = isChennai || isMadurai || isCoimbatore || isBangalore || isMangalore;
-  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : isBangalore ? 'Bangalore' : isMangalore ? 'Mangalore' : '';
+  const isDelhi = variantLower === 'delhi' || cityLower === 'delhi' || cityLower === 'new delhi';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore || isBangalore || isMangalore || isDelhi;
+  const cityName = isChennai ? 'Chennai' : isMadurai ? 'Madurai' : isCoimbatore ? 'Coimbatore' : isBangalore ? 'Bangalore' : isMangalore ? 'Mangalore' : isDelhi ? 'Delhi' : '';
   const backgroundImage = isCitySpecific
-    ? isBangalore
-      ? '/hero_section_Bangalore.png'
-      : isMangalore
-        ? '/hero_section_Mangalore.png'
-        : `/hero_varicocele_${isChennai ? 'chennai' : isMadurai ? 'madhuri' : 'coimbatore'}.png`
+    ? isDelhi
+      ? '/Delhi_herosection_bg.png'
+      : isBangalore
+        ? '/hero_section_Bangalore.png'
+        : isMangalore
+          ? '/hero_section_Mangalore.png'
+          : `/hero_varicocele_${isChennai ? 'chennai' : isMadurai ? 'madhuri' : 'coimbatore'}.png`
     : '/UAE_BG_image.jpg';
   const overlayOpacity = isCitySpecific ? 'opacity-0' : 'opacity-60';
 

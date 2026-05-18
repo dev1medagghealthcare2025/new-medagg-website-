@@ -23,7 +23,7 @@ const Y90_TAREPage = ({ city = '', variant = '' }) => {
       <WhyChooseY90 />
       <HowY90Works />
       <AreYouExperiencingY90Tare />
-      <Y90_TARE_MEDAGG />
+      <Y90_TARE_MEDAGG city={city} variant={variant} />
       <BookAppointmentY90Tare city={city} variant={variant} />
       <TARE_Compare />
       <OurTestimonial />

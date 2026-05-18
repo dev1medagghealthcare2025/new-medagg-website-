@@ -52,7 +52,8 @@ const BreastNoduleFaq = ({ city = '', variant = '' }) => {
   const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
   const isBangalore = variantLower === 'bangalore' || cityLower === 'bangalore' || cityLower === 'bengaluru';
   const isMangalore = variantLower === 'mangalore' || cityLower === 'mangalore' || cityLower === 'mangaluru';
-  const isCitySpecific = isChennai || isMadurai || isCoimbatore || isBangalore || isMangalore;
+  const isDelhi = variantLower === 'delhi' || cityLower === 'delhi' || cityLower === 'new delhi';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore || isBangalore || isMangalore || isDelhi;
   const cityName = isChennai
     ? 'Chennai'
     : isMadurai
@@ -63,7 +64,9 @@ const BreastNoduleFaq = ({ city = '', variant = '' }) => {
           ? 'Bangalore'
           : isMangalore
             ? 'Mangalore'
-            : '';
+            : isDelhi
+              ? 'Delhi'
+              : '';
 
   const [faqs, setFaqs] = useState(faqData);
   const [question, setQuestion] = useState('');
@@ -95,7 +98,15 @@ const BreastNoduleFaq = ({ city = '', variant = '' }) => {
           <div className='flex flex-col justify-center'>
             {/* Header section using flexbox */}
             <div className='flex flex-col mb-6'>
-              {isCitySpecific ? (
+              {isDelhi ? (
+                <>
+                  <h2 className='text-3xl md:text-4xl lg:text-5xl font-bold text-[#2d2552] mb-4 leading-tight'>
+                    Frequently Asked Questions About{' '}
+                    <span className='text-[#ff3576]'>Breast Nodule</span> Treatment in{' '}
+                    <span className='text-[#ff3576]'>Delhi</span>
+                  </h2>
+                </>
+              ) : isCitySpecific ? (
                 <>
                   <h2 className='text-3xl md:text-4xl lg:text-5xl font-bold text-[#2d2552] mb-2'>
                     Frequently Asked Questions

@@ -9,7 +9,26 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 
-const Y90_TARE_MEDAGG = () => {
+const Y90_TARE_MEDAGG = ({ city = '', variant = '' }) => {
+  const cityLower = (city || '').toLowerCase();
+  const variantLower = (variant || '').toLowerCase();
+  const isChennai = variantLower === 'chennai' || cityLower === 'chennai';
+  const isMadurai = variantLower === 'madurai' || cityLower === 'madurai';
+  const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
+  const isBangalore = variantLower === 'bangalore' || cityLower === 'bangalore' || cityLower === 'bengaluru';
+  const isMangalore = variantLower === 'mangalore' || cityLower === 'mangalore' || cityLower === 'mangaluru';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore || isBangalore || isMangalore;
+  const cityName = isChennai
+    ? 'Chennai'
+    : isMadurai
+      ? 'Madurai'
+      : isCoimbatore
+        ? 'Coimbatore'
+        : isBangalore
+          ? 'Bangalore'
+          : isMangalore
+            ? 'Mangalore'
+            : '';
   const gridRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -84,9 +103,15 @@ const Y90_TARE_MEDAGG = () => {
             </p>
 
             <h2 className='mt-4 text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-[#ff3576]'>
-              Surgery Isn’t
-              <br />
-              the Only Option
+              {isCitySpecific ? (
+                <>In {cityName}, No-Surgery Treatment for Liver Tumors is Available</>
+              ) : (
+                <>
+                  Surgery Isn’t
+                  <br />
+                  the Only Option
+                </>
+              )}
             </h2>
 
             <p className='mt-6 text-sm sm:text-base text-[#2d2552]/70 leading-relaxed'>

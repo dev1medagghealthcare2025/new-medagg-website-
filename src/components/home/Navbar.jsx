@@ -470,6 +470,17 @@ export default function Navbar() {
         '/varicocele-embolization': '/varicocele-embolization-bangalore',
         '/fallopian-tube-recanalization-ftr': '/fallopian-tube-recanalization-ftr-bangalore',
         '/uterine-artery-embolization-uae': '/uterine-artery-embolization-uae-bangalore',
+        '/varicose-vein': '/varicose-vein-bangalore',
+        '/plantar-fascial-embolization': '/plantar-fascial-embolization-bangalore',
+        '/diabetic-foot': '/diabetic-foot-bangalore',
+        '/frozen-shoulder': '/frozen-shoulder-bangalore',
+        '/breast-nodule-vae': '/breast-nodule-vae-bangalore',
+        '/transcatheter-aortic-valve-replacement': '/transcatheter-aortic-valve-replacement-bangalore',
+        '/cto': '/cto-bangalore',
+        '/endovascular-coiling': '/endovascular-coiling-bangalore',
+        '/y90-radioembolization-tare': '/y90-radioembolization-tare-bangalore',
+        '/pelvic-vein-embolization': '/pelvic-vein-embolization-bangalore',
+        '/pvc': '/pelvic-vein-embolization-bangalore',
       },
 
       'mangalore': {
@@ -479,6 +490,17 @@ export default function Navbar() {
         '/varicocele-embolization': '/varicocele-embolization-mangalore',
         '/fallopian-tube-recanalization-ftr': '/fallopian-tube-recanalization-ftr-mangalore',
         '/uterine-artery-embolization-uae': '/uterine-artery-embolization-uae-mangalore',
+        '/varicose-vein': '/varicose-vein-mangalore',
+        '/plantar-fascial-embolization': '/plantar-fascial-embolization-mangalore',
+        '/diabetic-foot': '/diabetic-foot-mangalore',
+        '/frozen-shoulder': '/frozen-shoulder-mangalore',
+        '/breast-nodule-vae': '/breast-nodule-vae-mangalore',
+        '/transcatheter-aortic-valve-replacement': '/transcatheter-aortic-valve-replacement-mangalore',
+        '/cto': '/cto-mangalore',
+        '/endovascular-coiling': '/endovascular-coiling-mangalore',
+        '/y90-radioembolization-tare': '/y90-radioembolization-tare-mangalore',
+        '/pelvic-vein-embolization': '/pelvic-vein-embolization-mangalore',
+        '/pvc': '/pelvic-vein-embolization-mangalore',
       },
 
       'madurai': {
@@ -506,6 +528,21 @@ export default function Navbar() {
         '/breast-nodule-vae': '/breast-nodule-vae-madurai',
         '/pelvic-vein-embolization': '/pelvic-vein-embolization-madurai',
 
+      },
+
+      'delhi': {
+        '/varicocele-embolization': '/varicocele-embolization-delhi',
+        '/prostate-artery-embolization-pae': '/prostate-artery-embolization-pae-delhi',
+        '/genicular-artery-embolization-gae': '/genicular-artery-embolization-gae-delhi',
+        '/thyroid-nodule-ablation': '/thyroid-nodule-ablation-delhi',
+        '/thyroid': '/thyroid-nodule-ablation-delhi',
+        '/fallopian-tube-recanalization-ftr': '/fallopian-tube-recanalization-ftr-delhi',
+        '/fte': '/fallopian-tube-recanalization-ftr-delhi',
+        '/uterine-artery-embolization-uae': '/uterine-artery-embolization-uae-delhi',
+        '/uae': '/uterine-artery-embolization-uae-delhi',
+        '/varicose-vein': '/varicose-vein-delhi',
+        '/plantar-fascial-embolization': '/plantar-fascial-embolization-delhi',
+        '/breast-nodule-vae': '/breast-nodule-vae-delhi',
       },
 
       'coimbatore': {

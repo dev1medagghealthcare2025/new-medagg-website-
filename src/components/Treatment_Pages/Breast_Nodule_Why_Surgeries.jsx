@@ -48,7 +48,8 @@ const BreastNoduleWhySurgeries = ({ city = '', variant = '' }) => {
   const isCoimbatore = variantLower === 'coimbatore' || cityLower === 'coimbatore';
   const isBangalore = variantLower === 'bangalore' || cityLower === 'bangalore' || cityLower === 'bengaluru';
   const isMangalore = variantLower === 'mangalore' || cityLower === 'mangalore' || cityLower === 'mangaluru';
-  const isCitySpecific = isChennai || isMadurai || isCoimbatore || isBangalore || isMangalore;
+  const isDelhi = variantLower === 'delhi' || cityLower === 'delhi' || cityLower === 'new delhi';
+  const isCitySpecific = isChennai || isMadurai || isCoimbatore || isBangalore || isMangalore || isDelhi;
   const cityName = isChennai
     ? 'Chennai'
     : isMadurai
@@ -59,7 +60,9 @@ const BreastNoduleWhySurgeries = ({ city = '', variant = '' }) => {
           ? 'Bangalore'
           : isMangalore
             ? 'Mangalore'
-            : '';
+            : isDelhi
+              ? 'Delhi'
+              : '';
 
   const gridRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -95,7 +98,16 @@ const BreastNoduleWhySurgeries = ({ city = '', variant = '' }) => {
               <div className='h-px flex-1 bg-[#e9d8dd]' />
             </div>
 
-            {isCitySpecific ? (
+            {isDelhi ? (
+              <>
+                <p className='text-lg font-semibold tracking-wide text-[#2d2552] mb-3'>
+                  Why Choose NoSurgeries / MEDAGG?
+                </p>
+                <h2 className='text-3xl sm:text-4xl font-extrabold text-[#ff3576] leading-tight'>
+                  In Delhi, No-Surgery Treatment Available for Breast Nodule
+                </h2>
+              </>
+            ) : isCitySpecific ? (
               <>
                 <p className='text-lg font-semibold tracking-wide text-[#2d2552] mb-3'>
                   Why Choose NoSurgeries / MEDAGG?
@@ -126,7 +138,15 @@ const BreastNoduleWhySurgeries = ({ city = '', variant = '' }) => {
 
             <div className='mt-6 rounded-xl border border-[#ff3576]/30 bg-white px-5 py-4'>
               <p className='text-gray-700'>
-                <span className='font-semibold text-[#ff3576]'>Breast Nodules:</span> No surgeries for benign breast nodules using minimally invasive ablation without visible scars.
+                {isDelhi ? (
+                  <>
+                    <span className='font-semibold text-[#ff3576]'>Vacuum-Assisted Excision (VAE):</span> Scar-free removal of benign breast nodules through minimally invasive technology without visible scars.
+                  </>
+                ) : (
+                  <>
+                    <span className='font-semibold text-[#ff3576]'>Breast Nodules:</span> No surgeries for benign breast nodules using minimally invasive ablation without visible scars.
+                  </>
+                )}
               </p>
             </div>
 
