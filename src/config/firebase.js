@@ -10,12 +10,26 @@ const firebaseConfig = {
   storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
 };
 
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
+export const isFirebaseConfigured = Boolean(
+  firebaseConfig.apiKey &&
+    firebaseConfig.authDomain &&
+    firebaseConfig.projectId &&
+    firebaseConfig.appId &&
+    firebaseConfig.messagingSenderId
+);
 
-auth.languageCode = 'en';
+const app = isFirebaseConfigured ? initializeApp(firebaseConfig) : null;
+export const auth = app ? getAuth(app) : null;
 
-if (import.meta.env.DEV && import.meta.env.VITE_FIREBASE_APP_VERIFICATION_DISABLED_FOR_TESTING === 'true') {
+if (auth) {
+  auth.languageCode = 'en';
+}
+
+if (
+  auth &&
+  import.meta.env.DEV &&
+  import.meta.env.VITE_FIREBASE_APP_VERIFICATION_DISABLED_FOR_TESTING === 'true'
+) {
   auth.settings.appVerificationDisabledForTesting = true;
 }
 

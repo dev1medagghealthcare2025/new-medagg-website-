@@ -5,7 +5,7 @@ import {
   signInWithCredential,
   RecaptchaVerifier,
 } from 'firebase/auth';
-import { auth } from '../config/firebase';
+import { auth, isFirebaseConfigured } from '../config/firebase';
 import { getOtpDomainSetupHint, getOtpHostname, isOtpFriendlyHostname } from '../utils/otpDomainHint';
 
 const RECAPTCHA_CONTAINER_ID = 'medagg-firebase-recaptcha';
@@ -56,6 +56,10 @@ export const destroyRecaptchaVerifier = () => {
 };
 
 const buildRecaptchaVerifier = async () => {
+  if (!auth) {
+    throw new Error('Firebase OTP is not configured.');
+  }
+
   if (verifierInstance) {
     return verifierInstance;
   }
@@ -117,6 +121,10 @@ const mapOtpSendError = (err) => {
 };
 
 const sendOtpOnce = async (e164) => {
+  if (!auth) {
+    throw new Error('Firebase OTP is not configured.');
+  }
+
   destroyRecaptchaVerifier();
   const verifier = await buildRecaptchaVerifier();
   console.log('[OTP] Sending to:', e164);
@@ -165,6 +173,10 @@ export const usePhoneVerification = () => {
 
   const sendOtp = useCallback(
     async (phone) => {
+      if (!isFirebaseConfigured) {
+        setError('OTP is not configured on this deployment. Add Firebase environment variables and redeploy.');
+        return false;
+      }
       if (!isOtpFriendlyHostname()) {
         setError('Use http://127.0.0.1:5173 and add 127.0.0.1 in Firebase Authorized domains.');
         return false;
@@ -178,6 +190,12 @@ export const usePhoneVerification = () => {
   const verifyOtp = useCallback(async (code) => {
     setError('');
     setIsVerifying(true);
+
+    if (!auth) {
+      setError('OTP is not configured on this deployment. Add Firebase environment variables and redeploy.');
+      setIsVerifying(false);
+      return false;
+    }
 
     if (!verificationId) {
       setError('Please request OTP first');
