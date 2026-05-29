@@ -93,6 +93,9 @@ export default defineConfig({
   // Ensure assets are referenced from the root in production
   base: '/',
   server: {
+    // Firebase Phone Auth often fails on "localhost" — use http://127.0.0.1:5173
+    host: '127.0.0.1',
+    port: 5173,
     headers: {
       // Empty Permissions-Policy to suppress experimental feature warnings
       'Permissions-Policy': '',

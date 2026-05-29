@@ -12,6 +12,11 @@ export default function ThankYouModalHost() {
       if (window.location.pathname !== '/thank-you') {
         window.history.replaceState(null, '', '/thank-you');
       }
+      try {
+        if (typeof window.fbq === 'function') {
+          window.fbq('track', 'Lead');
+        }
+      } catch {}
     };
     window.addEventListener('thankyou:open', handler);
     return () => window.removeEventListener('thankyou:open', handler);

@@ -32,6 +32,15 @@
     <title>Home - United towards a healthy tomorrow.</title>
   </head>
   <body style="overflow-x: clip;">
+    <script>
+      (function () {
+        if (location.hostname === 'localhost' && (location.port === '5173' || location.port === '')) {
+          location.replace(
+            'http://127.0.0.1:5173' + location.pathname + location.search + location.hash
+          );
+        }
+      })();
+    </script>
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K2VWSW83"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>

@@ -108,6 +108,8 @@ import ImageCursorStyle from './components/ui/ImageCursorStyle';
 import { UI_ENHANCEMENTS_ENABLED, IMAGE_CURSOR_ENABLED } from './config/uiEnhancements';
 import ButtonInteractions from './components/ui/ButtonInteractions';
 import ThankYouModalHost from './components/common/ThankYouModalHost';
+import TelecrmOtpGateHost from './components/common/TelecrmOtpGateHost';
+import { TelecrmOtpGateProvider } from './lib/telecrmOtpGate';
 import TaviChennai from './pages/tavi_chennai';
 import TaviMadurai from './pages/tavi_madurai';
 import TaviCoimbatore from './pages/tavi_coimbatore';
@@ -200,10 +202,17 @@ function CanonicalUrlUpdater() {
 }
 
 function Irpreneur2025Page() {
+  React.useEffect(() => {
+    const { pathname, search, hash } = window.location;
+    if (pathname === '/irpreneur2025') {
+      window.location.replace(`/irpreneur2025/${search || ''}${hash || ''}`);
+    }
+  }, []);
+
   return (
     <div className='w-full' style={{ height: '100vh' }}>
       <iframe
-        src='/irpreneur2025/index.html'
+        src='/irpreneur2025/'
         title='IRpreneur 2025'
         style={{ width: '100%', height: '100%', border: 0, display: 'block' }}
       />
@@ -221,6 +230,7 @@ function App() {
   const location = useLocation();
   const isIrpreneur2025 = (location.pathname || '').startsWith('/irpreneur2025');
   return (
+    <TelecrmOtpGateProvider>
     <div className='min-h-screen bg-pink-50 flex flex-col isolate'>
       <main className='flex-grow'>
         <ScrollToTop />
@@ -380,6 +390,7 @@ function App() {
             <Footer />
             <Chatbot />
             <ThankYouModalHost />
+            <TelecrmOtpGateHost />
             <BackToTop />
             <CallFab position='right' phone='+919363656010' />
             <FloatingWhatsApp phone='+918925928840' position='left' />
@@ -394,6 +405,7 @@ function App() {
           </>
         )}
       </div>
+    </TelecrmOtpGateProvider>
   );
 }
 
