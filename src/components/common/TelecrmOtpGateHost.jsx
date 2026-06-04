@@ -60,40 +60,43 @@ export default function TelecrmOtpGateHost() {
   if (!open) return null;
 
   return createPortal(
-    <div className='fixed inset-0 z-[99999] flex items-center justify-center bg-black/50 px-4 backdrop-blur-sm'>
-      <div className='relative w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden'>
-        <div className='bg-gradient-to-r from-[#2d2552] to-[#4a3f8f] px-6 py-5 text-white text-center'>
+    <div className='fixed inset-0 z-[99999] flex items-center justify-center bg-slate-950/55 px-4 backdrop-blur-sm'>
+      <div className='relative w-full max-w-[420px] bg-white rounded-2xl shadow-2xl overflow-hidden'>
+        <div className='bg-[#21183f] px-6 pb-5 pt-6 text-center'>
           <button
             type='button'
             onClick={close}
-            className='absolute right-4 top-4 text-white/80 hover:text-white transition-colors'
+            className='absolute right-4 top-4 rounded-full p-1.5 text-white/70 hover:bg-white/10 hover:text-white transition-colors'
             aria-label='Close'
           >
-            <X size={22} />
+            <X size={20} />
           </button>
-          <img
-            src={OTP_BRAND.logoSrc}
-            alt={OTP_BRAND.companyName}
-            className='h-10 mx-auto mb-3 object-contain brightness-0 invert'
-          />
-          <p className='text-xs uppercase tracking-widest text-white/80'>{OTP_BRAND.productName}</p>
-          <h3 className='text-xl font-bold mt-1'>{OTP_BRAND.companyName}</h3>
-          <p className='text-sm text-white/90 mt-1'>{OTP_BRAND.tagline}</p>
+          <div className='mx-auto text-center'>
+            <p className='text-2xl font-extrabold uppercase leading-none tracking-[0.08em] text-white'>
+              No Surgeries
+            </p>
+            <p className='mt-1 text-xs font-semibold text-white/75'>
+              Powered by Medagg
+            </p>
+          </div>
+          <p className='mt-4 text-sm font-medium text-white/80'>{OTP_BRAND.tagline}</p>
         </div>
 
         <div className='p-6 space-y-4'>
-          <div className='flex items-start gap-3 rounded-xl bg-pink-50 border border-pink-100 px-4 py-3'>
-            <ShieldCheck className='w-5 h-5 text-[#ff3576] shrink-0 mt-0.5' />
-            <div className='text-sm text-[#2d2552]'>
-              <p className='font-semibold'>Verify your mobile number</p>
-              <p className='mt-1 text-gray-600'>
-                We sent a 6-digit OTP to <span className='font-bold text-[#2d2552]'>+91 {phone}</span>
+          <div className='flex items-start gap-3 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3.5'>
+            <span className='flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-pink-100'>
+              <ShieldCheck className='h-5 w-5 text-[#ff3576]' />
+            </span>
+            <div className='text-left'>
+              <p className='text-base font-bold text-slate-800'>Verify your mobile number</p>
+              <p className='mt-1 text-sm leading-6 text-slate-600'>
+                Enter the 6-digit OTP sent to <span className='font-bold text-[#21183f]'>+91 {phone}</span>
               </p>
             </div>
           </div>
 
           {isSending && !hasVerificationId && (
-            <p className='text-sm text-center text-gray-500'>Sending OTP…</p>
+            <p className='text-sm text-center font-medium text-slate-500'>Sending OTP...</p>
           )}
 
           <input
@@ -103,7 +106,7 @@ export default function TelecrmOtpGateHost() {
             value={otp}
             onChange={(e) => setOtp(String(e.target.value || '').replace(/\D/g, '').slice(0, 6))}
             placeholder='Enter 6-digit OTP'
-            className='w-full p-4 bg-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#ff3576] transition text-center text-2xl tracking-[0.35em] font-bold text-[#2d2552]'
+            className='w-full rounded-xl border border-slate-200 bg-white px-4 py-4 text-center text-2xl font-bold tracking-[0.22em] text-[#21183f] transition placeholder:text-base placeholder:font-semibold placeholder:tracking-normal placeholder:text-slate-400 focus:border-[#ff3576] focus:outline-none focus:ring-4 focus:ring-pink-100'
             maxLength={6}
           />
 
@@ -115,8 +118,8 @@ export default function TelecrmOtpGateHost() {
             disabled={!canVerify || isVerifying}
             className={`w-full py-3.5 rounded-xl font-bold text-base transition-all ${
               canVerify && !isVerifying
-                ? 'bg-[#ff3576] text-white hover:bg-[#e02e68]'
-                : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                ? 'bg-[#ff3576] text-white shadow-lg shadow-pink-200 hover:bg-[#e02e68]'
+                : 'bg-slate-100 text-slate-400 cursor-not-allowed'
             }`}
           >
             {isVerifying ? 'Verifying...' : 'Verify & Continue'}
@@ -127,7 +130,7 @@ export default function TelecrmOtpGateHost() {
               type='button'
               onClick={() => sendOtp(phone)}
               disabled={isSending || resendCooldownSec > 0}
-              className='text-[#2d2552] font-semibold text-sm hover:underline disabled:opacity-50'
+              className='text-[#21183f] font-semibold text-sm hover:text-[#ff3576] disabled:opacity-50'
             >
               {isSending
                 ? 'Sending...'

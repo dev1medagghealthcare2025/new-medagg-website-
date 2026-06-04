@@ -3,7 +3,7 @@ export const OTP_BRAND = {
   companyName: import.meta.env.VITE_OTP_BRAND_NAME || 'MedAgg Healthcare',
   productName: import.meta.env.VITE_OTP_PRODUCT_NAME || 'NoSurgeries',
   tagline: import.meta.env.VITE_OTP_BRAND_TAGLINE || 'Minimally invasive care',
-  logoSrc: import.meta.env.VITE_OTP_BRAND_LOGO || '/Medagg_new_logo_nosurgeries.png',
+  logoSrc: import.meta.env.VITE_OTP_BRAND_LOGO || '/Medagg_new_logo_nosurgeries_2-removebg-preview.png',
   website: import.meta.env.VITE_OTP_BRAND_WEBSITE || 'nosurgeries.in',
 };
 
