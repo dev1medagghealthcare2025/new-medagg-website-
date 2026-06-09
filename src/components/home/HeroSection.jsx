@@ -676,16 +676,16 @@ const HeroSection = () => {
 
   return (
     <>
-      {/* Mobile Hero Section - Visible only on mobile */}
-      <div className='md:hidden'>
-        <MobileHeroSection
-          query={query}
-          setQuery={setQuery}
-          handleSearch={handleSearch}
-          results={results}
-          isLoading={isLoading}
-        />
-      </div>
+      {/* Mobile Hero Carousel - Visible only on mobile */}
+      <MobileHeroSection
+        query={query}
+        setQuery={setQuery}
+        handleSearch={handleSearch}
+        results={results}
+        isLoading={isLoading}
+        onSearchFocus={handleSearchInputFocus}
+        onSearchBlur={handleSearchInputBlur}
+      />
 
       {/* Desktop Carousel - Hidden on mobile, visible on md and up */}
       <div className='hidden md:block relative w-full overflow-hidden'>
