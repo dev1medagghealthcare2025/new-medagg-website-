@@ -109,7 +109,7 @@ const FixedDropdown = ({ isOpen, position, items, onMouseEnter, onMouseLeave, st
   const { left, top } = position || { left: 0, top: 0 };
   return (
     <div
-      className='fixed z-50'
+      className='fixed z-[60]'
       style={{ left, top }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
@@ -147,28 +147,49 @@ const FixedDropdown = ({ isOpen, position, items, onMouseEnter, onMouseLeave, st
   );
 };
 
+const MEGA_MENU_WIDTH = 1120;
+
+const MEGA_MENU_SHORT_LABELS = {
+  'Transarterial Chemoembolization (TACE)': 'TACE (Chemoembolization)',
+  'Transcatheter Aortic Valve Implantation': 'TAVR / TAVI',
+  'Radiofrequency Ablation For Arrhythmia': 'RFA for Arrhythmia',
+  'Breast Nodule Radiofrequency Ablation': 'Breast Nodule RFA',
+  'RFA Treatment For AVM': 'RFA for AVM',
+  'Y-90 Radioembolization': 'Y-90 TARE',
+};
+
+const getMegaMenuLabel = (title) => MEGA_MENU_SHORT_LABELS[title] || title;
+
 const TreatmentsMegaMenu = ({ isOpen, position, columns, onMouseEnter, onMouseLeave }) => {
   if (!isOpen) return null;
   const { left, top } = position || { left: 0, top: 0 };
+  const maxHeight = `calc(100vh - ${top}px - 8px)`;
   return (
     <div
-      className='fixed z-50'
-      style={{ left, top }}
+      className='fixed z-[60]'
+      style={{ left, top, maxHeight }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      <div className='bg-white border border-gray-200 shadow-xl rounded-b-md ring-1 ring-black/5 overflow-hidden'>
-        <div className='grid grid-cols-5 gap-10 px-10 py-8' style={{ minWidth: '1040px' }}>
+      <div className='bg-white border border-gray-200 shadow-xl rounded-b-md ring-1 ring-black/5 max-w-[calc(100vw-1rem)] overflow-y-auto overscroll-contain' style={{ maxHeight }}>
+        <div
+          className='grid grid-cols-5 gap-4 lg:gap-5 px-5 py-6'
+          style={{ width: `min(${MEGA_MENU_WIDTH}px, calc(100vw - 1rem))` }}
+        >
           {columns.map((col, colIdx) => (
             <div key={colIdx} className='min-w-0'>
               {col.sections.map((section) => (
-                <div key={section.title} className='mb-6 last:mb-0'>
-                  <div className='text-[12px] font-bold text-gray-900 mb-3'>{section.title}</div>
-                  <ul className='space-y-3'>
+                <div key={section.title} className='mb-5 last:mb-0'>
+                  <div className='text-[12px] font-bold text-gray-900 mb-2 leading-tight'>{section.title}</div>
+                  <ul className='space-y-2.5'>
                     {section.items.map((item) => (
                       <li key={item.title}>
-                        <Link to={item.path || '#'} className='flex items-center gap-3 text-[13px] text-gray-800 hover:text-pink-600'>
-                          <span className='w-9 h-9 rounded-md bg-gray-100 border border-gray-200 flex items-center justify-center text-[11px] font-semibold text-gray-600 shrink-0 overflow-hidden'>
+                        <Link
+                          to={item.path || '#'}
+                          title={item.title}
+                          className='flex items-start gap-2.5 text-[13px] text-gray-800 hover:text-pink-600'
+                        >
+                          <span className='w-9 h-9 rounded-md bg-gray-100 border border-gray-200 flex items-center justify-center text-[11px] font-semibold text-gray-600 shrink-0 overflow-hidden mt-0.5'>
                             {(() => {
                               const iconByTitle = {
                                 'Uterine Fibroids': 'Uterine Fibroid Embolization.jpg',
@@ -209,7 +230,9 @@ const TreatmentsMegaMenu = ({ isOpen, position, columns, onMouseEnter, onMouseLe
                               );
                             })()}
                           </span>
-                          <span className='leading-snug font-semibold'>{item.title}</span>
+                          <span className='leading-tight font-semibold min-w-0 break-words pt-0.5'>
+                            {getMegaMenuLabel(item.title)}
+                          </span>
                         </Link>
                       </li>
                     ))}
@@ -503,13 +526,27 @@ export default function Treatmentnavbar() {
     if (!targetEl || !items || !items.length) return;
     const rect = targetEl.getBoundingClientRect();
     const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
-    const dropdownWidth = 360;
-    let left = rect.left;
-    if (left + dropdownWidth > viewportWidth - 8) {
-      left = Math.max(8, viewportWidth - dropdownWidth - 8);
-    }
-    left = Math.max(8, left);
     const top = rect.bottom;
+    let left = rect.left;
+
+    if (variant === 'treatments') {
+      const menuWidth = Math.min(MEGA_MENU_WIDTH, viewportWidth - 16);
+      const containerEl = targetEl.closest('nav')?.querySelector('.max-w-7xl');
+      if (containerEl) {
+        const cr = containerEl.getBoundingClientRect();
+        left = cr.left + (cr.width - menuWidth) / 2;
+      } else {
+        left = (viewportWidth - menuWidth) / 2;
+      }
+      left = Math.max(8, Math.min(left, viewportWidth - menuWidth - 8));
+    } else {
+      const dropdownWidth = 360;
+      if (left + dropdownWidth > viewportWidth - 8) {
+        left = Math.max(8, viewportWidth - dropdownWidth - 8);
+      }
+      left = Math.max(8, left);
+    }
+
     setFixedItems(items);
     setFixedStackBelow(!!stackBelow);
     setFixedPos({ left, top });
@@ -543,8 +580,14 @@ export default function Treatmentnavbar() {
     };
   }, []);
 
+  useEffect(() => {
+    if (isMobile) return;
+    const open = fixedOpen && (fixedVariant === 'treatments' || fixedVariant === 'cities');
+    window.dispatchEvent(new CustomEvent('mega-menu-toggle', { detail: { open } }));
+  }, [fixedOpen, fixedVariant, isMobile]);
+
   return (
-    <nav className='sticky top-[64px] lg:top-[78px] z-40 w-full bg-white border-b border-gray-200 shadow-sm ring-1 ring-black/5 overflow-x-hidden'>
+    <nav className='sticky top-[64px] lg:top-[78px] z-40 w-full bg-white border-b border-gray-200 shadow-sm ring-1 ring-black/5 overflow-x-hidden lg:overflow-visible'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         {/* Desktop layout */}
         <div className='hidden lg:flex items-center justify-between h-[68px]'>

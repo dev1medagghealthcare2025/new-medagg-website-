@@ -103,6 +103,7 @@ const HeroSection = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isInteracting, setIsInteracting] = useState(false);
+  const [megaMenuOpen, setMegaMenuOpen] = useState(false);
   const totalSlides = 3;
   // Defer query updates to reduce re-render pressure while typing
   const deferredQuery = useDeferredValue(query);
@@ -115,6 +116,12 @@ const HeroSection = () => {
       setIsLoading(false);
     }
   }, [deferredQuery]);
+
+  useEffect(() => {
+    const onMegaMenuToggle = (e) => setMegaMenuOpen(!!e.detail?.open);
+    window.addEventListener('mega-menu-toggle', onMegaMenuToggle);
+    return () => window.removeEventListener('mega-menu-toggle', onMegaMenuToggle);
+  }, []);
 
   // Data structure for treatment suggestions
   const treatmentSuggestions = [
@@ -690,18 +697,20 @@ const HeroSection = () => {
       {/* Desktop Carousel - Hidden on mobile, visible on md and up */}
       <div className='hidden md:block relative w-full overflow-hidden'>
         {/* Top-center floating CTA (visible across all slides) */}
-        <FloatingBadgeCTA
-          imgSrc='/irpreneur.png'
-          alt='IR preneur 2025'
-          href='/irpreneur2025'
-          size={120}
-          mobileSize={120}
-          topOffset={24}
-          align='left'
-          leftOffset={24}
-          zIndex={40}
-          showOnMobile={false}
-        />
+        {!megaMenuOpen && (
+          <FloatingBadgeCTA
+            imgSrc='/irpreneur.png'
+            alt='IR preneur 2025'
+            href='/irpreneur2025'
+            size={120}
+            mobileSize={120}
+            topOffset={24}
+            align='left'
+            leftOffset={24}
+            zIndex={40}
+            showOnMobile={false}
+          />
+        )}
         {/* Carousel Container */}
         <div
           className='flex transition-transform duration-1000 ease-in-out'
