@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { Link, useNavigate } from 'react-router-dom';
 
-import { MapPin, Menu, Search, X, ChevronDown, PhoneCall } from 'lucide-react';
+import { MapPin, Menu, Search, X, ChevronDown } from 'lucide-react';
 
 import { filterTreatments, treatmentCategories } from './searchTreatments';
  
@@ -1150,69 +1150,43 @@ export default function Navbar() {
 
 
 
-          <div className='lg:hidden w-full bg-white -mx-4 px-4 h-[64px] grid grid-cols-3 items-center'>
+          <div className='lg:hidden w-full bg-white -mx-4 px-4 h-[64px] flex items-center justify-between'>
 
-            <div className='flex items-center justify-start'>
+            <Link to='/' className='flex items-center justify-start min-w-0' onClick={closeMobileMenu}>
 
-              <button
+              <img
 
-                onClick={toggleMenu}
+                src='/new_part2.png'
 
-                className='text-[#392C5C] hover:text-pink-500 transition-colors p-2'
+                alt='Medagg Healthcare'
 
-                aria-label='Toggle menu'
+                className='h-[80px] w-auto max-w-[min(100%,400px)] object-contain object-left'
 
-                aria-expanded={isMenuOpen}
+                loading='eager'
 
-                aria-controls='mobile-menu'
+                decoding='async'
 
-              >
+              />
 
-                <Menu size={22} />
+            </Link>
 
-              </button>
+            <button
 
-            </div>
+              onClick={toggleMenu}
 
-            <div className='flex items-center justify-center'>
+              className='text-[#392C5C] hover:text-pink-500 transition-colors p-2 shrink-0'
 
-              <Link to='/' className='flex items-center justify-center' onClick={closeMobileMenu}>
+              aria-label='Toggle menu'
 
-                <img
+              aria-expanded={isMenuOpen}
 
-                  src='/new_part2.png'
+              aria-controls='mobile-menu'
 
-                  alt='Medagg Healthcare'
+            >
 
-                  className='h-16 w-auto max-w-[340px] object-contain scale-[1.06] origin-center'
+              <Menu size={22} />
 
-                  loading='eager'
-
-                  decoding='async'
-
-                />
-
-              </Link>
-
-            </div>
-
-            <div className='flex items-center justify-end'>
-
-              <a
-
-                href='tel:+919363656010'
-
-                className='h-10 w-10 rounded-full bg-[#392C5C] text-white shadow-sm flex items-center justify-center hover:bg-pink-500 transition-colors'
-
-                aria-label='Call'
-
-              >
-
-                <PhoneCall size={18} />
-
-              </a>
-
-            </div>
+            </button>
 
           </div>
 
@@ -1236,53 +1210,27 @@ export default function Navbar() {
 
               <div className='h-full bg-[#392C5C] text-white overflow-y-auto'>
 
-                <div className='h-[64px] bg-white text-[#392C5C] px-4 grid grid-cols-3 items-center'>
+                <div className='h-[64px] bg-white text-[#392C5C] px-4 flex items-center justify-between'>
 
-                  <div className='flex items-center justify-start'>
+                  <img src='/new_part2.png' alt='Medagg Healthcare' className='h-[80px] w-auto max-w-[min(100%,400px)] object-contain object-left' />
 
-                    {mobileView === 'main' ? (
+                  {mobileView === 'main' ? (
 
-                      <button type='button' onClick={closeMobileMenu} className='p-2' aria-label='Close menu'>
+                    <button type='button' onClick={closeMobileMenu} className='p-2 shrink-0' aria-label='Close menu'>
 
-                        <X size={22} />
+                      <X size={22} />
 
-                      </button>
+                    </button>
 
-                    ) : (
+                  ) : (
 
-                      <button type='button' onClick={() => setMobileView('main')} className='p-2 text-pink-600 font-medium' aria-label='Back'>
+                    <button type='button' onClick={() => setMobileView('main')} className='p-2 text-pink-600 font-medium shrink-0' aria-label='Back'>
 
-                        <span className='text-sm'>Back</span>
+                      <span className='text-sm'>Back</span>
 
-                      </button>
+                    </button>
 
-                    )}
-
-                  </div>
-
-                  <div className='flex items-center justify-center'>
-
-                    <img src='/new_part2.png' alt='Medagg Healthcare' className='h-16 w-auto max-w-[340px] object-contain scale-[1.06] origin-center' />
-
-                  </div>
-
-                  <div className='flex items-center justify-end'>
-
-                    <a
-
-                      href='tel:+919363656010'
-
-                      className='h-10 w-10 rounded-full bg-[#392C5C] text-white shadow-sm flex items-center justify-center hover:bg-pink-500 transition-colors'
-
-                      aria-label='Call'
-
-                    >
-
-                      <PhoneCall size={18} />
-
-                    </a>
-
-                  </div>
+                  )}
 
                 </div>
 

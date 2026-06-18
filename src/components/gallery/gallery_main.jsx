@@ -5,6 +5,7 @@ const TABS = [
   { key: 'Videos', label: 'Videos' },
   { key: 'Conference', label: "IRPRENEUR '25" },
   { key: 'Founder Explains', label: 'Founder Explains' },
+  { key: 'Podcast', label: 'Podcast' },
 ];
 
 // Sample items. Replace the src paths with your real images if needed.
@@ -200,6 +201,17 @@ export default function GalleryMain() {
     'https://www.instagram.com/reel/C6vJvPWLpme/?igsh=MTZ0Yzh0ejR6a2pocQ==',
   ];
 
+  const PODCAST_REELS = [
+    'https://www.instagram.com/reel/DZnGL6gTNVy/?igsh=bzQyMWJ6OGl3M3lx',
+    'https://www.instagram.com/reel/DZNX9DoSQSH/?igsh=MXZhN3FoNG40ZWxhNQ==',
+    'https://www.instagram.com/reel/DZchf5fy5S9/?igsh=NXJ1OGFiYWU0YWxo',
+    'https://www.instagram.com/reel/DYeiLGsTO4c/?igsh=bnFvNXR1ZWJzajRp',
+    'https://www.instagram.com/reel/DYbQSMNTdgD/?igsh=bzExdXhoZG8zdTJo',
+    'https://www.instagram.com/reel/DW6CEZ4EqVn/?igsh=MW83ejRqd3dlNXFhdQ==',
+    'https://youtu.be/mbOS6w_inZw',
+    'https://youtu.be/YieS_4z0lyg',
+  ];
+
   // YouTube videos grouped by language. Replace the placeholder IDs with your real video IDs or full URLs.
   // You can provide just the YouTube ID (e.g., "dQw4w9WgXcQ") or a full watch URL (e.g., "https://www.youtube.com/watch?v=dQw4w9WgXcQ").
   const VIDEOS = {
@@ -389,7 +401,7 @@ export default function GalleryMain() {
                 {filteredVideosByLanguageAndTreatment.map(v => {
                   const youtubeInput = v.youtubeId || v.url || '';
                   const videoId = getYouTubeVideoId(youtubeInput);
-                  const youtubeEmbedUrl = videoId ? `https://www.youtube.com/embed/${videoId}` : '';
+                  const youtubeEmbedUrl = videoId ? `https://www.youtube-nocookie.com/embed/${videoId}` : '';
                   const reelId = getInstagramReelId(v.instagramUrl);
                   const instagramEmbedUrl = reelId ? `https://www.instagram.com/reel/${reelId}/embed/` : '';
                   const isInstagram = !youtubeEmbedUrl && !!instagramEmbedUrl;
@@ -476,6 +488,58 @@ export default function GalleryMain() {
               </div>
             ) : (
               <div className='text-gray-600'>No reels added yet for Founder Explains. Share the Instagram reel links and I will plug them in.</div>
+            )}
+          </div>
+        ) : activeTab === 'Podcast' ? (
+          <div>
+            {PODCAST_REELS.length > 0 ? (
+              <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5'>
+                {PODCAST_REELS.map((url, idx) => {
+                  const youtubeId = getYouTubeVideoId(url);
+                  const youtubeEmbedUrl = youtubeId ? `https://www.youtube-nocookie.com/embed/${youtubeId}` : '';
+                  const reelId = getInstagramReelId(url);
+                  const instagramEmbedUrl = reelId ? `https://www.instagram.com/reel/${reelId}/embed/` : '';
+                  const isInstagram = !youtubeEmbedUrl && !!instagramEmbedUrl;
+                  return (
+                    <div
+                      key={`${youtubeId || reelId || 'podcast-reel'}-${idx}`}
+                      className='bg-white rounded-xl shadow-md overflow-hidden border border-gray-100'
+                    >
+                      <div className={`relative w-full ${isInstagram ? 'pb-[177.78%]' : 'pb-[56.25%]'} bg-black`}>
+                        {youtubeEmbedUrl ? (
+                          <iframe
+                            className='absolute inset-0 w-full h-full'
+                            src={`${youtubeEmbedUrl}?rel=0`}
+                            title='Podcast YouTube Video'
+                            frameBorder='0'
+                            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+                            referrerPolicy='strict-origin-when-cross-origin'
+                            allowFullScreen
+                            loading='lazy'
+                          />
+                        ) : instagramEmbedUrl ? (
+                          <iframe
+                            className='absolute inset-0 w-full h-full'
+                            src={instagramEmbedUrl}
+                            title='Podcast Instagram Reel'
+                            frameBorder='0'
+                            allow='autoplay; encrypted-media'
+                            allowFullScreen
+                            loading='lazy'
+                            style={{ border: 0 }}
+                          />
+                        ) : (
+                          <div className='absolute inset-0 flex items-center justify-center text-sm text-gray-500 bg-gray-100'>
+                            Invalid Instagram reel URL
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className='text-gray-600'>No podcast reels added yet. Share the Instagram reel links and I will plug them in.</div>
             )}
           </div>
         ) : (
