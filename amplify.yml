@@ -12,6 +12,7 @@ frontend:
         - npm run sitemap
         - ROLLUP_USE_NODEJS=true npx vite build
         - node scripts/buildIrpreneur2025.js
+        - node scripts/ensureGoogleVerification.js
   artifacts:
     baseDirectory: dist
     files:
@@ -20,6 +21,9 @@ frontend:
     - source: '/google5f869c9128547998.html'
       target: '/google5f869c9128547998.html'
       status: '200'
+    - source: '/<*>'
+      target: '/index.html'
+      status: '404-200'
   cache:
     paths:
       - node_modules/***
