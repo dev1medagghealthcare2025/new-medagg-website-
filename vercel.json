@@ -10,6 +10,7 @@
     }
   ],
   "routes": [
+    { "src": "/google5f869c9128547998.html", "dest": "/google5f869c9128547998.html" },
     { "handle": "filesystem" },
     { "src": "/irpreneur2025(?:/(.*))?$", "dest": "/irpreneur2025/index.html" },
     { "src": "/(.*)", "dest": "/index.html" }
