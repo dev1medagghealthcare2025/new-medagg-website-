@@ -21,9 +21,9 @@ frontend:
     - source: '/google5f869c9128547998.html'
       target: '/google5f869c9128547998.html'
       status: '200'
-    - source: '/<*>'
+    - source: '</^[^.]+$|\.(?!(css|gif|ico|jpg|js|png|txt|svg|woff|woff2|ttf|map|json|html|webp|xml)$)([^.]+$)/>'
       target: '/index.html'
-      status: '404-200'
+      status: '200'
   cache:
     paths:
       - node_modules/***
