@@ -13,6 +13,8 @@ frontend:
         - ROLLUP_USE_NODEJS=true npx vite build
         - node scripts/buildIrpreneur2025.js
         - node scripts/ensureGoogleVerification.js
+        - test -f dist/google5f869c9128547998.html
+        - test "$(cat dist/google5f869c9128547998.html)" = "google-site-verification: google5f869c9128547998.html"
   artifacts:
     baseDirectory: dist
     files:
