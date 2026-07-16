@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
-import { MapPin, Menu, Search, X, ChevronDown } from 'lucide-react';
+import { MapPin, Menu, Search, X, ChevronDown, ChevronRight } from 'lucide-react';
 
 import { filterTreatments, treatmentCategories } from './searchTreatments';
  
@@ -19,6 +19,8 @@ import {
   saveLocation,
 
 } from './locationUtils';
+
+import { MOBILE_TREATMENT_CHIPS } from './mobileHomeConstants';
 
 
 
@@ -106,6 +108,10 @@ export default function Navbar() {
 
   const navigate = useNavigate();
 
+  const { pathname } = useLocation();
+
+  const isHomePage = pathname === '/';
+
 
 
   // Location state
@@ -122,6 +128,12 @@ export default function Navbar() {
 
   const [mobileView, setMobileView] = useState('main');
 
+  const [showHomeCityPicker, setShowHomeCityPicker] = useState(false);
+
+  const mobileTreatmentChipsRef = useRef(null);
+
+  const [showMobileTreatmentArrow, setShowMobileTreatmentArrow] = useState(true);
+
 
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -136,6 +148,15 @@ export default function Navbar() {
 
     setShowSuggestions(false);
 
+  };
+
+  const updateMobileTreatmentArrow = () => {
+    const container = mobileTreatmentChipsRef.current;
+    if (!container) return;
+
+    const hasOverflow = container.scrollWidth > container.clientWidth + 4;
+    const isAtEnd = container.scrollLeft >= container.scrollWidth - container.clientWidth - 8;
+    setShowMobileTreatmentArrow(hasOverflow && !isAtEnd);
   };
 
 
@@ -208,6 +229,13 @@ export default function Navbar() {
 
   }, []);
 
+  useEffect(() => {
+    updateMobileTreatmentArrow();
+    window.addEventListener('resize', updateMobileTreatmentArrow);
+
+    return () => window.removeEventListener('resize', updateMobileTreatmentArrow);
+  }, []);
+
 
 
   // Handle city selection from dropdown
@@ -223,6 +251,8 @@ export default function Navbar() {
     setShowCityDropdown(false);
 
     setMobileView('main');
+
+    setShowHomeCityPicker(false);
 
   };
 
@@ -315,6 +345,8 @@ export default function Navbar() {
         saveLocation(locationData);
 
         setShowCityDropdown(false);
+
+        setShowHomeCityPicker(false);
 
       } else {
 
@@ -1150,9 +1182,9 @@ export default function Navbar() {
 
 
 
-          <div className='lg:hidden w-full bg-white -mx-4 px-4 h-[64px] flex items-center justify-between'>
+          <div className='lg:hidden w-full bg-white -mx-4 px-4 h-[64px] flex items-center justify-between gap-2'>
 
-            <Link to='/' className='flex items-center justify-start min-w-0' onClick={closeMobileMenu}>
+            <Link to='/' className='flex items-center justify-start min-w-0 shrink' onClick={closeMobileMenu}>
 
               <img
 
@@ -1160,7 +1192,7 @@ export default function Navbar() {
 
                 alt='Medagg Healthcare'
 
-                className='h-[80px] w-auto max-w-[min(100%,400px)] object-contain object-left'
+                className='h-[84px] w-auto max-w-[156px] object-contain object-left'
 
                 loading='eager'
 
@@ -1170,23 +1202,45 @@ export default function Navbar() {
 
             </Link>
 
-            <button
+            {isHomePage ? (
 
-              onClick={toggleMenu}
+              <div className='flex items-center gap-5 sm:gap-6 shrink-0'>
 
-              className='text-[#392C5C] hover:text-pink-500 transition-colors p-2 shrink-0'
+                <Link to='/about' className='text-sm sm:text-base font-semibold text-[#392C5C] hover:text-pink-500 transition-colors whitespace-nowrap'>
 
-              aria-label='Toggle menu'
+                  About Us
 
-              aria-expanded={isMenuOpen}
+                </Link>
 
-              aria-controls='mobile-menu'
+                <Link to='/blog' className='text-sm sm:text-base font-semibold text-[#392C5C] hover:text-pink-500 transition-colors whitespace-nowrap'>
 
-            >
+                  Blogs
 
-              <Menu size={22} />
+                </Link>
 
-            </button>
+              </div>
+
+            ) : (
+
+              <button
+
+                onClick={toggleMenu}
+
+                className='text-[#392C5C] hover:text-pink-500 transition-colors p-2 shrink-0'
+
+                aria-label='Toggle menu'
+
+                aria-expanded={isMenuOpen}
+
+                aria-controls='mobile-menu'
+
+              >
+
+                <Menu size={22} />
+
+              </button>
+
+            )}
 
           </div>
 
@@ -1194,7 +1248,309 @@ export default function Navbar() {
 
 
 
-        {isMenuOpen && (
+        {isHomePage && (
+
+          <div className='lg:hidden -mx-4 px-4 pb-3 bg-white border-b border-gray-100'>
+
+            <div className='flex items-center h-12 rounded-2xl border border-[#392C5C]/15 bg-white w-full shadow-sm relative'>
+
+              <button
+
+                type='button'
+
+                onClick={() => setShowHomeCityPicker(true)}
+
+                className='inline-flex items-center gap-2 h-full px-3 text-[#392C5C] font-semibold whitespace-nowrap rounded-l-2xl shrink-0'
+
+              >
+
+                <MapPin size={16} className='text-pink-500' />
+
+                <span className='max-w-[72px] truncate text-sm'>
+
+                  {isDetectingLocation ? 'Detecting...' : userLocation?.city || 'Location'}
+
+                </span>
+
+              </button>
+
+              <div className='h-full w-px bg-[#392C5C]/15 shrink-0' />
+
+              <input
+
+                ref={searchInputRef}
+
+                value={searchQuery}
+
+                onChange={handleSearchChange}
+
+                onKeyDown={handleKeyDown}
+
+                placeholder='Search disease'
+
+                className='h-full px-3 text-sm text-[#392C5C] placeholder:text-[#392C5C]/45 outline-none w-full min-w-0'
+
+              />
+
+              <button
+
+                type='button'
+
+                onClick={handleSearchClick}
+
+                className='h-full w-12 bg-pink-500 text-white inline-flex items-center justify-center hover:bg-pink-600 transition-colors rounded-r-2xl shrink-0'
+
+                aria-label='Search'
+
+              >
+
+                <Search size={18} />
+
+              </button>
+
+            </div>
+
+
+
+            {showSuggestions && (
+
+              <div
+
+                ref={suggestionsRef}
+
+                className='mt-2 bg-white border border-gray-200 rounded-xl shadow-2xl z-50 max-h-[280px] overflow-y-auto'
+
+              >
+
+                {suggestions.length === 0 || !suggestions.some((g) => g.items.length > 0) ? (
+
+                  <div className='px-4 py-3 text-sm text-gray-500'>No treatments found</div>
+
+                ) : (
+
+                  <div className='p-3'>
+
+                    {suggestions.map((group, groupIdx) => (
+
+                      <div key={groupIdx} className='mb-3 last:mb-0'>
+
+                        <div className='text-[11px] font-bold text-pink-600 uppercase tracking-wide mb-1 px-1'>
+
+                          {group.category}
+
+                        </div>
+
+                        <ul className='space-y-0.5'>
+
+                          {group.items.map((item, idx) => (
+
+                            <li key={idx}>
+
+                              <button
+
+                                type='button'
+
+                                onClick={() => handleSuggestionClick(item.path)}
+
+                                className='w-full text-left px-3 py-2 text-sm text-[#392C5C] hover:bg-pink-50 hover:text-pink-600 transition-colors rounded-lg'
+
+                              >
+
+                                {item.title}
+
+                              </button>
+
+                            </li>
+
+                          ))}
+
+                        </ul>
+
+                      </div>
+
+                    ))}
+
+                  </div>
+
+                )}
+
+              </div>
+
+            )}
+
+
+
+            <div className='relative mt-3 -mx-4'>
+
+              <div
+                ref={mobileTreatmentChipsRef}
+                onScroll={updateMobileTreatmentArrow}
+                className='px-4 pr-12 overflow-x-auto scrollbar-hide touch-pan-x'
+              >
+
+              <div className='flex items-center gap-2 pb-1 w-max min-w-full'>
+
+                {MOBILE_TREATMENT_CHIPS.map((chip) => (
+
+                  <button
+
+                    key={`${chip.path}-${chip.title}`}
+
+                    type='button'
+
+                    onClick={() => handleSuggestionClick(chip.path)}
+
+                    className='inline-flex items-center gap-2 px-3 py-2 bg-white border border-gray-200 rounded-full shadow-sm shrink-0 hover:border-pink-300 transition-colors'
+
+                  >
+
+                    <span className='w-7 h-7 rounded-full bg-pink-50 flex items-center justify-center overflow-hidden shrink-0'>
+
+                      {chip.icon ? (
+
+                        <img src={`/${chip.icon}`} alt='' className='w-5 h-5 object-contain' />
+
+                      ) : (
+
+                        <span className='text-[9px] font-bold text-[#392C5C]'>
+
+                          {chip.title.split(' ').map((w) => w[0]).join('').slice(0, 2).toUpperCase()}
+
+                        </span>
+
+                      )}
+
+                    </span>
+
+                    <span className='text-xs font-semibold text-[#392C5C] whitespace-nowrap'>{chip.title}</span>
+
+                  </button>
+
+                ))}
+
+              </div>
+
+              </div>
+
+              <div className={`pointer-events-none absolute right-0 top-0 bottom-1 flex w-12 items-center justify-end bg-gradient-to-l from-white via-white/90 to-transparent pr-3 transition-opacity duration-200 ${showMobileTreatmentArrow ? 'opacity-100' : 'opacity-0'}`}>
+                <span className='inline-flex h-8 w-8 items-center justify-center rounded-full border border-pink-100 bg-white text-[#392C5C] shadow-sm'>
+                  <ChevronRight size={18} strokeWidth={2.4} />
+                </span>
+              </div>
+
+            </div>
+
+          </div>
+
+        )}
+
+
+
+        {showHomeCityPicker && isHomePage && (
+
+          <>
+
+            <div
+
+              className='fixed inset-0 bg-black/40 z-[55] lg:hidden'
+
+              onClick={() => setShowHomeCityPicker(false)}
+
+            />
+
+            <div className='fixed inset-x-0 bottom-0 top-16 z-[56] lg:hidden bg-[#392C5C] text-white overflow-y-auto rounded-t-2xl'>
+
+              <div className='sticky top-0 flex items-center justify-between px-4 py-3 bg-[#392C5C] border-b border-white/10'>
+
+                <h2 className='text-base font-semibold'>Select City</h2>
+
+                <button type='button' onClick={() => setShowHomeCityPicker(false)} className='p-2' aria-label='Close'>
+
+                  <X size={20} />
+
+                </button>
+
+              </div>
+
+              <div className='px-4 pt-4 pb-8'>
+
+                <button
+
+                  type='button'
+
+                  onClick={handleDetectMyLocation}
+
+                  disabled={isDetectingLocation}
+
+                  className='mb-4 text-xs text-white bg-white/10 px-3 py-2 rounded-lg border border-white/10 disabled:opacity-50'
+
+                >
+
+                  {isDetectingLocation ? 'Detecting...' : 'Detect my location'}
+
+                </button>
+
+                <div className='space-y-4'>
+
+                  {MOBILE_CITY_GROUPS.map((group) => {
+
+                    const availableCities = group.cities.filter((c) => DEFAULT_CITIES.includes(c));
+
+                    if (availableCities.length === 0) return null;
+
+                    return (
+
+                      <div key={group.title} className='bg-white rounded-2xl p-4 text-[#392C5C]'>
+
+                        <div className='text-[11px] font-extrabold text-gray-600 tracking-wide mb-2'>{group.title}</div>
+
+                        <div className='bg-gray-50 rounded-xl border border-gray-200 overflow-hidden'>
+
+                          {availableCities.map((city) => (
+
+                            <button
+
+                              key={city}
+
+                              type='button'
+
+                              onClick={() => handleCitySelect(city)}
+
+                              className={`w-full text-left px-4 py-3 text-sm hover:bg-pink-50 transition-colors border-b border-gray-200 last:border-b-0 ${
+
+                                userLocation?.city === city ? 'text-pink-600 font-semibold' : 'text-[#392C5C]'
+
+                              }`}
+
+                            >
+
+                              {city}
+
+                            </button>
+
+                          ))}
+
+                        </div>
+
+                      </div>
+
+                    );
+
+                  })}
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </>
+
+        )}
+
+
+
+        {isMenuOpen && !isHomePage && (
 
           <>
 

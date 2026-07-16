@@ -13,6 +13,7 @@ import FAQ_Home from '../components/home/FAQ_Home';
 import Navbar from '../components/home/Navbar';
 import Treatmentnavbar from '../components/home/Treatmentnavbar';
 import RunningCity from '../components/home/running_city';
+import MobileHomeActionGrid from '../components/home/MobileHomeActionGrid';
 import PageMeta from '../components/PageMeta';
 
 const Home = () => (
@@ -24,6 +25,7 @@ const Home = () => (
     <Navbar />
     <Treatmentnavbar />
     <HeroSection />
+    <MobileHomeActionGrid />
     <RunningCity />
     <ServicesSection />
     <OurServiceSection />

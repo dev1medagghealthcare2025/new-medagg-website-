@@ -4,40 +4,41 @@ import SharedSearchBar from './SharedSearchBar';
 const MobileHeroSlide2 = ({ query, setQuery, handleSearch, results = [], isLoading = false, onSearchFocus, onSearchBlur }) => {
   return (
     <div
-      className='relative w-full min-h-[88vh] bg-cover bg-center overflow-hidden'
+      className='relative w-full h-[610px] max-[360px]:h-[590px] bg-cover bg-center overflow-hidden'
       style={{
         backgroundImage: 'url(\'/Mobile_view2nd_banner.png\')',
       }}
     >
-      <div className='absolute inset-0 bg-gradient-to-b from-[#2d2552]/45 via-[#2d2552]/25 to-[#2d2552]/50' />
+      <div className='absolute inset-0 bg-[#261f4b]/82' />
 
-      <div className='relative z-10 flex flex-col min-h-[88vh] px-4 sm:px-6 pt-14 sm:pt-16 pb-28 text-white'>
-        <div className='space-y-3'>
-          <span className='inline-block bg-[#ff3576] text-white text-sm sm:text-base font-bold px-4 py-2 rounded-md leading-snug'>
+      <div className='relative z-10 px-3 pt-[56px] text-white'>
+        <div className='space-y-2'>
+          <span className='inline-block bg-[#ff3576] text-white text-[11px] font-bold px-3 py-2 rounded-[5px] leading-snug'>
             The Longest Kept Secret Of Modern Medicine
           </span>
-          <h1 className='text-3xl sm:text-4xl font-extrabold uppercase leading-tight tracking-wide text-white'>
+          <h1 className='text-[24px] font-extrabold uppercase leading-[1.14] tracking-wide text-white'>
             Interventional Radiology
           </h1>
-          <p className='text-base sm:text-lg text-white/90 font-medium'>
+          <p className='text-[15px] text-white font-bold leading-snug'>
             Now Available For Common Good
           </p>
         </div>
-
-        <div className='mt-8 mb-2 scale-[1.08] origin-top'>
-          <SharedSearchBar
-            query={query}
-            setQuery={setQuery}
-            handleSearch={handleSearch}
-            results={results}
-            isLoading={isLoading}
-            onInputFocus={onSearchFocus}
-            onInputBlur={onSearchBlur}
-          />
-        </div>
       </div>
 
-      <div className='absolute bottom-0 left-1/2 -translate-x-1/2 w-[72%] sm:w-[75%] max-w-[300px] z-[5] pointer-events-none select-none'>
+      <div className='absolute left-4 right-4 top-[198px] z-30'>
+        <SharedSearchBar
+          query={query}
+          setQuery={setQuery}
+          handleSearch={handleSearch}
+          results={results}
+          isLoading={isLoading}
+          onInputFocus={onSearchFocus}
+          onInputBlur={onSearchBlur}
+          compact
+        />
+      </div>
+
+      <div className='absolute bottom-[4px] left-1/2 -translate-x-1/2 w-[80%] max-w-[300px] z-[5] pointer-events-none select-none'>
         <img
           src='/ira_one-removebg-preview.png'
           alt='IRa health companion with chat'

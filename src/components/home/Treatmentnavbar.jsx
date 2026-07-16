@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 
- const treatments = [
+export const treatments = [
   { title: 'Enlarged Prostate', path: '/prostate-artery-embolization-pae', subTreatments: [{ title: 'Prostate Artery Embolization', path: '/prostate-artery-embolization-pae' }] },
   { title: 'Knee Pain', path: '/genicular-artery-embolization-gae', subTreatments: [{ title: 'Genicular Artery Embolization', path: '/genicular-artery-embolization-gae' }] },
   { title: 'Thyroid Nodule', path: '/thyroid-nodule-ablation', subTreatments: [{ title: 'Thyroid Nodule Ablation', path: '/thyroid-nodule-ablation' }] },
@@ -248,6 +248,8 @@ const TreatmentsMegaMenu = ({ isOpen, position, columns, onMouseEnter, onMouseLe
 };
 
 export default function Treatmentnavbar() {
+  const { pathname } = useLocation();
+  const isHomePage = pathname === '/';
   const [openIndex, setOpenIndex] = useState(null);
   const scrollContainerRef = useRef(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
@@ -587,7 +589,7 @@ export default function Treatmentnavbar() {
   }, [fixedOpen, fixedVariant, isMobile]);
 
   return (
-    <nav className='sticky top-[64px] lg:top-[78px] z-40 w-full bg-white border-b border-gray-200 shadow-sm ring-1 ring-black/5 overflow-x-hidden lg:overflow-visible'>
+    <nav className={`sticky top-[64px] lg:top-[78px] z-40 w-full bg-white border-b border-gray-200 shadow-sm ring-1 ring-black/5 overflow-x-hidden lg:overflow-visible ${isHomePage ? 'hidden lg:block' : ''}`}>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         {/* Desktop layout */}
         <div className='hidden lg:flex items-center justify-between h-[68px]'>
@@ -654,7 +656,7 @@ export default function Treatmentnavbar() {
         </div>
 
         {/* Mobile layout (keep existing scrollable tabs) */}
-        <div className='lg:hidden flex items-center'>
+        <div className={`lg:hidden flex items-center ${isHomePage ? 'hidden' : ''}`}>
           <button
             onClick={() => scroll('left')}
             className={`mr-2 bg-white hover:bg-gray-50 rounded-full shadow-md p-2 border border-gray-200 transition-opacity ${showLeftArrow ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}

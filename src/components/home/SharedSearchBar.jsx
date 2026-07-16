@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { ArrowRight, Search } from 'lucide-react';
 
 const SharedSearchBar = ({
   query,
@@ -9,23 +10,36 @@ const SharedSearchBar = ({
   isLoading,
   onInputFocus,
   onInputBlur,
+  compact = false,
 }) => {
   return (
     <div className='w-full max-w-xl relative'>
       {/* Search Bar */}
       <form
         onSubmit={handleSearch}
-        className='flex items-center bg-white rounded-xl overflow-hidden shadow-lg w-full border border-gray-100 mb-0'>
-        <span className='pl-3 sm:pl-5 text-gray-400 flex-shrink-0'>
-          <svg width='18' height='18' className='sm:w-5 sm:h-5' fill='none' stroke='currentColor' strokeWidth='2' viewBox='0 0 24 24'>
-            <circle cx='11' cy='11' r='8' />
-            <line x1='21' y1='21' x2='16.65' y2='16.65' />
-          </svg>
-        </span>
+        className={`flex items-center bg-white overflow-hidden shadow-lg w-full border border-gray-100 mb-0 ${
+          compact ? 'rounded-[10px]' : 'rounded-xl'
+        }`}>
+        {compact ? (
+          <span className='pl-3 text-gray-400 flex-shrink-0'>
+            <Search size={15} strokeWidth={2} />
+          </span>
+        ) : (
+          <span className='pl-3 sm:pl-5 text-gray-400 flex-shrink-0'>
+            <svg width='18' height='18' className='sm:w-5 sm:h-5' fill='none' stroke='currentColor' strokeWidth='2' viewBox='0 0 24 24'>
+              <circle cx='11' cy='11' r='8' />
+              <line x1='21' y1='21' x2='16.65' y2='16.65' />
+            </svg>
+          </span>
+        )}
         <input
           type='text'
           placeholder='Facing symptoms? Type them in'
-          className='flex-1 px-3 sm:px-4 py-3 sm:py-4 outline-none text-gray-700 bg-transparent placeholder-gray-500 text-sm sm:text-base font-medium'
+          className={`flex-1 outline-none text-gray-700 bg-transparent placeholder-gray-500 font-medium ${
+            compact
+              ? 'px-3 py-3 text-[11px] placeholder:text-gray-500'
+              : 'px-3 sm:px-4 py-3 sm:py-4 text-sm sm:text-base placeholder-gray-500'
+          }`}
           value={query || ''}
           onChange={(e) => setQuery && setQuery(e.target.value)}
           onFocus={onInputFocus}
@@ -33,19 +47,30 @@ const SharedSearchBar = ({
         />
         <button
           type='submit'
-          className='bg-gradient-to-r from-[#ff3576] to-[#e1006a] text-white px-4 sm:px-6 lg:px-8 py-3 sm:py-4 font-semibold hover:from-[#e1006a] hover:to-[#c9005a] transition-all duration-300 flex items-center gap-1 sm:gap-2'
+          className={
+            compact
+              ? 'h-10 w-10 bg-[#ff2f7d] text-white inline-flex items-center justify-center hover:bg-pink-600 transition-colors shrink-0'
+              : 'bg-gradient-to-r from-[#ff3576] to-[#e1006a] text-white px-4 sm:px-6 lg:px-8 py-3 sm:py-4 font-semibold hover:from-[#e1006a] hover:to-[#c9005a] transition-all duration-300 flex items-center gap-1 sm:gap-2'
+          }
+          aria-label='Search'
         >
-          <span className='hidden sm:inline'>Search</span>
-          <svg width='14' height='14' className='sm:w-4 sm:h-4' fill='none' stroke='currentColor' strokeWidth='2' viewBox='0 0 24 24'>
-            <path d='M5 12h14M12 5l7 7-7 7'/>
-          </svg>
+          {compact ? (
+            <ArrowRight size={15} />
+          ) : (
+            <>
+              <span className='hidden sm:inline'>Search</span>
+              <svg width='14' height='14' className='sm:w-4 sm:h-4' fill='none' stroke='currentColor' strokeWidth='2' viewBox='0 0 24 24'>
+                <path d='M5 12h14M12 5l7 7-7 7'/>
+              </svg>
+            </>
+          )}
         </button>
       </form>
 
       {/* Suggestions overlay (dark theme, no layout shift) */}
       {(isLoading || results.length > 0) && (
         <div className='absolute left-0 right-0 top-full mt-1 z-50'>
-          <div className='bg-white/10 backdrop-blur-sm p-3 sm:p-4 rounded-lg w-full'>
+          <div className='bg-[#e0e0e05e] backdrop-blur-sm p-3 sm:p-4 rounded-lg w-full'>
             <p className='text-white/90 font-medium mb-1 text-sm sm:text-base'>Suggested results{isLoading ? '...' : ':'}</p>
             {results.length > 0 && (
               <ul>

@@ -80,29 +80,30 @@ const MobileHeroSection = ({
       onBlurCapture={handleBlurCapture}
     >
       <div
-        className='flex transition-transform duration-700 ease-in-out'
+        className='flex w-full transition-transform duration-700 ease-in-out'
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
       >
-        <div className='w-full flex-shrink-0'>
-          <MobileHeroSlide1 {...searchProps} />
+        <div className='w-full min-w-full flex-[0_0_100%]'>
+          <MobileHeroSlide1 {...slideSearchProps} />
         </div>
-        <div className='w-full flex-shrink-0'>
+        <div className='w-full min-w-full flex-[0_0_100%]'>
           <MobileHeroSlide2 {...slideSearchProps} />
         </div>
-        <div className='w-full flex-shrink-0'>
+        <div className='w-full min-w-full flex-[0_0_100%]'>
           <MobileHeroSlide3 {...slideSearchProps} />
         </div>
       </div>
 
-      <div className='absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2.5 z-30'>
+      <div className='absolute bottom-1.5 left-1/2 -translate-x-1/2 flex items-center gap-1.5 z-30 pointer-events-auto'>
         {Array.from({ length: totalSlides }).map((_, index) => (
           <button
             key={index}
+            type='button'
             onClick={() => goToSlide(index)}
-            className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+            className={`rounded-full transition-all duration-300 ${
               currentSlide === index
-                ? 'bg-white scale-125'
-                : 'bg-white/50 hover:bg-white/75'
+                ? 'h-2.5 w-2.5 bg-white border-2 border-[#ffc400]'
+                : 'h-2 w-2 bg-white/60'
             }`}
             aria-label={`Go to slide ${index + 1}`}
           />
