@@ -101,6 +101,7 @@ const STATIC_ROUTES = [
   '/y90-radioembolization-tare-bangalore',
   '/y90-radioembolization-tare-mangalore',
   '/transarterial-chemoembolization-tace',
+  '/nuclear-medicine',
   '/transarterial-chemoembolization-tace-chennai',
   '/transarterial-chemoembolization-tace-madurai',
   '/transarterial-chemoembolization-tace-coimbatore',

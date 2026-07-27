@@ -42,6 +42,7 @@ export default function Consultourdoctor({ city = '', variant = '' }) {
   const isVaricocele = path.includes('varicocele');
   const isBreastNodule = path.includes('breast-nodule') || path.includes('breast-nodule-vae') || path.includes('vae');
   const isPVC = path.includes('pelvic-vein') || path.includes('pvc') || path.includes('pelvic');
+  const isNuclear = path.includes('nuclear-medicine') || path.includes('nuclear');
 
   const cityLower = (city || '').toLowerCase();
   const variantLower = (variant || '').toLowerCase();
@@ -74,6 +75,7 @@ export default function Consultourdoctor({ city = '', variant = '' }) {
     if (isY90) return 'Liver Tumor';
     if (isTACE) return 'Liver Tumor';
     if (isEndovascularCoiling) return 'Brain Aneurysm';
+    if (isNuclear) return 'Radiosynovectomy';
     return '';
   };
   const [formData, setFormData] = useState({
@@ -145,6 +147,17 @@ export default function Consultourdoctor({ city = '', variant = '' }) {
                   Consult Our <span className='text-[#F7266B]'>{getTreatmentHeading()}</span>
                   <br />
                   Experts In {cityName} Today
+                </h2>
+                <p className='text-sm sm:text-base text-gray-600 max-w-xl mx-auto lg:mx-0'>
+                  Get Expert Guidance And Clarity On The Best Non-Surgical Treatments Tailored To You.
+                </p>
+              </>
+            ) : getTreatmentHeading() ? (
+              <>
+                <h2 className='text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#2D224C] mb-3 leading-tight'>
+                  Consult Our <span className='text-[#F7266B]'>{getTreatmentHeading()}</span>
+                  <br />
+                  Experts Today
                 </h2>
                 <p className='text-sm sm:text-base text-gray-600 max-w-xl mx-auto lg:mx-0'>
                   Get Expert Guidance And Clarity On The Best Non-Surgical Treatments Tailored To You.

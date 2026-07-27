@@ -67,6 +67,11 @@ export const treatments = [
     { title: 'Pelvic Vein Embolization', path: '/pelvic-vein-embolization' }
   ] },
 
+  // Nuclear Medicine
+  { title: 'Nuclear Medicine', path: '/nuclear-medicine', subTreatments: [
+    { title: 'Nuclear Medicine', path: '/nuclear-medicine' }
+  ] },
+
 ];
 
 const DropdownMenu = ({ items, stackSubBelow = false, depth = 0 }) => {
@@ -215,6 +220,7 @@ const TreatmentsMegaMenu = ({ isOpen, position, columns, onMouseEnter, onMouseLe
                                 'Chronic Total Occlusion': 'chronic.svg',
                                 'Radiofrequency Ablation For Arrhythmia': 'rfa for Ar.svg',
                                 'Pelvic Vein Embolization': 'Pelvic.png',
+                                'Nuclear Medicine': 'Y-90 Radioembolization_1.png',
                               };
 
                               const iconFile = iconByTitle[item.title];

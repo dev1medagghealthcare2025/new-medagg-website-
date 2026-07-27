@@ -40,6 +40,7 @@ export const treatmentCategories = [
       { title: 'Varicose Veins', path: '/varicose-vein', keywords: ['varicose', 'veins', 'leg'] },
       { title: 'Diabetic Foot', path: '/diabetic-foot', keywords: ['diabetic', 'foot', 'wound'] },
       { title: 'Y-90 Radioembolization', path: '/y90-radioembolization-tare', keywords: ['y90', 'radioembolization', 'tare', 'cancer'] },
+      { title: 'Nuclear Medicine', path: '/nuclear-medicine', keywords: ['nuclear', 'medicine', 'radioembolization', 'pet', 'scan', 'theranostics', 'oncology'] },
     ],
   },
   {

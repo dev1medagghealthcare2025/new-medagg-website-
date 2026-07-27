@@ -102,6 +102,7 @@ import FrozenShoulderBangalore from './pages/frozen_shoulder_bangalore';
 import FrozenShoulderMangalore from './pages/frozen_shoulder_mangalore';
 import Hemorrhoidal from './pages/Hemorrhoidal';
 import Y90_TAREPage from './pages/Y90_TARE';
+import NuclearMedicinePage from './pages/Nuclear-medicine';
 import Transarterial_Chemoembolization from './pages/Transarterial_Chemoembolization';
 import Cursor from './components/ui/Cursor';
 import ImageCursorStyle from './components/ui/ImageCursorStyle';
@@ -354,6 +355,7 @@ function App() {
           <Route path='/frozen-shoulder-coimbatore' element={<FrozenShoulderCoimbatore />} />
           <Route path='/frozen-shoulder-bangalore' element={<FrozenShoulderBangalore />} />
           <Route path='/frozen-shoulder-mangalore' element={<FrozenShoulderMangalore />} />
+          <Route path='/nuclear-medicine' element={<NuclearMedicinePage />} />
           <Route path='/y90-radioembolization-tare' element={<Y90_TAREPage />} />
           <Route path='/y90-radioembolization-tare-chennai' element={<Y90Chennai />} />
           <Route path='/y90-radioembolization-tare-madurai' element={<Y90Madurai />} />
