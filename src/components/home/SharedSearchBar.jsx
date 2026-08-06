@@ -11,7 +11,9 @@ const SharedSearchBar = ({
   onInputFocus,
   onInputBlur,
   compact = false,
+  theme = 'dark',
 }) => {
+  const isLight = theme === 'light';
   return (
     <div className='w-full max-w-xl relative'>
       {/* Search Bar */}
@@ -66,17 +68,28 @@ const SharedSearchBar = ({
           )}
         </button>
       </form>
-
-      {/* Suggestions overlay (dark theme, no layout shift) */}
+ 
+      {/* Suggestions overlay (adaptive theme, no layout shift) */}
       {(isLoading || results.length > 0) && (
         <div className='absolute left-0 right-0 top-full mt-1 z-50'>
-          <div className='bg-[#e0e0e05e] backdrop-blur-sm p-3 sm:p-4 rounded-lg w-full'>
-            <p className='text-white/90 font-medium mb-1 text-sm sm:text-base'>Suggested results{isLoading ? '...' : ':'}</p>
+          <div className={
+            isLight
+              ? 'bg-white/95 backdrop-blur-md p-3 sm:p-4 rounded-lg w-full shadow-xl border border-gray-200/50'
+              : 'bg-[#e0e0e05e] backdrop-blur-sm p-3 sm:p-4 rounded-lg w-full'
+          }>
+            <p className={`font-semibold mb-1 text-sm sm:text-base ${isLight ? 'text-gray-800' : 'text-white/90'}`}>
+              Suggested results{isLoading ? '...' : ':'}
+            </p>
             {results.length > 0 && (
               <ul>
                 {results.map((result, index) => (
                   <li key={index}>
-                    <Link to={result.path} className='text-lg sm:text-xl font-bold text-white hover:text-pink-400 transition-colors'>
+                    <Link
+                      to={result.path}
+                      className={`text-lg sm:text-xl font-bold transition-colors ${
+                        isLight ? 'text-[#1a1446] hover:text-[#ff3576]' : 'text-white hover:text-pink-400'
+                      }`}
+                    >
                       {result.name}
                     </Link>
                   </li>
