@@ -3,6 +3,9 @@ import MobileHeroSlide1 from './MobileHeroSlide1';
 import MobileHeroSlide2 from './MobileHeroSlide2';
 import MobileHeroSlide3 from './MobileHeroSlide3';
 
+// Month index is 0-indexed (August is 7). This will be true until August 15, 2026 11:59:59 PM.
+const showIndependenceDayTheme = new Date() < new Date(2026, 7, 16);
+
 const MobileHeroSection = ({
   query,
   setQuery,
@@ -102,8 +105,8 @@ const MobileHeroSection = ({
             onClick={() => goToSlide(index)}
             className={`rounded-full transition-all duration-300 ${
               currentSlide === index
-                ? 'h-2.5 w-2.5 bg-white border-2 border-[#ffc400]'
-                : 'h-2 w-2 bg-white/60'
+                ? (showIndependenceDayTheme && currentSlide === 0 ? 'h-2.5 w-2.5 bg-[#1a1446] border-2 border-[#ffc400]' : 'h-2.5 w-2.5 bg-white border-2 border-[#ffc400]')
+                : (showIndependenceDayTheme && currentSlide === 0 ? 'h-2 w-2 bg-[#1a1446]/30' : 'h-2 w-2 bg-white/60')
             }`}
             aria-label={`Go to slide ${index + 1}`}
           />
