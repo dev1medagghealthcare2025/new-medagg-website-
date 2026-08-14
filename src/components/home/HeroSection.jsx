@@ -79,11 +79,11 @@ const OriginalHeroSlide = ({
           {showIndependenceDayTheme && (
             <div className='flex items-center gap-2 bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-full px-3.5 py-1.5 shadow-sm mb-2'>
               <svg className='w-5 h-3.5 rounded-sm shadow-[0_1px_3px_rgba(0,0,0,0.15)]' viewBox='0 0 3 2'>
-                <rect width='3' height='2' fill='#FF9933'/>
-                <rect y='0.67' width='3' height='0.67' fill='#FFFFFF'/>
-                <rect y='1.33' width='3' height='0.67' fill='#128807'/>
-                <circle cx='1.5' cy='1' r='0.25' fill='#000080'/>
-                <circle cx='1.5' cy='1' r='0.2' fill='none' stroke='#FFFFFF' strokeWidth='0.04'/>
+                <rect width='3' height='2' fill='#FF9933' />
+                <rect y='0.67' width='3' height='0.67' fill='#FFFFFF' />
+                <rect y='1.33' width='3' height='0.67' fill='#128807' />
+                <circle cx='1.5' cy='1' r='0.25' fill='#000080' />
+                <circle cx='1.5' cy='1' r='0.2' fill='none' stroke='#FFFFFF' strokeWidth='0.04' />
               </svg>
               <span className='text-xs font-extrabold tracking-wide flex gap-1.5 select-none'>
                 <span className='text-[#FF9933]'>Happy</span>
@@ -93,9 +93,8 @@ const OriginalHeroSlide = ({
           )}
 
           <h1
-            className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mt-2 ${
-              showIndependenceDayTheme ? 'text-[#1a1446]' : 'text-white'
-            }`}
+            className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mt-2 ${showIndependenceDayTheme ? 'text-[#1a1446]' : 'text-white'
+              }`}
             style={{ lineHeight: 1.2 }}
           >
             {showIndependenceDayTheme ? (
@@ -817,11 +816,10 @@ const HeroSection = () => {
         {/* Carousel Navigation Arrows */}
         <button
           onClick={() => goToSlide((currentSlide - 1 + totalSlides) % totalSlides)}
-          className={`absolute left-4 top-1/2 transform -translate-y-1/2 p-3 rounded-full transition-all duration-300 z-20 ${
-            showIndependenceDayTheme && currentSlide === 0
+          className={`absolute left-4 top-1/2 transform -translate-y-1/2 p-3 rounded-full transition-all duration-300 z-20 ${showIndependenceDayTheme && currentSlide === 0
               ? 'bg-white/80 hover:bg-white border border-gray-200/50 text-[#1a1446] shadow-md'
               : 'bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white'
-          }`}
+            }`}
           aria-label='Previous slide'
         >
           <svg width='20' height='20' fill='none' stroke='currentColor' strokeWidth='2' viewBox='0 0 24 24'>
@@ -831,11 +829,10 @@ const HeroSection = () => {
 
         <button
           onClick={() => goToSlide((currentSlide + 1) % totalSlides)}
-          className={`absolute right-4 top-1/2 transform -translate-y-1/2 p-3 rounded-full transition-all duration-300 z-20 ${
-            showIndependenceDayTheme && currentSlide === 0
+          className={`absolute right-4 top-1/2 transform -translate-y-1/2 p-3 rounded-full transition-all duration-300 z-20 ${showIndependenceDayTheme && currentSlide === 0
               ? 'bg-white/80 hover:bg-white border border-gray-200/50 text-[#1a1446] shadow-md'
               : 'bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white'
-          }`}
+            }`}
           aria-label='Next slide'
         >
           <svg width='20' height='20' fill='none' stroke='currentColor' strokeWidth='2' viewBox='0 0 24 24'>

@@ -228,12 +228,57 @@ function App() {
       if (gaId) initGA(gaId);
     } catch {}
   }, []);
+
+  // Play Vande Mataram on load/interaction for 6-7 seconds
+  React.useEffect(() => {
+    // Month index is 0-indexed (August is 7). This will be true until August 15, 2026 11:59:59 PM.
+    const showIndependenceDayTheme = new Date() < new Date(2026, 7, 16);
+    if (!showIndependenceDayTheme) return;
+
+    const audio = new Audio('/Vande Mataram – AR Rahman.mp3');
+    let hasPlayed = false;
+
+    const playAudio = () => {
+      if (hasPlayed) return;
+      audio.play().then(() => {
+        hasPlayed = true;
+        // Play song, then schedule fade out and stop
+        setTimeout(() => {
+          // Fade out over 1.5 seconds
+          let fadeInterval = setInterval(() => {
+            if (audio.volume > 0.1) {
+              audio.volume -= 0.1;
+            } else {
+              clearInterval(fadeInterval);
+              audio.pause();
+            }
+          }, 150);
+        }, 5000); // Start fade-out at 5.0 seconds, completely off by 6.5 seconds
+      }).catch((err) => {
+        // Autoplay blocked by browser, wait for user interaction to play
+        const startOnInteraction = () => {
+          playAudio();
+          document.removeEventListener('click', startOnInteraction);
+          document.removeEventListener('touchstart', startOnInteraction);
+        };
+        document.addEventListener('click', startOnInteraction);
+        document.addEventListener('touchstart', startOnInteraction);
+      });
+    };
+
+    playAudio();
+
+    // Cleanup on unmount or reload
+    return () => {
+      audio.pause();
+    };
+  }, []);
   const location = useLocation();
   const isIrpreneur2025 = (location.pathname || '').startsWith('/irpreneur2025');
   return (
     <TelecrmOtpGateProvider>
     <div className='min-h-screen bg-pink-50 flex flex-col isolate'>
-      <main className='flex-grow'>
+      <main className='flex-grow'> 
         <ScrollToTop />
         <CanonicalUrlUpdater />
         <Routes>
