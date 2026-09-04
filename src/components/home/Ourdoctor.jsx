@@ -111,6 +111,13 @@ const doctors = [
     city: 'Bangalore',
     image: 'Dr. Junaid.png',
   },
+  {
+    name: 'Dr. Soumil Singhal',
+    degrees: 'MBBS, DMRD, DNB',
+    specialty: 'Lead Consultant – Interventional Radiology & Endovascular Therapies',
+    city: 'Bangalore',
+    image: '/dr-soumil-singhal.jpg',
+  },
 
   // Madurai Doctors
   {
@@ -123,16 +130,16 @@ const doctors = [
 
   // Salem Doctors
   //{
-    //name: 'Dr. Karthikeyan',
-    //degrees: 'MBBS, DMRD, DNB',
-    //specialty: 'Interventional Radiology',
-    //city: 'Salem',
-    //image: '/Karthikeyan.png',
- // },
+  //name: 'Dr. Karthikeyan',
+  //degrees: 'MBBS, DMRD, DNB',
+  //specialty: 'Interventional Radiology',
+  //city: 'Salem',
+  //image: '/Karthikeyan.png',
+  // },
 
   // Hyderabad Doctors
- 
-  
+
+
   {
     name: 'Dr. Nishant Sunkarineni',
     degrees: 'MBBS, DMRD, DNB',
@@ -147,7 +154,7 @@ const doctors = [
     city: 'Hyderabad',
     image: '/Dr Sai Teja N.png',
   },
-   {
+  {
     name: 'Dr. Sailesh Kumar Garge',
     degrees: 'MBBS, DMRD, DNB',
     specialty: 'Interventional Radiology',
@@ -218,73 +225,73 @@ const doctors = [
     city: 'Ahmedabad',
     image: '/Raj Soni.png',
   },
-   // Bhuvaneshwar Doctors
-   {
+  // Bhuvaneshwar Doctors
+  {
     name: 'Dr. Setham Kumar',
     degrees: 'MBBS, DNB, FVIR',
     specialty: 'Interventional Radiology',
     city: 'Bhuvaneshwar',
     image: '/Dr. T Seetam.png',
   },
-     // Goa Doctors
-     {
-      name: 'Dr. Charudatta sambhaji',
-      degrees: 'MBBS, DNB, FVIR',
-      specialty: 'Interventional Radiology',
-      city: 'Goa',
-      image: '/Charudatta sambhaji.png',
-    },
-     // Surat Doctors
-     {
-      name: 'Dr. Vivek Mavani',
-      degrees: 'MBBS, DNB, FVIR',
-      specialty: 'Interventional Radiology',
-      city: 'Surat',
-      image: '/vivek_new.png',
-    },
+  // Goa Doctors
+  {
+    name: 'Dr. Charudatta sambhaji',
+    degrees: 'MBBS, DNB, FVIR',
+    specialty: 'Interventional Radiology',
+    city: 'Goa',
+    image: '/Charudatta sambhaji.png',
+  },
+  // Surat Doctors
+  {
+    name: 'Dr. Vivek Mavani',
+    degrees: 'MBBS, DNB, FVIR',
+    specialty: 'Interventional Radiology',
+    city: 'Surat',
+    image: '/vivek_new.png',
+  },
 
-    // Jaipur Doctors
-    {
-      name: 'Dr. Amol Nagvekar',
-      degrees: 'MBBS, DNB, FVIR',
-      specialty: 'Interventional Radiology',
-      city: 'Jaipur',
-      image: '/Dr Amol.jpeg',
-    },
+  // Jaipur Doctors
+  {
+    name: 'Dr. Amol Nagvekar',
+    degrees: 'MBBS, DNB, FVIR',
+    specialty: 'Interventional Radiology',
+    city: 'Jaipur',
+    image: '/Dr Amol.jpeg',
+  },
 
-    // Calicut Doctors
-    {
-      name: 'Dr. Jithu Subhash Babu',
-      degrees: 'MBBS, DNB, FVIR',
-      specialty: 'Interventional Radiology',
-      city: 'Calicut',
-      image: '/Dr Jitu.png',
-    },
+  // Calicut Doctors
+  {
+    name: 'Dr. Jithu Subhash Babu',
+    degrees: 'MBBS, DNB, FVIR',
+    specialty: 'Interventional Radiology',
+    city: 'Calicut',
+    image: '/Dr Jitu.png',
+  },
 
-     // Trivandrum Doctors
-     {
-      name: 'Dr. Manish Kumar Yadav',
-      degrees: 'MBBS, DNB, FVIR',
-      specialty: 'Interventional Radiology',
-      city: 'Trivandrum',
-      image: '/Dr. Manish Kumar Yadav.png',
-    },
-    {
-      name: 'Dr. Praveen Kesav',
-      degrees: 'MBBS, DNB, FVIR',
-      specialty: 'Interventional Radiology',
-      city: 'Trivandrum',
-      image: '/Dr Praveen Kesav.png',
-    },
+  // Trivandrum Doctors
+  {
+    name: 'Dr. Manish Kumar Yadav',
+    degrees: 'MBBS, DNB, FVIR',
+    specialty: 'Interventional Radiology',
+    city: 'Trivandrum',
+    image: '/Dr. Manish Kumar Yadav.png',
+  },
+  {
+    name: 'Dr. Praveen Kesav',
+    degrees: 'MBBS, DNB, FVIR',
+    specialty: 'Interventional Radiology',
+    city: 'Trivandrum',
+    image: '/Dr Praveen Kesav.png',
+  },
 
-    // Perinthlmanna Doctors
-    {
-      name: 'Dr. Thoufiq Ali',
-      degrees: 'MBBS, DNB, FVIR',
-      specialty: 'Interventional Radiology',
-      city: 'Perinthalmanna',
-      image: '/Dr. Thoufiq Ali.png',
-    },
+  // Perinthlmanna Doctors
+  {
+    name: 'Dr. Thoufiq Ali',
+    degrees: 'MBBS, DNB, FVIR',
+    specialty: 'Interventional Radiology',
+    city: 'Perinthalmanna',
+    image: '/Dr. Thoufiq Ali.png',
+  },
 
 ];
 

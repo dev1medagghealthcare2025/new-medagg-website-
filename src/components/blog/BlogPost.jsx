@@ -3,6 +3,8 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Calendar, User, ArrowLeft, Tag, Folder, Share2, Clock } from 'lucide-react';
 import DOMPurify from 'dompurify';
 import blogPosts from '../../data/blogPosts.json';
+import Navbar from '../home/Navbar';
+import Treatmentnavbar from '../home/Treatmentnavbar';
 import '../../assets/css/blog.css';
 
 const BlogPost = () => {
@@ -248,52 +250,60 @@ const BlogPost = () => {
 
   if (loading) {
     return (
-      <div className='min-h-screen bg-pink-50 py-12'>
-        <div className='max-w-6xl mx-auto px-4 sm:px-6 lg:px-8'>
-          <div className='animate-pulse'>
-            <div className='h-8 bg-gray-300 rounded w-1/4 mb-8'></div>
-            <div className='h-64 bg-gray-300 rounded mb-8'></div>
-            <div className='h-12 bg-gray-300 rounded w-3/4 mb-4'></div>
-            <div className='h-4 bg-gray-300 rounded w-1/2 mb-8'></div>
-            <div className='space-y-4'>
-              <div className='h-4 bg-gray-300 rounded'></div>
-              <div className='h-4 bg-gray-300 rounded'></div>
-              <div className='h-4 bg-gray-300 rounded w-5/6'></div>
+      <>
+        <Navbar />
+        <Treatmentnavbar />
+        <div className='min-h-screen bg-pink-50 py-12'>
+          <div className='max-w-6xl mx-auto px-4 sm:px-6 lg:px-8'>
+            <div className='animate-pulse'>
+              <div className='h-8 bg-gray-300 rounded w-1/4 mb-8'></div>
+              <div className='h-64 bg-gray-300 rounded mb-8'></div>
+              <div className='h-12 bg-gray-300 rounded w-3/4 mb-4'></div>
+              <div className='h-4 bg-gray-300 rounded w-1/2 mb-8'></div>
+              <div className='space-y-4'>
+                <div className='h-4 bg-gray-300 rounded'></div>
+                <div className='h-4 bg-gray-300 rounded'></div>
+                <div className='h-4 bg-gray-300 rounded w-5/6'></div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 
   if (error) {
     return (
-      <div className='min-h-screen bg-pink-50 py-12'>
-        <div className='max-w-6xl mx-auto px-4 sm:px-6 lg:px-8'>
-          <div className='bg-red-50 border border-red-200 rounded-lg p-8 text-center'>
-            <div className='text-red-600 text-xl font-medium mb-4'>
-              {error}
-            </div>
-            <div className='space-x-4'>
-              <button
-                onClick={() => navigate('/blog')}
-                className='bg-pink-600 text-white px-6 py-2 rounded-lg hover:bg-pink-700 transition-colors'
-              >
-                Back to Blog
-              </button>
-              <button
-                onClick={() => {
-                  setError(null);
-                  loadPost();
-                }}
-                className='bg-gray-600 text-white px-6 py-2 rounded-lg hover:bg-gray-700 transition-colors'
-              >
-                Try Again
-              </button>
+      <>
+        <Navbar />
+        <Treatmentnavbar />
+        <div className='min-h-screen bg-pink-50 py-12'>
+          <div className='max-w-6xl mx-auto px-4 sm:px-6 lg:px-8'>
+            <div className='bg-red-50 border border-red-200 rounded-lg p-8 text-center'>
+              <div className='text-red-600 text-xl font-medium mb-4'>
+                {error}
+              </div>
+              <div className='space-x-4'>
+                <button
+                  onClick={() => navigate('/blog')}
+                  className='bg-pink-600 text-white px-6 py-2 rounded-lg hover:bg-pink-700 transition-colors'
+                >
+                  Back to Blog
+                </button>
+                <button
+                  onClick={() => {
+                    setError(null);
+                    loadPost();
+                  }}
+                  className='bg-gray-600 text-white px-6 py-2 rounded-lg hover:bg-gray-700 transition-colors'
+                >
+                  Try Again
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 
@@ -302,7 +312,10 @@ const BlogPost = () => {
   }
 
   return (
-    <div className='min-h-screen bg-pink-50 py-12'>
+    <>
+      <Navbar />
+      <Treatmentnavbar />
+      <div className='min-h-screen bg-pink-50 py-12'>
       <div className='max-w-6xl mx-auto px-4 sm:px-6 lg:px-8'>
         {/* 2-column layout: content + sidebar (desktop) */}
         <div className='grid grid-cols-1 lg:grid-cols-3 gap-8'>
@@ -489,6 +502,7 @@ const BlogPost = () => {
         )}
       </div>
     </div>
+    </>
   );
 };
 
