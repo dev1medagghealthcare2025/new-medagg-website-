@@ -118,6 +118,20 @@ const doctors = [
     city: 'Bangalore',
     image: '/dr-soumil-singhal.jpg',
   },
+  {
+    name: 'Dr. Dheeraj Kumar Tiwari',
+    degrees: 'MBBS, DMRD, DNB',
+    specialty: 'Senior Consultant, Clinical Lead Interventional & Endovascular Radiology',
+    city: 'Bangalore',
+    image: '/Dr. Dheeraj Kumar Tiwari.png',
+  },
+  {
+    name: 'Dr Vinaya Manohara Gowda',
+    degrees: 'MBBS, DMRD, DNB',
+    specialty: 'Interventional Radiologist',
+    city: 'Bangalore',
+    image: '/Dr Vinaya Manohara Gowda.png',
+  },
 
   // Madurai Doctors
   {
