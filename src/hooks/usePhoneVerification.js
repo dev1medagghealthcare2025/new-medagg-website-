@@ -40,7 +40,7 @@ const resetRecaptchaWidget = () => {
     if (widgetId != null && window.grecaptcha) {
       window.grecaptcha.reset(widgetId);
     }
-  } catch {}
+  } catch { }
 };
 
 export const destroyRecaptchaVerifier = () => {
@@ -48,7 +48,7 @@ export const destroyRecaptchaVerifier = () => {
     if (verifierInstance?.clear) {
       verifierInstance.clear();
     }
-  } catch {}
+  } catch { }
   verifierInstance = null;
   widgetId = null;
   renderLock = null;
@@ -74,7 +74,7 @@ const buildRecaptchaVerifier = async () => {
 
     verifierInstance = new RecaptchaVerifier(auth, container, {
       size: 'invisible',
-      callback: () => {},
+      callback: () => { },
       'expired-callback': resetRecaptchaWidget,
     });
 
