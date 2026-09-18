@@ -14,7 +14,6 @@ const openings = [
     subtitle: 'Join Our Mission to Transform Healthcare Experiences!',
     level: 'Fresher / Experience',
     languages: ['English', 'Hindi', 'Telugu', 'Tamil', 'Malayalam', 'Kannada', 'Bengali'],
-
     responsibilities: [
       'Make outbound calls to potential patients, presenting Medagg Healthcare\'s services with enthusiasm and professionalism',
       'Understand patient needs and provide relevant information about our offerings',
@@ -68,6 +67,79 @@ const openings = [
       '0–5 years in Marketing/BD, preferably in healthcare',
       'Strong stakeholder management and communication',
       'Data‑driven decision making and campaign ownership',
+    ],
+  },
+  {
+    id: 4,
+    title: 'Business Development Executive / Inside Sales',
+    subtitle: 'Join Our Mission to Transform Healthcare Experiences!',
+    level: '0–5 Years Experience',
+    positions: 1,
+    qualification: 'Any',
+    location: 'Chennai',
+    preferredCandidates: 'Should be based out of Chennai or ready to relocate to Chennai',
+    timings: '10 AM – 7 PM',
+    modeOfWork: 'Work From Office',
+    availability: 'Immediate Joiners',
+    employmentType: 'Full Time',
+    languages: ['English', 'Kannada'],
+    salary: 'Freshers: ₹20,000 – ₹25,000/month | Experienced: Based on previous CTC',
+    contactEmail: 'karankinger@medagghealthcare.com',
+    contactPhone: '9786400655',
+    responsibilities: [
+      'Make outbound calls to potential patients, presenting Medagg Healthcare\'s services with enthusiasm and professionalism',
+      'Understand patient needs and provide relevant information about our healthcare offerings',
+      'Convert leads into loyal patients by highlighting the value and benefits of Medagg Healthcare',
+      'Maintain accurate records of all patient interactions in the CRM system',
+      'Collaborate with the healthcare team to stay updated on services and promotions',
+      'Achieve individual and team targets for patient conversion and revenue growth',
+    ],
+    requirements: [
+      'Any graduate / qualification accepted',
+      '0–5 years of relevant sales or inside sales experience',
+      'Fluency in English and Kannada is compulsory; additional languages are an added advantage',
+      'Strong communication, persuasion, and interpersonal skills',
+      'Self-motivated with a passion for healthcare and helping people',
+      'Must be based in Chennai or willing to relocate immediately',
+      'Immediate joiner preferred',
+    ],
+  },
+  {
+    id: 5,
+    title: 'Call Centre Manager',
+    subtitle: 'Lead and Grow Our Patient Connect Team!',
+    level: '5+ Years Experience',
+    positions: 1,
+    qualification: 'Any',
+    location: 'Chennai',
+    preferredCandidates: 'Should be based out of Chennai or ready to relocate to Chennai',
+    timings: '10 AM – 7 PM',
+    modeOfWork: 'Work From Office',
+    availability: 'Immediate Joiners',
+    employmentType: 'Full Time',
+    languages: ['English'],
+    salary: '₹40,000 – ₹60,000/month',
+    contactEmail: 'karankinger@medagghealthcare.com',
+    contactPhone: '9786400655',
+    responsibilities: [
+      'Oversee and manage the day-to-day operations of the call centre team',
+      'Set performance targets and monitor team KPIs including call quality, conversion rates, and patient satisfaction',
+      'Train, mentor, and coach call centre executives to improve performance',
+      'Develop and implement call centre strategies, policies, and procedures',
+      'Analyse call centre data and prepare reports for senior management',
+      'Ensure compliance with healthcare regulations and company standards',
+      'Handle escalated patient queries and resolve complex issues',
+      'Coordinate with other departments to ensure seamless patient experience',
+    ],
+    requirements: [
+      'Any graduate / qualification accepted',
+      'Minimum 5 years of experience in a call centre environment, with at least 2 years in a managerial role',
+      'Strong leadership and team management skills',
+      'Excellent communication and problem-solving abilities',
+      'Proficiency with CRM tools and call centre software',
+      'Healthcare or patient services background preferred',
+      'Must be based in Chennai or willing to relocate immediately',
+      'Immediate joiner preferred',
     ],
   },
 ];
@@ -272,6 +344,67 @@ const CareerOpening = () => {
                 {/* Details */}
                 {isOpen && (
                   <div className='px-5 sm:px-6 pb-6 sm:pb-7 pt-1'>
+
+                    {/* Job Meta Grid (for rich listings) */}
+                    {(job.location || job.modeOfWork || job.timings || job.salary || job.employmentType || job.availability) && (
+                      <div className='mb-5 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 bg-[#fdf6ff] border border-[#f0e6ff] rounded-xl px-4 py-4'>
+                        {job.positions && (
+                          <div className='flex gap-2 text-sm'>
+                            <span className='font-semibold text-[#2d2552] min-w-[130px]'>Open Positions:</span>
+                            <span className='text-[#4b4766]'>{job.positions}</span>
+                          </div>
+                        )}
+                        {job.qualification && (
+                          <div className='flex gap-2 text-sm'>
+                            <span className='font-semibold text-[#2d2552] min-w-[130px]'>Qualification:</span>
+                            <span className='text-[#4b4766]'>{job.qualification}</span>
+                          </div>
+                        )}
+                        {job.location && (
+                          <div className='flex gap-2 text-sm'>
+                            <span className='font-semibold text-[#2d2552] min-w-[130px]'>Location:</span>
+                            <span className='text-[#4b4766]'>{job.location}</span>
+                          </div>
+                        )}
+                        {job.timings && (
+                          <div className='flex gap-2 text-sm'>
+                            <span className='font-semibold text-[#2d2552] min-w-[130px]'>Timings:</span>
+                            <span className='text-[#4b4766]'>{job.timings}</span>
+                          </div>
+                        )}
+                        {job.modeOfWork && (
+                          <div className='flex gap-2 text-sm'>
+                            <span className='font-semibold text-[#2d2552] min-w-[130px]'>Mode of Work:</span>
+                            <span className='text-[#4b4766]'>{job.modeOfWork}</span>
+                          </div>
+                        )}
+                        {job.employmentType && (
+                          <div className='flex gap-2 text-sm'>
+                            <span className='font-semibold text-[#2d2552] min-w-[130px]'>Employment Type:</span>
+                            <span className='text-[#4b4766]'>{job.employmentType}</span>
+                          </div>
+                        )}
+                        {job.availability && (
+                          <div className='flex gap-2 text-sm'>
+                            <span className='font-semibold text-[#2d2552] min-w-[130px]'>Availability:</span>
+                            <span className='text-[#ff3576] font-semibold'>{job.availability}</span>
+                          </div>
+                        )}
+                        {job.salary && (
+                          <div className='flex gap-2 text-sm sm:col-span-2'>
+                            <span className='font-semibold text-[#2d2552] min-w-[130px]'>Salary:</span>
+                            <span className='text-[#4b4766]'>{job.salary}</span>
+                          </div>
+                        )}
+                        {job.preferredCandidates && (
+                          <div className='flex gap-2 text-sm sm:col-span-2'>
+                            <span className='font-semibold text-[#2d2552] min-w-[130px]'>Preferred:</span>
+                            <span className='text-[#4b4766]'>{job.preferredCandidates}</span>
+                          </div>
+                        )}
+                      </div>
+                    )}
+
                     {/* Responsibilities */}
                     <div>
                       <h4 className='text-[#ff3576] font-extrabold text-xl'>Key Responsibilities:</h4>
@@ -297,6 +430,29 @@ const CareerOpening = () => {
                         ))}
                       </ul>
                     </div>
+
+                    {/* Contact info (for rich listings) */}
+                    {(job.contactEmail || job.contactPhone) && (
+                      <div className='mt-5 rounded-xl bg-[#fff0f5] border border-[#ffd6e7] px-4 py-3'>
+                        <p className='text-sm font-semibold text-[#2d2552] mb-1'>📩 How to Apply</p>
+                        <p className='text-sm text-[#4b4766]'>
+                          Send your resume to{' '}
+                          {job.contactEmail && (
+                            <a href={`mailto:${job.contactEmail}`} className='text-[#ff3576] font-semibold hover:underline'>
+                              {job.contactEmail}
+                            </a>
+                          )}
+                          {job.contactPhone && (
+                            <>
+                              {' '}or call{' '}
+                              <a href={`tel:${job.contactPhone}`} className='text-[#ff3576] font-semibold hover:underline'>
+                                {job.contactPhone}
+                              </a>
+                            </>
+                          )}
+                        </p>
+                      </div>
+                    )}
 
                     {/* CTA */}
                     <div className='mt-6'>
