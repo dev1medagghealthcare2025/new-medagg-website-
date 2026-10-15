@@ -4,6 +4,9 @@ import SharedSearchBar from './SharedSearchBar';
 // Month index is 0-indexed (August is 7). This will be true until August 15, 2026 11:59:59 PM.
 const showIndependenceDayTheme = new Date() < new Date(2026, 7, 16);
 
+// Durga Puja theme: active until Oct 21, 2026 11:59:59 PM. Background: /public/Mobile_view_durga_puja_1.png
+const showDurgaPujaTheme = !showIndependenceDayTheme && new Date() < new Date(2026, 9, 22);
+
 const MobileHeroSlide1 = ({
   query,
   setQuery,
@@ -15,15 +18,18 @@ const MobileHeroSlide1 = ({
 }) => {
   return (
     <div
-      className='relative w-full h-[610px] max-[360px]:h-[590px] bg-cover bg-center overflow-hidden'
+      className={`relative w-full h-[610px] max-[360px]:h-[590px] bg-cover overflow-hidden ${showDurgaPujaTheme ? '' : 'bg-center'}`}
       style={{
         backgroundImage: showIndependenceDayTheme
           ? 'url(\'/Mobile-view-independence.png\')'
-          : 'url(\'/Herosection background.jpg\')',
+          : showDurgaPujaTheme
+            ? 'url(\'/Mobile_view_durga_puja_1.png\')'
+            : 'url(\'/Herosection background.jpg\')',
+        ...(showDurgaPujaTheme ? { backgroundPosition: 'left top' } : {}),
       }}
     >
-      {/* Overlay - Shown only when Independence Day period is over */}
-      {!showIndependenceDayTheme && (
+      {/* Overlay - Shown only when neither Independence Day nor Durga Puja theme is active */}
+      {!showIndependenceDayTheme && !showDurgaPujaTheme && (
         <>
           <div className='absolute inset-0 bg-gradient-to-b from-[#271f4e] via-[#34245b] to-[#cf0069]/95' />
           <div className='absolute inset-x-0 bottom-0 h-[62%] bg-[radial-gradient(circle_at_84%_24%,rgba(255,70,147,0.26),transparent_32%),radial-gradient(circle_at_42%_92%,rgba(103,22,117,0.9),transparent_64%)]' />
@@ -37,7 +43,7 @@ const MobileHeroSlide1 = ({
         <span className='text-[13px] font-semibold tracking-wide'>IRPreneur'25</span>
       </div>
 
-      <div className='relative z-10 px-4 pt-[76px] text-white'>
+      <div className={`relative z-10 px-4 text-white ${showDurgaPujaTheme ? 'pt-[184px]' : 'pt-[76px]'}`}>
         {/* Happy Independence Day Badge */}
         {showIndependenceDayTheme && (
           <div className='inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-full px-3 py-1 shadow-sm mb-2'>
@@ -77,7 +83,7 @@ const MobileHeroSlide1 = ({
         )}
       </div>
 
-      <div className='absolute left-4 right-4 top-[193px] z-30'>
+      <div className={`absolute left-4 right-4 z-30 ${showDurgaPujaTheme ? 'top-[318px]' : 'top-[193px]'}`}>
         <SharedSearchBar
           query={query}
           setQuery={setQuery}
@@ -91,7 +97,8 @@ const MobileHeroSlide1 = ({
         />
       </div>
 
-      <div className='absolute bottom-[248px] left-48 z-20 text-left'>
+      {!showDurgaPujaTheme && (
+      <div className='absolute left-48 bottom-[248px] z-20 text-left'>
         <div className={`mb-2.5 text-[13px] font-bold ${showIndependenceDayTheme ? 'text-[#1a1446]/80' : 'text-white'}`}>Follow Us On :</div>
         <div className='flex items-center justify-start gap-3.5 pointer-events-auto'>
           <a href='https://www.facebook.com/profile.php?id=61558841344582' target='_blank' rel='noopener noreferrer' aria-label='Facebook'
@@ -112,6 +119,7 @@ const MobileHeroSlide1 = ({
           </a>
         </div>
       </div>
+      )}
 
       <div className='absolute bottom-0 right-[-26px] w-[294px] max-[360px]:right-[-28px] max-[360px]:w-[268px] z-[8] pointer-events-none select-none'>
         <img src='/abc_home.png' alt='Doctor' className='w-full h-auto' />

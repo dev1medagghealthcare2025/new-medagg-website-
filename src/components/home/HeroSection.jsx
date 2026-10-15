@@ -13,6 +13,9 @@ const MemoHeroCrosselMap = React.memo(HeroCrosselMap);
 // Month index is 0-indexed (August is 7). This will be true until August 15, 2026 11:59:59 PM.
 const showIndependenceDayTheme = new Date() < new Date(2026, 7, 16);
 
+// Durga Puja theme: active until Oct 21, 2026 11:59:59 PM (month index 9 = October). Background: /public/durga_puja.png
+const showDurgaPujaTheme = !showIndependenceDayTheme && new Date() < new Date(2026, 9, 22);
+
 const OriginalHeroSlide = ({
   query,
   setQuery,
@@ -27,11 +30,13 @@ const OriginalHeroSlide = ({
     style={{
       backgroundImage: showIndependenceDayTheme
         ? 'url(\'/independence_day_bg.png\')'
-        : 'url(\'/independence_day_bg.jpg\')',
+        : showDurgaPujaTheme
+          ? 'url(\'/durga_puja.png\')'
+          : 'url(\'/independence_day_bg.jpg\')',
     }}
   >
-    {/* Overlay - Shown only when Independence Day period is over */}
-    {!showIndependenceDayTheme && (
+    {/* Overlay - Shown only when neither Independence Day nor Durga Puja theme is active */}
+    {!showIndependenceDayTheme && !showDurgaPujaTheme && (
       <div className='absolute inset-0 bg-gradient-to-br from-[#1a1446] via-[#2d2552] to-[#e1006a] opacity-90 z-0' />
     )}
 
@@ -73,7 +78,7 @@ const OriginalHeroSlide = ({
     <div className='relative z-10 flex flex-col justify-center items-center md:items-start w-full text-center md:text-left pt-6 pb-5 md:pt-6 md:pb-12'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full'>
         {/* Content - Left side with responsive width (ISVIR logo/text removed) */}
-        <div className={`flex flex-col justify-center items-center md:items-start h-full gap-2 sm:gap-3 w-full md:max-w-2xl lg:max-w-xl xl:max-w-2xl ${showIndependenceDayTheme ? 'pt-12 sm:pt-14 md:pt-16' : 'pt-2 sm:pt-4 md:pt-0'}`}>
+        <div className={`flex flex-col justify-center items-center md:items-start h-full gap-2 sm:gap-3 w-full md:max-w-2xl lg:max-w-xl xl:max-w-2xl ${showIndependenceDayTheme ? 'pt-12 sm:pt-14 md:pt-16' : showDurgaPujaTheme ? 'pt-2 sm:pt-4 md:pt-44 lg:pt-52' : 'pt-2 sm:pt-4 md:pt-0'}`}>
 
           {/* Happy Independence Day Badge */}
           {showIndependenceDayTheme && (
