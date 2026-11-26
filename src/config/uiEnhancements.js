@@ -32,15 +32,14 @@ export const APPLY_IMAGE_CURSOR_TO_INTERACTIVE = true;
 // Target size (pixels) for the cursor image; many browsers prefer <= 64, often 32 is ideal
 export const CURSOR_IMAGE_TARGET_SIZE = 48;
 
-// Smooth interactions for buttons/links
-export const BUTTON_INTERACTIONS_ENABLED = true; // master toggle
-export const MAGNETIC_HOVER_ENABLED = true; // gentle magnetic pull on hover
-export const RIPPLE_PRESS_ENABLED = true; // ripple effect on click/press
+// Smooth interactions for buttons/links (disabled to prevent event hijacking)
+export const BUTTON_INTERACTIONS_ENABLED = false;
+export const MAGNETIC_HOVER_ENABLED = false;
+export const RIPPLE_PRESS_ENABLED = false;
 
-// Proximity hover/click: treat nearby buttons/links as hovered/clickable
-export const PROXIMITY_INTERACTION_ENABLED = true; // master toggle
-// Radius in pixels around pointer to consider an element a candidate (fallback to half cursor size)
-export const PROXIMITY_RADIUS = 28; // tweak as needed
+// Proximity hover/click
+export const PROXIMITY_INTERACTION_ENABLED = false;
+export const PROXIMITY_RADIUS = 28;
 
-// Show default system cursor when hovering CTAs (buttons/links) while keeping catheter elsewhere
-export const DEFAULT_CURSOR_ON_CTA_ENABLED = true;
+// Show default system cursor on CTAs
+export const DEFAULT_CURSOR_ON_CTA_ENABLED = false;

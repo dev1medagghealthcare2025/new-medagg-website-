@@ -26,7 +26,7 @@ const OriginalHeroSlide = ({
   onSearchBlur,
 }) => (
   <section
-    className='relative w-full min-h-screen bg-cover bg-center rounded-none overflow-hidden flex items-center'
+    className='relative w-full h-full bg-cover bg-center rounded-none overflow-hidden flex items-center'
     style={{
       backgroundImage: showIndependenceDayTheme
         ? 'url(\'/independence_day_bg.png\')'
@@ -742,29 +742,46 @@ const HeroSection = () => {
       />
 
       {/* Desktop Carousel - Hidden on mobile, visible on md and up */}
-      <div className='hidden md:block relative w-full overflow-hidden'>
+      <div className='hidden md:block relative w-full overflow-hidden [overflow:clip]'>
         {/* Top-center floating CTA (visible across all slides) */}
         {!megaMenuOpen && (
-          <FloatingBadgeCTA
-            imgSrc='/irpreneur.png'
-            alt='IR preneur 2025'
-            href='/irpreneur2025'
-            size={120}
-            mobileSize={120}
-            topOffset={24}
-            align='left'
-            leftOffset={24}
-            zIndex={40}
-            showOnMobile={false}
-          />
+          <>
+            {/* Left: Digital Marketing badge */}
+            <FloatingBadgeCTA
+              imgSrc='/digital_marketing.png'
+              alt='Medagg Digital Marketing'
+              href='https://medagg.com/digital-marketing'
+              newTab
+              size={120}
+              mobileSize={120}
+              topOffset={24}
+              align='left'
+              leftOffset={24}
+              zIndex={40}
+              showOnMobile={false}
+            />
+            {/* Right: IRpreneur badge */}
+            <FloatingBadgeCTA
+              imgSrc='/irpreneur.png'
+              alt='IR preneur 2025'
+              href='/irpreneur2025'
+              size={120}
+              mobileSize={120}
+              topOffset={24}
+              align='right'
+              rightOffset={24}
+              zIndex={40}
+              showOnMobile={false}
+            />
+          </>
         )}
         {/* Carousel Container */}
         <div
-          className='flex transition-transform duration-1000 ease-in-out'
+          className='flex h-screen transition-transform duration-1000 ease-in-out'
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}
         >
           {/* Slide 1: Original Hero */}
-          <div className='w-full flex-shrink-0'>
+          <div className='w-full h-full flex-shrink-0 overflow-hidden'>
             <OriginalHeroSlide
               query={query}
               setQuery={setQuery}
@@ -777,7 +794,7 @@ const HeroSection = () => {
           </div>
 
           {/* Slide 2: New Hero Crossel */}
-          <div className='w-full flex-shrink-0'>
+          <div className='w-full h-full flex-shrink-0 overflow-hidden'>
             <MemoHeroCrossel
               query={query}
               setQuery={setQuery}
@@ -790,7 +807,7 @@ const HeroSection = () => {
           </div>
 
           {/* Slide 3: Map Hero Crossel */}
-          <div className='w-full flex-shrink-0'>
+          <div className='w-full h-full flex-shrink-0 overflow-hidden'>
             <MemoHeroCrosselMap
               query={query}
               setQuery={setQuery}
@@ -819,12 +836,15 @@ const HeroSection = () => {
         </div>
 
         {/* Carousel Navigation Arrows */}
+        <div className='absolute inset-y-0 left-0 right-0 flex items-center justify-between px-4 pointer-events-none z-30'>
         <button
           onClick={() => goToSlide((currentSlide - 1 + totalSlides) % totalSlides)}
-          className={`absolute left-4 top-1/2 transform -translate-y-1/2 p-3 rounded-full transition-all duration-300 z-20 ${showIndependenceDayTheme && currentSlide === 0
+          onMouseDown={(e) => e.preventDefault()}
+          className={`pointer-events-auto flex items-center justify-center w-12 h-12 shrink-0 rounded-full transition-colors duration-300 cursor-pointer ${showIndependenceDayTheme && currentSlide === 0
               ? 'bg-white/80 hover:bg-white border border-gray-200/50 text-[#1a1446] shadow-md'
               : 'bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white'
             }`}
+          type='button'
           aria-label='Previous slide'
         >
           <svg width='20' height='20' fill='none' stroke='currentColor' strokeWidth='2' viewBox='0 0 24 24'>
@@ -834,16 +854,19 @@ const HeroSection = () => {
 
         <button
           onClick={() => goToSlide((currentSlide + 1) % totalSlides)}
-          className={`absolute right-4 top-1/2 transform -translate-y-1/2 p-3 rounded-full transition-all duration-300 z-20 ${showIndependenceDayTheme && currentSlide === 0
+          onMouseDown={(e) => e.preventDefault()}
+          className={`pointer-events-auto flex items-center justify-center w-12 h-12 shrink-0 rounded-full transition-colors duration-300 cursor-pointer ${showIndependenceDayTheme && currentSlide === 0
               ? 'bg-white/80 hover:bg-white border border-gray-200/50 text-[#1a1446] shadow-md'
               : 'bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white'
             }`}
+          type='button'
           aria-label='Next slide'
         >
           <svg width='20' height='20' fill='none' stroke='currentColor' strokeWidth='2' viewBox='0 0 24 24'>
             <path d='M9 18l6-6-6-6' />
           </svg>
         </button>
+        </div>
       </div>
     </>
   );

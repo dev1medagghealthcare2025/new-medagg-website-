@@ -11,8 +11,9 @@ const FloatingBadgeCTA = ({
   mobileSize = 110,
   topOffset = 20,
   offsetX = 0,
-  align = 'center', // 'center' | 'left'
+  align = 'center', // 'center' | 'left' | 'right'
   leftOffset = 24,
+  rightOffset = 24,
   zIndex = 30,
   showOnMobile = true,
   rotateImage = true,
@@ -24,8 +25,10 @@ const FloatingBadgeCTA = ({
       style={{
         position: 'absolute',
         top: topOffset,
-        left: align === 'left' ? leftOffset : '50%',
-        transform: align === 'left' ? 'none' : `translateX(calc(-50% - ${offsetX}px))`,
+        ...(align === 'right'
+          ? { right: rightOffset }
+          : { left: align === 'left' ? leftOffset : '50%' }),
+        transform: align === 'left' || align === 'right' ? 'none' : `translateX(calc(-50% - ${offsetX}px))`,
         zIndex,
       }}
     >

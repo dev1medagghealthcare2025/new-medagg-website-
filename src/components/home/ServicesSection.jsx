@@ -172,7 +172,19 @@ const OurServiceSection = () => {
     }
   };
 
-  // Auto-rotation effect
+  const [rotationKey, setRotationKey] = useState(0);
+  const SET_ORDER = ['set1', 'set2', 'set3'];
+
+  // Manual arrow navigation (clamped) - also restarts the auto-rotation timer
+  const changeSet = (dir) => {
+    setActiveSet((prev) => {
+      const next = SET_ORDER.indexOf(prev) + dir;
+      return SET_ORDER[Math.min(Math.max(next, 0), SET_ORDER.length - 1)];
+    });
+    setRotationKey((k) => k + 1);
+  };
+
+  // Auto-rotation effect (restarts after every manual click)
   useEffect(() => {
     intervalRef.current = setInterval(() => {
       setActiveSet((prevSet) => {
@@ -187,7 +199,7 @@ const OurServiceSection = () => {
         clearInterval(intervalRef.current);
       }
     };
-  }, []);
+  }, [rotationKey]);
 
   return (
     <section id='services' className='w-full bg-white'>
@@ -198,25 +210,6 @@ const OurServiceSection = () => {
         <p className='text-base sm:text-lg text-gray-600 mb-6 sm:mb-8 text-center sm:text-left max-w-2xl'>
           Explore Safer, Scar-Free Treatments
         </p>
-
-        {/* Left Arrow - show when not on set1 */}
-        {activeSet !== 'set1' && (
-          <button
-            onClick={() =>
-              setActiveSet((prev) => {
-                if (prev === 'set2') return 'set1';
-                if (prev === 'set3') return 'set2';
-                return 'set1';
-              })
-            }
-            className='absolute -left-6 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-white text-[#1a1446] border border-gray-200 shadow-lg hover:bg-[#ff3576] hover:text-white hover:border-[#ff3576] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#ff3576] focus:ring-offset-2 z-10'
-            aria-label='Show first set of services'
-          >
-            <svg width='24' height='24' fill='none' stroke='currentColor' strokeWidth='2' viewBox='0 0 24 24'>
-              <path d='M14 8l-4 4 4 4' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
-            </svg>
-          </button>
-        )}
 
         {/* Mobile Icon Grid (paginated) */}
         <div className='md:hidden w-full'>
@@ -264,8 +257,9 @@ const OurServiceSection = () => {
           )}
         </div>
 
-        {/* Desktop Service Cards */}
-        <div className='hidden md:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full'>
+        {/* Desktop Service Cards + arrows (arrows are anchored to this wrapper so they never move) */}
+        <div className='hidden md:block relative w-full'>
+        <div className='grid grid-cols-3 lg:grid-cols-4 gap-6 w-full content-start'>
           {services.map((t, idx) => (
             <div
               key={t.title}
@@ -298,24 +292,43 @@ const OurServiceSection = () => {
           ))}
         </div>
 
-        {/* Right Arrow - show when not on last set */}
-        {activeSet !== 'set3' && (
-          <button
-            onClick={() =>
-              setActiveSet((prev) => {
-                if (prev === 'set1') return 'set2';
-                if (prev === 'set2') return 'set3';
-                return 'set3';
-              })
-            }
-            className='absolute -right-6 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-white text-[#1a1446] border border-gray-200 shadow-lg hover:bg-[#ff3576] hover:text-white hover:border-[#ff3576] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#ff3576] focus:ring-offset-2 z-10'
-            aria-label='Show second set of services'
-          >
-            <svg width='24' height='24' fill='none' stroke='currentColor' strokeWidth='2' viewBox='0 0 24 24'>
-              <path d='M10 8l4 4-4 4' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
-            </svg>
-          </button>
-        )}
+          {/* Pager: normal document flow (no absolute positioning) so it can never move or overlap */}
+          <div className='flex items-center justify-center gap-4 mt-8'>
+            <button
+              type='button'
+              onClick={() => changeSet(-1)}
+              disabled={activeSet === 'set1'}
+              className='w-12 h-12 flex items-center justify-center rounded-full bg-white text-[#1a1446] border border-gray-200 shadow-lg hover:bg-[#ff3576] hover:text-white hover:border-[#ff3576] transition-colors duration-300 focus:outline-none disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-[#1a1446] disabled:hover:border-gray-200'
+              aria-label='Previous services'
+            >
+              <svg width='24' height='24' fill='none' stroke='currentColor' strokeWidth='2' viewBox='0 0 24 24'>
+                <path d='M14 8l-4 4 4 4' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
+              </svg>
+            </button>
+            <div className='flex items-center gap-2'>
+              {SET_ORDER.map((s) => (
+                <button
+                  key={s}
+                  type='button'
+                  onClick={() => { setActiveSet(s); setRotationKey((k) => k + 1); }}
+                  className={`h-2.5 rounded-full transition-all duration-300 ${activeSet === s ? 'w-6 bg-[#ff3576]' : 'w-2.5 bg-gray-300 hover:bg-gray-400'}`}
+                  aria-label={`Show services page ${SET_ORDER.indexOf(s) + 1}`}
+                />
+              ))}
+            </div>
+            <button
+              type='button'
+              onClick={() => changeSet(1)}
+              disabled={activeSet === 'set3'}
+              className='w-12 h-12 flex items-center justify-center rounded-full bg-white text-[#1a1446] border border-gray-200 shadow-lg hover:bg-[#ff3576] hover:text-white hover:border-[#ff3576] transition-colors duration-300 focus:outline-none disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-[#1a1446] disabled:hover:border-gray-200'
+              aria-label='Next services'
+            >
+              <svg width='24' height='24' fill='none' stroke='currentColor' strokeWidth='2' viewBox='0 0 24 24'>
+                <path d='M10 8l4 4-4 4' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
+              </svg>
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   );

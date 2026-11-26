@@ -210,6 +210,11 @@ function Irpreneur2025Page() {
     }
   }, []);
 
+  // If the server wrongly serves this SPA inside the iframe, don't nest another iframe (causes a blank page)
+  if (typeof window !== 'undefined' && window.self !== window.top) {
+    return null;
+  }
+
   return (
     <div className='w-full' style={{ height: '100vh' }}>
       <iframe
